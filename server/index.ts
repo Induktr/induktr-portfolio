@@ -24,6 +24,7 @@ import cors from "cors";
 import apiRoutes from "./shared/api";
 
 const app = express();
+export { app };
 
 app.use(
   cors({
@@ -152,9 +153,13 @@ import { botManager } from "./bot";
   }
 
   const PORT = Number.parseInt(process.env.PORT || "5000", 10);
-  server.listen(PORT, "0.0.0.0", () => {
-    log(`Server running on port ${PORT} in ${app.get("env")} mode`);
-    log(`Telegram Bot Token: ${process.env.TELEGRAM_BOT_TOKEN ? "CONFIGURED ✅" : "MISSING ❌"}`);
-    log(`Telegram Chat ID: ${process.env.TELEGRAM_CHAT_ID ? "CONFIGURED ✅" : "MISSING ❌"}`);
-  });
+  if (process.env.VERCEL !== "1") {
+    server.listen(PORT, "0.0.0.0", () => {
+      log(`Server running on port ${PORT} in ${app.get("env")} mode`);
+      log(`Telegram Bot Token: ${process.env.TELEGRAM_BOT_TOKEN ? "CONFIGURED ✅" : "MISSING ❌"}`);
+      log(`Telegram Chat ID: ${process.env.TELEGRAM_CHAT_ID ? "CONFIGURED ✅" : "MISSING ❌"}`);
+    });
+  }
 })();
+
+export default app;
