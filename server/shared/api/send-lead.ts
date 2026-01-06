@@ -5,10 +5,7 @@ import { storage } from "../../storage";
 export default async function handleSendLead(req: Request, res: Response) {
   try {
     const leadData = LeadSchema.parse(req.body);
-    console.log("Received Lead Submission:", JSON.stringify(leadData, null, 2));
-
     const newLead = await storage.createLead(leadData);
-    console.log(`Created lead in storage with ID: ${newLead.id}`);
 
     const token = process.env.TELEGRAM_BOT_TOKEN;
     const chatId = process.env.TELEGRAM_CHAT_ID;
@@ -18,8 +15,10 @@ export default async function handleSendLead(req: Request, res: Response) {
       return res.status(500).json({ error: "Server configuration error" });
     }
 
-    // Safety check for timestamp to avoid possible locale issues on Vercel
-    const timestamp = new Date().toISOString().replace('T', ' ').substring(0, 19);
+    const timestamp = new Date().toLocaleString("uk-UA", { 
+      timeZone: "Europe/Kiev", 
+      hour12: false 
+    });
 
     const isPurchase = leadData.orderType === 'template';
     const message = isPurchase 
@@ -43,15 +42,13 @@ export default async function handleSendLead(req: Request, res: Response) {
 
     const telegramUrl = `https://api.telegram.org/bot${token}/sendMessage`;
     
-    console.log(`Sending Telegram notification to chat ${chatId}...`);
-    
     const response = await fetch(telegramUrl, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        chat_id: chatId.toString().trim(),
+        chat_id: chatId,
         text: message,
         parse_mode: "Markdown",
         reply_markup: {
@@ -64,14 +61,12 @@ export default async function handleSendLead(req: Request, res: Response) {
       }),
     });
 
-    const telegramResult: any = await response.json();
+    const telegramResult = await response.json();
 
     if (!telegramResult.ok) {
-      console.error("Telegram API Error Response:", JSON.stringify(telegramResult, null, 2));
-      throw new Error(`Telegram Error: ${telegramResult.description || "Unknown error"}`);
+      console.error("Telegram API Error:", telegramResult);
+      throw new Error("Failed to send message to Telegram");
     }
-
-    console.log("Telegram notification sent successfully");
 
     res.json({ 
       success: true, 

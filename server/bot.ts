@@ -21,22 +21,15 @@ class TelegramBotManager {
   constructor() {}
 
   initialize(token: string) {
-    const isVercel = process.env.VERCEL === "1";
-    console.log(`Initializing Telegram Bot (Vercel: ${isVercel})...`);
-    
-    // Create a bot. On Vercel, we MUST disable polling.
-    // Serverless functions cannot maintain persistent connections.
-    this.bot = new TelegramBot(token, { polling: !isVercel });
+    if (this.isInitialized) return;
 
-    if (!isVercel) {
-      this.setupListeners();
-      console.log("Telegram Bot listeners set up (polling mode)");
-    } else {
-      console.log("Telegram Bot initialized in static/webhook-ready mode (no polling)");
-    }
-    
+    console.log("Initializing Telegram Bot...");
+    // Create a bot that uses 'polling' to fetch new updates
+    this.bot = new TelegramBot(token, { polling: true });
+
+    this.setupListeners();
     this.isInitialized = true;
-    console.log("Telegram Bot manager initialized successfully");
+    console.log("Telegram Bot initialized successfully");
   }
 
   private MARKETPLACE_RESOURCES: Record<string, Record<string, ProjectMarketplaceData>> = {

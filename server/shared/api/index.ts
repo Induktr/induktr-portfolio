@@ -6,7 +6,7 @@ import {
 } from 'express';
 import handleEnvCheck from './env-check';
 import handleSendLead from './send-lead';
-import { log } from '../logger';
+import { log } from '../../vite';
 
 const logWithTimestamp = (level: string, message: string, error?: any) => {
   log(`${level.toUpperCase()}: ${message} ${error ? JSON.stringify(error) : ''}`, 'API');
