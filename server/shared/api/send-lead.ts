@@ -42,13 +42,15 @@ export default async function handleSendLead(req: Request, res: Response) {
 
     const telegramUrl = `https://api.telegram.org/bot${token}/sendMessage`;
     
+    console.log(`Sending Telegram notification to chat ${chatId}...`);
+    
     const response = await fetch(telegramUrl, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        chat_id: chatId,
+        chat_id: chatId.toString().trim(),
         text: message,
         parse_mode: "Markdown",
         reply_markup: {
@@ -61,12 +63,14 @@ export default async function handleSendLead(req: Request, res: Response) {
       }),
     });
 
-    const telegramResult = await response.json();
+    const telegramResult: any = await response.json();
 
     if (!telegramResult.ok) {
-      console.error("Telegram API Error:", telegramResult);
-      throw new Error("Failed to send message to Telegram");
+      console.error("Telegram API Error Response:", JSON.stringify(telegramResult, null, 2));
+      throw new Error(`Telegram Error: ${telegramResult.description || "Unknown error"}`);
     }
+
+    console.log("Telegram notification sent successfully");
 
     res.json({ 
       success: true, 
