@@ -27,7 +27,7 @@ export default defineConfig({
       output: {
         manualChunks: {
           vendor: ['react', 'react-dom', 'framer-motion', 'wouter'],
-          ui: ['@/components/ui']
+          ui: ['@/shared/ui']
         }
       }
     },
