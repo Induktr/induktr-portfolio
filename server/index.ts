@@ -18,7 +18,8 @@ import express, {
   NextFunction 
 } from "express";
 import { registerRoutes } from "./routes";
-import { setupVite, serveStatic, log } from "./vite";
+import { setupVite, serveStatic } from "./vite";
+import { log } from "./shared/logger";
 import session from "express-session";
 import cors from "cors";
 import apiRoutes from "./shared/api";

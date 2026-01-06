@@ -5,7 +5,10 @@ import { storage } from "../../storage";
 export default async function handleSendLead(req: Request, res: Response) {
   try {
     const leadData = LeadSchema.parse(req.body);
+    console.log("Received Lead Submission:", JSON.stringify(leadData, null, 2));
+
     const newLead = await storage.createLead(leadData);
+    console.log(`Created lead in storage with ID: ${newLead.id}`);
 
     const token = process.env.TELEGRAM_BOT_TOKEN;
     const chatId = process.env.TELEGRAM_CHAT_ID;
@@ -15,10 +18,8 @@ export default async function handleSendLead(req: Request, res: Response) {
       return res.status(500).json({ error: "Server configuration error" });
     }
 
-    const timestamp = new Date().toLocaleString("uk-UA", { 
-      timeZone: "Europe/Kiev", 
-      hour12: false 
-    });
+    // Safety check for timestamp to avoid possible locale issues on Vercel
+    const timestamp = new Date().toISOString().replace('T', ' ').substring(0, 19);
 
     const isPurchase = leadData.orderType === 'template';
     const message = isPurchase 

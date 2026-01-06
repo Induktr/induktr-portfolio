@@ -11,16 +11,8 @@ const viteLogger = createLogger();
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
-export function log(message: string, source = "express") {
-  const formattedTime = new Date().toLocaleTimeString("en-US", {
-    hour: "numeric",
-    minute: "2-digit",
-    second: "2-digit",
-    hour12: true,
-  });
-
-  console.log(`${formattedTime} [${source}] ${message}`);
-}
+import { log } from "./shared/logger";
+export { log };
 
 export async function setupVite(app: Express, server: Server) {
   const serverOptions = {
