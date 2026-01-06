@@ -17,7 +17,18 @@
     "types": ["node", "express"],
     "paths": {
       "@/*": ["./client/src/*"],
-      "@shared/*": ["./shared/*"],
+      "@client/*": ["./client/src/*"],
+      "@client/shared/*": ["./client/src/shared/*"],
+      "@client/entities/*": ["./client/src/entities/*"],
+      "@client/features/*": ["./client/src/features/*"],
+      "@client/lib/*": ["./client/src/lib/*"],
+      "@client/pages/*": ["./client/src/pages/*"],
+      "@client/store/*": ["./client/src/store/*"],
+      "@client/types/*": ["./client/src/types/*"],
+      "@client/utils/*": ["./client/src/utils/*"],
+      "@client/widget/*": ["./client/src/widget/*"],
+      "@server/*": ["./server/*"],
+      "@server/shared/*": ["./server/shared/*"],
       "vite/client": ["./node_modules/vite/client.d.ts"]
     },
     "typeRoots": ["./node_modules/@types", "./server/types"]

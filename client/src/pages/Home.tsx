@@ -1,12 +1,15 @@
 import { motion } from "framer-motion";
-import { Button } from "@/components/ui/button";
+import { Button } from "@/shared/ui/button";
 import { Link } from "wouter";
 import { ArrowRight } from "lucide-react";
-import { TechSphere } from "@/components/TechSphere";
-import { RoleWheel } from "@/components/RoleWheel";
-import { TypewriterMission } from "@/components/TypewriterMission";
+import { RoleWheel } from "@/features/definition-role/RoleWheel";
+import { TypewriterMission } from "@/features/writer-mission/TypewriterMission";
+import { ContactForm } from "@/features/send-app/ContactForm";
+import { useTranslation } from "react-i18next";
 
 export default function Home() {
+  const { t } = useTranslation();
+
   return (
     <div className="min-h-[calc(100vh-4rem)] flex flex-col">
       <main className="flex-1">
@@ -19,21 +22,21 @@ export default function Home() {
               className="max-w-3xl mx-auto text-center"
             >
               <h1 className="text-4xl md:text-6xl font-bold mb-6">
-                Hi, I'm Induktr
+                {t('home.greeting')}
               </h1>
               <p className="text-xl text-muted-foreground mb-8">
-                A passionate web developer crafting beautiful and functional digital experiences
+                {t('home.description')}
               </p>
               <div className="flex justify-center gap-4">
                 <Button asChild size="lg">
                   <Link href="/projects">
-                    View Projects
+                    {t('common.viewProjects')}
                     <ArrowRight className="ml-2 h-4 w-4" />
                   </Link>
                 </Button>
                 <Button variant="outline" size="lg" asChild>
-                  <a href="/resume.pdf" target="_blank" rel="noopener noreferrer">
-                    Download Resume
+                  <a href="#contact">
+                    {t('home.startProject')}
                   </a>
                 </Button>
               </div>
@@ -58,12 +61,14 @@ export default function Home() {
             </motion.div>
 
             <motion.div
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.5, delay: 0.7 }}
-              className="mt-16"
+              id="contact"
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              className="mt-20 mb-10"
             >
-              <TechSphere />
+              <ContactForm />
             </motion.div>
           </div>
         </section>

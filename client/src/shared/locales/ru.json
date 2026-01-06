@@ -1,0 +1,475 @@
+{
+  "common": {
+    "projects": "Проекты",
+    "tools": "Инструменты",
+    "marketplace": "Магазин",
+    "blog": "Блог",
+    "startProject": "Начать проект",
+    "downloadResume": "Скачать резюме",
+    "viewProjects": "Смотреть проекты",
+    "contact": "Контакты",
+    "language": "Язык",
+    "close": "Закрыть",
+    "faq": "FAQ"
+  },
+  "home": {
+    "greeting": "Привет, я Induktr",
+    "description": "Увлеченный веб-разработчик, создающий красивые и функциональные цифровые решения",
+    "startProject": "Отправить заявку"
+  },
+  "mission-statement": {
+    "title": "Миссия",
+    "author": "Induktr",
+    "phrases": [
+      "Я строю цифровые империи, строку за строкой.",
+      "Создаю высокопроизводительные решения для современного веба.",
+      "Превращаю сложные идеи в элегантную реальность.",
+      "Инновации на стыке ИИ и пользовательского опыта.",
+      "Стремление к совершенству в каждом цифровом взаимодействии."
+    ]
+  },
+  "roleWheel": {
+    "title": "Кто такой Induktr?",
+    "subtitle": "Экосистема ролей, способствующих цифровому совершенству",
+    "roles": {
+      "techSpecialist": {
+        "title": "Тех-специалист",
+        "description": "Эксперт в современных веб-стеках, обеспечивающий производительность и масштабируемость."
+      },
+      "mvpCreator": {
+        "title": "Создатель MVP",
+        "description": "Мастер быстрого прототипирования и воплощения идей в жизнь."
+      },
+      "cryptoInvestor": {
+        "title": "Крипто-инвестор",
+        "description": "Глубокое понимание web3, алгоритмической торговли и токеномики."
+      },
+      "contentCreator": {
+        "title": "Контент-креатор",
+        "description": "Создание увлекательного цифрового контента и образовательных ресурсов."
+      }
+    }
+  },
+  "contactForm": {
+    "title": "Отправить заявку",
+    "name": "Имя",
+    "contact": "Контакт (Email или Telegram)",
+    "projectType": "Тип проекта",
+    "budget": "Бюджет",
+    "deadline": "Дедлайн (Опционально)",
+    "paymentMethod": "Предпочитаемый способ оплаты",
+    "description": "Описание",
+    "send": "Отправить заявку 🚀",
+    "sending": "Отправка...",
+    "successTitle": "Заявка успешно отправлена! 🚀",
+    "successDesc": "Я свяжусь с вами в ближайшее время.",
+    "errorTitle": "Ошибка отправки",
+    "errorDesc": "Что-то пошло не так. Пожалуйста, попробуйте снова или свяжитесь со мной напрямую в Telegram.",
+    "placeholders": {
+      "name": "Иван Иванов",
+      "contact": "@username или email@example.com",
+      "type": "Выберите тип",
+      "budget": "$1000 - $5000",
+      "deadline": "Например: Ноябрь 2025",
+      "description": "Расскажите о вашей идее проекта..."
+    },
+    "types": {
+      "landing": "Лендинг",
+      "ecommerce": "Интернет-магазин",
+      "saas": "SaaS / Веб-приложение",
+      "bot": "Разработка ботов",
+      "other": "Другое"
+    },
+    "paymentMethods": {
+      "crypto": "Криптовалюта (USDT/BTC/ETH)",
+      "card": "Банковская карта / Перевод",
+      "other": "Обсудить позже"
+    },
+    "paymentInfo": {
+      "title": "Оплата и Реквизиты",
+      "desc": "Для начала индивидуальной разработки обычно требуется предоплата. Вы можете использовать эти реквизиты:",
+      "cryptoLabel": "Кошелек USDT (TRC20):",
+      "cryptoValue": "UQAz5injkmvCFXp9QtqyicEOh-cBpzAHlbH_BcXj-Tqtc7Sz",
+      "cardLabel": "Банковская карта (USD/EUR) (Visa/Mastercard):",
+      "cardValue": "4149 4990 9968 5867",
+      "note": "Пожалуйста, укажите выбранный способ оплаты в форме ниже."
+    }
+  },
+  "footer": {
+    "description": "Платформа для обзора и сравнения инструментов разработки и дизайна",
+    "navigation": {
+      "title": "Навигация",
+      "home": "Главная",
+      "projects": "Проекты",
+      "tools": "Инструменты",
+      "blog": "Блог",
+      "contact": "Контакты"
+    },
+    "social": {
+      "title": "Соцсети",
+      "github": "GitHub",
+      "twitter": "Twitter",
+      "linkedin": "LinkedIn"
+    },
+    "copyright": "Induktr © 2025-2026 Все права защищены"
+  },
+  "marketplace": {
+    "title": "Магазин",
+    "subtitle": "Премиальные шаблоны и готовые решения",
+    "buy": "Купить",
+    "questions_title": "Есть вопросы?",
+    "faq_hint_before": "Зайдите на",
+    "faq_link": "страницу FAQ",
+    "faq_hint_after": ", там все подробности про шаблоны и не только.",
+    "buy_component": "Купить компонент"
+  },
+  "faq": {
+    "title": "Часто задаваемые вопросы",
+    "subtitle": "Все, что вам нужно знать о шаблонах и услугах Induktr",
+    "categories": {
+      "general": "Общие вопросы",
+      "tech": "Технические детали",
+      "payments": "Оплата и доставка"
+    },
+    "items": {
+      "what_is_induktr": {
+        "q": "Что такое Induktr Portfolio?",
+        "a": "Induktr Portfolio — это бутиковая цифровая экосистема, созданная @Induktr. Она служит как витриной высокоуровневой инженерии, так и маркетплейсом премиальных, готовых к работе шаблонов и инструментов на базе ИИ."
+      },
+      "how_it_works": {
+        "q": "Как работает процесс заказа?",
+        "a": "Как только вы выбираете шаблон в Маркетплейсе и нажимаете «Купить», вы получаете инструкции по оплате. После оплаты вы получаете код доступа. Введите этот код в нашем официальном Telegram-боте, чтобы мгновенно скачать исходные файлы и документацию."
+      },
+      "custom_projects": {
+        "q": "Можно ли заказать индивидуальный проект?",
+        "a": "Да! Я специализируюсь на создании MVP, высокопроизводительных лендингов и ИИ-автоматизаций. Заполните форму на странице «Начать проект», и я свяжусь с вами с предложением."
+      },
+      "stack": {
+        "q": "Какие технологии вы используете?",
+        "a": "В основном я использую Next.js, React и TypeScript для фронтенда в сочетании с Python (Flask/FastAPI) или Node.js для сложной логики и интеграций ИИ. Для стилизации стандартами являются Tailwind CSS и Framer Motion."
+      },
+      "ai_safety": {
+        "q": "Безопасны ли торговые инструменты на базе ИИ?",
+        "a": "Инструменты A.S.T.R.A. и Hunter Bot разработаны с соблюдением принципов безопасности. Они включают модули управления рисками и используют официальные API. Однако они предоставляются как фреймворки для ваших собственных стратегий; всегда тестируйте в тестнетах или песочницах."
+      },
+      "payment_methods": {
+        "q": " какие способы оплаты принимаются?",
+        "a": "В настоящее время я принимаю USDT (TRC20/ERC20/TON) и прямые переводы на банковскую карту (USD/EUR). Реквизиты предоставляются в процессе оформления заказа."
+      },
+      "refunds": {
+        "q": "Предусмотрен ли возврат средств?",
+        "a": "Из-за цифровой природы продуктов (доступ к исходному коду) я обычно не предлагаю возврат средств после скачивания файлов. Тем не менее, я предоставляю полную поддержку, чтобы шаблон работал так, как заявлено."
+      }
+    },
+    "cta": {
+      "title": "Остались вопросы?",
+      "desc": "Если вы не нашли нужный ответ, не стесняйтесь обращаться ко мне напрямую в Telegram.",
+      "telegram": "Написать в Telegram",
+      "form": "Форма контактов"
+    }
+  },
+  "projects": {
+    "categories": {
+      "title": "Категории проектов",
+      "names": {
+        "web": "Веб-приложения",
+        "mobile": "Кросс-платформенные приложения",
+        "fintech": "FinTech решения",
+        "communication": "Коммуникационные инструменты",
+        "ai": "AI & Автоматизация",
+        "trading": "Трейдинг Системы"
+      }
+    },
+    "card": {
+      "inDevelopment": "В разработке",
+      "moreDetails": "Подробнее",
+      "liveDemo": "Live Demo"
+    },
+    "dialog": {
+      "keyFeatures": "Ключевые функции",
+      "tags": "Теги",
+      "projectStart": "Начало проекта",
+      "projectPhases": "Фазы проекта",
+      "mainStack": "Основной стек",
+      "additionalTech": "Дополнительные технологии",
+      "status": {
+        "completed": "Завершено",
+        "active": "В процессе",
+        "upcoming": "Предстоит",
+        "inDevelopment": "В разработке"
+      },
+      "roadmap": {
+        "tab": "Roadmap",
+        "stage": "Этапа",
+        "goal": "Цель",
+        "duration": "Срок",
+        "task": "Задача",
+        "checklist": "Чек-лист"
+      },
+      "tabs": {
+        "overview": "Обзор",
+        "timeline": "Таймлайн",
+        "tech": "Стек"
+      }
+    }
+  },
+  "tools": {
+    "allCategories": "Все категории",
+    "comparison": {
+      "performance": "Производительность",
+      "reliability": "Надежность",
+      "usability": "Удобство использования"
+    }
+  },
+  "pages": {
+    "projects": {
+      "title": "Проекты",
+      "description": "Портфолио наших инновационных веб-разработок и технологических решений"
+    },
+    "tools": {
+      "title": "Инструменты и технологии",
+      "categories": {
+        "dev": "Разработка и программирование",
+        "code": "Анализ и улучшение кода",
+        "web": "Веб-разработка",
+        "ai": "ИИ и язык",
+        "translation": "Язык и перевод",
+        "product": "Продуктивность",
+        "marketing": "Маркетинг и автоматизация",
+        "utility": "Утилиты",
+        "ai-research": "Исследование ИИ"
+      },
+      "description": "Сравнительный анализ и обзор используемых технологий в наших проектах",
+      "performanceComparison": "Сравнение производительности",
+      "ourTechStack": "Наш технологический стек"
+    },
+    "blog": {
+      "title": "Блог"
+    }
+  },
+  "projectsData": {
+    "1": {
+      "id": 1,
+      "title": "BrainMessenger",
+      "shortDescription": "Современный мессенджер с уникальным UX/UI дизайном и передовыми технологиями",
+      "description": "Инновационная платформа для обмена сообщениями, объединяющая передовые технологии и интуитивный пользовательский опыт.",
+      "image": "https://res.cloudinary.com/dsjalneil/image/upload/v1740704902/5891520_r1cl35.png",
+      "categories": ["communication", "mobile", "web"],
+      "techStack": ["TypeScript & React Native", "Next.js & Tailwind CSS", "Node.js & NestJS", "PostgreSQL & Redis", "GraphQL & Firebase"],
+      "tags": ["Messenger", "Cross-platform", "Modern UI"],
+      "links": {
+        "github": "https://github.com/Induktr/brainmessenger",
+        "live": "https://webbrainmessenger.netlify.app/"
+      },
+      "features": [
+        "Уникальная система UI компонентов",
+        "Анимации и микроинтеракции",
+        "Поддержка мультиязычности",
+        "Оптимизированная производительность",
+        "Адаптивный дизайн",
+        "Системы безопасности"
+      ],
+      "status": "in-development",
+      "timeline": {
+        "start": "2024-01-01",
+        "phases": [
+          { "name": "Идея", "duration": "1 месяц", "status": "completed" },
+          { "name": "Дизайн", "duration": "2 месяца", "status": "completed" },
+          { "name": "Разработка", "duration": "в процессе", "status": "active" }
+        ]
+      }
+    },
+    "2": {
+      "id": 2,
+      "title": "Westbud",
+      "shortDescription": "Премиальная корпоративная платформа для крупной строительной компании",
+      "description": "Высокотехнологичный корпоративный портал для крупного строительного игрока. Фокус на максимальной скорости загрузки, премиальном дизайне и удобном интерфейсе для демонстрации строительных объектов.",
+      "image": "https://res.cloudinary.com/dsjalneil/image/upload/v1740704902/5891522-1_yryudd.png",
+      "categories": ["web"],
+      "techStack": ["Next.js", "TypeScript", "Tailwind CSS", "Framer Motion", "Three.js"],
+      "tags": ["Construction", "Web Platform", "Premium UI"],
+      "links": {
+        "github": "https://github.com/Induktr/westbud-legacy",
+        "live": "https://westbud.netlify.app/"
+      },
+      "features": [
+        "Максимальная скорость (PageSpeed 95+)",
+        "3D визуализация объектов",
+        "Интерактивная карта проектов",
+        "Мультиязычность (EN/NL/UA)",
+        "Адаптивность под все устройства"
+      ],
+      "status": "completed",
+      "timeline": {
+        "start": "2023-06-01",
+        "phases": [
+          { "name": "Требования", "duration": "2 недели", "status": "completed" },
+          { "name": "Разработка", "duration": "3 месяца", "status": "completed" },
+          { "name": "Запуск", "duration": "1 неделя", "status": "completed" }
+        ]
+      }
+    },
+    "3": {
+      "id": 3,
+      "title": "BuildKo",
+      "shortDescription": "Полнофункциональная веб-платформа для строительной компании с инновационными технологиями",
+      "description": "Современное веб-приложение для строительной компании с интерактивным портфолио проектов, системой расчета смет и богатым пользовательским опытом.",
+      "image": "https://res.cloudinary.com/dsjalneil/image/upload/v1740704902/5891522-1_yryudd.png",
+      "categories": ["web"],
+      "techStack": ["React", "TypeScript", "Three.js", "Framer Motion", "Tailwind CSS"],
+      "tags": ["Construction", "Web Platform", "3D Visualization"],
+      "links": {
+        "github": "https://github.com/Induktr/buildko",
+        "live": "https://buildko.netlify.app/"
+      },
+      "features": [
+        "Интерактивное портфолио проектов",
+        "3D визуализация с Three.js",
+        "Система расчета смет",
+        "Анимации Framer Motion",
+        "Адаптивный дизайн"
+      ],
+      "status": "active",
+      "timeline": {
+        "start": "2024-02-15",
+        "phases": [
+          { "name": "Архитектура", "duration": "3 недели", "status": "completed" },
+          { "name": "Разработка MVP", "duration": "2 месяца", "status": "active" }
+        ]
+      }
+    },
+    "4": {
+      "id": 4,
+      "title": "BueatyLove",
+      "shortDescription": "Инновационная платформа для индустрии красоты с элегантным дизайном и плавными анимациями",
+      "description": "Элегантное веб-приложение для индустрии красоты, сочетающее в себе современный дизайн, плавные анимации и роскошные визуальные эффекты.",
+      "image": "https://res.cloudinary.com/dsjalneil/image/upload/v1740704902/5891523_cvgovb.png",
+      "categories": ["web"],
+      "techStack": ["JavaScript", "HTML5", "Vite", "Framer Motion"],
+      "tags": ["Beauty Industry", "Web Platform", "Luxury Design"],
+      "links": {
+        "github": "https://github.com/Induktr/BueatyLove",
+        "live": "https://bueatylove.netlify.app/"
+      },
+      "features": [
+        "Анимации с плавными переходами",
+        "Элегантные фоновые паттерны",
+        "Физически-реалистичные эффекты инерции",
+        "Роскошные UI элементы",
+        "Оптимизированная производительность"
+      ],
+      "status": "upcoming",
+      "timeline": {
+        "start": "2024-05-01",
+        "phases": [
+          { "name": "Концептуализация", "duration": "1 месяц", "status": "completed" },
+          { "name": "Прототипирование", "duration": "1 месяц", "status": "upcoming" }
+        ]
+      }
+    },
+    "5": {
+      "id": 5,
+      "title": "A.S.T.R.A",
+      "shortDescription": "Автономная ИИ-система для алгоритмической торговли криптой",
+      "description": "Автономная система для торговли на криптовалютном рынке. Использует анализ настроений (Sentiment Analysis) через Gemini 2.0 AI и алгоритмические стратегии для полностью независимого управления капиталом.",
+      "image": "https://res.cloudinary.com/dsjalneil/image/upload/v1740704902/5891520_r1cl35.png",
+      "categories": ["ai", "trading", "fintech"],
+      "techStack": ["Python", "React", "CCXT", "Gemini AI"],
+      "tags": ["Trading AI", "Crypto", "Automation"],
+      "links": {
+        "github": "https://github.com/Induktr/astra-lite"
+      },
+      "features": [
+        "Gemini 2.0 Sentiment Analysis",
+        "Автономное исполнение ордеров",
+        "Продвинутый Risk Guard",
+        "Реал-тайм дашборд",
+        "Уведомления в Telegram"
+      ],
+      "status": "completed",
+      "timeline": {
+        "start": "2023-11-10",
+        "phases": [
+          { "name": "Проектирование алгоритма", "duration": "1 месяц", "status": "completed" },
+          { "name": "Бэктестинг", "duration": "2 месяца", "status": "completed" },
+          { "name": "Продакшн", "duration": "в процессе", "status": "active" }
+        ]
+      }
+    }
+  },
+  "toolsData": [
+    {
+      "id": "dev",
+      "category": "Разработка и программирование",
+      "items": [
+        { "name": "VS Code", "icon": "SiVisualstudiocode", "description": "Основная IDE с расширениями" },
+        { "name": "Cursor", "icon": "SiCursor", "description": "Редактор кода на базе ИИ" }
+      ]
+    }
+  ],
+  "marketplaceTemplates": [
+    {
+      "id": "westbud-legacy",
+      "title": "Elite Corporate Landing Engine",
+      "description": "The Westbud Legacy: Ультимативный шаблон для серьезного бизнеса. Максимальная скорость и премиальный дизайн.",
+      "price": 199,
+      "stack": ["Next.js", "Tailwind CSS", "TypeScript"],
+      "features": [
+        "Поддержка i18n (EN/NL/UA)",
+        "Performance King (95+ PageSpeed)",
+        "Motion UI и 3D Tilt эффекты",
+        "Контент на базе JSON"
+      ],
+      "gradient": "from-blue-600 to-indigo-900"
+    },
+    {
+      "id": "astra-lite",
+      "title": "Autonomous AI Trading Dashboard",
+      "description": "A.S.T.R.A. Lite: Готовая платформа для мониторинга и автоматизации торговли с интеграцией ИИ.",
+      "price": 399,
+      "stack": ["React", "Python", "CCXT"],
+      "features": [
+        "Анализ настроений Gemini 2.0 AI",
+        "PnL и синхронизация в реальном времени",
+        "Встроенный Risk Guard",
+        "Docker и systemd Ready"
+      ],
+      "gradient": "from-emerald-500 to-teal-800"
+    },
+    {
+      "id": "hunter-bot",
+      "title": "Smart AI Outreach & Job Scouter",
+      "description": "Hunter Bot: Автоматический поиск заказов и вакансий. Фильтрация мусора и умные отклики.",
+      "price": 149,
+      "stack": ["Python", "Telethon", "Gemini AI"],
+      "features": [
+        "Фильтрация 90% спама и скама",
+        "Генератор откликов в стиле Восса",
+        "Мгновенные уведомления в Telegram",
+        "Режим тактической эмпатии"
+      ],
+      "gradient": "from-orange-600 to-amber-900"
+    },
+    {
+      "id": "ui-kit",
+      "title": "Induktr Signature UI System",
+      "description": "Полная дизайн-система: библиотека компонентов, цветовые палитры и анимации в стиле Induktr.",
+      "price": 99,
+      "stack": ["React", "Tailwind", "Framer Motion"],
+      "features": [
+        "50+ премиальных компонентов",
+        "Глобальная система цветов",
+        "Встроенные микро-анимации",
+        "Готовые лейауты"
+      ],
+      "gradient": "from-violet-600 to-purple-900"
+    }
+  ],
+  "marketplaceData": {
+    "westbud-legacy": {
+      "videos": [],
+      "roadmap": [],
+      "docs": []
+    }
+  }
+}

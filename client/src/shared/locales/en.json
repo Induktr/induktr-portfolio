@@ -1,0 +1,491 @@
+{
+  "common": {
+    "projects": "Projects",
+    "tools": "Tools",
+    "marketplace": "Marketplace",
+    "blog": "Blog",
+    "startProject": "Start a Project",
+    "downloadResume": "Download Resume",
+    "viewProjects": "View Projects",
+    "contact": "Contact",
+    "language": "Language",
+    "close": "Close",
+    "faq": "FAQ"
+  },
+  "home": {
+    "greeting": "Hi, I'm Induktr",
+    "description": "A passionate web developer crafting beautiful and functional digital experiences",
+    "startProject": "Start a Project"
+  },
+  "mission-statement": {
+    "title": "Mission",
+    "author": "Induktr",
+    "phrases": [
+      "I build digital empires, one line of code at a time.",
+      "Engineering high-performance solutions for the modern web.",
+      "Transforming complex ideas into elegant reality.",
+      "Innovating at the intersection of AI and user experience.",
+      "Committed to excellence in every digital interaction."
+    ]
+  },
+  "roleWheel": {
+    "title": "Who is Induktr?",
+    "subtitle": "An ecosystem of roles contributing to digital excellence",
+    "roles": {
+      "techSpecialist": {
+        "title": "Tech Specialist",
+        "description": "Expert in modern web stacks, ensuring performance and scalability."
+      },
+      "mvpCreator": {
+        "title": "MVP Creator",
+        "description": "Master of rapid prototyping and bringing ideas to life quickly."
+      },
+      "cryptoInvestor": {
+        "title": "Crypto Investor",
+        "description": "Deep understanding of web3, algorithmic trading, and tokenomics."
+      },
+      "contentCreator": {
+        "title": "Content Creator",
+        "description": "Crafting engaging digital content and educational resources."
+      }
+    }
+  },
+  "contactForm": {
+    "title": "Start a Project",
+    "name": "Name",
+    "contact": "Contact (Email or Telegram)",
+    "projectType": "Project Type",
+    "budget": "Budget",
+    "deadline": "Deadline (Optional)",
+    "paymentMethod": "Preferred Payment Method",
+    "description": "Description",
+    "send": "Send Request 🚀",
+    "sending": "Sending...",
+    "successTitle": "Lead Sent Successfully! 🚀",
+    "successDesc": "I'll get back to you shortly.",
+    "errorTitle": "Error Sending Lead",
+    "errorDesc": "Something went wrong. Please try again or contact me directly on Telegram.",
+    "placeholders": {
+      "name": "John Doe",
+      "contact": "@username or email@example.com",
+      "type": "Select type",
+      "budget": "$1000 - $5000",
+      "deadline": "Example: November 2025",
+      "description": "Tell me about your project idea..."
+    },
+    "types": {
+      "landing": "Landing Page",
+      "ecommerce": "E-commerce",
+      "saas": "Saas",
+      "bot": "Bot Development",
+      "other": "Other"
+    },
+    "paymentMethods": {
+      "crypto": "Cryptocurrency (USDT/BTC/ETH)",
+      "card": "Bank Card / Transfer",
+      "other": "Discuss Later"
+    },
+    "paymentInfo": {
+      "title": "Payment & Requisites",
+      "desc": "To start separate development, a prepayment is usually discussed. You can use these details:",
+      "cryptoLabel": "USDT (TON) Wallet:",
+      "cryptoValue": "UQAz5injkmvCFXp9QtqyicEOh-cBpzAHlbH_BcXj-Tqtc7Sz",
+      "cardLabel": "Bank Card (USD/EUR) (Visa/Mastercard):",
+      "cardValue": "4149 4990 9968 5867",
+      "note": "Please specify the payment method in the form below."
+    }
+  },
+  "footer": {
+    "description": "A platform for reviewing and comparing development and design tools",
+    "navigation": {
+      "title": "Navigation",
+      "home": "Home",
+      "projects": "Projects",
+      "tools": "Tools",
+      "blog": "Blog",
+      "contact": "Contact"
+    },
+    "social": {
+      "title": "Social",
+      "github": "GitHub",
+      "twitter": "Twitter",
+      "linkedin": "LinkedIn"
+    },
+    "copyright": "Induktr © 2025-2026 All rights reserved"
+  },
+  "marketplace": {
+    "title": "Marketplace",
+    "subtitle": "Premium templates and ready-to-use solutions",
+    "buy": "Buy",
+    "questions_title": "Any Questions?",
+    "faq_hint_before": "Check our",
+    "faq_link": "FAQ page",
+    "faq_hint_after": "for all technical details and template usage.",
+    "buy_component": "Buy Component"
+  },
+  "faq": {
+    "title": "Frequently Asked Questions",
+    "subtitle": "Everything you need to know about Induktr templates and services",
+    "categories": {
+      "general": "General Questions",
+      "tech": "Technical Details",
+      "payments": "Payments & Delivery"
+    },
+    "items": {
+      "what_is_induktr": {
+        "q": "What is Induktr Portfolio?",
+        "a": "Induktr Portfolio is a boutique digital ecosystem created by @Induktr. It serves as both a showcase of high-end engineering and a marketplace for premium, production-ready templates and AI-powered tools."
+      },
+      "how_it_works": {
+        "q": "How does the ordering process work?",
+        "a": "Once you select a template in the Marketplace and click \"Buy\", you will receive payment instructions. After payment, you get an access code. Enter this code in our official Telegram Bot to instantly download the source files and documentation."
+      },
+      "custom_projects": {
+        "q": "Can I hire you for a custom project?",
+        "a": "Yes! I specialize in building MVPs, high-performance landings, and AI automations. Fill out the form on the \"Start Project\" page, and I will get back to you with a proposal."
+      },
+      "stack": {
+        "q": "What technologies do you use?",
+        "a": "I primarily use Next.js, React, and TypeScript for the frontend, combined with Python (Flask/FastAPI) or Node.js for heavy logic and AI integrations. For styling, Tailwind CSS and Framer Motion are my standards."
+      },
+      "ai_safety": {
+        "q": "Are the AI trading tools safe?",
+        "a": "The A.S.T.R.A. and Hunter Bot tools are designed with \"Safety First\" principles. They include risk management modules and use official APIs. However, they are provided as frameworks for your own strategies; always test in testnets/sandbox."
+      },
+      "payment_methods": {
+        "q": "Which payment methods are accepted?",
+        "a": "I currently accept USDT (TRC20/ERC20/TON) and direct Bank Card transfers (USD/EUR). Details are provided during the checkout process."
+      },
+      "refunds": {
+        "q": "Do you offer refunds?",
+        "a": "Due to the digital nature of the products (source code access), I generally do not offer refunds once the files are downloaded. However, I provide full support to ensure the template works as advertised."
+      }
+    },
+    "cta": {
+      "title": "Still have questions?",
+      "desc": "If you couldn't find the answer you were looking for, feel free to reach out to me directly on Telegram.",
+      "telegram": "Chat on Telegram",
+      "form": "Contact Form"
+    }
+  },
+  "projects": {
+    "categories": {
+      "title": "Project Categories",
+      "names": {
+        "web": "Web Applications",
+        "mobile": "Cross-platform Apps",
+        "fintech": "FinTech Solutions",
+        "communication": "Communication Tools",
+        "ai": "AI & Automation",
+        "trading": "Trading Systems"
+      }
+    },
+    "card": {
+      "inDevelopment": "In Development",
+      "moreDetails": "More Details",
+      "liveDemo": "Live Demo"
+    },
+    "dialog": {
+      "keyFeatures": "Key Features",
+      "tags": "Tags",
+      "projectStart": "Project Start",
+      "projectPhases": "Project Phases",
+      "mainStack": "Main Stack",
+      "additionalTech": "Additional Technologies",
+      "status": {
+        "completed": "Completed",
+        "active": "In Progress",
+        "upcoming": "Upcoming",
+        "inDevelopment": "In Development"
+      },
+      "roadmap": {
+        "tab": "Roadmap",
+        "stage": "Stage",
+        "goal": "Goal",
+        "duration": "Duration",
+        "task": "Task",
+        "checklist": "Checklist"
+      },
+      "tabs": {
+        "overview": "Overview",
+        "timeline": "Timeline",
+        "tech": "Tech Stack"
+      }
+    }
+  },
+  "tools": {
+    "allCategories": "All Categories",
+    "comparison": {
+      "performance": "Performance",
+      "reliability": "Reliability",
+      "usability": "Usability"
+    }
+  },
+  "pages": {
+    "projects": {
+      "title": "Projects",
+      "description": "Portfolio of our innovative web developments and technological solutions"
+    },
+    "tools": {
+      "title": "Tools and Technologies",
+      "categories": {
+        "dev": "Development and Programming",
+        "code": "Code Analysis and Improvement",
+        "web": "Web Development",
+        "ai": "AI and Language",
+        "translation": "Translation",
+        "product": "Productivity",
+        "marketing": "Marketing and Automation",
+        "utility": "Utilities",
+        "ai-research": "AI Research"
+      },
+      "description": "Comparative analysis and review of technologies used in our projects",
+      "performanceComparison": "Performance Comparison",
+      "ourTechStack": "Our Technology Stack"
+    },
+    "blog": {
+      "title": "Blog"
+    }
+  },
+  "projectsData": {
+    "1": {
+      "id": 1,
+      "title": "BrainMessenger",
+      "shortDescription": "Modern messenger with unique UX/UI design and advanced technologies",
+      "description": "Innovative messaging platform combining cutting-edge technology and intuitive user experience.",
+      "image": "https://res.cloudinary.com/dsjalneil/image/upload/v1740704902/5891520_r1cl35.png",
+      "categories": ["communication", "mobile", "web"],
+      "techStack": ["TypeScript & React Native", "Next.js & Tailwind CSS", "Node.js & NestJS", "PostgreSQL & Redis", "GraphQL & Firebase"],
+      "tags": ["Messenger", "Cross-platform", "Modern UI"],
+      "links": {
+        "github": "https://github.com/Induktr/brainmessenger",
+        "live": "https://webbrainmessenger.netlify.app/"
+      },
+      "features": [
+        "Unique UI Component System",
+        "Animations and Micro-interactions",
+        "Multilanguage Support",
+        "Optimized Performance",
+        "Responsive Design",
+        "Security Systems"
+      ],
+      "status": "in-development",
+      "timeline": {
+        "start": "2024-01-01",
+        "phases": [
+          { "name": "Ideation", "duration": "1 month", "status": "completed" },
+          { "name": "Design", "duration": "2 months", "status": "completed" },
+          { "name": "Development", "duration": "ongoing", "status": "active" }
+        ]
+      }
+    },
+    "2": {
+      "id": 2,
+      "title": "Westbud",
+      "shortDescription": "Premium corporate platform for a large construction company",
+      "description": "High-end corporate portal for a major construction player. Focus on maximum load speed, premium design, and user-friendly interface for building showcase.",
+      "image": "https://res.cloudinary.com/dsjalneil/image/upload/v1740704902/5891522-1_yryudd.png",
+      "categories": ["web"],
+      "techStack": ["Next.js", "TypeScript", "Tailwind CSS", "Framer Motion", "Three.js"],
+      "tags": ["Construction", "Web Platform", "Premium UI"],
+      "links": {
+        "github": "https://github.com/Induktr/westbud-legacy",
+        "live": "https://westbud.netlify.app/"
+      },
+      "features": [
+        "Maximum performance (PageSpeed 95+)",
+        "3D visualization of objects",
+        "Interactive project map",
+        "Multi-language support (EN/NL/UA)",
+        "Responsive for all devices"
+      ],
+      "status": "completed",
+      "timeline": {
+        "start": "2023-06-01",
+        "phases": [
+          { "name": "Requirements", "duration": "2 weeks", "status": "completed" },
+          { "name": "Development", "duration": "3 months", "status": "completed" },
+          { "name": "Launch", "duration": "1 week", "status": "completed" }
+        ]
+      }
+    },
+    "3": {
+      "id": 3,
+      "title": "BuildKo",
+      "shortDescription": "Full-featured web platform for a construction company with innovative technologies",
+      "description": "Modern web application for a construction company with an interactive project portfolio, estimation system, and rich UX.",
+      "image": "https://res.cloudinary.com/dsjalneil/image/upload/v1740704902/5891522-1_yryudd.png",
+      "categories": ["web"],
+      "techStack": ["React", "TypeScript", "Three.js", "Framer Motion", "Tailwind CSS"],
+      "tags": ["Construction", "Web Platform", "3D Visualization"],
+      "links": {
+        "github": "https://github.com/Induktr/buildko",
+        "live": "https://buildko.netlify.app/"
+      },
+      "features": [
+        "Interactive project portfolio",
+        "3D visualization with Three.js",
+        "Estimation system",
+        "Framer Motion animations",
+        "Responsive design"
+      ],
+      "status": "active",
+      "timeline": {
+        "start": "2024-02-15",
+        "phases": [
+          { "name": "Architecture", "duration": "3 weeks", "status": "completed" },
+          { "name": "MVP Development", "duration": "2 months", "status": "active" }
+        ]
+      }
+    },
+    "4": {
+      "id": 4,
+      "title": "BueatyLove",
+      "shortDescription": "Innovative platform for the beauty industry with elegant design and smooth animations",
+      "description": "Elegant web application for the beauty industry combining modern design, smooth animations, and luxurious visual effects.",
+      "image": "https://res.cloudinary.com/dsjalneil/image/upload/v1740704902/5891523_cvgovb.png",
+      "categories": ["web"],
+      "techStack": ["JavaScript", "HTML5", "Vite", "Framer Motion"],
+      "tags": ["Beauty Industry", "Web Platform", "Luxury Design"],
+      "links": {
+        "github": "https://github.com/Induktr/BueatyLove",
+        "live": "https://bueatylove.netlify.app/"
+      },
+      "features": [
+        "Smooth Transition Animations",
+        "Elegant Background Patterns",
+        "Physics-based Inertia Effects",
+        "Luxurious UI Elements",
+        "Optimized Performance"
+      ],
+      "status": "upcoming",
+      "timeline": {
+        "start": "2024-05-01",
+        "phases": [
+          { "name": "Conceptualization", "duration": "1 month", "status": "completed" },
+          { "name": "Prototyping", "duration": "1 month", "status": "upcoming" }
+        ]
+      }
+    },
+    "5": {
+      "id": 5,
+      "title": "A.S.T.R.A",
+      "shortDescription": "Autonomous AI system for algorithmic crypto trading",
+      "description": "Autonomous system for trading on the cryptocurrency market. Uses sentiment analysis via Gemini 2.0 AI and algorithmic strategies for fully independent capital management.",
+      "image": "https://res.cloudinary.com/dsjalneil/image/upload/v1740704902/5891520_r1cl35.png",
+      "categories": ["ai", "trading", "fintech"],
+      "techStack": ["Python", "React", "CCXT", "Gemini AI"],
+      "tags": ["Trading AI", "Crypto", "Automation"],
+      "links": {
+        "github": "https://github.com/Induktr/astra-lite"
+      },
+      "features": [
+        "Gemini 2.0 Sentiment Analysis",
+        "Autonomous order execution",
+        "Advanced Risk Guard",
+        "Real-time dashboard",
+        "Telegram notifications"
+      ],
+      "status": "completed",
+      "timeline": {
+        "start": "2023-11-10",
+        "phases": [
+          { "name": "Algorithm Design", "duration": "1 month", "status": "completed" },
+          { "name": "Backtesting", "duration": "2 months", "status": "completed" },
+          { "name": "Production", "duration": "ongoing", "status": "active" }
+        ]
+      }
+    }
+  },
+  "toolsData": [
+    {
+      "id": "dev",
+      "category": "Development & Programming",
+      "items": [
+        { "name": "VS Code", "icon": "SiVisualstudiocode", "description": "Primary IDE with extensions" },
+        { "name": "Cursor", "icon": "SiCursor", "description": "AI-powered code editor" }
+      ]
+    }
+  ],
+  "marketplaceTemplates": [
+    {
+      "id": "westbud-legacy",
+      "title": "Elite Corporate Landing Engine",
+      "description": "The Westbud Legacy: Ultimate template for serious business. Maximum speed and premium design.",
+      "price": 199,
+      "stack": ["Next.js", "Tailwind CSS", "TypeScript"],
+      "features": [
+        "Full i18n Support (EN/NL/UA)",
+        "Performance King (95+ PageSpeed)",
+        "Motion UI & 3D Tilt Effects",
+        "Clean JSON-based Content"
+      ],
+      "gradient": "from-blue-600 to-indigo-900"
+    },
+    {
+      "id": "astra-lite",
+      "title": "Autonomous AI Trading Dashboard",
+      "description": "A.S.T.R.A. Lite: Ready-made platform for monitoring and automating trading with AI integration.",
+      "price": 399,
+      "stack": ["React", "Python", "CCXT"],
+      "features": [
+        "Gemini 2.0 AI Sentiment Analysis",
+        "Real-time PnL & Logic Sync",
+        "Built-in Risk Guard & API Safety",
+        "Docker & systemd Ready"
+      ],
+      "gradient": "from-emerald-500 to-teal-800"
+    },
+    {
+      "id": "hunter-bot",
+      "title": "Smart AI Outreach & Job Scouter",
+      "description": "Hunter Bot: Automatic search for orders and jobs. Trash filtering and smart responses.",
+      "price": 149,
+      "stack": ["Python", "Telethon", "Gemini AI"],
+      "features": [
+        "90% Spam & Scam Filtering",
+        "Voss-style AI Response Writer",
+        "Instant Telegram Alerts",
+        "Tactical Empathy Mode"
+      ],
+      "gradient": "from-orange-600 to-amber-900"
+    },
+    {
+      "id": "ui-kit",
+      "title": "Induktr Signature UI System",
+      "description": "Complete design system: component library, color palettes, and animations in the branded Induktr style.",
+      "price": 99,
+      "stack": ["React", "Tailwind", "Framer Motion"],
+      "features": [
+        "50+ Premium Components",
+        "Global Color & Theme System",
+        "Built-in Micro-animations",
+        "Ready-to-use Layouts"
+      ],
+      "gradient": "from-violet-600 to-purple-900"
+    }
+  ],
+  "marketplaceData": {
+    "westbud-legacy": {
+      "videos": [],
+      "roadmap": [],
+      "docs": []
+    }
+  },
+  "postsData": [
+    {
+      "id": 1,
+      "title": "Building a Modern Portfolio",
+      "date": "2024-03-20",
+      "excerpt": "How I built this portfolio using React and modern web technologies",
+      "content": "# Building a Modern Portfolio\n\nIn this post, I'll share my experience building a modern portfolio website using React, Tailwind CSS, and other cutting-edge technologies.\n\n## The Tech Stack\n\n- React for the UI\n- Tailwind CSS for styling\n- Framer Motion for animations\n\n## Key Features\n\n1. Dark/Light theme\n2. Responsive design\n3. Markdown support"
+    },
+    {
+      "id": 2,
+      "title": "Web Development Best Practices",
+      "date": "2024-03-15",
+      "excerpt": "Essential practices for modern web development",
+      "content": "# Web Development Best Practices\n\nLet's explore some essential practices for modern web development that I've learned over the years.\n\n## 1. Performance First\n\nAlways optimize for performance from the start.\n\n## 2. Responsive Design\n\nMake your sites work on all devices.\n\n## 3. Accessibility\n\nEnsure your sites are accessible to everyone."
+    }
+  ]
+}

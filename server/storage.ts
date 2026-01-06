@@ -1,167 +1,77 @@
-import { supabase } from "./db";
-import { User, InsertUser } from "@shared/schema";
+import { Lead, LeadStatus } from "./shared/schemas/lead.schema";
 
-// Типы для работы с комментариями
-export type ToolComment = {
-  id: string;
-  tool_name: string;
-  comment: string;
-  rating: number;
-  user_id: string;
-  created_at: string;
-};
-
-export type CommentWithUser = {
-  id: string;
-  username: string;
-  comment: string;
-  rating: number;
-  createdAt: string;
-};
-
-export type InsertToolComment = Omit<ToolComment, 'id' | 'created_at' | 'user_id'> & {
-  username: string;
-};
-
-// Интерфейс хранилища с методами для работы с пользователями и комментариями
 export interface IStorage {
-  // Методы для работы с пользователями
-  getUser(id: string): Promise<User | undefined>;
-  getUserByUsername(username: string): Promise<User | undefined>;
-  createUser(user: InsertUser): Promise<User>;
-  
-  // Методы для работы с комментариями
-  getToolComments(toolName: string): Promise<CommentWithUser[]>;
-  addToolComment(comment: InsertToolComment): Promise<ToolComment>;
+  createLead(lead: Lead): Promise<Lead & { id: number }>;
+  getLead(id: number): Promise<(Lead & { id: number }) | undefined>;
+  getLeadByAccessCode(code: string): Promise<(Lead & { id: number }) | undefined>;
+  updateLeadStatus(id: number, status: LeadStatus, materialsUrl?: string): Promise<Lead & { id: number }>;
+  setLeadTelegramChatId(id: number, chatId: string): Promise<Lead & { id: number }>;
+  getAllLeads(): Promise<(Lead & { id: number })[]>;
+  getUserLanguage(chatId: string): Promise<string>;
+  setUserLanguage(chatId: string, lang: string): Promise<void>;
 }
 
-export class SupabaseStorage implements IStorage {
+export class MemStorage implements IStorage {
+  private leads: Map<number, Lead & { id: number }>;
+  private userLanguages: Map<string, string>;
+  private currentId: number;
+
   constructor() {
-    console.log("Initializing SupabaseStorage");
+    this.leads = new Map();
+    this.userLanguages = new Map();
+    this.currentId = 1;
   }
 
-  async getUser(id: string): Promise<User | undefined> {
-    const { data, error } = await supabase
-      .from('users')
-      .select('*')
-      .eq('id', id)
-      .single();
-    
-    if (error) {
-      console.error("Error fetching user:", error);
-      return undefined;
-    }
-    
-    return data;
+  async createLead(leadData: Lead): Promise<Lead & { id: number }> {
+    const id = this.currentId++;
+    const accessCode = Math.random().toString(36).substring(2, 9).toUpperCase();
+    const lead = { 
+      ...leadData, 
+      id, 
+      accessCode, 
+      status: (leadData.status || "pending") as LeadStatus 
+    };
+    this.leads.set(id, lead);
+    return lead;
   }
 
-  async getUserByUsername(username: string): Promise<User | undefined> {
-    const { data, error } = await supabase
-      .from('users')
-      .select('*')
-      .eq('username', username)
-      .single();
-    
-    if (error) {
-      console.error("Error fetching user by username:", error);
-      return undefined;
-    }
-    
-    return data;
+  async getLead(id: number): Promise<(Lead & { id: number }) | undefined> {
+    return this.leads.get(id);
   }
 
-  async createUser(insertUser: InsertUser): Promise<User> {
-    const { data, error } = await supabase
-      .from('users')
-      .insert(insertUser)
-      .select()
-      .single();
-    
-    if (error) {
-      console.error("Error creating user:", error);
-      throw error;
-    }
-    
-    return data;
+  async getLeadByAccessCode(code: string): Promise<(Lead & { id: number }) | undefined> {
+    return Array.from(this.leads.values()).find(l => l.accessCode === code);
   }
 
-  async getToolComments(toolName: string): Promise<CommentWithUser[]> {
-    const { data, error } = await supabase
-      .from('tool_comments')
-      .select(`
-        id,
-        comment,
-        rating,
-        created_at,
-        users (
-          username
-        )
-      `)
-      .eq('tool_name', toolName)
-      .order('created_at', { ascending: false });
-
-    if (error) {
-      console.error("Error fetching tool comments:", error);
-      throw error;
-    }
+  async updateLeadStatus(id: number, status: LeadStatus, materialsUrl?: string): Promise<Lead & { id: number }> {
+    const lead = this.leads.get(id);
+    if (!lead) throw new Error("Lead not found");
     
-    // Преобразование данных в ожидаемый формат
-    return data.map((comment: any) => ({
-      id: comment.id,
-      username: comment.users?.username || 'Anonymous',
-      comment: comment.comment,
-      rating: comment.rating,
-      createdAt: comment.created_at
-    }));
+    const updatedLead = { ...lead, status, ...(materialsUrl && { materialsUrl }) };
+    this.leads.set(id, updatedLead);
+    return updatedLead;
   }
 
-  async addToolComment(comment: InsertToolComment): Promise<ToolComment> {
-    // Сначала проверяем, существует ли пользователь
-    let userId;
+  async setLeadTelegramChatId(id: number, telegramChatId: string): Promise<Lead & { id: number }> {
+    const lead = this.leads.get(id);
+    if (!lead) throw new Error("Lead not found");
     
-    const { data: existingUser } = await supabase
-      .from('users')
-      .select('id')
-      .eq('username', comment.username)
-      .single();
-    
-    if (existingUser) {
-      userId = existingUser.id;
-    } else {
-      // Если пользователя нет, создаем нового
-      const { data: newUser, error: userError } = await supabase
-        .from('users')
-        .insert({ username: comment.username })
-        .select('id')
-        .single();
-      
-      if (userError) {
-        console.error("Error creating user:", userError);
-        throw userError;
-      }
-      userId = newUser.id;
-    }
-    
-    // Добавляем комментарий
-    const { data, error } = await supabase
-      .from('tool_comments')
-      .insert({
-        tool_name: comment.tool_name,
-        comment: comment.comment,
-        rating: comment.rating,
-        user_id: userId
-      })
-      .select()
-      .single();
-    
-    if (error) {
-      console.error("Error adding tool comment:", error);
-      throw error;
-    }
-    
-    return data;
+    const updatedLead = { ...lead, telegramChatId };
+    this.leads.set(id, updatedLead);
+    return updatedLead;
+  }
+
+  async getAllLeads(): Promise<(Lead & { id: number })[]> {
+    return Array.from(this.leads.values());
+  }
+
+  async getUserLanguage(chatId: string): Promise<string> {
+    return this.userLanguages.get(chatId) || "en";
+  }
+
+  async setUserLanguage(chatId: string, lang: string): Promise<void> {
+    this.userLanguages.set(chatId, lang);
   }
 }
 
-// Создаем и экспортируем инстанс хранилища
-export const storage = new SupabaseStorage();
+export const storage = new MemStorage();

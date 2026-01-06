@@ -1,20 +1,33 @@
-import express, { type Request, Response, NextFunction } from "express";
+import path from "path";
+import dotenv from "dotenv";
+import fs from "fs";
+
+// Explicitly load .env from current working directory
+const envPath = path.resolve(process.cwd(), '.env');
+const result = dotenv.config({ path: envPath });
+
+if (result.error) {
+  console.log("⚠️ Failed to load .env file:", result.error.message);
+} else {
+  console.log("✅ .env loaded successfully");
+}
+
+import express, { 
+  Request, 
+  Response, 
+  NextFunction 
+} from "express";
 import { registerRoutes } from "./routes";
 import { setupVite, serveStatic, log } from "./vite";
 import session from "express-session";
 import cors from "cors";
-import dotenv from "dotenv";
-import apiRoutes from "./api"; // Импортируем API роуты
-
-// Загружаем переменные окружения
-dotenv.config();
+import apiRoutes from "./shared/api";
 
 const app = express();
 
-// Настройка CORS для разработки
 app.use(
   cors({
-    origin: true, // Разрешаем любые кросс-доменные запросы
+    origin: true,
     credentials: true,
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS', 'PATCH'],
     allowedHeaders: [
@@ -29,12 +42,11 @@ app.use(
       'X-Supabase-Auth',
       'Access-Control-Allow-Origin',
     ],
-    maxAge: 86400, // Увеличенное время кэширования CORS (24 часа)
+    maxAge: 86400,
   })
 );
 
-// Добавляем middleware для логирования запросов
-app.use((req, res, next) => {
+app.use((req: Request, res: Response, next: NextFunction) => {
   const timestamp = new Date().toISOString();
   console.log(`[${timestamp}] ${req.method} ${req.url}`);
   next();
@@ -43,7 +55,6 @@ app.use((req, res, next) => {
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-// Добавляем middleware для сессий
 app.use(
   session({
     secret: process.env.SESSION_SECRET || "your-secret-key",
@@ -52,13 +63,12 @@ app.use(
     cookie: {
       secure: process.env.NODE_ENV === "production",
       httpOnly: true,
-      maxAge: 1000 * 60 * 60 * 24 * 7 // 1 неделя
+      maxAge: 1000 * 60 * 60 * 24 * 7
     }
   })
 );
 
-// Добавляем middleware для логирования
-app.use((req, res, next) => {
+app.use((req: Request, res: Response, next: NextFunction) => {
   const start = Date.now();
   const path = req.path;
   let capturedJsonResponse: Record<string, any> | undefined = undefined;
@@ -88,30 +98,34 @@ app.use((req, res, next) => {
   next();
 });
 
-// Добавляем API роуты
 app.use('/api', apiRoutes);
 
-// Регистрируем основные маршруты через функцию registerRoutes
+import { botManager } from "./bot";
+
 (async () => {
-  // Регистрируем маршруты через функцию registerRoutes
   const server = registerRoutes(app);
 
-  // Обработка ошибок
+  // Initialize Telegram Bot
+  if (process.env.TELEGRAM_BOT_TOKEN) {
+    try {
+      botManager.initialize(process.env.TELEGRAM_BOT_TOKEN);
+    } catch (error) {
+       console.error("Failed to initialize Telegram Bot:", error);
+    }
+  }
+
   app.use((err: any, _req: Request, res: Response, _next: NextFunction) => {
     const timestamp = new Date().toISOString();
     console.error(`[${timestamp}] Server Error:`, err);
     
-    // Убедимся, что заголовки не были уже отправлены
     if (res.headersSent) {
       return _next(err);
     }
-
-    // Форматируем ошибку как JSON
+    
     const status = err.status || err.statusCode || 500;
     const message = err.message || "Internal Server Error";
     const stack = process.env.NODE_ENV === 'development' ? err.stack : undefined;
     
-    // Всегда возвращаем JSON-ответ
     res.status(status).json({
       success: false,
       message: message,
@@ -124,25 +138,23 @@ app.use('/api', apiRoutes);
     });
   });
 
-  // Убедимся, что все другие маршруты, которые не совпали, вернут JSON-ответ для API
-  app.use('/api/*', (req, res) => {
+  app.use('/api/*', (req: Request, res: Response) => {
     res.status(404).json({
       success: false,
       message: `API endpoint not found: ${req.method} ${req.originalUrl}`
     });
   });
 
-  // Настройка Vite для разработки или статических файлов для продакшена
   if (app.get("env") === "development") {
     await setupVite(app, server);
   } else {
     serveStatic(app);
   }
 
-  // Запуск сервера
-  const PORT = parseInt(process.env.PORT || "5000", 10);
+  const PORT = Number.parseInt(process.env.PORT || "5000", 10);
   server.listen(PORT, "0.0.0.0", () => {
     log(`Server running on port ${PORT} in ${app.get("env")} mode`);
-    log(`Supabase URL: ${process.env.SUPABASE_URL ? "configured" : "missing"}`);
+    log(`Telegram Bot Token: ${process.env.TELEGRAM_BOT_TOKEN ? "CONFIGURED ✅" : "MISSING ❌"}`);
+    log(`Telegram Chat ID: ${process.env.TELEGRAM_CHAT_ID ? "CONFIGURED ✅" : "MISSING ❌"}`);
   });
 })();

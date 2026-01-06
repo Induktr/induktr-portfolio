@@ -1,19 +1,41 @@
-import { ProjectCard } from "@/components/ProjectCard";
-import { ProjectCategories } from "@/components/ProjectCategories";
-import { projects, categories } from "../data/projects.json";
+import { ProjectCard } from "@/entities/Project/ui/ProjectCard";
+import { ProjectCategories } from "@/entities/Project/ui/ProjectCategories";
 import { motion } from "framer-motion";
-import { useState } from "react";
+import { useState, useMemo } from "react";
+import { useTranslation } from "react-i18next";
+import type { Project } from "@/shared/types/project";
 
 export default function Projects() {
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
+  const { t } = useTranslation();
 
-  const filteredProjects = selectedCategories.length === 0
-    ? projects
-    : projects.filter(project => 
-        project.categories.some(category => 
-          selectedCategories.includes(category)
-        )
-      );
+  const projectsDataRaw = t('projectsData', { returnObjects: true });
+  
+  const PROJECTS = useMemo(() => {
+    if (!projectsDataRaw || typeof projectsDataRaw !== 'object' || Array.isArray(projectsDataRaw)) {
+      return [] as Project[];
+    }
+    return Object.values(projectsDataRaw) as Project[];
+  }, [projectsDataRaw]);
+
+  const categories = useMemo(() => [
+    { id: "web", icon: "browser" },
+    { id: "mobile", icon: "mobile" },
+    { id: "fintech", icon: "finance" },
+    { id: "communication", icon: "message" },
+    { id: "ai", icon: "ai" },
+    { id: "trading", icon: "trading" }
+  ].map(cat => ({
+    ...cat,
+    name: t(`projects.categories.names.${cat.id}`),
+    description: t(`projects.categories.descriptions.${cat.id}`, "")
+  })), [t]);
+
+  const filteredProjects = useMemo(() => PROJECTS.filter(project => {
+    const matchesCategory = selectedCategories.length === 0 || 
+      (project.categories && project.categories.some((cat: string) => selectedCategories.includes(cat)));
+    return matchesCategory;
+  }), [PROJECTS, selectedCategories]);
 
   const handleCategorySelect = (categoryId: string) => {
     setSelectedCategories(prev => {
@@ -31,9 +53,9 @@ export default function Projects() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
       >
-        <h1 className="text-4xl font-bold mb-4">Проекты</h1>
+        <h1 className="text-4xl font-bold mb-4">{t('pages.projects.title')}</h1>
         <p className="text-muted-foreground text-lg mb-8">
-          Портфолио наших инновационных веб-разработок и технологических решений
+          {t('pages.projects.description')}
         </p>
 
         <ProjectCategories
