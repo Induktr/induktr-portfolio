@@ -239,9 +239,8 @@
         "utility": "Utilities",
         "ai-research": "AI Research"
       },
-      "description": "Comparative analysis and review of technologies used in our projects",
-      "performanceComparison": "Performance Comparison",
-      "ourTechStack": "Our Technology Stack"
+      "description": "My personal toolkit and technologies that I have mastered, used to create innovative software solutions",
+      "ourTechStack": "My Technological Arsenal"
     },
     "blog": {
       "title": "Blog"
@@ -403,7 +402,83 @@
       "category": "Development & Programming",
       "items": [
         { "name": "VS Code", "icon": "SiVisualstudiocode", "description": "Primary IDE with extensions" },
-        { "name": "Cursor", "icon": "SiCursor", "description": "AI-powered code editor" }
+        { "name": "Cursor", "icon": "SiCursor", "description": "AI-powered code editor" },
+        { "name": "Antigravity", "icon": "SiGoogle", "description": "Specialized VS Code fork by Google DeepMind for advanced agentic coding" }
+      ]
+    },
+    {
+      "id": "version-control",
+      "category": "Version Control",
+      "items": [
+        { "name": "Git", "icon": "SiGit", "description": "Distributed version control system" },
+        { "name": "GitHub", "icon": "SiGithub", "description": "Hosting platform for collaboration" }
+      ]
+    },
+    {
+      "id": "web-stack",
+      "category": "Web Technologies & Frontend",
+      "items": [
+        { "name": "HTML5", "icon": "SiHtml5", "description": "Web structure and semantics" },
+        { "name": "CSS3", "icon": "SiCss3", "description": "Styling and responsive design" },
+        { "name": "JavaScript", "icon": "SiJavascript", "description": "Interactivity and dynamics" },
+        { "name": "TypeScript", "icon": "SiTypescript", "description": "Strict typing for reliability" },
+        { "name": "React", "icon": "SiReact", "description": "Library for building UIs" },
+        { "name": "Next.js", "icon": "SiNextdotjs", "description": "Full-stack framework for React" },
+        { "name": "Vite", "icon": "SiVite", "description": "Next generation frontend tooling" },
+        { "name": "TailwindCSS", "icon": "SiTailwindcss", "description": "Utility-first CSS framework" },
+        { "name": "clsx", "icon": "SiJavascript", "description": "Utility for conditional CSS classes" }
+      ]
+    },
+    {
+      "id": "python-creative",
+      "category": "Python & Creative Coding",
+      "items": [
+        { "name": "Python", "icon": "SiPython", "description": "Powerful language for logic and AI" },
+        { "name": "Pygame", "icon": "SiPython", "description": "Game development and multimedia" },
+        { "name": "Turtle", "icon": "SiPython", "description": "Vector graphics and algorithmic art" }
+      ]
+    },
+    {
+      "id": "react-ecosystem",
+      "category": "React Ecosystem & State Management",
+      "items": [
+        { "name": "React Hook Form", "icon": "SiReact", "description": "Performant form management" },
+        { "name": "Zod", "icon": "SiTypescript", "description": "TypeScript-first schema validation" },
+        { "name": "Zustand", "icon": "SiReact", "description": "Lightweight state management" },
+        { "name": "i18next", "icon": "SiI18Next", "description": "Internationalization framework for multilingual apps" },
+        { "name": "Lucide React", "icon": "SiReact", "description": "Beautiful icon library for React apps" },
+        { "name": "shadcn/ui", "icon": "SiRadixui", "description": "Component collection built on Radix UI" }
+      ]
+    },
+    {
+      "id": "cloud-services",
+      "category": "Cloud Services & Deployment",
+      "items": [
+        { "name": "Vercel", "icon": "SiVercel", "description": "Frontend deployment platform" },
+        { "name": "Cloud Firestore", "icon": "SiFirebase", "description": "Real-time NoSQL database" },
+        { "name": "Netlify", "icon": "SiNetlify", "description": "Platform for deploying static sites" }
+      ]
+    },
+    {
+      "id": "backend-runtime",
+      "category": "Backend & Runtime",
+      "items": [
+        { "name": "Node.js", "icon": "SiNodedotjs", "description": "JavaScript runtime for server-side development" },
+        { "name": "Express", "icon": "SiExpress", "description": "Minimalist web framework for Node.js" },
+        { "name": "GraphQL", "icon": "SiGraphql", "description": "Query language for APIs" },
+        { "name": "Prisma", "icon": "SiPrisma", "description": "Modern ORM for TypeScript and Node.js" },
+        { "name": "NestJS", "icon": "SiNestjs", "description": "Progressive framework for scalable applications" }
+      ]
+    },
+    {
+      "id": "databases",
+      "category": "Databases & Data Storage",
+      "items": [
+        { "name": "SQL", "icon": "SiMysql", "description": "Structured query language" },
+        { "name": "SQLite", "icon": "SiSqlite", "description": "Embedded relational database" },
+        { "name": "Drizzle ORM", "icon": "SiDrizzle", "description": "Lightweight TypeScript ORM" },
+        { "name": "PostgreSQL", "icon": "SiPostgresql", "description": "Powerful relational database" },
+        { "name": "NeonDB", "icon": "SiPostgresql", "description": "Serverless PostgreSQL platform" }
       ]
     }
   ],

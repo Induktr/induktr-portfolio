@@ -239,9 +239,8 @@
         "utility": "Утилиты",
         "ai-research": "Исследование ИИ"
       },
-      "description": "Сравнительный анализ и обзор используемых технологий в наших проектах",
-      "performanceComparison": "Сравнение производительности",
-      "ourTechStack": "Наш технологический стек"
+      "description": "Мой личный инструментарий и технологии, которыми я владею в совершенстве, используемые для создания инновационных программных решений",
+      "ourTechStack": "Мой технологический арсенал"
     },
     "blog": {
       "title": "Блог"
@@ -403,7 +402,83 @@
       "category": "Разработка и программирование",
       "items": [
         { "name": "VS Code", "icon": "SiVisualstudiocode", "description": "Основная IDE с расширениями" },
-        { "name": "Cursor", "icon": "SiCursor", "description": "Редактор кода на базе ИИ" }
+        { "name": "Cursor", "icon": "SiCursor", "description": "Редактор кода на базе ИИ" },
+        { "name": "Antigravity", "icon": "SiGoogle", "description": "Специализированная версия VS Code от Google DeepMind для продвинутой агентной разработки" }
+      ]
+    },
+    {
+      "id": "version-control",
+      "category": "Контроль версий",
+      "items": [
+        { "name": "Git", "icon": "SiGit", "description": "Распределенная система управления версиями" },
+        { "name": "GitHub", "icon": "SiGithub", "description": "Платформа для хостинга и совместной разработки" }
+      ]
+    },
+    {
+      "id": "web-stack",
+      "category": "Веб-технологии и Фронтенд",
+      "items": [
+        { "name": "HTML5", "icon": "SiHtml5", "description": "Структура и семантика веба" },
+        { "name": "CSS3", "icon": "SiCss3", "description": "Стилизация и адаптивный дизайн" },
+        { "name": "JavaScript", "icon": "SiJavascript", "description": "Интерактивность и динамика" },
+        { "name": "TypeScript", "icon": "SiTypescript", "description": "Строгая типизация для надежности" },
+        { "name": "React", "icon": "SiReact", "description": "Библиотека для создания UI" },
+        { "name": "Next.js", "icon": "SiNextdotjs", "description": "Full-stack фреймворк для React" },
+        { "name": "Vite", "icon": "SiVite", "description": "Сверхбыстрый сборщик проектов" },
+        { "name": "TailwindCSS", "icon": "SiTailwindcss", "description": "Utility-first CSS фреймворк" },
+        { "name": "clsx", "icon": "SiJavascript", "description": "Утилита для условных CSS классов" }
+      ]
+    },
+    {
+      "id": "python-creative",
+      "category": "Python и Креативный Кодинг",
+      "items": [
+        { "name": "Python", "icon": "SiPython", "description": "Мощный язык для логики и ИИ" },
+        { "name": "Pygame", "icon": "SiPython", "description": "Разработка игр и мультимедиа" },
+        { "name": "Turtle", "icon": "SiPython", "description": "Векторная графика и обучение алгоритмам" }
+      ]
+    },
+    {
+      "id": "react-ecosystem",
+      "category": "React Экосистема и State Management",
+      "items": [
+        { "name": "React Hook Form", "icon": "SiReact", "description": "Эффективное управление формами" },
+        { "name": "Zod", "icon": "SiTypescript", "description": "TypeScript-first валидация схем" },
+        { "name": "Zustand", "icon": "SiReact", "description": "Легковесный state management" },
+        { "name": "i18next", "icon": "SiI18Next", "description": "Фреймворк интернационализации для мультиязычности" },
+        { "name": "Lucide React", "icon": "SiReact", "description": "Библиотека иконок для React приложений" },
+        { "name": "shadcn/ui", "icon": "SiRadixui", "description": "Коллекция компонентов на основе Radix UI" }
+      ]
+    },
+    {
+      "id": "cloud-services",
+      "category": "Облачные Сервисы и Деплой",
+      "items": [
+        { "name": "Vercel", "icon": "SiVercel", "description": "Платформа для деплоя фронтенда" },
+        { "name": "Cloud Firestore", "icon": "SiFirebase", "description": "NoSQL база данных в реальном времени" },
+        { "name": "Netlify", "icon": "SiNetlify", "description": "Платформа для деплоя статических сайтов" }
+      ]
+    },
+    {
+      "id": "backend-runtime",
+      "category": "Backend и Runtime",
+      "items": [
+        { "name": "Node.js", "icon": "SiNodedotjs", "description": "JavaScript runtime для серверной разработки" },
+        { "name": "Express", "icon": "SiExpress", "description": "Минималистичный веб-фреймворк для Node.js" },
+        { "name": "GraphQL", "icon": "SiGraphql", "description": "Язык запросов для API" },
+        { "name": "Prisma", "icon": "SiPrisma", "description": "Современный ORM для TypeScript и Node.js" },
+        { "name": "NestJS", "icon": "SiNestjs", "description": "Прогрессивный фреймворк для масштабируемых приложений" }
+      ]
+    },
+    {
+      "id": "databases",
+      "category": "Базы данных и Хранение",
+      "items": [
+        { "name": "SQL", "icon": "SiMysql", "description": "Язык структурированных запросов" },
+        { "name": "SQLite", "icon": "SiSqlite", "description": "Встраиваемая реляционная БД" },
+        { "name": "Drizzle ORM", "icon": "SiDrizzle", "description": "Легковесный TypeScript ORM" },
+        { "name": "PostgreSQL", "icon": "SiPostgresql", "description": "Мощная реляционная база данных" },
+        { "name": "NeonDB", "icon": "SiPostgresql", "description": "Serverless PostgreSQL платформа" }
       ]
     }
   ],

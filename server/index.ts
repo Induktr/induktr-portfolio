@@ -12,6 +12,12 @@ if (result.error) {
   console.log("✅ .env loaded successfully");
 }
 
+// Force development mode if running from TS source (locally)
+if (import.meta.url.endsWith('.ts')) {
+  process.env.NODE_ENV = 'development';
+  console.log("🔧 Detected TypeScript source, forcing NODE_ENV=development");
+}
+
 import express, { 
   Request, 
   Response, 

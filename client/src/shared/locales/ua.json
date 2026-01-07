@@ -239,9 +239,8 @@
         "utility": "Утиліти",
         "ai-research": "Дослідження AI"
       },
-      "description": "Порівняльний аналіз та огляд технологій, що використовуються в наших проєктах",
-      "performanceComparison": "Порівняння продуктивності",
-      "ourTechStack": "Наш технологічний стек"
+      "description": "Мій особистий інструментарій та технології, якими я володію досконало, що використовуються для створення інноваційних програмних рішень",
+      "ourTechStack": "Мій технологічний арсенал"
     },
     "blog": {
       "title": "Блог"
@@ -403,7 +402,83 @@
       "category": "Розробка та програмування",
       "items": [
         { "name": "VS Code", "icon": "SiVisualstudiocode", "description": "Основна IDE з розширеннями" },
-        { "name": "Cursor", "icon": "SiCursor", "description": "Редактор коду на базі ШІ" }
+        { "name": "Cursor", "icon": "SiCursor", "description": "Редактор коду на базі ШІ" },
+        { "name": "Antigravity", "icon": "SiGoogle", "description": "Спеціалізована версія VS Code від Google DeepMind для просунутої агентної розробки" }
+      ]
+    },
+    {
+      "id": "version-control",
+      "category": "Контроль версій",
+      "items": [
+        { "name": "Git", "icon": "SiGit", "description": "Розподілена система управління версіями" },
+        { "name": "GitHub", "icon": "SiGithub", "description": "Платформа для хостингу та спільної розробки" }
+      ]
+    },
+    {
+      "id": "web-stack",
+      "category": "Веб-технології та Фронтенд",
+      "items": [
+        { "name": "HTML5", "icon": "SiHtml5", "description": "Структура та семантика вебу" },
+        { "name": "CSS3", "icon": "SiCss3", "description": "Стилізація та адаптивний дизайн" },
+        { "name": "JavaScript", "icon": "SiJavascript", "description": "Інтерактивність та динаміка" },
+        { "name": "TypeScript", "icon": "SiTypescript", "description": "Сувора типізація для надійності" },
+        { "name": "React", "icon": "SiReact", "description": "Бібліотека для створення UI" },
+        { "name": "Next.js", "icon": "SiNextdotjs", "description": "Full-stack фреймворк для React" },
+        { "name": "Vite", "icon": "SiVite", "description": "Надшвидкий збірник проєктів" },
+        { "name": "TailwindCSS", "icon": "SiTailwindcss", "description": "Utility-first CSS фреймворк" },
+        { "name": "clsx", "icon": "SiJavascript", "description": "Утиліта для умовних CSS класів" }
+      ]
+    },
+    {
+      "id": "python-creative",
+      "category": "Python і Креативний Кодинг",
+      "items": [
+        { "name": "Python", "icon": "SiPython", "description": "Потужна мова для логіки та ШІ" },
+        { "name": "Pygame", "icon": "SiPython", "description": "Розробка ігор та мультимедіа" },
+        { "name": "Turtle", "icon": "SiPython", "description": "Векторна графіка та навчання алгоритмам" }
+      ]
+    },
+    {
+      "id": "react-ecosystem",
+      "category": "React Екосистема та State Management",
+      "items": [
+        { "name": "React Hook Form", "icon": "SiReact", "description": "Ефективне управління формами" },
+        { "name": "Zod", "icon": "SiTypescript", "description": "TypeScript-first валідація схем" },
+        { "name": "Zustand", "icon": "SiReact", "description": "Легковаговий state management" },
+        { "name": "i18next", "icon": "SiI18Next", "description": "Фреймворк інтернаціоналізації для мультимовності" },
+        { "name": "Lucide React", "icon": "SiReact", "description": "Бібліотека іконок для React застосунків" },
+        { "name": "shadcn/ui", "icon": "SiRadixui", "description": "Колекція компонентів на основі Radix UI" }
+      ]
+    },
+    {
+      "id": "cloud-services",
+      "category": "Хмарні Сервіси та Деплой",
+      "items": [
+        { "name": "Vercel", "icon": "SiVercel", "description": "Платформа для деплою фронтенду" },
+        { "name": "Cloud Firestore", "icon": "SiFirebase", "description": "NoSQL база даних у реальному часі" },
+        { "name": "Netlify", "icon": "SiNetlify", "description": "Платформа для деплою статичних сайтів" }
+      ]
+    },
+    {
+      "id": "backend-runtime",
+      "category": "Backend та Runtime",
+      "items": [
+        { "name": "Node.js", "icon": "SiNodedotjs", "description": "JavaScript runtime для серверної розробки" },
+        { "name": "Express", "icon": "SiExpress", "description": "Мінімалістичний веб-фреймворк для Node.js" },
+        { "name": "GraphQL", "icon": "SiGraphql", "description": "Мова запитів для API" },
+        { "name": "Prisma", "icon": "SiPrisma", "description": "Сучасний ORM для TypeScript та Node.js" },
+        { "name": "NestJS", "icon": "SiNestjs", "description": "Прогресивний фреймворк для масштабованих застосунків" }
+      ]
+    },
+    {
+      "id": "databases",
+      "category": "Бази даних та Зберігання",
+      "items": [
+        { "name": "SQL", "icon": "SiMysql", "description": "Мова структурованих запитів" },
+        { "name": "SQLite", "icon": "SiSqlite", "description": "Вбудована реляційна БД" },
+        { "name": "Drizzle ORM", "icon": "SiDrizzle", "description": "Легковаговий TypeScript ORM" },
+        { "name": "PostgreSQL", "icon": "SiPostgresql", "description": "Потужна реляційна база даних" },
+        { "name": "NeonDB", "icon": "SiPostgresql", "description": "Serverless PostgreSQL платформа" }
       ]
     }
   ],
