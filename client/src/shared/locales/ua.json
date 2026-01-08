@@ -21,6 +21,7 @@
   "mission-statement": {
     "title": "Місія",
     "author": "Induktr",
+    "tags": ["Імперії", "Швидкість", "Елегантність", "Інновації", "Досконалість"],
     "phrases": [
       "Я будую цифрові імперії, рядок за рядком.",
       "Створюю високопродуктивні рішення для сучасного вебу.",
@@ -111,6 +112,11 @@
       "github": "GitHub",
       "twitter": "Twitter",
       "linkedin": "LinkedIn"
+    },
+    "contacts": {
+      "title": "Контакти",
+      "phone": "+380 689621643",
+      "telegram": "Telegram"
     },
     "copyright": "Induktr © 2025-2026 Всі права захищені"
   },
@@ -209,8 +215,10 @@
       },
       "tabs": {
         "overview": "Огляд",
-        "timeline": "Таймлайн",
-        "tech": "Стек"
+        "roadmap": "Roadmap",
+        "tech": "Стек",
+        "docs": "Документація",
+        "usage": "Інструкція"
       }
     }
   },
@@ -298,8 +306,12 @@
       "id": 1,
       "title": "BrainMessenger",
       "shortDescription": "Сучасний месенджер з унікальним UX/UI дизайном та передовими технологіями",
-      "description": "Інноваційна платформа для обміну повідомленнями, що поєднує передові технології та інтуїтивний користувацький досвід.",
+      "description": "Інноваційна платформа для обміну повідомленнями, що поєднує передові технології та інтуїтивний користувацький досвід. Спроектовано для швидкості, безпеки та емоційного зв'язку.",
       "image": "https://res.cloudinary.com/dsjalneil/image/upload/v1740704902/5891520_r1cl35.png",
+      "gallery": [
+        { "type": "image", "url": "https://res.cloudinary.com/dsjalneil/image/upload/v1740704902/5891520_r1cl35.png", "title": "Головна Панель" },
+        { "type": "image", "url": "https://res.cloudinary.com/dsjalneil/image/upload/v1740704902/5891523_cvgovb.png", "title": "Інтерфейс Чату" }
+      ],
       "categories": ["communication", "mobile", "web"],
       "techStack": ["TypeScript & React Native", "Next.js & Tailwind CSS", "Node.js & NestJS", "PostgreSQL & Redis", "GraphQL & Firebase"],
       "tags": ["Messenger", "Cross-platform", "Modern UI"],
@@ -312,7 +324,7 @@
         "Анімації та мікроінтеракції",
         "Підтримка багатомовності",
         "Оптимізована продуктивність",
-        "Адаптивний дизайн",
+        "Наскрізне шифрування (E2EE)",
         "Системи безпеки"
       ],
       "status": "in-development",
@@ -323,7 +335,54 @@
           { "name": "Дизайн", "duration": "2 місяці", "status": "completed" },
           { "name": "Розробка", "duration": "у процесі", "status": "active" }
         ]
-      }
+      },
+      "roadmap": [
+        {
+          "stage": 1,
+          "title": "Архітектура та UI Core",
+          "duration": "1 місяць",
+          "goal": "Створення фундаментальної системи компонентів та архітектури управління станом.",
+          "tasks": [
+            {
+              "title": "Бібліотека базових компонентів",
+              "checklists": [
+                {
+                  "title": "Дизайн-система",
+                  "items": ["Впровадження кольорових токенів", "Налаштування системи типографіки", "Базові класи гласморфізму"]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "stage": 2,
+          "title": "Real-time Двигун",
+          "duration": "2 місяці",
+          "goal": "Реалізація обміну повідомленнями з низькою затримкою через WebSockets та Redis.",
+          "tasks": [
+            {
+              "title": "WebSocket Шлюз",
+              "checklists": [
+                {
+                  "title": "Оптимізація сокетів",
+                  "items": ["Реалізація бінарного протоколу", "Стратегія балансування навантаження", "Логіка персистентності повідомлень"]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "docs": [
+        {
+          "title": "Технічна Архітектура",
+          "goal": "Детальний розбір інфраструктури системи та потоків даних.",
+          "items": [
+            "Принцип Atomic Design для UI компонентів для забезпечення 100% перевикористання.",
+            "Патерн CQRS для обробки складних станів повідомлень у розподілених вузлах.",
+            "Гібридна стратегія зберігання: PostgreSQL для реляційних даних, Redis для транзитних станів."
+          ]
+        }
+      ]
     },
     "2": {
       "id": 2,
@@ -331,13 +390,38 @@
       "shortDescription": "Преміальна корпоративна платформа для великої будівельної компанії",
       "description": "Високотехнологічний корпоративний портал для великого будівельного гравця. Фокус на максимальній швидкості завантаження, преміальному дизайні та зручному інтерфейсі для демонстрації будівельних об'єктів.",
       "image": "https://res.cloudinary.com/dsjalneil/image/upload/v1740704902/5891522-1_yryudd.png",
+      "gallery": [
+        { "type": "image", "url": "https://res.cloudinary.com/dsjalneil/image/upload/v1740704902/5891522-1_yryudd.png", "title": "Головна Вітрина" }
+      ],
       "categories": ["web"],
       "techStack": ["Next.js", "TypeScript", "Tailwind CSS", "Framer Motion", "Three.js"],
       "tags": ["Construction", "Web Platform", "Premium UI"],
       "links": {
-        "github": "https://github.com/Induktr/westbud-legacy",
-        "live": "https://westbud.netlify.app/"
+        "github": "https://github.com/Induktr/westbud.git",
+        "live": "https://www.westbud.net/"
       },
+      "usage": [
+        {
+          "title": "Вибір сектору",
+          "description": "Ознайомтеся зі спеціалізованими напрямками (кладка, бетон, роботи під ключ) через блок 'Key Sectors'.",
+          "actionType": "interaction"
+        },
+        {
+          "title": "Галерея проектів",
+          "description": "Фільтруйте та переглядайте розділ 'Our Projects' для вивчення фотографій будівельних об'єктів.",
+          "actionType": "search"
+        },
+        {
+          "title": "Кар'єра та команда",
+          "description": "Перейдіть до розділу 'Join the Westbud Team', щоб подати заявку на відкриті вакансії.",
+          "actionType": "navigation"
+        },
+        {
+          "title": "Запит контакту",
+          "description": "Заповніть форму 'Get in touch', вказавши деталі проекту для отримання консультації або кошторису.",
+          "actionType": "form"
+        }
+      ],
       "features": [
         "Максимальна швидкість (PageSpeed 95+)",
         "3D візуалізація об'єктів",
@@ -353,7 +437,26 @@
           { "name": "Розробка", "duration": "3 місяці", "status": "completed" },
           { "name": "Запуск", "duration": "1 тиждень", "status": "completed" }
         ]
-      }
+      },
+      "roadmap": [
+        {
+          "stage": 1,
+          "title": "Модернізація Спадщини",
+          "duration": "Завершено",
+          "goal": "Міграція з PHP/jQuery на Next.js для чудових показників Core Web Vitals.",
+          "tasks": [
+            {
+              "title": "Переробка стеку",
+              "checklists": [
+                {
+                  "title": "SEO та Перфоманс",
+                  "items": ["Впровадження Server-side rendering", "Оптимізація зображень через next/image", "Генерація статичних сторінок проєктів"]
+                }
+              ]
+            }
+          ]
+        }
+      ]
     },
     "3": {
       "id": 3,

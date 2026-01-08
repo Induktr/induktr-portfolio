@@ -69,13 +69,6 @@ export function MobileNav() {
               </Link>
             </motion.div>
             <motion.div variants={navItemVariants}>
-              <Link href="/blog">
-                <div className="block px-4 py-3 text-lg hover:text-primary hover:bg-muted rounded-md cursor-pointer transition-colors">
-                  {t('common.blog')}
-                </div>
-              </Link>
-            </motion.div>
-            <motion.div variants={navItemVariants}>
               <Link href="/faq">
                 <div className="block px-4 py-3 text-lg hover:text-primary hover:bg-muted rounded-md cursor-pointer transition-colors">
                   {t('common.faq', 'FAQ')}

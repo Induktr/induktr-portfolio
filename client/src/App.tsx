@@ -10,7 +10,6 @@ import { AnimatePresence } from "framer-motion";
 import Home from "@/pages/Home";
 import Projects from "@/pages/Projects";
 import Tools from "@/pages/Tools";
-import Blog from "@/pages/Blog";
 import Marketplace from "@/pages/Marketplace";
 import FAQ from "@/pages/FAQ";
 import { About } from "@/pages/About";
@@ -28,7 +27,6 @@ function Router() {
           <Route path="/about" component={About} />
           <Route path="/projects" component={Projects} />
           <Route path="/tools" component={Tools} />
-          <Route path="/blog" component={Blog} />
           <Route path="/marketplace" component={Marketplace} />
           <Route path="/faq" component={FAQ} />
           <Route component={NotFound} />

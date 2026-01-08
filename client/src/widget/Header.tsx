@@ -82,16 +82,6 @@ export function Header() {
               {t('common.marketplace')}
             </motion.span>
           </Link>
-          <Link href="/blog">
-            <motion.span 
-              className="cursor-pointer"
-              variants={navItemVariants}
-              whileHover="hover"
-              whileTap="tap"
-            >
-              {t('common.blog')}
-            </motion.span>
-          </Link>
           <Link href="/faq">
             <motion.span 
               className="cursor-pointer"

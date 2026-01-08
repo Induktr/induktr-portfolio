@@ -39,6 +39,25 @@ export interface AdditionalTechGroup {
   items: string[];
 }
 
+export interface ProjectDocChapter {
+  title: string;
+  goal?: string;
+  items: string[];
+}
+
+export interface ProjectGalleryItem {
+  type: 'image' | 'video';
+  url: string;
+  thumbnail?: string;
+  title?: string;
+}
+
+export interface ProjectUsageStep {
+  title: string;
+  description: string;
+  actionType: 'navigation' | 'interaction' | 'search' | 'form' | 'result';
+}
+
 export interface Project {
   id: number;
   title: string;
@@ -46,6 +65,7 @@ export interface Project {
   description: string;
   image: string;
   video?: string;
+  gallery?: ProjectGalleryItem[];
   status: 'completed' | 'active' | 'upcoming' | 'in-development';
   categories: string[];
   techStack: string[];
@@ -54,6 +74,8 @@ export interface Project {
   features: string[];
   timeline: ProjectTimeline;
   roadmap?: ProjectRoadmapStage[];
+  docs?: ProjectDocChapter[];
+  usage?: ProjectUsageStep[];
   additionalTech?: {
     mediaTools?: AdditionalTechGroup;
     formTools?: AdditionalTechGroup;

@@ -2,8 +2,7 @@ import { motion } from "framer-motion";
 import { Button } from "@/shared/ui/button";
 import { Link } from "wouter";
 import { ArrowRight } from "lucide-react";
-import { RoleWheel } from "@/features/definition-role/RoleWheel";
-import { TypewriterMission } from "@/features/writer-mission/TypewriterMission";
+import { MissionWheel } from "@/features/writer-mission/MissionWheel";
 import { ContactForm } from "@/features/send-app/ContactForm";
 import { useTranslation } from "react-i18next";
 
@@ -12,7 +11,7 @@ export default function Home() {
 
   return (
     <div className="min-h-[calc(100vh-4rem)] flex flex-col">
-      <main className="flex-1">
+      <main className="flex-1 overflow-x-hidden">
         <section className="py-20">
           <div className="container px-4 mx-auto">
             <motion.div
@@ -42,22 +41,15 @@ export default function Home() {
               </div>
             </motion.div>
 
+            {/* Mission Wheel Section */}
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.2 }}
+              initial={{ opacity: 0, scale: 0.9 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8 }}
               className="mt-16"
             >
-              <TypewriterMission />
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.4 }}
-              className="mt-16 mb-16"
-            >
-              <RoleWheel />
+              <MissionWheel />
             </motion.div>
 
             <motion.div
