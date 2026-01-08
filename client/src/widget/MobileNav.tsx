@@ -41,6 +41,13 @@ export function MobileNav() {
             className="flex flex-col space-y-1"
           >
             <motion.div variants={navItemVariants}>
+              <Link href="/about">
+                <div className="block px-4 py-3 text-lg hover:text-primary hover:bg-muted rounded-md cursor-pointer transition-colors">
+                  {t('common.about')}
+                </div>
+              </Link>
+            </motion.div>
+            <motion.div variants={navItemVariants}>
               <Link href="/projects">
                 <div className="block px-4 py-3 text-lg hover:text-primary hover:bg-muted rounded-md cursor-pointer transition-colors">
                   {t('common.projects')}

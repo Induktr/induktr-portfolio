@@ -42,6 +42,16 @@ export function Header() {
         </div>
 
         <nav className="hidden md:flex items-center space-x-8">
+          <Link href="/about">
+            <motion.span 
+              className="cursor-pointer"
+              variants={navItemVariants}
+              whileHover="hover"
+              whileTap="tap"
+            >
+              {t('common.about')}
+            </motion.span>
+          </Link>
           <Link href="/projects">
             <motion.span 
               className="cursor-pointer"

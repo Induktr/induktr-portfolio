@@ -19,6 +19,11 @@ export function Footer() {
             <h3 className="text-lg font-medium mb-4">{t('footer.navigation.title')}</h3>
             <ul className="space-y-2">
               <li>
+                <Link href="/about" className="text-muted-foreground hover:text-primary transition">
+                  {t('common.about')}
+                </Link>
+              </li>
+              <li>
                 <Link href="/" className="text-muted-foreground hover:text-primary transition">
                   {t('footer.navigation.home')}
                 </Link>

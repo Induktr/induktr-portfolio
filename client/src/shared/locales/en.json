@@ -8,6 +8,7 @@
     "downloadResume": "Download Resume",
     "viewProjects": "View Projects",
     "contact": "Contact",
+    "about": "About",
     "language": "Language",
     "close": "Close",
     "faq": "FAQ"
@@ -246,6 +247,53 @@
       "title": "Blog"
     }
   },
+  "about": {
+      "title": "About Me",
+      "subtitle": "Junior Frontend Developer (React)",
+      "summary": "Junior Frontend Developer focused on Result-Driven development. Specialized in creating modern, fast, and responsive web interfaces (SPA) using the React and Vue ecosystem. My strength is an engineering approach. I don't just write code; I care about component architecture, reusability (DRY), and user experience (UX).",
+      "experience": {
+        "title": "Work Experience",
+        "items": [
+          {
+            "role": "Junior Frontend Developer",
+            "period": "2 years of experience",
+            "description": "Practical experience (Pet-projects & Freelance): Developed and deployed the corporate website for the construction company Westbud. Implemented a custom design system, interactive sliders, and modal windows without heavy libraries. Mobile-First responsiveness.",
+            "catalog": "Interactive Product Catalog (JS + DOM API): Created an SPA product catalog application. Implemented complex filtering and search on the client side. Used the Constraint Validation API for forms."
+          }
+        ]
+      },
+      "achievements": {
+        "title": "Achievements",
+        "list": [
+          "Commercial Success: Independently developed and deployed the corporate website for a construction company (Westbud) using the React + Tailwind stack ahead of the deadline.",
+          "Engineering Mindset: Implemented complex product filtering logic and custom form validation without using heavy libraries for maximum performance.",
+          "Discipline: Built a personal productivity system that allows consistently investing 50-60 hours per week in coding and learning."
+        ]
+      },
+      "expectations": {
+        "title": "Work Expectations",
+        "text": "Looking for a team with a strong engineering culture where Code Review and mentoring are present. I'm not looking for an \"easy job\"; I'm looking for the opportunity to solve complex problems and grow quickly. My goal: to reach Strong Junior / Middle level within 1 year of active work. Open to Remote, Part-time, or project-based work."
+      },
+      "skills": {
+        "title": "Skill Experience",
+        "years": "years",
+        "year": "year"
+      },
+      "languages": {
+        "title": "Language Proficiency",
+        "english": "English: B1 — Intermediate",
+        "ukrainian": "Ukrainian: B2 — Upper-Intermediate",
+        "russian": "Russian: C2 — Native",
+        "communication": "Communication Language: Ukrainian, English"
+      },
+      "stats": {
+        "experience": "2 years of experience",
+        "location": "Ukraine, Zhytomyr",
+        "salary": "$500 / month",
+        "rate": "$7 / hour",
+        "verified": "Verified Candidate Badge"
+      }
+    },
   "projectsData": {
     "1": {
       "id": 1,

@@ -19,6 +19,7 @@
       "@/*": ["./client/src/*"],
       "@client/*": ["./client/src/*"],
       "@client/shared/*": ["./client/src/shared/*"],
+      "@client/assets/*": ["./client/src/assets/*"],
       "@client/entities/*": ["./client/src/entities/*"],
       "@client/features/*": ["./client/src/features/*"],
       "@client/lib/*": ["./client/src/lib/*"],
