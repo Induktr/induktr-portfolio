@@ -8,7 +8,10 @@ import {
 } from "@/shared/ui/dialog";
 import { ProjectSlider } from "./ProjectSlider";
 import { ProjectUsage } from "./ProjectUsage";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
+import { Loader, DeferredContent } from "@/shared/ui/Loader";
 import { Badge } from "@/shared/ui/badge";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/shared/ui/tabs";
 import { Button } from "@/shared/ui/button";
@@ -23,13 +26,40 @@ import {
   Milestone,
   CheckCircle2,
   Circle,
-  BookOpen
+  BookOpen,
+  ArrowLeft
 } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import type { Project, ProjectGalleryItem } from "@/shared/types/project";
 import { Card, CardContent } from "@/shared/ui/card";
 import { ScrollArea } from "@/shared/ui/scroll-area";
 import { cn } from "@/shared/lib/utils";
+
+const markdownComponents = {
+  h1: ({node, ...props}: any) => <h1 className="text-3xl font-bold text-primary mb-6 pb-2 border-b border-white/10" {...props} />,
+  h2: ({node, ...props}: any) => <h2 className="text-2xl font-bold text-foreground mt-8 mb-4 flex items-center gap-2" {...props} />,
+  table: ({node, ...props}: any) => <div className="overflow-x-auto my-6 rounded-lg border border-white/10"><table className="w-full text-left bg-black/20" {...props} /></div>,
+  th: ({node, ...props}: any) => <th className="bg-primary/10 p-3 font-bold text-primary border-b border-white/10" {...props} />,
+  td: ({node, ...props}: any) => <td className="p-3 border-b border-white/5" {...props} />,
+  blockquote: ({node, ...props}: any) => <blockquote className="border-l-4 border-primary pl-4 py-1 italic bg-primary/5 rounded-r my-4" {...props} />,
+  code: ({node, className, children, ...props}: any) => {
+    const match = /language-(\w+)/.exec(className || '')
+    return !String(children).includes('\n') ? (
+      <code className="bg-primary/20 text-primary px-1.5 py-0.5 rounded text-sm font-mono" {...props}>
+        {children}
+      </code>
+    ) : (
+      <div className="relative group">
+        <div className="absolute top-2 right-2 text-xs text-muted-foreground bg-black/50 px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity">
+          {match?.[1] || 'text'}
+        </div>
+        <code className="block bg-black/40 p-4 rounded-lg my-4 overflow-x-auto text-sm font-mono border border-white/5" {...props}>
+          {children}
+        </code>
+      </div>
+    )
+  }
+};
 
 interface ProjectDialogProps {
   project: Project;
@@ -39,7 +69,38 @@ interface ProjectDialogProps {
 
 export function ProjectDialog({ project, isOpen, onClose }: ProjectDialogProps) {
   const [activeTab, setActiveTab] = useState("overview");
+  const [docContent, setDocContent] = useState<string | null>(null);
+  const [currentChapter, setCurrentChapter] = useState<number | null>(null);
   const { t } = useTranslation();
+
+  useEffect(() => {
+    if (project.docFile && isOpen) {
+      fetch(project.docFile)
+        .then(res => res.text())
+        .then(text => setDocContent(text))
+        .catch(err => console.error("Failed to load doc", err));
+    } else {
+      setDocContent(null);
+    }
+  }, [project.docFile, isOpen]);
+
+  useEffect(() => {
+    if (currentChapter !== null && project.docs?.[currentChapter]?.file && isOpen) {
+      setDocContent(null); // Reset content while loading
+      fetch(project.docs[currentChapter].file!)
+        .then(res => res.text())
+        .then(text => setDocContent(text))
+        .catch(err => console.error("Failed to load chapter", err));
+    }
+  }, [currentChapter, project.docs, isOpen]);
+
+  // Reset documentation state when tab changes or dialog closes
+  useEffect(() => {
+    if (activeTab !== "docs" || !isOpen) {
+      setCurrentChapter(null);
+      if (!project.docFile) setDocContent(null);
+    }
+  }, [activeTab, isOpen, project.docFile]);
 
   if (!isOpen) return null;
 
@@ -143,53 +204,58 @@ export function ProjectDialog({ project, isOpen, onClose }: ProjectDialogProps) 
           <div className="flex-1 overflow-y-auto mt-4 pr-2 pb-8 scrollbar-thin scrollbar-thumb-primary/20 scrollbar-track-transparent">
             <div className="animate-in fade-in slide-in-from-bottom-2 duration-300">
               <TabsContent value="overview" className="mt-0 space-y-8">
-                <ProjectSlider items={galleryItems} className="aspect-video shadow-2xl" />
+                <DeferredContent 
+                  fallback={<div className="h-[60vh] w-full flex items-center justify-center"><Loader size="lg" text="preparing overview..." /></div>}
+                  delay={150}
+                >
+                  <ProjectSlider items={galleryItems} className="aspect-video shadow-2xl" />
 
-                <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                  <div className="lg:col-span-2 space-y-6">
-                    <div>
-                      <h3 className="text-xl font-bold mb-4 flex items-center gap-2">
-                        <CheckCircle2 className="w-5 h-5 text-primary" />
-                        {t('projects.dialog.keyFeatures')}
-                      </h3>
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                        {project.features?.map((feature, index) => (
-                          <Card key={index} className="bg-card/50 border-white/5 hover:border-primary/20 transition-all group">
-                            <CardContent className="p-4 flex gap-3">
-                              <div className="w-1.5 h-1.5 rounded-full bg-primary mt-2 shrink-0 group-hover:scale-150 transition-transform" />
-                              <span className="text-sm font-medium">{feature}</span>
-                            </CardContent>
-                          </Card>
-                        ))}
+                  <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                    <div className="lg:col-span-2 space-y-6">
+                      <div>
+                        <h3 className="text-xl font-bold mb-4 flex items-center gap-2">
+                          <CheckCircle2 className="w-5 h-5 text-primary" />
+                          {t('projects.dialog.keyFeatures')}
+                        </h3>
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                          {project.features?.map((feature, index) => (
+                            <Card key={index} className="bg-card/50 border-white/5 hover:border-primary/20 transition-all group">
+                              <CardContent className="p-4 flex gap-3">
+                                <div className="w-1.5 h-1.5 rounded-full bg-primary mt-2 shrink-0 group-hover:scale-150 transition-transform" />
+                                <span className="text-sm font-medium">{feature}</span>
+                              </CardContent>
+                            </Card>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="space-y-6">
+                      <div>
+                        <h4 className="text-sm font-bold text-muted-foreground uppercase tracking-widest mb-3">
+                          {t('projects.dialog.tags')}
+                        </h4>
+                        <div className="flex flex-wrap gap-2">
+                          {project.tags?.map(tag => (
+                            <Badge key={tag} variant="outline" className="text-[10px] px-2 py-0">
+                              {tag}
+                            </Badge>
+                          ))}
+                        </div>
+                      </div>
+
+                      <div>
+                        <h4 className="text-sm font-bold text-muted-foreground uppercase tracking-widest mb-3">
+                          {t('projects.dialog.projectStart')}
+                        </h4>
+                        <div className="flex items-center gap-2 text-primary font-bold">
+                          <Milestone className="w-4 h-4" />
+                          {project.timeline.start}
+                        </div>
                       </div>
                     </div>
                   </div>
-
-                  <div className="space-y-6">
-                    <div>
-                      <h4 className="text-sm font-bold text-muted-foreground uppercase tracking-widest mb-3">
-                        {t('projects.dialog.tags')}
-                      </h4>
-                      <div className="flex flex-wrap gap-2">
-                        {project.tags?.map(tag => (
-                          <Badge key={tag} variant="outline" className="text-[10px] px-2 py-0">
-                            {tag}
-                          </Badge>
-                        ))}
-                      </div>
-                    </div>
-
-                    <div>
-                      <h4 className="text-sm font-bold text-muted-foreground uppercase tracking-widest mb-3">
-                        {t('projects.dialog.projectStart')}
-                      </h4>
-                      <div className="flex items-center gap-2 text-primary font-bold">
-                        <Milestone className="w-4 h-4" />
-                        {project.timeline.start}
-                      </div>
-                    </div>
-                  </div>
-                </div>
+                </DeferredContent>
               </TabsContent>
 
               <TabsContent value="roadmap" className="mt-0">
@@ -281,43 +347,128 @@ export function ProjectDialog({ project, isOpen, onClose }: ProjectDialogProps) 
               </TabsContent>
 
               <TabsContent value="docs" className="mt-0">
-                <div className="space-y-6">
-                  {project.docs ? (
-                    project.docs.map((chapter, idx) => (
-                      <Card key={idx} className="bg-card/30 border-white/5 overflow-hidden group hover:border-primary/30 transition-all">
-                        <div className="h-1 w-full bg-gradient-to-r from-primary/50 to-transparent" />
-                        <CardContent className="p-6 space-y-4">
-                          <h3 className="text-xl font-bold flex items-center gap-3">
-                            <span className="w-8 h-8 rounded-lg bg-primary/20 text-primary flex items-center justify-center text-sm">
-                              {idx + 1}
-                            </span>
-                            {chapter.title}
-                          </h3>
-                          {chapter.goal && (
-                            <div className="text-sm font-medium text-primary/80 bg-primary/5 p-3 rounded-lg border border-primary/10">
-                              {chapter.goal}
-                            </div>
-                          )}
-                          <ul className="space-y-3 grid grid-cols-1 md:grid-cols-2 gap-x-8">
-                            {chapter.items.map((item, i) => (
-                              <li key={i} className="flex items-start gap-3 text-sm text-muted-foreground leading-relaxed">
-                                <Circle className="w-1.5 h-1.5 mt-1.5 bg-primary rounded-full shrink-0" />
-                                {item}
-                              </li>
-                            ))}
-                          </ul>
-                        </CardContent>
-                      </Card>
-                    ))
-                  ) : (
-                    <div className="text-center py-20 bg-muted/20 rounded-2xl border border-dashed border-white/10">
-                      <FileText className="w-12 h-12 mx-auto mb-4 text-muted-foreground/30" />
-                      <p className="text-muted-foreground italic">
-                        {t('projects.dialog.docs.empty', 'System documentation is being prepared for this project...')}
-                      </p>
+                {project.docFile && !project.docs ? (
+                   <ScrollArea className="h-[60vh] pr-4">
+                    <div className="prose prose-invert max-w-none p-6 bg-card/30 rounded-xl border border-white/5">
+                      {docContent ? (
+                        <ReactMarkdown 
+                          remarkPlugins={[remarkGfm]}
+                          components={markdownComponents}
+                        >
+                          {docContent}
+                        </ReactMarkdown>
+                      ) : (
+                        <div className="flex items-center justify-center py-20">
+                          <Loader size="lg" text="fetching documentation..." />
+                        </div>
+                      )}
                     </div>
-                  )}
-                </div>
+                  </ScrollArea>
+                ) : project.docs ? (
+                  <div className="space-y-6">
+                    {currentChapter === null ? (
+                      <div className="grid gap-4">
+                        <div className="flex items-center justify-between mb-2">
+                          <h3 className="text-xl font-bold flex items-center gap-2">
+                             <FileText className="w-5 h-5 text-primary" />
+                             {t('projects.dialog.tabs.docs', 'Documentation')}
+                          </h3>
+                        </div>
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                          {project.docs.map((chapter, idx) => (
+                            <Card 
+                              key={idx} 
+                              className="bg-card/30 border-white/5 overflow-hidden group hover:border-primary/30 transition-all cursor-pointer"
+                              onClick={() => {
+                                if (chapter.file || chapter.content) {
+                                  setCurrentChapter(idx);
+                                }
+                              }}
+                            >
+                              <div className="h-1 w-full bg-gradient-to-r from-primary/50 to-transparent" />
+                              <CardContent className="p-6 space-y-3">
+                                <div className="flex items-center justify-between">
+                                  <h3 className="text-lg font-bold flex items-center gap-3">
+                                    <span className="w-8 h-8 rounded-lg bg-primary/20 text-primary flex items-center justify-center text-sm font-mono">
+                                      {idx + 1}
+                                    </span>
+                                    {chapter.title}
+                                  </h3>
+                                  {(chapter.file || chapter.content) && (
+                                    <ArrowLeft className="w-4 h-4 rotate-180 text-muted-foreground group-hover:text-primary transition-colors" />
+                                  )}
+                                </div>
+                                {chapter.goal && (
+                                  <p className="text-xs text-muted-foreground line-clamp-2 italic">
+                                    {chapter.goal}
+                                  </p>
+                                )}
+                                {chapter.items && (
+                                  <ul className="space-y-1.5 pt-2">
+                                    {chapter.items.slice(0, 2).map((item, i) => (
+                                      <li key={i} className="flex items-start gap-2 text-[11px] text-muted-foreground/70 line-clamp-1">
+                                        <Circle className="w-1 h-1 mt-1.5 bg-primary/40 rounded-full shrink-0" />
+                                        {item}
+                                      </li>
+                                    ))}
+                                    {chapter.items.length > 2 && (
+                                      <li className="text-[10px] text-primary font-medium pl-3">
+                                        + {chapter.items.length - 2} {t('common.more', 'more')}...
+                                      </li>
+                                    )}
+                                  </ul>
+                                ) }
+                              </CardContent>
+                            </Card>
+                          ))}
+                        </div>
+                      </div>
+                    ) : (
+                      <div className="space-y-4">
+                         <div className="flex items-center gap-4 mb-2">
+                            <Button 
+                              variant="ghost" 
+                              size="sm" 
+                              className="gap-2 text-muted-foreground hover:text-primary"
+                              onClick={() => setCurrentChapter(null)}
+                            >
+                              <ArrowLeft className="w-4 h-4" />
+                              {t('common.back', 'Back')}
+                            </Button>
+                            <h3 className="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-primary to-primary/60">
+                              {project.docs[currentChapter].title}
+                            </h3>
+                         </div>
+                         <ScrollArea className="h-[55vh] pr-4">
+                            <div className="prose prose-invert max-w-none p-8 bg-card/30 rounded-2xl border border-white/5 shadow-2xl">
+                              {project.docs[currentChapter].file ? (
+                                docContent ? (
+                                  <ReactMarkdown remarkPlugins={[remarkGfm]} components={markdownComponents}>
+                                    {docContent}
+                                  </ReactMarkdown>
+                                ) : (
+                                  <div className="flex flex-col items-center justify-center py-20">
+                                    <Loader size="lg" text="fetching chapter..." variant="accent" />
+                                  </div>
+                                )
+                              ) : (
+                                <ReactMarkdown remarkPlugins={[remarkGfm]} components={markdownComponents}>
+                                  {project.docs[currentChapter].content || ""}
+                                </ReactMarkdown>
+                              )}
+                            </div>
+                         </ScrollArea>
+                      </div>
+                    )}
+                  </div>
+                ) : (
+                  <div className="text-center py-20 bg-muted/20 rounded-2xl border border-dashed border-white/10">
+                    <FileText className="w-12 h-12 mx-auto mb-4 text-muted-foreground/30" />
+                    <p className="text-muted-foreground italic">
+                      {t('projects.dialog.docs.empty', 'System documentation is being prepared for this project...')}
+                    </p>
+                  </div>
+                )}
               </TabsContent>
 
               <TabsContent value="usage" className="mt-0 outline-none">

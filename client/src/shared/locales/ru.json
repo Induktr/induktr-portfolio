@@ -395,7 +395,22 @@
         { "type": "image", "url": "https://res.cloudinary.com/dsjalneil/image/upload/v1740704902/5891522-1_yryudd.png", "title": "Главная Витрина" }
       ],
       "categories": ["web"],
-      "techStack": ["Next.js", "TypeScript", "Tailwind CSS", "Framer Motion", "Three.js"],
+      "techStack": [
+        "Next.js",
+        "TypeScript",
+        "Tailwind CSS",
+        "Framer Motion",
+        "i18next",
+        "Zod",
+        "Tailwindcss",
+        "Shadcn UI",
+        "Lucide React",
+        "React Hook Form",
+        "Date Fns",
+        "Sonner",
+        "Clsx",
+        "Eslint"
+      ],
       "tags": ["Construction", "Web Platform", "Premium UI"],
       "links": {
         "github": "https://github.com/Induktr/westbud-legacy",
@@ -423,6 +438,43 @@
           "actionType": "form"
         }
       ],
+      "docs": [
+        {
+          "title": "README",
+          "goal": "Обзор проекта и инструкции по установке.",
+          "file": "/docs/westbud/README.md"
+        },
+        {
+          "title": "Тех-стек",
+          "goal": "Список используемых технологий и библиотек.",
+          "file": "/docs/westbud/doc-tech.md"
+        },
+        {
+          "title": "Дизайн и Цвета",
+          "goal": "Брендинг, палитра и правила использования.",
+          "file": "/docs/westbud/doc-design.md"
+        },
+        {
+          "title": "Требования",
+          "goal": "Функциональные и нефункциональные требования.",
+          "file": "/docs/westbud/doc-req.md"
+        },
+        {
+          "title": "Гайд разработчика",
+          "goal": "Структура проекта, стандарты кода и валидация.",
+          "file": "/docs/westbud/doc-dev.md"
+        },
+        {
+          "title": "Производительность",
+          "goal": "KPI и стратегии оптимизации скорости загрузки.",
+          "file": "/docs/westbud/doc-per.md"
+        },
+        {
+          "title": "Безопасность",
+          "goal": "Защита от спама, настройка HTTPS и защита данных.",
+          "file": "/docs/westbud/doc-security.md"
+        }
+      ],
       "features": [
         "Максимальная скорость (PageSpeed 95+)",
         "3D визуализация объектов",
@@ -442,16 +494,123 @@
       "roadmap": [
         {
           "stage": 1,
-          "title": "Модернизация Наследия",
-          "duration": "Завершено",
-          "goal": "Миграция с PHP/jQuery на Next.js для превосходных показателей Core Web Vitals.",
+          "title": "Этап 1: Фундамент и Дизайн",
+          "duration": "2 недели",
+          "status": "completed",
+          "goal": "Создание основной архитектуры и визуальной идентичности.",
           "tasks": [
             {
-              "title": "Переработка стека",
+              "title": "Базовая настройка",
               "checklists": [
                 {
-                  "title": "SEO и Перфоманс",
-                  "items": ["Внедрение Server-side rendering", "Оптимизация изображений через next/image", "Генерация статических страниц проектов"]
+                  "title": "Инициализация",
+                  "items": [
+                    "Vite + React + TypeScript окружение",
+                    "Интеграция цветов BESIX и шрифта Sora"
+                  ]
+                },
+                {
+                  "title": "Статическая верстка",
+                  "items": [
+                    "Sticky Header и мобильное меню",
+                    "Hero слайдер и сетка секторов",
+                    "Секция 'О нас' и корпоративный футер"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "stage": 2,
+          "title": "Этап 2: Инженерная Логика",
+          "duration": "3 недели",
+          "status": "completed",
+          "goal": "Реализация динамических функций и интерактивных компонентов.",
+          "tasks": [
+            {
+              "title": "Функциональное ядро",
+              "checklists": [
+                {
+                  "title": "Логика и навигация",
+                  "items": [
+                    "Настройка React Router (/, /projects, /about)",
+                    "Динамический каталог проектов с фильтрацией"
+                  ]
+                },
+                {
+                  "title": "Wow-эффекты",
+                  "items": [
+                    "3D Tilt эффект на карточках",
+                    "Scrollytelling: анимация появления текста",
+                    "Модальная система галереи (Lightbox)"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "stage": 2,
+          "title": "Этап 3: Глобальная Архитектура",
+          "duration": "2 недели",
+          "status": "completed",
+          "goal": "Масштабируемость и международный охват.",
+          "tasks": [
+            {
+              "title": "Инфраструктура",
+              "checklists": [
+                {
+                  "title": "i18n и Бэкенд",
+                  "items": [
+                    "Настройка react-i18next (EN/RU/UA)",
+                    "Вынос всего контента в JSON",
+                    "Интеграция API контактной формы"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "stage": 4,
+          "title": "Этап 4: Генеральная Уборка",
+          "duration": "В процессе",
+          "status": "active",
+          "goal": "Шлифовка, оптимизация и качество кода.",
+          "tasks": [
+            {
+              "title": "Финальная полировка",
+              "checklists": [
+                {
+                  "title": "Оптимизация",
+                  "items": [
+                    "Очистка кода (удаление логов и неиспользуемых компонентов)",
+                    "Профессиональная обработка изображений (webp/ретушь)",
+                    "Запуск Lighthouse Mobile (цель 90+)"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "stage": 5,
+          "title": "Этап 5: Сдача и Деплой",
+          "duration": "Планируется",
+          "status": "upcoming",
+          "goal": "Финальная передача и запуск проекта.",
+          "tasks": [
+            {
+              "title": "Релиз",
+              "checklists": [
+                {
+                  "title": "Завершение",
+                  "items": [
+                    "Валидация продакшн-сборки",
+                    "Скринкаст и README документация",
+                    "Финальная передача проекта"
+                  ]
                 }
               ]
             }
@@ -523,12 +682,55 @@
       "shortDescription": "Автономная ИИ-система для алгоритмической торговли криптой",
       "description": "Автономная система для торговли на криптовалютном рынке. Использует анализ настроений (Sentiment Analysis) через Gemini 2.0 AI и алгоритмические стратегии для полностью независимого управления капиталом.",
       "image": "https://res.cloudinary.com/dsjalneil/image/upload/v1740704902/5891520_r1cl35.png",
+      "gallery": [
+        { "type": "image", "url": "https://images.unsplash.com/photo-1639762681485-074b7f938ba0?auto=format&fit=crop&q=80&w=2000", "title": "Обработка логики ИИ" },
+        { "type": "image", "url": "https://images.unsplash.com/photo-1642104704074-907c0698bcd9?auto=format&fit=crop&q=80&w=2000", "title": "Дашборд анализа рынка" },
+        { "type": "video", "url": "https://www.youtube.com/watch?v=qRTVO8n1bEY", "title": "Обзор системы A.S.T.R.A" }
+      ],
       "categories": ["ai", "trading", "fintech"],
-      "techStack": ["Python", "React", "CCXT", "Gemini AI"],
+      "techStack": [
+        "Python",
+        "React",
+        "CCXT",
+        "Gemini AI",
+        "Async Flask",
+        "Asgiref",
+        "Google GenAI",
+        "Python Dotenv",
+        "Pydantic",
+        "Pydantic Settings",
+        "Schedule",
+        "Requests",
+        "Feedparser",
+        "Websockets",
+        "PyTelegramBotAPI"
+      ],
       "tags": ["Trading AI", "Crypto", "Automation"],
       "links": {
         "github": "https://github.com/Induktr/astra-lite"
       },
+      "docs": [
+        {
+          "title": "A.S.T.R.A README",
+          "goal": "Философия и миссия проекта.",
+          "file": "/docs/A.S.T.R.A/README.md"
+        },
+        {
+          "title": "Тех-спецификации",
+          "goal": "Модульная архитектура и компоненты.",
+          "file": "/docs/A.S.T.R.A/doc-tech.md"
+        },
+        {
+          "title": "Требования к системе",
+          "goal": "Функциональные и нефункциональные требования.",
+          "file": "/docs/A.S.T.R.A/doc-req.md"
+        },
+        {
+          "title": "Стандарт отчетности",
+          "goal": "Структура ежедневных автономных отчетов.",
+          "file": "/docs/A.S.T.R.A/doc-report.md"
+        }
+      ],
       "features": [
         "Gemini 2.0 Sentiment Analysis",
         "Автономное исполнение ордеров",

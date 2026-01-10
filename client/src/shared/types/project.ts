@@ -41,8 +41,10 @@ export interface AdditionalTechGroup {
 
 export interface ProjectDocChapter {
   title: string;
+  items?: string[];
   goal?: string;
-  items: string[];
+  content?: string;
+  file?: string;
 }
 
 export interface ProjectGalleryItem {
@@ -75,6 +77,7 @@ export interface Project {
   timeline: ProjectTimeline;
   roadmap?: ProjectRoadmapStage[];
   docs?: ProjectDocChapter[];
+  docFile?: string;
   usage?: ProjectUsageStep[];
   additionalTech?: {
     mediaTools?: AdditionalTechGroup;

@@ -414,7 +414,22 @@
         { "type": "video", "url": "https://youtu.be/Cub3dNYY870", "title": "Video Showcase step 6" }
       ],
       "categories": ["web"],
-      "techStack": ["Next.js", "TypeScript", "Tailwind CSS", "Framer Motion", "Three.js"],
+      "techStack": [
+        "Vite",
+        "TypeScript",
+        "Tailwind CSS",
+        "Framer Motion",
+        "i18next",
+        "Zod",
+        "Tailwindcss",
+        "Shadcn UI",
+        "Lucide React",
+        "React Hook Form",
+        "Date Fns",
+        "Sonner",
+        "Clsx",
+        "Eslint"
+      ],
       "tags": ["Construction", "Web Platform", "Premium UI"],
       "links": {
         "github": "https://github.com/Induktr/westbud.git",
@@ -442,16 +457,53 @@
           "actionType": "form"
         }
       ],
+      "docs": [
+        {
+          "title": "README",
+          "goal": "Project description and setup instructions.",
+          "file": "/docs/westbud/README.md"
+        },
+        {
+          "title": "Tech Stack",
+          "goal": "List of technologies used in the project.",
+          "file": "/docs/westbud/doc-tech.md"
+        },
+        {
+          "title": "Design Colors",
+          "goal": "Branding, palette, and usage rules.",
+          "file": "/docs/westbud/doc-design.md"
+        },
+        {
+          "title": "Requirements Spec",
+          "goal": "Functional and non-functional requirements.",
+          "file": "/docs/westbud/doc-req.md"
+        },
+        {
+          "title": "Developer Guide",
+          "goal": "Project structure, coding standards, and validation.",
+          "file": "/docs/westbud/doc-dev.md"
+        },
+        {
+          "title": "Performance Guide",
+          "goal": "KPIs and optimization strategies for speed.",
+          "file": "/docs/westbud/doc-per.md"
+        },
+        {
+          "title": "Security Policy",
+          "goal": "Spam protection, HTTPS, and data safety.",
+          "file": "/docs/westbud/doc-security.md"
+        }
+      ],
       "features": [
         "Maximum performance (PageSpeed 95+)",
         "3D visualization of objects",
         "Interactive project map",
-        "Multi-language support (EN/NL/UA)",
+        "Multi-language support (EN/NL)",
         "Responsive for all devices"
       ],
       "status": "completed",
       "timeline": {
-        "start": "2023-06-01",
+        "start": "2025-12-15",
         "phases": [
           { "name": "Requirements", "duration": "2 weeks", "status": "completed" },
           { "name": "Development", "duration": "3 months", "status": "completed" },
@@ -461,16 +513,123 @@
       "roadmap": [
         {
           "stage": 1,
-          "title": "Legacy Modernization",
-          "duration": "Finished",
-          "goal": "Migrate from PHP/jQuery to Next.js for superior Core Web Vitals.",
+          "title": "Foundation & Design",
+          "duration": "2 weeks",
+          "status": "completed",
+          "goal": "Establish core architecture and visual identity.",
           "tasks": [
             {
-              "title": "Stack Overhaul",
+              "title": "Core Setup",
               "checklists": [
                 {
-                  "title": "SEO & Perf",
-                  "items": ["Server-side rendering implementation", "Image optimization with next/image", "Static site generation for project pages"]
+                  "title": "Initialization",
+                  "items": [
+                    "Vite + React + TypeScript environment",
+                    "BESIX brand colors & Sora font integration"
+                  ]
+                },
+                {
+                  "title": "Static Layout",
+                  "items": [
+                    "Sticky Header & Mobile Navigation",
+                    "Hero Slider & Service Sectors Grid",
+                    "About Us section & Corporate Footer"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "stage": 2,
+          "title": "Engineering Logic",
+          "duration": "3 weeks",
+          "status": "completed",
+          "goal": "Implement dynamic features and interactive components.",
+          "tasks": [
+            {
+              "title": "Functional Core",
+              "checklists": [
+                {
+                  "title": "Logic & Navigation",
+                  "items": [
+                    "React Router (/, /projects, /about)",
+                    "Dynamic Project Catalog with filtration logic"
+                  ]
+                },
+                {
+                  "title": "Wow-Factor",
+                  "items": [
+                    "3D Tilt Effect on project cards",
+                    "Scrollytelling: Text reveal animations",
+                    "Lightbox Gallery modal system"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "stage": 3,
+          "title": "Global Architecture",
+          "duration": "2 weeks",
+          "status": "completed",
+          "goal": "Scalability and international reach.",
+          "tasks": [
+            {
+              "title": "Infrastructure",
+              "checklists": [
+                {
+                  "title": "i18n & Backend",
+                  "items": [
+                    "react-i18next setup (EN/RU/UA)",
+                    "Full content extraction to JSON",
+                    "Contact form API integration"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "stage": 4,
+          "title": "General Cleanup",
+          "duration": "In Progress",
+          "status": "active",
+          "goal": "Refinement, optimization, and code quality.",
+          "tasks": [
+            {
+              "title": "Final Polish",
+              "checklists": [
+                {
+                  "title": "Optimization",
+                  "items": [
+                    "Code cleanup (unused components, logs)",
+                    "Professional image processing (webp/retouch)",
+                    "Lighthouse Mobile performance run (90+)"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "stage": 5,
+          "title": "Handover & Deploy",
+          "duration": "Planned",
+          "status": "upcoming",
+          "goal": "Final delivery and project launch.",
+          "tasks": [
+            {
+              "title": "Release",
+              "checklists": [
+                {
+                  "title": "Closing",
+                  "items": [
+                    "Production build validation",
+                    "Screencast & README documentation",
+                    "Final project handover"
+                  ]
                 }
               ]
             }
@@ -541,15 +700,61 @@
       "title": "A.S.T.R.A",
       "shortDescription": "Autonomous AI system for algorithmic crypto trading",
       "description": "Autonomous system for trading on the cryptocurrency market. Uses sentiment analysis via Gemini 2.0 AI and algorithmic strategies for fully independent capital management.",
-      "image": "https://res.cloudinary.com/dsjalneil/image/upload/v1740704902/5891520_r1cl35.png",
+      "image": "https://res.cloudinary.com/dsjalneil/image/upload/v1768078819/%D0%97%D0%BD%D1%96%D0%BC%D0%BE%D0%BA_%D0%B5%D0%BA%D1%80%D0%B0%D0%BD%D0%B0_2026-01-10_230002_xh8xg4.png",
+      "gallery": [
+        { "type": "image", "url": "https://res.cloudinary.com/dsjalneil/image/upload/v1768078197/%D0%97%D0%BD%D1%96%D0%BC%D0%BE%D0%BA_%D0%B5%D0%BA%D1%80%D0%B0%D0%BD%D0%B0_2026-01-06_082459_wsmmtr.png", "title": "Dashboard Analytics 1" },
+        { "type": "image", "url": "https://res.cloudinary.com/dsjalneil/image/upload/v1768078190/%D0%97%D0%BD%D1%96%D0%BC%D0%BE%D0%BA_%D0%B5%D0%BA%D1%80%D0%B0%D0%BD%D0%B0_2026-01-06_084539_yaisix.png", "title": "Dashboard Analytics 2" },
+        { "type": "image", "url": "https://res.cloudinary.com/dsjalneil/image/upload/v1768078166/%D0%97%D0%BD%D1%96%D0%BC%D0%BE%D0%BA_%D0%B5%D0%BA%D1%80%D0%B0%D0%BD%D0%B0_2026-01-04_210818_rszwwu.png", "title": "Dashboard Analytics 3" },
+        { "type": "image", "url": "https://res.cloudinary.com/dsjalneil/image/upload/v1768078160/%D0%97%D0%BD%D1%96%D0%BC%D0%BE%D0%BA_%D0%B5%D0%BA%D1%80%D0%B0%D0%BD%D0%B0_2026-01-05_095327_dicltg.png", "title": "Dashboard Analytics 4" },
+        { "type": "image", "url": "https://res.cloudinary.com/dsjalneil/image/upload/v1768078075/%D0%97%D0%BD%D1%96%D0%BC%D0%BE%D0%BA_%D0%B5%D0%BA%D1%80%D0%B0%D0%BD%D0%B0_2026-01-10_224342_ckam7m.png", "title": "Dashboard Analytics 5" },
+        { "type": "image", "url": "https://images.unsplash.com/photo-1642104704074-907c0698bcd9?auto=format&fit=crop&q=80&w=2000", "title": "Market Sentiment Dashboard" }
+      ],
       "categories": ["ai", "trading", "fintech"],
-      "techStack": ["Python", "React", "CCXT", "Gemini AI"],
+      "techStack": [
+        "Python",
+        "React",
+        "CCXT",
+        "Gemini AI",
+        "Async Flask",
+        "Asgiref",
+        "Google GenAI",
+        "Python Dotenv",
+        "Pydantic",
+        "Pydantic Settings",
+        "Schedule",
+        "Requests",
+        "Feedparser",
+        "Websockets",
+        "PyTelegramBotAPI"
+      ],
       "tags": ["Trading AI", "Crypto", "Automation"],
       "links": {
         "github": "https://github.com/Induktr/astra-lite"
       },
+      "docs": [
+        {
+          "title": "A.S.T.R.A README",
+          "goal": "Project philosophy and mission.",
+          "file": "/docs/A.S.T.R.A/README.md"
+        },
+        {
+          "title": "Technical Specs",
+          "goal": "Modular architecture and components.",
+          "file": "/docs/A.S.T.R.A/doc-tech.md"
+        },
+        {
+          "title": "System Requirements",
+          "goal": "Functional and non-functional requirements.",
+          "file": "/docs/A.S.T.R.A/doc-req.md"
+        },
+        {
+          "title": "Reporting Standard",
+          "goal": "Structure of daily autonomous reports.",
+          "file": "/docs/A.S.T.R.A/doc-report.md"
+        }
+      ],
       "features": [
-        "Gemini 2.0 Sentiment Analysis",
+        "Gemini 3.0 Sentiment Analysis",
         "Autonomous order execution",
         "Advanced Risk Guard",
         "Real-time dashboard",
