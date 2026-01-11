@@ -374,13 +374,54 @@
       ],
       "docs": [
         {
-          "title": "Технічна Архітектура",
-          "goal": "Детальний розбір інфраструктури системи та потоків даних.",
-          "items": [
-            "Принцип Atomic Design для UI компонентів для забезпечення 100% перевикористання.",
-            "Патерн CQRS для обробки складних станів повідомлень у розподілених вузлах.",
-            "Гібридна стратегія зберігання: PostgreSQL для реляційних даних, Redis для транзитних станів."
-          ]
+          "title": "Вступ",
+          "goal": "Бачення, місія та основні принципи проєкту.",
+          "file": "/docs/BrainMessenger/README.md"
+        },
+        {
+          "title": "Маніфест Cohesive",
+          "goal": "Глибока філософська та архітектурна сонастройка.",
+          "file": "/docs/BrainMessenger/TheCohesiveManifesto.md"
+        },
+        {
+          "title": "Технічний Огляд",
+          "goal": "Високорівнева архітектура системи та тех-стек.",
+          "file": "/docs/BrainMessenger/doc-tech.md"
+        },
+        {
+          "title": "Специфікація API",
+          "goal": "Детальний розбір GraphQL API та взаємодії компонентів.",
+          "file": "/docs/BrainMessenger/doc-spec.md"
+        },
+        {
+          "title": "Дизайн-система",
+          "goal": "UI компоненти, брендинг та візуальна мова.",
+          "file": "/docs/BrainMessenger/doc-design.md"
+        },
+        {
+          "title": "Посібник розробника",
+          "goal": "Стандарти коду, структура проєкту та робочий процес.",
+          "file": "/docs/BrainMessenger/doc-devIn.md"
+        },
+        {
+          "title": "Інтеграції",
+          "goal": "Підключення Neon, Cloudflare та зовнішніх API.",
+          "file": "/docs/BrainMessenger/doc-int.md"
+        },
+        {
+          "title": "Локалізація",
+          "goal": "Стратегія багатомовності та перекладу.",
+          "file": "/docs/BrainMessenger/doc-locIn.md"
+        },
+        {
+          "title": "Посібник користувача",
+          "goal": "Інструкція із взаємодії для кінцевого користувача.",
+          "file": "/docs/BrainMessenger/doc-user.md"
+        },
+        {
+          "title": "Контроль якості",
+          "goal": "Тестування, валідація та протоколи обслуговування.",
+          "file": "/docs/BrainMessenger/doc-validation.md"
         }
       ]
     },
@@ -389,13 +430,23 @@
       "title": "Westbud",
       "shortDescription": "Преміальна корпоративна платформа для великої будівельної компанії",
       "description": "Високотехнологічний корпоративний портал для великого будівельного гравця. Фокус на максимальній швидкості завантаження, преміальному дизайні та зручному інтерфейсі для демонстрації будівельних об'єктів.",
-      "image": "https://res.cloudinary.com/dsjalneil/image/upload/v1740704902/5891522-1_yryudd.png",
+      "image": "https://res.cloudinary.com/dsjalneil/image/upload/v1767898995/WestBud_tcwel4.png",
       "gallery": [
-        { "type": "image", "url": "https://res.cloudinary.com/dsjalneil/image/upload/v1740704902/5891522-1_yryudd.png", "title": "Головна Вітрина" }
+        { "type": "image", "url": "https://res.cloudinary.com/dsjalneil/image/upload/v1767898995/WestBud_tcwel4.png", "title": "Main Showcase" },
+        { "type": "image", "url": "https://res.cloudinary.com/dsjalneil/image/upload/v1767905178/%D0%97%D0%BD%D1%96%D0%BC%D0%BE%D0%BA_%D0%B5%D0%BA%D1%80%D0%B0%D0%BD%D0%B0_2026-01-08_224545_ufrehi.png", "title": "Modal Showcase" },
+        { "type": "image", "url": "https://res.cloudinary.com/dsjalneil/image/upload/v1767905253/%D0%97%D0%BD%D1%96%D0%BC%D0%BE%D0%BA_%D0%B5%D0%BA%D1%80%D0%B0%D0%BD%D0%B0_2026-01-08_224717_mhf0zw.png", "title": "Gallery Showcase" },
+        { "type": "image", "url": "https://res.cloudinary.com/dsjalneil/image/upload/v1767905285/%D0%97%D0%BD%D1%96%D0%BC%D0%BE%D0%BA_%D0%B5%D0%BA%D1%80%D0%B0%D0%BD%D0%B0_2026-01-08_224751_cqae35.png", "title": "Functions Gallery Showcase" },
+        { "type": "video", "url": "https://youtu.be/CxzbkhB0MNQ", "title": "Video Showcase" },
+        { "type": "video", "url": "https://youtu.be/6Ai82zHEYxQ", "title": "Video Showcase step 1" },
+        { "type": "video", "url": "https://youtu.be/XSExr7DzMNE", "title": "Video Showcase step 2" },
+        { "type": "video", "url": "https://youtu.be/4J0E5RtLWG0", "title": "Video Showcase step 3" },
+        { "type": "video", "url": "https://youtu.be/lXonkyAU-W0", "title": "Video Showcase step 4" },
+        { "type": "video", "url": "https://youtu.be/EXKtsghISx4", "title": "Video Showcase step 5" },
+        { "type": "video", "url": "https://youtu.be/Cub3dNYY870", "title": "Video Showcase step 6" }
       ],
       "categories": ["web"],
       "techStack": [
-        "Next.js",
+        "Vite",
         "TypeScript",
         "Tailwind CSS",
         "Framer Motion",
@@ -478,12 +529,12 @@
         "Максимальна швидкість (PageSpeed 95+)",
         "3D візуалізація об'єктів",
         "Інтерактивна карта проєктів",
-        "Мультимовність (EN/NL/UA)",
+        "Мультимовність (EN/NL)",
         "Адаптивність під усі пристрої"
       ],
       "status": "completed",
       "timeline": {
-        "start": "2023-06-01",
+        "start": "2025-12-15",
         "phases": [
           { "name": "Вимоги", "duration": "2 тижні", "status": "completed" },
           { "name": "Розробка", "duration": "3 місяці", "status": "completed" },
@@ -680,11 +731,14 @@
       "title": "A.S.T.R.A",
       "shortDescription": "Автономна ШІ-система для алгоритмічної торгівлі криптою",
       "description": "Автономна система для торгівлі на криптовалютном ринку. Використовує аналіз настроїв (Sentiment Analysis) через Gemini 2.0 AI та алгоритмічні стратегії для повністю незалежного управління капіталом.",
-      "image": "https://res.cloudinary.com/dsjalneil/image/upload/v1740704902/5891520_r1cl35.png",
+      "image": "https://res.cloudinary.com/dsjalneil/image/upload/v1768078819/%D0%97%D0%BD%D1%96%D0%BC%D0%BE%D0%BA_%D0%B5%D0%BA%D1%80%D0%B0%D0%BD%D0%B0_2026-01-10_230002_xh8xg4.png",
       "gallery": [
-        { "type": "image", "url": "https://images.unsplash.com/photo-1639762681485-074b7f938ba0?auto=format&fit=crop&q=80&w=2000", "title": "Обробка логіки ШІ" },
-        { "type": "image", "url": "https://images.unsplash.com/photo-1642104704074-907c0698bcd9?auto=format&fit=crop&q=80&w=2000", "title": "Дашборд аналізу ринку" },
-        { "type": "video", "url": "https://www.youtube.com/watch?v=qRTVO8n1bEY", "title": "Огляд системи A.S.T.R.A" }
+        { "type": "image", "url": "https://res.cloudinary.com/dsjalneil/image/upload/v1768078197/%D0%97%D0%BD%D1%96%D0%BC%D0%BE%D0%BA_%D0%B5%D0%BA%D1%80%D0%B0%D0%BD%D0%B0_2026-01-06_082459_wsmmtr.png", "title": "Dashboard Analytics 1" },
+        { "type": "image", "url": "https://res.cloudinary.com/dsjalneil/image/upload/v1768078190/%D0%97%D0%BD%D1%96%D0%BC%D0%BE%D0%BA_%D0%B5%D0%BA%D1%80%D0%B0%D0%BD%D0%B0_2026-01-06_084539_yaisix.png", "title": "Dashboard Analytics 2" },
+        { "type": "image", "url": "https://res.cloudinary.com/dsjalneil/image/upload/v1768078166/%D0%97%D0%BD%D1%96%D0%BC%D0%BE%D0%BA_%D0%B5%D0%BA%D1%80%D0%B0%D0%BD%D0%B0_2026-01-04_210818_rszwwu.png", "title": "Dashboard Analytics 3" },
+        { "type": "image", "url": "https://res.cloudinary.com/dsjalneil/image/upload/v1768078160/%D0%97%D0%BD%D1%96%D0%BC%D0%BE%D0%BA_%D0%B5%D0%BA%D1%80%D0%B0%D0%BD%D0%B0_2026-01-05_095327_dicltg.png", "title": "Dashboard Analytics 4" },
+        { "type": "image", "url": "https://res.cloudinary.com/dsjalneil/image/upload/v1768078075/%D0%97%D0%BD%D1%96%D0%BC%D0%BE%D0%BA_%D0%B5%D0%BA%D1%80%D0%B0%D0%BD%D0%B0_2026-01-10_224342_ckam7m.png", "title": "Dashboard Analytics 5" },
+        { "type": "image", "url": "https://images.unsplash.com/photo-1642104704074-907c0698bcd9?auto=format&fit=crop&q=80&w=2000", "title": "Market Sentiment Dashboard" }
       ],
       "categories": ["ai", "trading", "fintech"],
       "techStack": [
@@ -739,13 +793,99 @@
       ],
       "status": "completed",
       "timeline": {
-        "start": "2023-11-10",
+        "start": "2025-12-25",
         "phases": [
           { "name": "Проєктування алгоритму", "duration": "1 місяць", "status": "completed" },
           { "name": "Бектестинг", "duration": "2 місяці", "status": "completed" },
           { "name": "Продакшн", "duration": "у процесі", "status": "active" }
         ]
-      }
+      },
+      "roadmap": [
+        {
+          "stage": 0,
+          "title": "Етап 0: Фундамент",
+          "duration": "День 1, Ранок",
+          "status": "completed",
+          "goal": "Налаштування оточення та базової архітектури проєкту.",
+          "tasks": [
+            {
+              "title": "Базове налаштування",
+              "checklists": [
+                {
+                  "title": "Інфраструктура",
+                  "items": [
+                    "Налаштування Python та віртуального оточення",
+                    "Конфігурація Gemini API та CCXT"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "stage": 1,
+          "title": "Етап 1: Ядро Функціонала",
+          "duration": "День 1, День",
+          "status": "completed",
+          "goal": "Розробка основних модулів аналізу та торгівлі.",
+          "tasks": [
+            {
+              "title": "Нейронна логіка",
+              "checklists": [
+                {
+                  "title": "Двигун аналізу",
+                  "items": [
+                    "Модуль Sentiment Analysis на базі Gemini 3.0",
+                    "Агрегація даних з RSS та Websockets"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "stage": 2,
+          "title": "Етап 2: 'Броня'",
+          "duration": "День 2, Ранок",
+          "status": "completed",
+          "goal": "Впровадження систем управління ризиками та захисту API.",
+          "tasks": [
+            {
+              "title": "Захист та ризики",
+              "checklists": [
+                {
+                  "title": "Security Guard",
+                  "items": [
+                    "TokenGuard для контролю лімітів API",
+                    "Алгоритми ризик-менеджменту та позиціонування"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "stage": 3,
+          "title": "Етап 3: Інтерфейс та Здача",
+          "duration": "День 2, Вечір",
+          "status": "completed",
+          "goal": "Фінальне налаштування сповіщень та запуск у продакшн.",
+          "tasks": [
+            {
+              "title": "Фінальний реліз",
+              "checklists": [
+                {
+                  "title": "Звіти та алерти",
+                  "items": [
+                    "Telegram-бот для сповіщень у реальному часі",
+                    "Автономна система Markdown-звітів"
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
     }
   },
   "toolsData": [

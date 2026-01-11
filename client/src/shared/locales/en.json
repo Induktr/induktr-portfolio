@@ -311,7 +311,7 @@
       "image": "https://res.cloudinary.com/dsjalneil/image/upload/v1740704902/5891520_r1cl35.png",
       "gallery": [
         { "type": "image", "url": "https://res.cloudinary.com/dsjalneil/image/upload/v1740704902/5891520_r1cl35.png", "title": "Main Dashboard" },
-        { "type": "image", "url": "https://res.cloudinary.com/dsjalneil/image/upload/v1740704902/5891523_cvgovb.png", "title": "Chat Interface" }
+        { "type": "video", "url": "https://youtu.be/EbGHlnfUqpQ", "title": "Video Showcase" }
       ],
       "categories": ["communication", "mobile", "web"],
       "techStack": ["TypeScript & React Native", "Next.js & Tailwind CSS", "Node.js & NestJS", "PostgreSQL & Redis", "GraphQL & Firebase"],
@@ -320,6 +320,58 @@
         "github": "https://github.com/Induktr/brainmessenger",
         "live": "https://webbrainmessenger.netlify.app/"
       },
+      "docs": [
+        {
+          "title": "Introduction",
+          "goal": "Project vision, mission, and core principles.",
+          "file": "/docs/BrainMessenger/README.md"
+        },
+        {
+          "title": "Cohesive Manifesto",
+          "goal": "Deep philosophical and architectural alignment.",
+          "file": "/docs/BrainMessenger/TheCohesiveManifesto.md"
+        },
+        {
+          "title": "Technical Overview",
+          "goal": "High-level system architecture and tech stack.",
+          "file": "/docs/BrainMessenger/doc-tech.md"
+        },
+        {
+          "title": "API Specification",
+          "goal": "Detailed GraphQL API and component interaction.",
+          "file": "/docs/BrainMessenger/doc-spec.md"
+        },
+        {
+          "title": "Design System",
+          "goal": "UI components, branding, and visual language.",
+          "file": "/docs/BrainMessenger/doc-design.md"
+        },
+        {
+          "title": "Developer Guide",
+          "goal": "Coding standards, project structure, and workflow.",
+          "file": "/docs/BrainMessenger/doc-devIn.md"
+        },
+        {
+          "title": "Integrations",
+          "goal": "Connecting with Neon, Cloudflare, and external APIs.",
+          "file": "/docs/BrainMessenger/doc-int.md"
+        },
+        {
+          "title": "Localization",
+          "goal": "Multi-language support and translation strategy.",
+          "file": "/docs/BrainMessenger/doc-locIn.md"
+        },
+        {
+          "title": "User Guide",
+          "goal": "Instructional guide for end-user interaction.",
+          "file": "/docs/BrainMessenger/doc-user.md"
+        },
+        {
+          "title": "Quality Assurance",
+          "goal": "Testing, validation, and maintenance protocols.",
+          "file": "/docs/BrainMessenger/doc-validation.md"
+        }
+      ],
       "features": [
         "Unique UI Component System",
         "Animations and Micro-interactions",
@@ -370,26 +422,6 @@
                 }
               ]
             }
-          ]
-        }
-      ],
-      "docs": [
-        {
-          "title": "Technical Architecture",
-          "goal": "Detailed breakdown of the system's infrastructure and data flow.",
-          "items": [
-            "Atomic Design principle for UI components to ensure 100% reusability.",
-            "CQRS pattern for handling complex messaging states across distributed nodes.",
-            "Hybrid storage strategy: PostgreSQL for relational data, Redis for transient state."
-          ]
-        },
-        {
-          "title": "Security Protocols",
-          "goal": "Ensuring user privacy and data integrity through modern cryptographic standards.",
-          "items": [
-            "Signal Protocol implementation for asynchronous end-to-end encryption.",
-            "Zero-knowledge proof authentication for enhanced user privacy.",
-            "Regular automated security auditing integrated into the CI/CD pipeline."
           ]
         }
       ]
@@ -762,13 +794,99 @@
       ],
       "status": "completed",
       "timeline": {
-        "start": "2023-11-10",
+        "start": "2025-12-25",
         "phases": [
           { "name": "Algorithm Design", "duration": "1 month", "status": "completed" },
           { "name": "Backtesting", "duration": "2 months", "status": "completed" },
           { "name": "Production", "duration": "ongoing", "status": "active" }
         ]
-      }
+      },
+      "roadmap": [
+        {
+          "stage": 0,
+          "title": "Stage 0: Foundation",
+          "duration": "Day 1, Morning",
+          "status": "completed",
+          "goal": "Initial project setup and core environment configuration.",
+          "tasks": [
+            {
+              "title": "Core Setup",
+              "checklists": [
+                {
+                  "title": "Infrastructure",
+                  "items": [
+                    "Python & Virtual Environment setup",
+                    "Gemini API & CCXT configuration"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "stage": 1,
+          "title": "Stage 1: Functional Core",
+          "duration": "Day 1, Day",
+          "status": "completed",
+          "goal": "Development of the primary analysis and trading modules.",
+          "tasks": [
+            {
+              "title": "Neural Logic",
+              "checklists": [
+                {
+                  "title": "Logic Engine",
+                  "items": [
+                    "Sentiment Analysis module with Gemini 3.0",
+                    "RSS & Websocket data aggregation"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "stage": 2,
+          "title": "Stage 2: 'Armor'",
+          "duration": "Day 2, Morning",
+          "status": "completed",
+          "goal": "Implementation of risk management and security guards.",
+          "tasks": [
+            {
+              "title": "Risk Protection",
+              "checklists": [
+                {
+                  "title": "Security Guard",
+                  "items": [
+                    "TokenGuard for API quota management",
+                    "Position sizing & Risk management logic"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "stage": 3,
+          "title": "Stage 3: Interface & Delivery",
+          "duration": "Day 2, Evening",
+          "status": "completed",
+          "goal": "Final notifications setup and production deployment.",
+          "tasks": [
+            {
+              "title": "Final Launch",
+              "checklists": [
+                {
+                  "title": "Reporting & Alerts",
+                  "items": [
+                    "Telegram Bot for real-time notifications",
+                    "Autonomous Markdown reporting system"
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
     }
   },
   "toolsData": [

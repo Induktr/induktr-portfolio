@@ -34,6 +34,7 @@ import type { Project, ProjectGalleryItem } from "@/shared/types/project";
 import { Card, CardContent } from "@/shared/ui/card";
 import { ScrollArea } from "@/shared/ui/scroll-area";
 import { cn } from "@/shared/lib/utils";
+import { CLOUD_DOCS_BASE_URL } from "@/shared/lib/constants";
 
 const markdownComponents = {
   h1: ({node, ...props}: any) => <h1 className="text-3xl font-bold text-primary mb-6 pb-2 border-b border-white/10" {...props} />,
@@ -76,9 +77,19 @@ export function ProjectDialog({ project, isOpen, onClose }: ProjectDialogProps) 
   useEffect(() => {
     if (project.docFile && isOpen) {
       fetch(project.docFile)
-        .then(res => res.text())
+        .then(res => {
+          if (!res.ok) throw new Error('Local doc not found');
+          return res.text();
+        })
         .then(text => setDocContent(text))
-        .catch(err => console.error("Failed to load doc", err));
+        .catch(() => {
+          // Fallback to cloud
+          const cloudUrl = `${CLOUD_DOCS_BASE_URL}${project.docFile}`;
+          fetch(cloudUrl)
+            .then(res => res.text())
+            .then(text => setDocContent(text))
+            .catch(err => console.error("Cloud fallback failed", err));
+        });
     } else {
       setDocContent(null);
     }
@@ -87,10 +98,21 @@ export function ProjectDialog({ project, isOpen, onClose }: ProjectDialogProps) 
   useEffect(() => {
     if (currentChapter !== null && project.docs?.[currentChapter]?.file && isOpen) {
       setDocContent(null); // Reset content while loading
-      fetch(project.docs[currentChapter].file!)
-        .then(res => res.text())
+      const localPath = project.docs[currentChapter].file!;
+      fetch(localPath)
+        .then(res => {
+          if (!res.ok) throw new Error('Local chapter not found');
+          return res.text();
+        })
         .then(text => setDocContent(text))
-        .catch(err => console.error("Failed to load chapter", err));
+        .catch(() => {
+          // Fallback to cloud
+          const cloudUrl = `${CLOUD_DOCS_BASE_URL}${localPath}`;
+          fetch(cloudUrl)
+            .then(res => res.text())
+            .then(text => setDocContent(text))
+            .catch(err => console.error("Cloud chapter fallback failed", err));
+        });
     }
   }, [currentChapter, project.docs, isOpen]);
 
