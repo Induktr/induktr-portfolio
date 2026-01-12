@@ -8,7 +8,7 @@ export default function handleEnvCheck(req: Request, res: Response) {
       NODE_ENV: process.env.NODE_ENV || 'not set',
       DATABASE_URL: process.env.DATABASE_URL || 'not set',
       TELEGRAM_BOT_TOKEN: process.env.TELEGRAM_BOT_TOKEN || 'not set',
-      MY_CHAT_ID: process.env.MY_CHAT_ID || 'not set',
+      TELEGRAM_CHAT_ID: process.env.TELEGRAM_CHAT_ID || 'not set',
       VERCEL_ENV: process.env.VERCEL_ENV || 'not set',
       VERCEL_REGION: process.env.VERCEL_REGION || 'not set',
       VERCEL_URL: process.env.VERCEL_URL || 'not set',
@@ -30,7 +30,7 @@ export default function handleEnvCheck(req: Request, res: Response) {
     const missingEnvVars = [];
     if (!process.env.DATABASE_URL) missingEnvVars.push('DATABASE_URL');
     if (!process.env.TELEGRAM_BOT_TOKEN) missingEnvVars.push('TELEGRAM_BOT_TOKEN');
-    if (!process.env.MY_CHAT_ID) missingEnvVars.push('MY_CHAT_ID');
+    if (!process.env.TELEGRAM_CHAT_ID) missingEnvVars.push('TELEGRAM_CHAT_ID');
     if (!process.env.VERCEL_ENV) missingEnvVars.push('VERCEL_ENV');
     if (!process.env.VERCEL_REGION) missingEnvVars.push('VERCEL_REGION');
     if (!process.env.VERCEL_URL) missingEnvVars.push('VERCEL_URL');
@@ -48,7 +48,7 @@ export default function handleEnvCheck(req: Request, res: Response) {
     });
   } catch (error) {
     if(error instanceof Error) {
-      logWithTimestamp('error', 'Error during environment check', error);
+      console.error('Error during environment check:', error);
 
       return res.status(500).json({
         success: false,

@@ -7,11 +7,21 @@ async function throwIfResNotOk(res: Response) {
   }
 }
 
+const getBaseUrl = () => {
+  // Use VITE_API_URL if defined, otherwise use current origin for relative paths
+  const viteApiUrl = import.meta.env.VITE_API_URL;
+  if (viteApiUrl) return viteApiUrl;
+  return "";
+};
+
 export async function apiRequest(
   method: string,
   url: string,
   data?: unknown | undefined,
 ): Promise<Response> {
+  const baseUrl = getBaseUrl();
+  const fullUrl = url.startsWith("http") ? url : `${baseUrl}${url}`;
+
   const options: RequestInit = {
     method,
     headers: {
@@ -21,7 +31,7 @@ export async function apiRequest(
 
   if (data) options.body = JSON.stringify(data);
 
-  const res = await fetch(url, options);
+  const res = await fetch(fullUrl, options);
   await throwIfResNotOk(res);
   return res;
 }
@@ -34,7 +44,10 @@ export const getQueryFn: <T>(options: {
   ({ on401: unauthorizedBehavior }) =>
   async ({ queryKey }) => {
     const [url] = queryKey as [string];
-    const res = await fetch(url);
+    const baseUrl = getBaseUrl();
+    const fullUrl = url.startsWith("http") ? url : `${baseUrl}${url}`;
+    
+    const res = await fetch(fullUrl);
 
     if (!res.ok) {
       if (res.status === 401 && unauthorizedBehavior === "returnNull") {
