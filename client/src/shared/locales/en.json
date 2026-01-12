@@ -310,8 +310,16 @@
       "description": "Innovative messaging platform combining cutting-edge technology and intuitive user experience. Engineered for speed, security, and emotional connection.",
       "image": "https://res.cloudinary.com/dsjalneil/image/upload/v1740704902/5891520_r1cl35.png",
       "gallery": [
-        { "type": "image", "url": "https://res.cloudinary.com/dsjalneil/image/upload/v1740704902/5891520_r1cl35.png", "title": "Main Dashboard" },
-        { "type": "video", "url": "https://youtu.be/EbGHlnfUqpQ", "title": "Video Showcase" }
+        { "type": "video", "url": "https://youtu.be/EbGHlnfUqpQ", "title": "Web: Video Showcase" },
+        { "type": "image", "url": "https://res.cloudinary.com/dsjalneil/image/upload/v1768211127/%D0%97%D0%BD%D1%96%D0%BC%D0%BE%D0%BA_%D0%B5%D0%BA%D1%80%D0%B0%D0%BD%D0%B0_2026-01-11_154634_w2zyjd.png", "title": "Web: Main Dashboard" },
+        { "type": "video", "url": "https://youtu.be/64WPsvfU6qY", "title": "Landing Page: Video Showcase" },
+        { "type": "image", "url": "https://res.cloudinary.com/dsjalneil/image/upload/v1768211126/%D0%97%D0%BD%D1%96%D0%BC%D0%BE%D0%BA_%D0%B5%D0%BA%D1%80%D0%B0%D0%BD%D0%B0_2026-01-12_114059_n1xkpz.png", "title": "Landing Page: Home Page" },
+        { "type": "image", "url": "https://res.cloudinary.com/dsjalneil/image/upload/v1768211126/%D0%97%D0%BD%D1%96%D0%BC%D0%BE%D0%BA_%D0%B5%D0%BA%D1%80%D0%B0%D0%BD%D0%B0_2026-01-12_114129_jpuidu.png", "title": "Landing Page: Section Key Features" },
+        { "type": "image", "url": "https://res.cloudinary.com/dsjalneil/image/upload/v1768211126/%D0%97%D0%BD%D1%96%D0%BC%D0%BE%D0%BA_%D0%B5%D0%BA%D1%80%D0%B0%D0%BD%D0%B0_2026-01-12_114118_hmx3rp.png", "title": "Landing Page: Section News" },
+        { "type": "image", "url": "https://res.cloudinary.com/dsjalneil/image/upload/v1768211127/%D0%97%D0%BD%D1%96%D0%BC%D0%BE%D0%BA_%D0%B5%D0%BA%D1%80%D0%B0%D0%BD%D0%B0_2026-01-12_114206_ekbvqz.png", "title": "Landing Page: Section Roadmap" },
+        { "type": "image", "url": "https://res.cloudinary.com/dsjalneil/image/upload/v1768211126/%D0%97%D0%BD%D1%96%D0%BC%D0%BE%D0%BA_%D0%B5%D0%BA%D1%80%D0%B0%D0%BD%D0%B0_2026-01-12_114139_hxb139.png", "title": "Landing Page: Section Roadmap 1" },
+        { "type": "image", "url": "https://res.cloudinary.com/dsjalneil/image/upload/v1768211127/%D0%97%D0%BD%D1%96%D0%BC%D0%BE%D0%BA_%D0%B5%D0%BA%D1%80%D0%B0%D0%BD%D0%B0_2026-01-12_114311_tsizxx.png", "title": "Landing Page: Doc Page" },
+        { "type": "image", "url": "https://res.cloudinary.com/dsjalneil/image/upload/v1768211127/%D0%97%D0%BD%D1%96%D0%BC%D0%BE%D0%BA_%D0%B5%D0%BA%D1%80%D0%B0%D0%BD%D0%B0_2026-01-12_114240_z55vrv.png", "title": "Landing Page: FAQ Page" }
       ],
       "categories": ["communication", "mobile", "web"],
       "techStack": ["TypeScript & React Native", "Next.js & Tailwind CSS", "Node.js & NestJS", "PostgreSQL & Redis", "GraphQL & Firebase"],
@@ -392,16 +400,33 @@
       "roadmap": [
         {
           "stage": 1,
-          "title": "Architecture & UI Core",
-          "duration": "1 month",
-          "goal": "Establish the foundational component system and state management architecture.",
+          "title": "Phase 1: Strategic Reload",
+          "duration": "Q3 2025",
+          "status": "upcoming",
+          "goal": "Re-planning and architecture optimization for the long-term project vision.",
           "tasks": [
             {
-              "title": "Core Component Library",
+              "title": "Strategic Planning",
               "checklists": [
                 {
-                  "title": "Design System",
-                  "items": ["Color token implementation", "Typography system setup", "Glassmorphism base classes"]
+                  "title": "Roadmap & Structure",
+                  "items": [
+                    "Reorganization of Project Epics",
+                    "Setting realistic deadlines for MVP",
+                    "Creation of 'Blind Zone' Map"
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Quality Systems",
+              "checklists": [
+                {
+                  "title": "Testing Matrix",
+                  "items": [
+                    "Design of the Quality Control system",
+                    "Integration of the Testing Matrix in ClickUp"
+                  ]
                 }
               ]
             }
@@ -409,16 +434,86 @@
         },
         {
           "stage": 2,
-          "title": "Real-time Engine",
-          "duration": "2 months",
-          "goal": "Implement low-latency messaging via WebSockets and Redis.",
+          "title": "Phase 2: Foundation & Web-MVP",
+          "duration": "Q4 2025",
+          "status": "upcoming",
+          "goal": "Launch of the core web platform and project 'Showcase'.",
           "tasks": [
             {
-              "title": "WebSocket Gateway",
+              "title": "MVP Launch",
               "checklists": [
                 {
-                  "title": "Socket Optimization",
-                  "items": ["Binary protocol implementation", "Load balancing strategy", "Message persistence logic"]
+                  "title": "Web Core",
+                  "items": [
+                    "Web-MVP infrastructure setup",
+                    "Creation of the project 'Showcase' (Vitrine)",
+                    "Core messaging logic deployment"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "stage": 3,
+          "title": "Phase 3: Android-MVP Development",
+          "duration": "Q4 2025",
+          "status": "upcoming",
+          "goal": "Extending communication capabilities to Android mobile devices.",
+          "tasks": [
+            {
+              "title": "Mobile Core",
+              "checklists": [
+                {
+                  "title": "Android Platform",
+                  "items": [
+                    "Mobile-specific UI/UX implementation",
+                    "Optimization for Android ecosystem"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "stage": 4,
+          "title": "Phase 4: Community & Value",
+          "duration": "Q1 2026",
+          "status": "upcoming",
+          "goal": "Building the user ecosystem and achieving initial value cycle.",
+          "tasks": [
+            {
+              "title": "Ecosystem Building",
+              "checklists": [
+                {
+                  "title": "Value Cycle",
+                  "items": [
+                    "Community content strategy",
+                    "First user acquisition and feedback",
+                    "Monetization model validation"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "stage": 5,
+          "title": "Phase 5: Scaling & Improvement",
+          "duration": "Q3 2026",
+          "status": "upcoming",
+          "goal": "Global scaling and transition to advanced features.",
+          "tasks": [
+            {
+              "title": "Global Scaling",
+              "checklists": [
+                {
+                  "title": "Future Growth",
+                  "items": [
+                    "Scaling backend for mass users",
+                    "Introduction of advanced AI features",
+                    "System-wide performance Kaizen"
+                  ]
                 }
               ]
             }

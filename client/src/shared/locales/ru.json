@@ -310,8 +310,16 @@
       "description": "Инновационная платформа для обмена сообщениями, объединяющая передовые технологии и интуитивный пользовательский опыт. Спроектировано для скорости, безопасности и эмоциональной связи.",
       "image": "https://res.cloudinary.com/dsjalneil/image/upload/v1740704902/5891520_r1cl35.png",
       "gallery": [
-        { "type": "image", "url": "https://res.cloudinary.com/dsjalneil/image/upload/v1740704902/5891520_r1cl35.png", "title": "Основная Панель" },
-        { "type": "image", "url": "https://res.cloudinary.com/dsjalneil/image/upload/v1740704902/5891523_cvgovb.png", "title": "Интерфейс Чата" }
+        { "type": "video", "url": "https://youtu.be/EbGHlnfUqpQ", "title": "Web: Video Showcase" },
+        { "type": "image", "url": "https://res.cloudinary.com/dsjalneil/image/upload/v1768211127/%D0%97%D0%BD%D1%96%D0%BC%D0%BE%D0%BA_%D0%B5%D0%BA%D1%80%D0%B0%D0%BD%D0%B0_2026-01-11_154634_w2zyjd.png", "title": "Web: Main Dashboard" },
+        { "type": "video", "url": "https://youtu.be/64WPsvfU6qY", "title": "Landing Page: Video Showcase" },
+        { "type": "image", "url": "https://res.cloudinary.com/dsjalneil/image/upload/v1768211126/%D0%97%D0%BD%D1%96%D0%BC%D0%BE%D0%BA_%D0%B5%D0%BA%D1%80%D0%B0%D0%BD%D0%B0_2026-01-12_114059_n1xkpz.png", "title": "Landing Page: Home Page" },
+        { "type": "image", "url": "https://res.cloudinary.com/dsjalneil/image/upload/v1768211126/%D0%97%D0%BD%D1%96%D0%BC%D0%BE%D0%BA_%D0%B5%D0%BA%D1%80%D0%B0%D0%BD%D0%B0_2026-01-12_114129_jpuidu.png", "title": "Landing Page: Section Key Features" },
+        { "type": "image", "url": "https://res.cloudinary.com/dsjalneil/image/upload/v1768211126/%D0%97%D0%BD%D1%96%D0%BC%D0%BE%D0%BA_%D0%B5%D0%BA%D1%80%D0%B0%D0%BD%D0%B0_2026-01-12_114118_hmx3rp.png", "title": "Landing Page: Section News" },
+        { "type": "image", "url": "https://res.cloudinary.com/dsjalneil/image/upload/v1768211127/%D0%97%D0%BD%D1%96%D0%BC%D0%BE%D0%BA_%D0%B5%D0%BA%D1%80%D0%B0%D0%BD%D0%B0_2026-01-12_114206_ekbvqz.png", "title": "Landing Page: Section Roadmap" },
+        { "type": "image", "url": "https://res.cloudinary.com/dsjalneil/image/upload/v1768211126/%D0%97%D0%BD%D1%96%D0%BC%D0%BE%D0%BA_%D0%B5%D0%BA%D1%80%D0%B0%D0%BD%D0%B0_2026-01-12_114139_hxb139.png", "title": "Landing Page: Section Roadmap 1" },
+        { "type": "image", "url": "https://res.cloudinary.com/dsjalneil/image/upload/v1768211127/%D0%97%D0%BD%D1%96%D0%BC%D0%BE%D0%BA_%D0%B5%D0%BA%D1%80%D0%B0%D0%BD%D0%B0_2026-01-12_114311_tsizxx.png", "title": "Landing Page: Doc Page" },
+        { "type": "image", "url": "https://res.cloudinary.com/dsjalneil/image/upload/v1768211127/%D0%97%D0%BD%D1%96%D0%BC%D0%BE%D0%BA_%D0%B5%D0%BA%D1%80%D0%B0%D0%BD%D0%B0_2026-01-12_114240_z55vrv.png", "title": "Landing Page: FAQ Page" }
       ],
       "categories": ["communication", "mobile", "web"],
       "techStack": ["TypeScript & React Native", "Next.js & Tailwind CSS", "Node.js & NestJS", "PostgreSQL & Redis", "GraphQL & Firebase"],
@@ -340,16 +348,33 @@
       "roadmap": [
         {
           "stage": 1,
-          "title": "Архитектура и UI Core",
-          "duration": "1 месяц",
-          "goal": "Создание фундаментальной системы компонентов и архитектуры управления состоянием.",
+          "title": "Фаза 1: Стратегическая Перезагрузка",
+          "duration": "Q3 2025",
+          "status": "upcoming",
+          "goal": "Перепланирование и оптимизация архитектуры для долгосрочного видения проекта.",
           "tasks": [
             {
-              "title": "Библиотека базовых компонентов",
+              "title": "Стратегическое планирование",
               "checklists": [
                 {
-                  "title": "Дизайн-система",
-                  "items": ["Внедрение цветовых токенов", "Настройка системы типографики", "Базовые классы глассморфизма"]
+                  "title": "Roadmap и Структура",
+                  "items": [
+                    "Реорганизация эпиков проекта",
+                    "Установка реалистичных дедлайнов для MVP",
+                    "Создание Карты 'Слепых Зон'"
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Системы качества",
+              "checklists": [
+                {
+                  "title": "Матрица тестирования",
+                  "items": [
+                    "Проектирование системы контроля качества",
+                    "Наполнение Матрицы Тестирования в ClickUp"
+                  ]
                 }
               ]
             }
@@ -357,16 +382,86 @@
         },
         {
           "stage": 2,
-          "title": "Real-time Движок",
-          "duration": "2 месяца",
-          "goal": "Реализация обмена сообщениями с низкой задержкой через WebSockets и Redis.",
+          "title": "Фаза 2: Фундамент и Запуск Веб-MVP",
+          "duration": "Q4 2025",
+          "status": "upcoming",
+          "goal": "Запуск основного ядра веб-платформы и создание 'Витрины' проекта.",
           "tasks": [
             {
-              "title": "WebSocket Шлюз",
+              "title": "Запуск MVP",
               "checklists": [
                 {
-                  "title": "Оптимизация сокетов",
-                  "items": ["Реализация бинарного протокола", "Стратегия балансировки нагрузки", "Логика персистентности сообщений"]
+                  "title": "Веб-ядро",
+                  "items": [
+                    "Инфраструктура Web-MVP",
+                    "Создание 'Витрины' (Showcase) проекта",
+                    "Развертывание логики мессенджера"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "stage": 3,
+          "title": "Фаза 3: Разработка Android-MVP",
+          "duration": "Q4 2025",
+          "status": "upcoming",
+          "goal": "Расширение возможностей связи на мобильные устройства Android.",
+          "tasks": [
+            {
+              "title": "Мобильное ядро",
+              "checklists": [
+                {
+                  "title": "Платформа Android",
+                  "items": [
+                    "Реализация специфического UI/UX для мобильных устройств",
+                    "Оптимизация под экосистему Android"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "stage": 4,
+          "title": "Фаза 4: Сообщество и Ценность",
+          "duration": "Q1 2026",
+          "status": "upcoming",
+          "goal": "Построение экосистемы пользователей и достижение первого цикла ценности.",
+          "tasks": [
+            {
+              "title": "Построение экосистемы",
+              "checklists": [
+                {
+                  "title": "Цикл ценности",
+                  "items": [
+                    "Контент-стратегия сообщества",
+                    "Привлечение первых пользователей и сбор фидбека",
+                    "Валидация модели монетизации"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "stage": 5,
+          "title": "Фаза 5: Улучшение Продукта и Масштабирование",
+          "duration": "Q3 2026",
+          "status": "upcoming",
+          "goal": "Глобальное масштабирование и переход к продвинутому функционалу.",
+          "tasks": [
+            {
+              "title": "Глобальное масштабирование",
+              "checklists": [
+                {
+                  "title": "Будущий рост",
+                  "items": [
+                    "Масштабирование бэкенда под массового пользователя",
+                    "Внедрение продвинутых функций ИИ",
+                    "Общесистемный перфоманс Kaizen"
+                  ]
                 }
               ]
             }

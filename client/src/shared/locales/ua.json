@@ -309,8 +309,15 @@
       "description": "Інноваційна платформа для обміну повідомленнями, що поєднує передові технології та інтуїтивний користувацький досвід. Спроектовано для швидкості, безпеки та емоційного зв'язку.",
       "image": "https://res.cloudinary.com/dsjalneil/image/upload/v1740704902/5891520_r1cl35.png",
       "gallery": [
-        { "type": "image", "url": "https://res.cloudinary.com/dsjalneil/image/upload/v1740704902/5891520_r1cl35.png", "title": "Головна Панель" },
-        { "type": "image", "url": "https://res.cloudinary.com/dsjalneil/image/upload/v1740704902/5891523_cvgovb.png", "title": "Інтерфейс Чату" }
+        { "type": "image", "url": "https://res.cloudinary.com/dsjalneil/image/upload/v1768211127/%D0%97%D0%BD%D1%96%D0%BC%D0%BE%D0%BA_%D0%B5%D0%BA%D1%80%D0%B0%D0%BD%D0%B0_2026-01-11_154634_w2zyjd.png", "title": "Web: Main Dashboard" },
+        { "type": "video", "url": "https://youtu.be/64WPsvfU6qY", "title": "Landing Page: Video Showcase" },
+        { "type": "image", "url": "https://res.cloudinary.com/dsjalneil/image/upload/v1768211126/%D0%97%D0%BD%D1%96%D0%BC%D0%BE%D0%BA_%D0%B5%D0%BA%D1%80%D0%B0%D0%BD%D0%B0_2026-01-12_114059_n1xkpz.png", "title": "Landing Page: Home Page" },
+        { "type": "image", "url": "https://res.cloudinary.com/dsjalneil/image/upload/v1768211126/%D0%97%D0%BD%D1%96%D0%BC%D0%BE%D0%BA_%D0%B5%D0%BA%D1%80%D0%B0%D0%BD%D0%B0_2026-01-12_114129_jpuidu.png", "title": "Landing Page: Section Key Features" },
+        { "type": "image", "url": "https://res.cloudinary.com/dsjalneil/image/upload/v1768211126/%D0%97%D0%BD%D1%96%D0%BC%D0%BE%D0%BA_%D0%B5%D0%BA%D1%80%D0%B0%D0%BD%D0%B0_2026-01-12_114118_hmx3rp.png", "title": "Landing Page: Section News" },
+        { "type": "image", "url": "https://res.cloudinary.com/dsjalneil/image/upload/v1768211127/%D0%97%D0%BD%D1%96%D0%BC%D0%BE%D0%BA_%D0%B5%D0%BA%D1%80%D0%B0%D0%BD%D0%B0_2026-01-12_114206_ekbvqz.png", "title": "Landing Page: Section Roadmap" },
+        { "type": "image", "url": "https://res.cloudinary.com/dsjalneil/image/upload/v1768211126/%D0%97%D0%BD%D1%96%D0%BC%D0%BE%D0%BA_%D0%B5%D0%BA%D1%80%D0%B0%D0%BD%D0%B0_2026-01-12_114139_hxb139.png", "title": "Landing Page: Section Roadmap 1" },
+        { "type": "image", "url": "https://res.cloudinary.com/dsjalneil/image/upload/v1768211127/%D0%97%D0%BD%D1%96%D0%BC%D0%BE%D0%BA_%D0%B5%D0%BA%D1%80%D0%B0%D0%BD%D0%B0_2026-01-12_114311_tsizxx.png", "title": "Landing Page: Doc Page" },
+        { "type": "image", "url": "https://res.cloudinary.com/dsjalneil/image/upload/v1768211127/%D0%97%D0%BD%D1%96%D0%BC%D0%BE%D0%BA_%D0%B5%D0%BA%D1%80%D0%B0%D0%BD%D0%B0_2026-01-12_114240_z55vrv.png", "title": "Landing Page: FAQ Page" }
       ],
       "categories": ["communication", "mobile", "web"],
       "techStack": ["TypeScript & React Native", "Next.js & Tailwind CSS", "Node.js & NestJS", "PostgreSQL & Redis", "GraphQL & Firebase"],
@@ -339,16 +346,33 @@
       "roadmap": [
         {
           "stage": 1,
-          "title": "Архітектура та UI Core",
-          "duration": "1 місяць",
-          "goal": "Створення фундаментальної системи компонентів та архітектури управління станом.",
+          "title": "Фаза 1: Стратегічне Перезавантаження",
+          "duration": "Q3 2025",
+          "status": "upcoming",
+          "goal": "Перепланування та оптимізація архітектури для довгострокового бачення проєкту.",
           "tasks": [
             {
-              "title": "Бібліотека базових компонентів",
+              "title": "Стратегічне планування",
               "checklists": [
                 {
-                  "title": "Дизайн-система",
-                  "items": ["Впровадження кольорових токенів", "Налаштування системи типографіки", "Базові класи гласморфізму"]
+                  "title": "Roadmap та Структура",
+                  "items": [
+                    "Реорганізація епіків проєкту",
+                    "Встановлення реалістичних дедлайнів для MVP",
+                    "Створення Карти 'Слепих Зон'"
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Системи якості",
+              "checklists": [
+                {
+                  "title": "Матриця тестування",
+                  "items": [
+                    "Проєктування системи контролю якості",
+                    "Наповнення Матриці Тестування в ClickUp"
+                  ]
                 }
               ]
             }
@@ -356,16 +380,86 @@
         },
         {
           "stage": 2,
-          "title": "Real-time Двигун",
-          "duration": "2 місяці",
-          "goal": "Реалізація обміну повідомленнями з низькою затримкою через WebSockets та Redis.",
+          "title": "Фаза 2: Фундамент та Запуск Веб-MVP",
+          "duration": "Q4 2025",
+          "status": "upcoming",
+          "goal": "Запуск основного ядра веб-платформи та створення 'Вітрини' проєкту.",
           "tasks": [
             {
-              "title": "WebSocket Шлюз",
+              "title": "Запуск MVP",
               "checklists": [
                 {
-                  "title": "Оптимізація сокетів",
-                  "items": ["Реалізація бінарного протоколу", "Стратегія балансування навантаження", "Логіка персистентності повідомлень"]
+                  "title": "Веб-ядро",
+                  "items": [
+                    "Інфраструктура Web-MVP",
+                    "Створення 'Вітрини' (Showcase) проєкту",
+                    "Розгортання логіки мессенджера"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "stage": 3,
+          "title": "Фаза 3: Розробка Android-MVP",
+          "duration": "Q4 2025",
+          "status": "upcoming",
+          "goal": "Розширення можливостей зв'язку на мобільні пристрої Android.",
+          "tasks": [
+            {
+              "title": "Мобільне ядро",
+              "checklists": [
+                {
+                  "title": "Платформа Android",
+                  "items": [
+                    "Реалізація специфічного UI/UX для мобільних пристроїв",
+                    "Оптимізація під екосистему Android"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "stage": 4,
+          "title": "Фаза 4: Спільнота та Цінність",
+          "duration": "Q1 2026",
+          "status": "upcoming",
+          "goal": "Побудова екосистеми користувачів та досягнення першого циклу цінності.",
+          "tasks": [
+            {
+              "title": "Побудова екосистеми",
+              "checklists": [
+                {
+                  "title": "Цикл цінності",
+                  "items": [
+                    "Контент-стратегія спільноти",
+                    "Залучення перших користувачів та збір фідбеку",
+                    "Валідація моделі монетизації"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "stage": 5,
+          "title": "Фаза 5: Покращення Продукту та Масштабування",
+          "duration": "Q3 2026",
+          "status": "upcoming",
+          "goal": "Глобальне масштабування та перехід до просунутого функціонала.",
+          "tasks": [
+            {
+              "title": "Глобальное масштабування",
+              "checklists": [
+                {
+                  "title": "Майбутнє зростання",
+                  "items": [
+                    "Масштабування бекенду під масового користувача",
+                    "Впровадження просунутих функцій ШІ",
+                    "Загальносистемний перфоманс Kaizen"
+                  ]
                 }
               ]
             }
