@@ -3,7 +3,7 @@
   "buildCommand": "npm run vercel-static-build",
   "outputDirectory": "dist/public",
   "rewrites": [
-    { "source": "/api/(.*)", "destination": "/api/index.ts" },
+    { "source": "/api/(.*)", "destination": "https://induktr-portfolio-production.up.railway.app/api/$1" },
     { "source": "/(.*)", "destination": "/index.html" }
   ],
   "functions": {
