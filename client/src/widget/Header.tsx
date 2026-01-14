@@ -5,18 +5,9 @@ import { motion } from "framer-motion";
 import { MobileNav } from "./MobileNav";
 import { LanguageSwitcher } from "@/features/language-switch/LanguageSwitcher";
 import { useTranslation } from "react-i18next";
+import { navItemVariants, logoVariants } from "@/shared/lib/constants";
 
-const navItemVariants = {
-  hover: { scale: 1.05, color: "hsl(var(--primary))" },
-  tap: { scale: 0.95 }
-};
-
-const logoVariants = {
-  hover: { scale: 1.05 },
-  tap: { scale: 0.95 }
-};
-
-export function Header() {
+export const Header = () => {
   const { t } = useTranslation();
 
   return (
@@ -62,7 +53,7 @@ export function Header() {
               {t('common.projects')}
             </motion.span>
           </Link>
-      <Link href="/tools">
+          <Link href="/tools">
             <motion.span 
               className="cursor-pointer"
               variants={navItemVariants}

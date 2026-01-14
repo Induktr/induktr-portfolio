@@ -1,10 +1,22 @@
-import { useState } from "react";
+import { useState, MouseEvent } from "react";
 import { motion } from "framer-motion";
 import { useTranslation } from "react-i18next";
 import { Button } from "@/shared/ui/button";
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/shared/ui/card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/shared/ui/card";
 import { Badge } from "@/shared/ui/badge";
-import { Check, ShoppingCart, ExternalLink, Info } from "lucide-react";
+import {
+  Check,
+  ShoppingCart,
+  ExternalLink,
+  Info,
+} from "lucide-react";
 import { PurchaseDialog } from "@/features/purchase/PurchaseDialog";
 import { ProductDetailsDialog } from "@/features/marketplace/ProductDetailsDialog";
 import {
@@ -14,24 +26,20 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/shared/ui/dialog";
+import { Template, Order } from "@/shared/types/template";
 
-interface Template {
-  id: string;
-  title: string;
-  description: string;
-  price: number;
-  stack: string[];
-  features: string[];
-  gradient: string;
-}
-
-export default function Marketplace() {
+export const Marketplace = () => {
   const { t } = useTranslation();
   const [selectedTemplate, setSelectedTemplate] = useState<Template | null>(null);
   const [viewTemplate, setViewTemplate] = useState<Template | null>(null);
-  const [submittedOrder, setSubmittedOrder] = useState<{orderId: number, accessCode: string} | null>(null);
+  const [submittedOrder, setSubmittedOrder] = useState<Order | null>(null);
 
   const templates = t('marketplaceTemplates', { returnObjects: true }) as Template[];
+
+  const handleNavGithub = (e: MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    e.stopPropagation();
+    window.open('https://github.com/induktr', '_blank');
+  }
 
   return (
     <div className="container mx-auto px-4 py-20">

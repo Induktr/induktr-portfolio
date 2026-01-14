@@ -5,24 +5,12 @@ import {
   MdPayments,
   MdMessage,
   MdSmartToy,
-  MdTrendingUp,
 } from "react-icons/md";
 import { ArrowUpCircle } from "lucide-react";
 import { Button } from "@/shared/ui/button";
 import { useTranslation } from "react-i18next";
 
-interface Category {
-  id: string;
-  name: string;
-  icon: string;
-  description: string;
-}
-
-interface ProjectCategoriesProps {
-  categories: Category[];
-  selectedCategories: string[];
-  onSelectCategory: (categoryId: string) => void;
-}
+import type { ProjectCategoriesProps } from "@/shared/types/project";
 
 const getCategoryIcon = (iconName: string) => {
   switch (iconName) {
@@ -43,11 +31,11 @@ const getCategoryIcon = (iconName: string) => {
   }
 };
 
-export function ProjectCategories({
+export const ProjectCategories = ({
   categories,
   selectedCategories,
   onSelectCategory,
-}: ProjectCategoriesProps) {
+}: ProjectCategoriesProps) => {
   const { t } = useTranslation();
 
   return (

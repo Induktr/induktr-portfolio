@@ -89,3 +89,86 @@ export interface Project {
     developmentTools?: AdditionalTechGroup;
   };
 }
+
+export interface PurchaseDialogProps {
+  template: {
+    id: string;
+    title: string;
+    price: number;
+  } | null;
+  onClose: () => void;
+  onSuccess: (orderId: number, accessCode: string) => void;
+}
+
+export interface ProjectCardProps {
+  project: Project;
+}
+
+export interface Category {
+  id: string;
+  name: string;
+  icon: string;
+  description: string;
+}
+
+export interface ProjectCategoriesProps {
+  categories: Category[];
+  selectedCategories: string[];
+  onSelectCategory: (categoryId: string) => void;
+}
+
+export interface ProjectDialogProps {
+  project: Project;
+  isOpen: boolean;
+  onClose: () => void;
+}
+
+export interface ProjectGalleryProps {
+  project: {
+    title: string;
+    description: string;
+    image: string;
+    video?: string;
+    features: string[];
+    techStack: string[];
+    additionalTech?: {
+      mediaTools?: {
+        title: string;
+        items: string[];
+      };
+      formTools?: {
+        title: string;
+        items: string[];
+      };
+      cmsTools?: {
+        title: string;
+        items: string[];
+      };
+      performanceTools?: {
+        title: string;
+        items: string[];
+      };
+      testingTools?: {
+        title: string;
+        items: string[];
+      };
+      devopsTools?: {
+        title: string;
+        items: string[];
+      };
+      developmentTools?: {
+        title: string;
+        items: string[];
+      };
+    };
+  };
+}
+
+export interface ProjectSliderProps {
+  items: ProjectGalleryItem[];
+  className?: string;
+}
+
+export interface ProjectUsageProps {
+  steps: ProjectUsageStep[];
+}

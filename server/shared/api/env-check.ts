@@ -1,32 +1,11 @@
 import { Request, Response } from 'express';
 import dotenv from 'dotenv';
+import { envInfo } from '../constants/env';
+import { serverInfo } from '../constants/server';
 
 dotenv.config();
-export default function handleEnvCheck(req: Request, res: Response) {
+export const handleEnvCheck = (req: Request, res: Response) => {
   try {
-    const envInfo = {
-      NODE_ENV: process.env.NODE_ENV || 'not set',
-      DATABASE_URL: process.env.DATABASE_URL || 'not set',
-      TELEGRAM_BOT_TOKEN: process.env.TELEGRAM_BOT_TOKEN || 'not set',
-      TELEGRAM_CHAT_ID: process.env.TELEGRAM_CHAT_ID || 'not set',
-      VERCEL_ENV: process.env.VERCEL_ENV || 'not set',
-      VERCEL_REGION: process.env.VERCEL_REGION || 'not set',
-      VERCEL_URL: process.env.VERCEL_URL || 'not set',
-      npm_package_version: process.env.npm_package_version || 'not set'
-    };
-
-    const serverInfo = {
-      timestamp: new Date().toISOString(),
-      platform: process.platform,
-      nodeVersion: process.version,
-      uptimeSeconds: process.uptime(),
-      memoryUsage: {
-        rss: Math.round(process.memoryUsage().rss / 1024 / 1024) + ' MB',
-        heapTotal: Math.round(process.memoryUsage().heapTotal / 1024 / 1024) + ' MB',
-        heapUsed: Math.round(process.memoryUsage().heapUsed / 1024 / 1024) + ' MB'
-      }
-    };
-
     const missingEnvVars = [];
     if (!process.env.DATABASE_URL) missingEnvVars.push('DATABASE_URL');
     if (!process.env.TELEGRAM_BOT_TOKEN) missingEnvVars.push('TELEGRAM_BOT_TOKEN');

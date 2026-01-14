@@ -1,3 +1,5 @@
+import { useState, useEffect } from "react";
+import { useTranslation } from "react-i18next";
 import {
   Dialog,
   DialogContent,
@@ -8,9 +10,6 @@ import {
 } from "@/shared/ui/dialog";
 import { ProjectSlider } from "./ProjectSlider";
 import { ProjectUsage } from "./ProjectUsage";
-import { useState, useEffect } from "react";
-import ReactMarkdown from 'react-markdown';
-import remarkGfm from 'remark-gfm';
 import { Loader, DeferredContent } from "@/shared/ui/Loader";
 import { Badge } from "@/shared/ui/badge";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/shared/ui/tabs";
@@ -29,12 +28,16 @@ import {
   BookOpen,
   ArrowLeft
 } from "lucide-react";
-import { useTranslation } from "react-i18next";
-import type { Project, ProjectGalleryItem } from "@/shared/types/project";
 import { Card, CardContent } from "@/shared/ui/card";
 import { ScrollArea } from "@/shared/ui/scroll-area";
+
+import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
 import { cn } from "@/shared/lib/utils";
 import { CLOUD_DOCS_BASE_URL } from "@/shared/lib/constants";
+
+import type { ProjectGalleryItem } from "@/shared/types/project";
+import type { ProjectDialogProps } from "@/shared/types/project";
 
 const markdownComponents = {
   h1: ({node, ...props}: any) => <h1 className="text-3xl font-bold text-primary mb-6 pb-2 border-b border-white/10" {...props} />,
@@ -62,13 +65,7 @@ const markdownComponents = {
   }
 };
 
-interface ProjectDialogProps {
-  project: Project;
-  isOpen: boolean;
-  onClose: () => void;
-}
-
-export function ProjectDialog({ project, isOpen, onClose }: ProjectDialogProps) {
+export const ProjectDialog = ({ project, isOpen, onClose }: ProjectDialogProps) => {
   const [activeTab, setActiveTab] = useState("overview");
   const [docContent, setDocContent] = useState<string | null>(null);
   const [currentChapter, setCurrentChapter] = useState<number | null>(null);

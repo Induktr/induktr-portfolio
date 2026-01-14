@@ -9,3 +9,11 @@ export interface ToolCategory {
   category: string;
   items: ToolItem[];
 }
+
+export interface ComparisonData {
+  name: string;
+  performance: number;
+  reliability: number;
+  usability: number;
+}
+

@@ -1,4 +1,3 @@
-
 export const BOT_TRANSLATIONS: Record<string, any> = {
   en: {
     welcome: "👋 <b>Hi! I'm Induktr Portfolio Bot.</b>\n\nI'm your personal assistant in the world of Induktr digital assets.\n\n🚀 <b>What I can do:</b>\n• Show my best <b>projects and portfolio</b>\n• Browse and <b>buy premium templates</b> directly\n• Track the <b>status of your orders</b> in real-time\n\n💡 <b>Navigation:</b>\n🛍️ /marketplace — Templates store\n📂 /portfolio — My cases and dev projects\n🔱 /about — Philosophy and Roadmap\n❓ /faq — Frequently Asked Questions\n💳 /payment — Payment requisites\n🌏 /lang — Change language\n\n<i>If you have a question, use:</i>\n<code>/msg Your text</code>",

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
+import { motion } from "framer-motion";
 import { useToast } from "@/shared/ui/use-toast";
 import {
   Form,
@@ -41,53 +41,16 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/shared/ui/dialog";
-
-function use3DTilt() {
-  const x = useMotionValue(0);
-  const y = useMotionValue(0);
-
-  const mouseX = useSpring(x, { stiffness: 150, damping: 15 });
-  const mouseY = useSpring(y, { stiffness: 150, damping: 15 });
-
-  const rotateX = useTransform(mouseY, [-0.5, 0.5], ["7deg", "-7deg"]);
-  const rotateY = useTransform(mouseX, [-0.5, 0.5], ["-7deg", "7deg"]);
-
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    const rect = e.currentTarget.getBoundingClientRect();
-    const width = rect.width;
-    const height = rect.height;
-    const mouseXFromCenter = e.clientX - rect.left - width / 2;
-    const mouseYFromCenter = e.clientY - rect.top - height / 2;
-
-    x.set(mouseXFromCenter / width);
-    y.set(mouseYFromCenter / height);
-  };
-
-  const handleMouseLeave = () => {
-    x.set(0);
-    y.set(0);
-  };
-
-  return { handleMouseMove, handleMouseLeave, style: { rotateX, rotateY } };
-}
+import { use3DTilt } from "@/shared/hooks/use3DTilt";
+import { useClipboard } from "@/shared/hooks/useClipboard";
+import { Order } from "@/shared/types/template";
 
 export function ContactForm() {
   const { toast } = useToast();
   const { t } = useTranslation();
   const { handleMouseMove, handleMouseLeave, style } = use3DTilt();
-  const [submittedOrder, setSubmittedOrder] = useState<{orderId: number, accessCode: string} | null>(null);
-  const [copiedField, setCopiedField] = useState<string | null>(null);
-
-  const handleCopy = (text: string, field: string) => {
-    navigator.clipboard.writeText(text);
-    setCopiedField(field);
-    toast({
-      title: t('common.copied', 'Copied!'),
-      description: text,
-      duration: 2000,
-    });
-    setTimeout(() => setCopiedField(null), 2000);
-  };
+  const { copied, copyToClipboard } = useClipboard();
+  const [submittedOrder, setSubmittedOrder] = useState<Order | null>(null);
   
   const form = useForm<Lead>({
     resolver: zodResolver(LeadSchema),
@@ -163,9 +126,9 @@ export function ContactForm() {
                       variant="outline" 
                       size="icon" 
                       className="h-9 w-9 shrink-0 hover:bg-primary/10 hover:text-primary transition-colors"
-                      onClick={() => handleCopy(t('contactForm.paymentInfo.cryptoValue'), 'crypto')}
+                      onClick={() => copyToClipboard(t('contactForm.paymentInfo.cryptoValue'), 'crypto')}
                     >
-                      {copiedField === 'crypto' ? (
+                      {copied === 'crypto' ? (
                         <CheckCheck className="w-4 h-4 text-green-500" />
                       ) : (
                         <Copy className="w-4 h-4" />
@@ -184,9 +147,9 @@ export function ContactForm() {
                       variant="outline" 
                       size="icon" 
                       className="h-9 w-9 shrink-0 hover:bg-primary/10 hover:text-primary transition-colors"
-                      onClick={() => handleCopy(t('contactForm.paymentInfo.cardValue'), 'card')}
+                      onClick={() => copyToClipboard(t('contactForm.paymentInfo.cardValue'), 'card')}
                     >
-                      {copiedField === 'card' ? (
+                      {copied === 'card' ? (
                         <CheckCheck className="w-4 h-4 text-green-500" />
                       ) : (
                         <Copy className="w-4 h-4" />

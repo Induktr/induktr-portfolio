@@ -4,12 +4,7 @@ import { ChevronLeft, ChevronRight, PlayCircle, Image as ImageIcon } from 'lucid
 import { Button } from '@/shared/ui/button';
 import { VideoPlayer } from '@/shared/ui/VideoPlayer';
 import { cn } from '@/shared/lib/utils';
-import type { ProjectGalleryItem } from '@/shared/types/project';
-
-interface ProjectSliderProps {
-  items: ProjectGalleryItem[];
-  className?: string;
-}
+import { ProjectSliderProps } from '@/shared/types/project';
 
 export function ProjectSlider({ items, className }: ProjectSliderProps) {
   const [currentIndex, setCurrentIndex] = useState(0);

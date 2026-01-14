@@ -5,7 +5,7 @@ import { useState, useMemo } from "react";
 import { useTranslation } from "react-i18next";
 import type { Project } from "@/shared/types/project";
 
-export default function Projects() {
+export const Projects = () => {
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
   const { t } = useTranslation();
 

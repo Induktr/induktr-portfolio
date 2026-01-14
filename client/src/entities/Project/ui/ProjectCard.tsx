@@ -1,32 +1,20 @@
+import { useState } from "react";
+import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import { Card, CardContent, CardHeader, CardTitle } from "@/shared/ui/card";
 import { Badge } from "@/shared/ui/badge";
 import { Button } from "@/shared/ui/button";
-import { motion } from "framer-motion";
 import { Github, ExternalLink } from "lucide-react";
-import { useState } from "react";
 import { ProjectDialog } from "./ProjectDialog";
-import { useTranslation } from "react-i18next";
 
-import type { Project } from "@/shared/types/project";
+import { motion } from "framer-motion";
 
-interface ProjectCardProps {
-  project: Project;
-}
+import type { ProjectCardProps } from "@/shared/types/project";
+import { getStatusColor } from "@/shared/lib/constants";
 
-export function ProjectCard({ project }: ProjectCardProps) {
+export const ProjectCard = ({ project }: ProjectCardProps) => {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const { t } = useTranslation();
-
-  const statusColors = {
-    completed: "bg-green-500",
-    active: "bg-blue-500",
-    upcoming: "bg-amber-500",
-    "in-development": "bg-purple-500",
-  };
-
-  const getStatusColor = (status: string) => {
-    return statusColors[status as keyof typeof statusColors] || "bg-gray-500";
-  };
 
   return (
     <>
@@ -88,14 +76,14 @@ export function ProjectCard({ project }: ProjectCardProps) {
                 asChild
                 className="h-9 w-9"
               >
-                <a
-                  href={project.links.github}
+                <Link
+                  to={project.links.github}
                   target="_blank"
                   rel="noopener noreferrer"
                 >
                   <Github className="h-4 w-4" />
                   <span className="sr-only">GitHub</span>
-                </a>
+                </Link>
               </Button>
             )}
             
@@ -106,14 +94,14 @@ export function ProjectCard({ project }: ProjectCardProps) {
                 asChild
                 className="h-9 w-9"
               >
-                <a
-                  href={project.links.live}
+                <Link
+                  to={project.links.live}
                   target="_blank"
                   rel="noopener noreferrer"
                 >
                   <ExternalLink className="h-4 w-4" />
                   <span className="sr-only">{t('projects.card.liveDemo')}</span>
-                </a>
+                </Link>
               </Button>
             )}
             
@@ -124,8 +112,8 @@ export function ProjectCard({ project }: ProjectCardProps) {
                 asChild
                 className="h-9 w-9"
               >
-                <a
-                  href={project.links.srcbook}
+                <Link
+                  to={project.links.srcbook}
                   target="_blank"
                   rel="noopener noreferrer"
                 >
@@ -134,7 +122,7 @@ export function ProjectCard({ project }: ProjectCardProps) {
                     <path d="M8 8h8v2H8zM8 11h8v2H8zM8 14h5v2H8z" />
                   </svg>
                   <span className="sr-only">Srcbook</span>
-                </a>
+                </Link>
               </Button>
             )}
             
@@ -145,8 +133,8 @@ export function ProjectCard({ project }: ProjectCardProps) {
                 asChild
                 className="h-9 w-9"
               >
-                <a
-                  href={project.links.cursor}
+                <Link
+                  to={project.links.cursor}
                   target="_blank"
                   rel="noopener noreferrer"
                 >
@@ -154,7 +142,7 @@ export function ProjectCard({ project }: ProjectCardProps) {
                     <path d="M13.92 9.5L9.5 4.5V9.5h4.42zm-5.42 1v10l10-5-10-5z" />
                   </svg>
                   <span className="sr-only">Cursor</span>
-                </a>
+                </Link>
               </Button>
             )}
           </div>

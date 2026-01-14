@@ -1,48 +1,9 @@
-import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
 import { ChevronDown, ChevronUp, ZoomIn, ZoomOut, Image, Video } from "lucide-react";
 import { Button } from "@/shared/ui/button";
+import { motion, AnimatePresence } from "framer-motion";
 
-interface ProjectGalleryProps {
-  project: {
-    title: string;
-    description: string;
-    image: string;
-    video?: string;
-    features: string[];
-    techStack: string[];
-    additionalTech?: {
-      mediaTools?: {
-        title: string;
-        items: string[];
-      };
-      formTools?: {
-        title: string;
-        items: string[];
-      };
-      cmsTools?: {
-        title: string;
-        items: string[];
-      };
-      performanceTools?: {
-        title: string;
-        items: string[];
-      };
-      testingTools?: {
-        title: string;
-        items: string[];
-      };
-      devopsTools?: {
-        title: string;
-        items: string[];
-      };
-      developmentTools?: {
-        title: string;
-        items: string[];
-      };
-    };
-  };
-}
+import type { ProjectGalleryProps } from "@/shared/types/project";
 
 export function ProjectGallery({ project }: ProjectGalleryProps) {
   const [isDetailsOpen, setIsDetailsOpen] = useState(false);

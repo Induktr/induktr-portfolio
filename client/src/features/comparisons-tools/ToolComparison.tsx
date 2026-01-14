@@ -1,7 +1,5 @@
-import { useState } from "react";
 import {
   BarChart,
-  Bar,
   XAxis,
   YAxis,
   CartesianGrid,
@@ -10,71 +8,13 @@ import {
   ResponsiveContainer
 } from "recharts";
 import { useTheme } from "@/shared/lib/theme-provider";
-import { useTranslation } from "react-i18next";
-
-interface ComparisonData {
-  name: string;
-  performance: number;
-  reliability: number;
-  usability: number;
-}
-
-const toolComparisonData: ComparisonData[] = [
-  {
-    name: "BrainMessenger",
-    performance: 95,
-    reliability: 90,
-    usability: 88
-  },
-  {
-    name: "FinanceFlow",
-    performance: 92,
-    reliability: 94,
-    usability: 85
-  },
-  {
-    name: "BuildKo",
-    performance: 88,
-    reliability: 92,
-    usability: 90
-  },
-  {
-    name: "BueatyLove",
-    performance: 86,
-    reliability: 88,
-    usability: 94
-  }
-];
+import { toolComparisonData } from "@/shared/lib/constants";
 
 export function ToolComparison() {
   const { theme } = useTheme();
-  const [activeMetric, setActiveMetric] = useState<string>("performance");
-  const { t } = useTranslation();
-
-  const metrics = [
-    { key: "performance", label: t('tools.comparison.performance') },
-    { key: "reliability", label: t('tools.comparison.reliability') },
-    { key: "usability", label: t('tools.comparison.usability') }
-  ];
 
   return (
     <div className="space-y-6">
-      <div className="flex gap-4">
-        {metrics.map(metric => (
-          <button
-            key={metric.key}
-            onClick={() => setActiveMetric(metric.key)}
-            className={`px-4 py-2 rounded-lg transition-colors ${
-              activeMetric === metric.key
-                ? "bg-primary text-primary-foreground"
-                : "bg-muted hover:bg-muted/80"
-            }`}
-          >
-            {metric.label}
-          </button>
-        ))}
-      </div>
-      
       <div className="h-[400px] w-full">
         <ResponsiveContainer width="100%" height="100%">
           <BarChart data={toolComparisonData}>
@@ -99,11 +39,6 @@ export function ToolComparison() {
               }}
             />
             <Legend />
-            <Bar
-              dataKey={activeMetric}
-              fill="var(--primary)"
-              radius={[4, 4, 0, 0]}
-            />
           </BarChart>
         </ResponsiveContainer>
       </div>

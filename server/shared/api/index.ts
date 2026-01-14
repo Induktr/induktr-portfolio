@@ -4,15 +4,15 @@ import {
   Response,
   NextFunction,
 } from 'express';
-import handleEnvCheck from './env-check';
-import handleSendLead from './send-lead';
+import { handleEnvCheck } from './env-check';
+import { handleSendLead } from './send-lead';
 import { log } from '../../vite';
 
 const logWithTimestamp = (level: string, message: string, error?: any) => {
   log(`${level.toUpperCase()}: ${message} ${error ? JSON.stringify(error) : ''}`, 'API');
 };
 
-const router = Router();
+const router = Router(); 
 
 router.use((err: any, req: Request, res: Response, next: NextFunction) => {
   if (err instanceof SyntaxError && 'body' in err) {

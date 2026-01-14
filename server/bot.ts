@@ -1,18 +1,15 @@
 import TelegramBot from "node-telegram-bot-api";
-import { storage } from "./storage";
+
 import enData from "../client/src/shared/locales/en.json";
 import ruData from "../client/src/shared/locales/ru.json";
 import uaData from "../client/src/shared/locales/ua.json";
 
-import { BOT_TRANSLATIONS } from "./shared/bot_i18n";
-import type { 
-  DocPage, 
-  VideoResource, 
-  RoadmapStage, 
-  ProjectMarketplaceData,
-  Project,
-  Template
-} from "./shared/types";
+import { storage } from "./storage";
+import { BOT_TRANSLATIONS } from "./shared/constants/bot_i18n";
+
+import { Template, ProjectMarketplaceData } from "./shared/types/template"; 
+import { Project } from "@/shared/types/project"; 
+import { DocPage, RoadmapStage, VideoResource } from "./shared/types/content";
 
 class TelegramBotManager {
   private bot: TelegramBot | null = null;
@@ -232,10 +229,10 @@ class TelegramBotManager {
         if (!t) return;
 
         const message = `🛍️ <b>${t.title}</b>\n\n` +
-                        `💰 <b>${lang === 'ru' ? 'Цена' : (lang === 'ua' ? 'Ціна' : 'Price')}:</b> $${t.price}\n\n` +
-                        `📝 <b>${lang === 'ru' ? 'Описание' : (lang === 'ua' ? 'Опис' : 'Desc')}:</b> ${t.description}\n\n` +
-                        `🛠️ <b>${lang === 'ru' ? 'Стек' : (lang === 'ua' ? 'Стек' : 'Stack')}:</b> ${t.stack.join(", ")}\n\n` +
-                        `✨ <b>${lang === 'ru' ? 'Фичи' : (lang === 'ua' ? 'Фічі' : 'Features')}:</b>\n${t.features.map((f: string) => `• ${f}`).join("\n")}`;
+        `💰 <b>${lang === 'ru' ? 'Цена' : (lang === 'ua' ? 'Ціна' : 'Price')}:</b> $${t.price}\n\n` +
+        `📝 <b>${lang === 'ru' ? 'Описание' : (lang === 'ua' ? 'Опис' : 'Desc')}:</b> ${t.description}\n\n` +
+        `🛠️ <b>${lang === 'ru' ? 'Стек' : (lang === 'ua' ? 'Стек' : 'Stack')}:</b> ${t.stack.join(", ")}\n\n` +
+        `✨ <b>${lang === 'ru' ? 'Фичи' : (lang === 'ua' ? 'Фічі' : 'Features')}:</b>\n${t.features.map((f: string) => `• ${f}`).join("\n")}`;
 
         const inline_keyboard = [
           [
@@ -378,10 +375,10 @@ class TelegramBotManager {
         if (!p) return;
 
         const message = `🚀 <b>${p.title}</b>\n\n` +
-                        `📍 <b>${lang === 'ru' ? 'Статус' : (lang === 'ua' ? 'Статус' : 'Status')}:</b> ${p.status}\n` +
-                        `🏷️ <b>${lang === 'ru' ? 'Категории' : (lang === 'ua' ? 'Категорії' : 'Cats')}:</b> ${p.categories.join(", ")}\n\n` +
-                        `📝 <b>${lang === 'ru' ? 'О проекте' : (lang === 'ua' ? 'Про проєкт' : 'About')}:</b> ${p.description}\n\n` +
-                        `🛠️ <b>${lang === 'ru' ? 'Стек' : (lang === 'ua' ? 'Стек' : 'Stack')}:</b> ${p.techStack.join(", ")}`;
+        `📍 <b>${lang === 'ru' ? 'Статус' : (lang === 'ua' ? 'Статус' : 'Status')}:</b> ${p.status}\n` +
+        `🏷️ <b>${lang === 'ru' ? 'Категории' : (lang === 'ua' ? 'Категорії' : 'Cats')}:</b> ${p.categories.join(", ")}\n\n` +
+        `📝 <b>${lang === 'ru' ? 'О проекте' : (lang === 'ua' ? 'Про проєкт' : 'About')}:</b> ${p.description}\n\n` +
+        `🛠️ <b>${lang === 'ru' ? 'Стек' : (lang === 'ua' ? 'Стек' : 'Stack')}:</b> ${p.techStack.join(", ")}`;
 
         await this.bot?.sendMessage(chatId, message, {
           parse_mode: "HTML",
@@ -494,7 +491,9 @@ class TelegramBotManager {
       const isProcess = data.startsWith("process_");
       
       if (!isApprove && !isProcess) {
-        await this.bot?.answerCallbackQuery(query.id);
+        if(this.bot) {
+          await this.bot.answerCallbackQuery(query.id);
+        }
         return;
       }
 
@@ -502,7 +501,9 @@ class TelegramBotManager {
       const lead = await storage.getLead(orderId);
 
       if (!lead) {
-        await this.bot?.answerCallbackQuery(query.id, { text: "❌ Order not found" });
+        if(this.bot) {
+          await this.bot.answerCallbackQuery(query.id, { text: "❌ Order not found" });
+        }
         return;
       }
 
@@ -630,7 +631,7 @@ class TelegramBotManager {
         try {
           await this.sendNotification(lead.telegramChatId, clientNotification);
           this.bot?.sendMessage(chatId, `✅ Sent to client #${orderId}.`);
-        } catch (error) {
+        } catch {
           this.bot?.sendMessage(chatId, `❌ Send error.`);
         }
         return;
@@ -655,7 +656,9 @@ class TelegramBotManager {
             await this.bot?.sendMessage(adminId, adminNotification, { parse_mode: "HTML" });
             this.bot?.sendMessage(chatId, await this.t(chatId, "msg_sent"), { parse_mode: "HTML" });
           } catch (error) {
-            console.error("Failed to forward client message", error);
+            if(error instanceof Error) {
+              console.error("Failed to forward client message", error);
+            }
           }
         }
         return;
@@ -702,7 +705,9 @@ class TelegramBotManager {
     try {
       await this.bot.sendMessage(telegramChatId, message, { parse_mode: "HTML" });
     } catch (error) {
-      console.error(`Failed to send Telegram notification to ${telegramChatId}`, error);
+      if(error instanceof Error) {
+        console.error(`Failed to send Telegram notification to ${telegramChatId}`, error);
+      }
     }
   }
 }

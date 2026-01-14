@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useTranslation } from "react-i18next";
@@ -23,41 +22,26 @@ import { Button } from "@/shared/ui/button";
 import { Info, Copy, CheckCircle2 } from "lucide-react";
 import { LeadSchema, type Lead } from "../../../../server/shared/schemas/lead.schema";
 import { apiRequest } from "@/shared/lib/queryClient";
-
-interface PurchaseDialogProps {
-  template: {
-    id: string;
-    title: string;
-    price: number;
-  } | null;
-  onClose: () => void;
-  onSuccess: (orderId: number, accessCode: string) => void;
-}
+import { PurchaseDialogProps } from "@/shared/types/project";
+import { useClipboard } from "@/shared/hooks/useClipboard";
 
 export function PurchaseDialog({ template, onClose, onSuccess }: PurchaseDialogProps) {
   const { t } = useTranslation();
   const { toast } = useToast();
-  const [copied, setCopied] = useState<string | null>(null);
+  const { copied, copyToClipboard } = useClipboard();
 
   const form = useForm<Lead>({
     resolver: zodResolver(LeadSchema),
     defaultValues: {
       name: "",
       contact: "",
-      projectType: "Other" as any,
+      projectType: "Other",
       budget: template?.price.toString() || "0",
       orderType: "template",
       templateId: template?.id || "",
       description: `Purchase of template: ${template?.title}`,
     },
   });
-
-  const copyToClipboard = (text: string, type: string) => {
-    navigator.clipboard.writeText(text);
-    setCopied(type);
-    setTimeout(() => setCopied(null), 2000);
-    toast({ title: "Copied to clipboard" });
-  };
 
   const onSubmit = async (data: Lead) => {
     try {

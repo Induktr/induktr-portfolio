@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { HoverCard, HoverCardContent, HoverCardTrigger } from '@/shared/ui/hover-card';
 import { 
   Castle, 
   Zap, 
@@ -10,16 +9,9 @@ import {
   RotateCw 
 } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
+import { MissionSegment } from '@/shared/types/mission';
 
-interface MissionSegment {
-  id: string;
-  tag: string;
-  phrase: string;
-  icon: React.ReactNode;
-  color: string;
-}
-
-export function MissionWheel() {
+export const MissionWheel = () => {
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
   const [isRotating, setIsRotating] = useState(false);
   const { t } = useTranslation();

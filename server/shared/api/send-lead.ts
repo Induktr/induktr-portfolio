@@ -2,7 +2,7 @@ import type { Request, Response } from "express";
 import { LeadSchema } from "../schemas/lead.schema";
 import { storage } from "../../storage";
 
-export default async function handleSendLead(req: Request, res: Response) {
+export const handleSendLead = async (req: Request, res: Response) => {
   try {
     const leadData = LeadSchema.parse(req.body);
     const newLead = await storage.createLead(leadData);

@@ -7,32 +7,16 @@ import { Check, ShoppingCart, Rocket, Code2, Layers, FileText, ArrowLeft, Monito
 import { MarkdownViewer } from "@/shared/ui/MarkdownViewer";
 import { useTranslation } from "react-i18next";
 import { Link } from "wouter";
-import type { DocPage, VideoResource, MarketplaceStage, ProjectMarketplaceData } from "@/shared/types/marketplace";
-
-interface Template {
-  id: string;
-  title: string;
-  description: string;
-  price: number;
-  stack: string[];
-  features: string[];
-  gradient: string;
-}
-
-interface ProductDetailsDialogProps {
-  template: Template | null;
-  isOpen: boolean;
-  onClose: () => void;
-  onBuy: (template: Template) => void;
-}
+import type { DocPage, ProjectMarketplaceData } from "@/shared/types/marketplace";
+import { ProductDetailsDialogProps, StateView } from "@/shared/types/product";
+import { getYouTubeId, getThumbnail } from "@/shared/api/youtube";
 
 export function ProductDetailsDialog({ template, isOpen, onClose, onBuy }: ProductDetailsDialogProps) {
   const { t } = useTranslation();
-  const [view, setView] = useState<"overview" | "docs_list" | "docs_reading" | "roadmap" | "videos">("overview");
+  const [view, setView] = useState<StateView>("overview");
   const [currentDoc, setCurrentDoc] = useState<DocPage | null>(null);
   const [playingVideo, setPlayingVideo] = useState<string | null>(null);
 
-  // Reset view when template changes or dialog opens
   useEffect(() => {
     if (isOpen) {
       setView("overview");
@@ -58,18 +42,6 @@ export function ProductDetailsDialog({ template, isOpen, onClose, onBuy }: Produ
   const handleBackToDocs = () => {
     setCurrentDoc(null);
     setView("docs_list");
-  };
-
-  const getYouTubeId = (url: string) => {
-    const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
-    const match = url.match(regExp);
-    return (match && match[2].length === 11) ? match[2] : null;
-  };
-
-  const getThumbnail = (url: string) => {
-    const id = getYouTubeId(url);
-    if (!id) return null;
-    return `https://img.youtube.com/vi/${id}/mqdefault.jpg`;
   };
 
   const renderContent = () => {

@@ -10,19 +10,10 @@ import {
 import { Globe } from "lucide-react";
 
 export function LanguageSwitcher() {
-  const { i18n, t } = useTranslation();
+  const { i18n } = useTranslation();
 
   const handleLanguageChange = (value: string) => {
     i18n.changeLanguage(value);
-  };
-
-  const getLanguageLabel = (lng: string) => {
-    switch (lng) {
-      case 'en': return 'EN';
-      case 'ru': return 'RU';
-      case 'ua': return 'UA';
-      default: return 'EN';
-    }
   };
 
   return (

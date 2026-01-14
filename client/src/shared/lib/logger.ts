@@ -1,8 +1,4 @@
-/**
- * Модуль для логирования с временными метками
- */
-
-type LogLevel = 'debug' | 'info' | 'warn' | 'error';
+import { LogLevel } from "../types/logs";
 
 /**
  * Логирует сообщение с временной меткой

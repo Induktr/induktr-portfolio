@@ -1,24 +1,20 @@
-import { motion, AnimatePresence } from 'framer-motion';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
+import { Button } from '@/shared/ui/button';
+import { Card } from '@/shared/ui/card';
 import { 
   MousePointer2, 
   Search, 
   CheckCircle2, 
   ChevronRight, 
   ChevronLeft,
-  Layout,
   Globe,
-  Plus
 } from 'lucide-react';
-import type { ProjectUsageStep } from '@/shared/types/project';
-import { Button } from '@/shared/ui/button';
-import { Card } from '@/shared/ui/card';
 
-interface ProjectUsageProps {
-  steps: ProjectUsageStep[];
-}
+import { motion, AnimatePresence } from 'framer-motion';
 
-export function ProjectUsage({ steps }: ProjectUsageProps) {
+import { ProjectUsageProps } from '@/shared/types/project';
+
+export const ProjectUsage = ({ steps }: ProjectUsageProps) => {
   const [currentStep, setCurrentStep] = useState(0);
   
   if (!steps || steps.length === 0) {
