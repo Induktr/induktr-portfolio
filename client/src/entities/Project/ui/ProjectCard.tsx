@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link } from "wouter";
 import { useTranslation } from "react-i18next";
 import { Card, CardContent, CardHeader, CardTitle } from "@/shared/ui/card";
 import { Badge } from "@/shared/ui/badge";
@@ -77,7 +77,7 @@ export const ProjectCard = ({ project }: ProjectCardProps) => {
                 className="h-9 w-9"
               >
                 <Link
-                  to={project.links.github}
+                  href={project.links.github}
                   target="_blank"
                   rel="noopener noreferrer"
                 >
@@ -95,7 +95,7 @@ export const ProjectCard = ({ project }: ProjectCardProps) => {
                 className="h-9 w-9"
               >
                 <Link
-                  to={project.links.live}
+                  href={project.links.live}
                   target="_blank"
                   rel="noopener noreferrer"
                 >
@@ -113,7 +113,7 @@ export const ProjectCard = ({ project }: ProjectCardProps) => {
                 className="h-9 w-9"
               >
                 <Link
-                  to={project.links.srcbook}
+                  href={project.links.srcbook}
                   target="_blank"
                   rel="noopener noreferrer"
                 >
@@ -134,7 +134,7 @@ export const ProjectCard = ({ project }: ProjectCardProps) => {
                 className="h-9 w-9"
               >
                 <Link
-                  to={project.links.cursor}
+                  href={project.links.cursor}
                   target="_blank"
                   rel="noopener noreferrer"
                 >

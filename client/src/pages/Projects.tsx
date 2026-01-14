@@ -12,10 +12,10 @@ export const Projects = () => {
   const projectsDataRaw = t('projectsData', { returnObjects: true });
   
   const PROJECTS = useMemo(() => {
-    if (!projectsDataRaw || typeof projectsDataRaw !== 'object' || Array.isArray(projectsDataRaw)) {
-      return [] as Project[];
+    if (projectsDataRaw && typeof projectsDataRaw === 'object' && !Array.isArray(projectsDataRaw)) {
+      return Object.values(projectsDataRaw) as Project[];
     }
-    return Object.values(projectsDataRaw) as Project[];
+    return [] as Project[];
   }, [projectsDataRaw]);
 
   const categories = useMemo(() => [

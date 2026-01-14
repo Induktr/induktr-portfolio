@@ -185,6 +185,14 @@
         "communication": "Communication Tools",
         "ai": "AI & Automation",
         "trading": "Trading Systems"
+      },
+      "descriptions": {
+        "web": "Full-cycle web development from layout to complex logic.",
+        "mobile": "Mobile applications for iOS and Android.",
+        "fintech": "Financial systems and payment gateway integrations.",
+        "communication": "Messengers, notification systems and social tools.",
+        "ai": "Artificial Intelligence and Machine Learning solutions.",
+        "trading": "Algorithmic trading bots and market analysis tools."
       }
     },
     "card": {
