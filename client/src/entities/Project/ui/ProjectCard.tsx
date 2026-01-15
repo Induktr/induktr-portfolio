@@ -4,17 +4,19 @@ import { useTranslation } from "react-i18next";
 import { Card, CardContent, CardHeader, CardTitle } from "@/shared/ui/card";
 import { Badge } from "@/shared/ui/badge";
 import { Button } from "@/shared/ui/button";
-import { Github, ExternalLink } from "lucide-react";
+import { ExternalLink, LucideGitFork } from "lucide-react";
 import { ProjectDialog } from "./ProjectDialog";
 
 import { motion } from "framer-motion";
 
 import type { ProjectCardProps } from "@/shared/types/project";
 import { getStatusColor } from "@/shared/lib/constants";
+import { useExtraObj } from "@/shared/hooks/useExtraObj";
 
 export const ProjectCard = ({ project }: ProjectCardProps) => {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const { t } = useTranslation();
+  const [key, value] = useExtraObj(project.links);
 
   return (
     <>
@@ -69,82 +71,26 @@ export const ProjectCard = ({ project }: ProjectCardProps) => {
           </Button>
           
           <div className="flex gap-2">
-            {project.links.github && (
-              <Button
-                variant="outline"
-                size="icon"
-                asChild
-                className="h-9 w-9"
+            <Button
+              variant="outline"
+              size="icon"
+              asChild
+              className="h-9 w-9"
+            >
+              <a
+                href={value}
+                target="_blank"
+                rel="noopener noreferrer"
               >
-                <Link
-                  href={project.links.github}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <Github className="h-4 w-4" />
-                  <span className="sr-only">GitHub</span>
-                </Link>
-              </Button>
-            )}
-            
-            {project.links.live && (
-              <Button
-                variant="outline"
-                size="icon"
-                asChild
-                className="h-9 w-9"
-              >
-                <Link
-                  href={project.links.live}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
+                {key === "github" && (
+                  <LucideGitFork className="h-4 w-4" />
+                )}
+                {key === "live" && (
                   <ExternalLink className="h-4 w-4" />
-                  <span className="sr-only">{t('projects.card.liveDemo')}</span>
-                </Link>
-              </Button>
-            )}
-            
-            {project.links.srcbook && (
-              <Button
-                variant="outline"
-                size="icon"
-                asChild
-                className="h-9 w-9"
-              >
-                <Link
-                  href={project.links.srcbook}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <svg className="h-4 w-4" viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M4 4v16h16V4H4zm2 14V6h12v12H6z" />
-                    <path d="M8 8h8v2H8zM8 11h8v2H8zM8 14h5v2H8z" />
-                  </svg>
-                  <span className="sr-only">Srcbook</span>
-                </Link>
-              </Button>
-            )}
-            
-            {project.links.cursor && (
-              <Button
-                variant="outline"
-                size="icon"
-                asChild
-                className="h-9 w-9"
-              >
-                <Link
-                  href={project.links.cursor}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <svg className="h-4 w-4" viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M13.92 9.5L9.5 4.5V9.5h4.42zm-5.42 1v10l10-5-10-5z" />
-                  </svg>
-                  <span className="sr-only">Cursor</span>
-                </Link>
-              </Button>
-            )}
+                )}
+                <span className="sr-only">GitHub</span>
+              </a>
+            </Button>
           </div>
         </div>
       </Card>

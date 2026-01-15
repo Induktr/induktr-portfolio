@@ -30,8 +30,6 @@ export interface ProjectRoadmapStage {
 export interface ProjectLinks {
   github?: string;
   live?: string;
-  srcbook?: string;
-  cursor?: string;
 }
 
 export interface AdditionalTechGroup {
