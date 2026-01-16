@@ -38,7 +38,6 @@ import { CLOUD_DOCS_BASE_URL } from "@/shared/lib/constants";
 
 import type { ProjectGalleryItem } from "@/shared/types/project";
 import type { ProjectDialogProps } from "@/shared/types/project";
-import { useExtraObj } from "@/shared/utils/extraData";
 import { Link } from "wouter";
 
 const markdownComponents = {
@@ -72,7 +71,6 @@ export const ProjectDialog = ({ project, isOpen, onClose }: ProjectDialogProps) 
   const [docContent, setDocContent] = useState<string | null>(null);
   const [currentChapter, setCurrentChapter] = useState<number | null>(null);
   const { t } = useTranslation();
-  const [service, link] = useExtraObj(project.links);
 
   useEffect(() => {
     if (project.docFile && isOpen) {
@@ -512,19 +510,17 @@ export const ProjectDialog = ({ project, isOpen, onClose }: ProjectDialogProps) 
         <DialogFooter className="mt-0 p-6 pt-2 border-t border-white/5 shrink-0">
           <div className="flex flex-wrap gap-3 w-full justify-center md:justify-end">
             <Button variant="outline" className="rounded-full px-6 hover:bg-primary/10 hover:border-primary/50 transition-all font-semibold" asChild>
-              <a href={link} target="_blank" rel="noopener noreferrer">
-                {service === "github" ? (
-                  <>
-                    <Github className="mr-2 h-4 w-4" />
-                    GitHub
-                  </>
-                ) : (
-                  <>
-                    <ExternalLink className="mr-2 h-4 w-4" />
-                    Live Demo
-                  </>
-                )}
-              </a>
+              {project.links.github ? (
+                <Link href={project.links.github} target="_blank" rel="noopener noreferrer">
+                  <Github className="mr-2 h-4 w-4" />
+                  GitHub
+                </Link>
+              ) : project.links.live ?  (
+                <Link href={project.links.live} target="_blank" rel="noopener noreferrer">
+                  <ExternalLink className="mr-2 h-4 w-4" />
+                  Live Demo
+                </Link>
+              ) : null}
             </Button>
           </div>
         </DialogFooter>

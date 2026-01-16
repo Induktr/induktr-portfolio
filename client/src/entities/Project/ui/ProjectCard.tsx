@@ -11,15 +11,10 @@ import { motion } from "framer-motion";
 
 import type { ProjectCardProps } from "@/shared/types/project";
 import { getStatusColor } from "@/shared/lib/constants";
-import { extraData } from "@/shared/utils/extraData";
 
 export const ProjectCard = ({ project }: ProjectCardProps) => {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const { t } = useTranslation();
-
-  const list = ["dsdasdas", "dsadsadada"]
-
-  const link = extraData(list);
 
   return (
     <>
@@ -80,19 +75,25 @@ export const ProjectCard = ({ project }: ProjectCardProps) => {
               asChild
               className="h-9 w-9"
             >
-              <a
-                href={value}
+              {project.links.github ? (
+              <Link
+                href={project.links.github}
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                {key === "github" && (
-                  <LucideGitFork className="h-4 w-4" />
-                )}
-                {key === "live" && (
-                  <ExternalLink className="h-4 w-4" />
-                )}
+                <LucideGitFork className="h-4 w-4" />
                 <span className="sr-only">GitHub</span>
-              </a>
+              </Link>
+              ) : project.links.live ? (
+              <Link
+                href={project.links.live}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <ExternalLink className="h-4 w-4" />
+                <span className="sr-only">Live Demo</span>
+              </Link>
+              ) : null}
             </Button>
           </div>
         </div>
