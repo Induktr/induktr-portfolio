@@ -37,7 +37,7 @@ const PrivacyPage: React.FC = () => {
           </div>
 
           <div className="pt-10 border-t border-white/10">
-            <p>Inquiries: <span className="text-blue-400">admin@induktr.com</span></p>
+            <p>Inquiries: <span className="text-blue-400">nikitavoitenko2020@gmail.com</span></p>
           </div>
         </section>
       </div>
