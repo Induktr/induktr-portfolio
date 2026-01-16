@@ -11,12 +11,15 @@ import { motion } from "framer-motion";
 
 import type { ProjectCardProps } from "@/shared/types/project";
 import { getStatusColor } from "@/shared/lib/constants";
-import { useExtraObj } from "@/shared/hooks/useExtraObj";
+import { extraData } from "@/shared/utils/extraData";
 
 export const ProjectCard = ({ project }: ProjectCardProps) => {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const { t } = useTranslation();
-  const [key, value] = useExtraObj(project.links);
+
+  const list = ["dsdasdas", "dsadsadada"]
+
+  const link = extraData(list);
 
   return (
     <>

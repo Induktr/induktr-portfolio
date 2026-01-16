@@ -38,7 +38,7 @@ import { CLOUD_DOCS_BASE_URL } from "@/shared/lib/constants";
 
 import type { ProjectGalleryItem } from "@/shared/types/project";
 import type { ProjectDialogProps } from "@/shared/types/project";
-import { useExtraObj } from "@/shared/hooks/useExtraObj";
+import { useExtraObj } from "@/shared/utils/extraData";
 import { Link } from "wouter";
 
 const markdownComponents = {

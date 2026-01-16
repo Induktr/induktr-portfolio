@@ -94,6 +94,15 @@ export function Footer() {
               {t('footer.social.linkedin')}
             </a>
           </div>
+          
+          <div className="flex space-x-6 mt-4 md:mt-0">
+            <Link href="/privacy" className="text-xs text-muted-foreground hover:text-primary transition">
+              Privacy Policy
+            </Link>
+            <Link href="/terms" className="text-xs text-muted-foreground hover:text-primary transition">
+              Terms of Service
+            </Link>
+          </div>
         </div>
       </div>
     </footer>

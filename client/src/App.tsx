@@ -14,6 +14,8 @@ import { Marketplace } from "@/pages/Marketplace";
 import FAQ from "@/pages/FAQ";
 import { About } from "@/pages/About";
 import NotFound from "@/pages/not-found";
+import PrivacyPage from "@/pages/PrivacyPage";
+import TermsPage from "@/pages/TermsPage";
 import { Footer } from '@/widget/Footer';
 
 function Router() {
@@ -29,6 +31,8 @@ function Router() {
           <Route path="/tools" component={Tools} />
           <Route path="/marketplace" component={Marketplace} />
           <Route path="/faq" component={FAQ} />
+          <Route path="/privacy" component={PrivacyPage} />
+          <Route path="/terms" component={TermsPage} />
           <Route component={NotFound} />
         </Switch>
       </AnimatePresence>
