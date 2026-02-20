@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useToast } from "@/shared/ui/use-toast";
 
-export function useClipboard() {
+export const useClipboard = () => {
   const [copied, setCopied] = useState<string | null>(null);
   const { toast } = useToast();
 

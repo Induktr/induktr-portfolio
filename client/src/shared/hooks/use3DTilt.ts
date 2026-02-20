@@ -1,3 +1,4 @@
+import { MouseEvent } from "react";
 import { useMotionValue, useSpring, useTransform } from "framer-motion";
 
 export const use3DTilt = () => {
@@ -10,7 +11,7 @@ export const use3DTilt = () => {
   const rotateX = useTransform(mouseY, [-0.5, 0.5], ["7deg", "-7deg"]);
   const rotateY = useTransform(mouseX, [-0.5, 0.5], ["-7deg", "7deg"]);
 
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+  const handleMouseMove = (e: MouseEvent<HTMLDivElement>) => {
     const rect = e.currentTarget.getBoundingClientRect();
     const width = rect.width;
     const height = rect.height;

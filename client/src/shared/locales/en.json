@@ -10,6 +10,11 @@
     "contact": "Contact",
     "about": "About",
     "language": "Language",
+    "selectLang": {
+      "en": "English (EN)",
+      "ua": "Ukraine (UA)",
+      "ru": "Russian (RU)"
+    },
     "close": "Close",
     "faq": "FAQ"
   },
@@ -173,7 +178,52 @@
       "desc": "If you couldn't find the answer you were looking for, feel free to reach out to me directly on Telegram.",
       "telegram": "Chat on Telegram",
       "form": "Contact Form"
-    }
+    },
+    "faqData": [
+      {
+        "category": "General Questions",
+        "items": [
+          {
+            "q": "What is Induktr Portfolio?",
+            "a": "Induktr Portfolio is a boutique digital ecosystem created by @Induktr. It serves as both a showcase of high-end engineering and a marketplace for premium, production-ready templates and AI-powered tools."
+          },
+          {
+            "q": "How does the ordering process work?",
+            "a": "Once you select a template in the Marketplace and click \"Buy\", you will receive payment instructions. After payment, you get an access code. Enter this code in our official Telegram Bot to instantly download the source files and documentation."
+          },
+          {
+            "q": "Can I hire you for a custom project?",
+            "a": "Yes! I specialize in building MVPs, high-performance landings, and AI automations. Fill out the form on the \"Start Project\" page, and I will get back to you with a proposal."
+          }
+        ]
+      },
+      {
+        "category": "Technical Details",
+        "items": [
+          {
+            "q": "What technologies do you use?",
+            "a": "I primarily use Next.js, React, and TypeScript for the frontend, combined with Python (Flask/FastAPI) or Node.js for heavy logic and AI integrations. For styling, Tailwind CSS and Framer Motion are my standards."
+          },
+          {
+            "q": "Are the AI trading tools safe?",
+            "a": "The A.S.T.R.A. and Hunter Bot tools are designed with \"Safety First\" principles. They include risk management modules and use official APIs. However, they are provided as frameworks for your own strategies; always test in testnets/sandbox."
+          }
+        ]
+      },
+      {
+        "category": "Payments & Delivery",
+        "items": [
+          {
+            "q": "Which payment methods are accepted?",
+            "a": "I currently accept USDT (TRC20/ERC20/TON) and direct Bank Card transfers (USD/EUR). Details are provided during the checkout process."
+          },
+          {
+            "q": "Do you offer refunds?",
+            "a": "Due to the digital nature of the products (source code access), I generally do not offer refunds once the files are downloaded. However, I provide full support to ensure the template works as advertised."
+          }
+        ]
+      }
+    ]
   },
   "projects": {
     "categories": {
@@ -198,9 +248,19 @@
     "card": {
       "inDevelopment": "In Development",
       "moreDetails": "More Details",
-      "liveDemo": "Live Demo"
+      "liveDemo": "Live Demo",
+      "additionalLinks": {
+        "github": "GitHub"
+      }
     },
     "dialog": {
+      "titles": {
+        "info": "Info",
+        "map": "Map",
+        "tech": "Tech",
+        "docs": "Docs",
+        "howTo": "How-to"
+      },
       "keyFeatures": "Key Features",
       "tags": "Tags",
       "projectStart": "Project Start",
@@ -242,6 +302,22 @@
     "projects": {
       "title": "Projects",
       "description": "Portfolio of our innovative web developments and technological solutions"
+    },
+    "marketplace": {
+      "fueatersInside": "More features inside...",
+      "buy": "Buy now",
+      "pay": {
+        "success": "🎉 Payment Confirmed!",
+        "desc": "Your order has been registered. I will verify the payment and send your files."
+      },
+      "order": {
+        "id": "Order ID",
+        "accessCode": "Access Code:",
+        "getFiles": {
+          "step": "Get Files in Telegram",
+          "desc": "Get your files instantly in Telegram once payment is verified:"
+        }
+      }
     },
     "tools": {
       "title": "Tools and Technologies",
@@ -1138,9 +1214,62 @@
   ],
   "marketplaceData": {
     "westbud-legacy": {
-      "videos": [],
-      "roadmap": [],
-      "docs": []
+      "videos": [
+        { "id": "walkthrough", "title": "Portal Walkthrough", "description": "Complete overview of the corporate portal features.", "url": "https://youtu.be/CxzbkhB0MNQ", "duration": "3:45", "type": "walkthrough" },
+        { "id": "gallery", "title": "Interactive Gallery", "description": "Deep dive into the 3D gallery and lightbox system.", "url": "https://youtu.be/6Ai82zHEYxQ", "duration": "1:20", "type": "showcase" }
+      ],
+      "roadmap": [
+        {
+          "id": "foundation",
+          "title": "Foundation & Design",
+          "status": "completed",
+          "tasks": [
+            { "label": "<b>Core Setup</b>", "completed": true },
+            { "label": "Vite + React + TypeScript environment", "completed": true },
+            { "label": "BESIX brand colors & Sora font integration", "completed": true },
+            { "label": "<b>Static Layout</b>", "completed": true },
+            { "label": "Sticky Header & Mobile Navigation", "completed": true },
+            { "label": "Hero Slider & Service Sectors Grid", "completed": true },
+            { "label": "About Us section & Corporate Footer", "completed": true }
+          ]
+        },
+        {
+          "id": "logic",
+          "title": "Engineering Logic",
+          "status": "completed",
+          "tasks": [
+            { "label": "<b>Functional Core</b>", "completed": true },
+            { "label": "React Router (/, /projects, /about)", "completed": true },
+            { "label": "Dynamic Project Catalog with filtration logic", "completed": true },
+            { "label": "<b>Wow-Factor</b>", "completed": true },
+            { "label": "3D Tilt Effect on project cards", "completed": true },
+            { "label": "Scrollytelling: Text reveal animations", "completed": true },
+            { "label": "Lightbox Gallery modal system", "completed": true }
+          ]
+        }
+      ],
+      "docs": [
+        {
+          "id": "readme",
+          "title": "README",
+          "content": "<b>Westbud Corporate Portal</b>\n\nHigh-end corporate portal for a major construction player. Focus on maximum load speed, premium design, and user-friendly interface for building showcase.\n\n<b>Key Features:</b>\n• Maximum performance (PageSpeed 95+)\n• 3D visualization of objects\n• Interactive project map\n• Multi-language support (EN/NL)\n• Responsive for all devices"
+        },
+        {
+          "id": "tech",
+          "title": "Tech Stack",
+          "content": "<b>Core Technologies:</b>\n• React + Vite\n• TypeScript\n• Tailwind CSS\n• Framer Motion\n• i18next"
+        },
+        {
+          "id": "design",
+          "title": "Design Colors",
+          "content": "<b>Branding Colors:</b>\n• Primary: BESIX Blue\n• Secondary: Sora White\n• Accent: Construction Orange\n\n<b>Typography:</b>\n• Sora (Main Font)\n• Inter (Fallback)"
+        },
+        {
+          "id": "req",
+          "title": "Requirements Spec",
+          "content": "<b>Functional Requirements:</b>\n• Fast loading across all regions\n• Intuitive project navigation\n• Secure contact form integration"
+        }
+      ]
     }
   },
   "postsData": [

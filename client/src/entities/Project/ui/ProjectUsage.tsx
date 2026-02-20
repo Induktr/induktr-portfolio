@@ -16,14 +16,6 @@ import { ProjectUsageProps } from '@/shared/types/project';
 
 export const ProjectUsage = ({ steps }: ProjectUsageProps) => {
   const [currentStep, setCurrentStep] = useState(0);
-  
-  if (!steps || steps.length === 0) {
-    return (
-      <div className="flex items-center justify-center p-12 text-muted-foreground italic">
-        No simulation data available.
-      </div>
-    );
-  }
 
   const totalSteps = steps.length;
   const nextStep = () => setCurrentStep((prev) => (prev + 1) % totalSteps);

@@ -85,12 +85,14 @@ export function ContactForm() {
       
       form.reset();
     } catch (error) {
-      console.error(error);
-      toast({
-        title: t('contactForm.errorTitle'),
-        description: t('contactForm.errorDesc'),
-        variant: "destructive",
-      });
+      if(error instanceof Error) {
+        console.error(error);
+        toast({
+          title: t('contactForm.errorTitle'),
+          description: t('contactForm.errorDesc'),
+          variant: "destructive",
+        });
+      }
     }
   };
 

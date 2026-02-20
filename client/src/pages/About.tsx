@@ -16,7 +16,6 @@ import {
   SiNextdotjs,
   SiNodedotjs,
   SiHtml5,
-  SiCss3
 } from "react-icons/si";
 import { 
   MapPin, 
@@ -28,26 +27,26 @@ import {
   Award, 
   Target,
   Rocket,
-  Download
+  Download,
+  Plus,
+  Pencil,
+  Trash2
 } from "lucide-react";
 import avatarInduktr from "@/shared/assets/images/avatar-induktr.jpg";
 
-const fadeIn = {
-  initial: { opacity: 0, y: 20 },
-  animate: { opacity: 1, y: 0 },
-  transition: { duration: 0.5 }
-};
-
-const staggerContainer = {
-  animate: {
-    transition: {
-      staggerChildren: 0.1
-    }
-  }
-};
+import { fadeIn, staggerContainer } from "@/shared/constants/animations/about";
+import { useAuth } from "@/shared/hooks/useAuth";
+import { useExperience } from "@/shared/hooks/useExperience";
+import { ExperienceForm } from "@/entities/Experience/ui/ExperienceForm";
+import { useAppDispatch } from "@/shared/lib/store/store";
+import { openModal } from "@/shared/lib/store/slices/uiSlice";
+import { Loader } from "@/shared/ui/Loader";
 
 export const About = () => {
   const { t } = useTranslation();
+  const { user } = useAuth();
+  const { MERGED_EXPERIENCE, isLoading, deleteExperienceMutation } = useExperience();
+  const dispatch = useAppDispatch();
 
   const handleDownloadPDF = () => {
     window.print();
@@ -68,6 +67,12 @@ export const About = () => {
     { name: "Git", icon: <SiGit /> },
     { name: "Figma", icon: <SiFigma /> }
   ];
+
+  const handleDelete = (id: string | number) => {
+    if (confirm("Delete this experience entry?")) {
+      deleteExperienceMutation.mutate(id);
+    }
+  };
 
   return (
     <div className="min-h-screen pt-24 pb-16 px-4 print:p-0 print:pt-0">
@@ -107,12 +112,23 @@ export const About = () => {
         }
       `}</style>
       <div className="container mx-auto max-w-5xl">
-        <div className="flex justify-end mb-8 no-print">
+        <div className="flex justify-end mb-8 no-print gap-4">
+          {user && (
+            <Button variant="outline" className="gap-2" onClick={() => dispatch(openModal({ modalName: "experienceForm" }))}>
+              <Plus className="w-4 h-4" />
+              Add Experience
+            </Button>
+          )}
           <Button onClick={handleDownloadPDF} className="gap-2 shadow-lg shadow-primary/20">
             <Download className="w-4 h-4" />
             {t('common.downloadResume')}
           </Button>
         </div>
+
+        {isLoading && <Loader className="min-h-screen flex items-center justify-center" text="Loading Experience..." variant="primary" />}
+
+        <ExperienceForm />
+
         <motion.div 
           className="grid grid-cols-1 lg:grid-cols-3 gap-8"
           variants={staggerContainer}
@@ -205,24 +221,43 @@ export const About = () => {
                 <Briefcase className="w-6 h-6 text-primary" />
                 <h2 className="text-2xl font-bold">{t('about.experience.title')}</h2>
               </div>
-              {t('about.experience.items', { returnObjects: true }) instanceof Array && 
-               (t('about.experience.items', { returnObjects: true }) as any[]).map((item, index) => (
-                <div key={index} className="relative pl-6 border-l-2 border-primary/20 space-y-4">
-                  <div className="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-primary border-4 border-background" />
-                  <div>
-                    <h3 className="text-xl font-bold text-foreground">{item.role}</h3>
-                    <Badge variant="outline" className="mt-1 text-primary border-primary/30">
-                      {item.period}
-                    </Badge>
-                  </div>
-                  <div className="space-y-4 text-muted-foreground leading-relaxed">
-                    <p>{item.description}</p>
-                    <div className="bg-accent/30 p-4 rounded-xl border border-border/50">
-                      <p className="text-sm italic">{item.catalog}</p>
+              
+              <div className="space-y-8">
+                {MERGED_EXPERIENCE.map((item) => (
+                  <div key={item.slug} className="relative pl-6 border-l-2 border-primary/20 space-y-4 group">
+                    <div className="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-primary border-4 border-background" />
+                    
+                    <div className="flex justify-between items-start">
+                      <div>
+                        <h3 className="text-xl font-bold text-foreground">{item.role}</h3>
+                        <Badge variant="outline" className="mt-1 text-primary border-primary/30">
+                          {item.period}
+                        </Badge>
+                      </div>
+
+                      {user && item.isFromDb && (
+                        <div className="flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                           <Button size="icon" variant="ghost" className="h-8 w-8" onClick={() => dispatch(openModal({ modalName: "experienceForm", editingItem: item }))}>
+                             <Pencil className="w-4 h-4" />
+                           </Button>
+                           <Button size="icon" variant="ghost" className="h-8 w-8 text-destructive" onClick={() => handleDelete(item.id)}>
+                             <Trash2 className="w-4 h-4" />
+                           </Button>
+                        </div>
+                      )}
+                    </div>
+
+                    <div className="space-y-4 text-muted-foreground leading-relaxed">
+                      <p>{item.description}</p>
+                      {item.catalog && (
+                        <div className="bg-accent/30 p-4 rounded-xl border border-border/50">
+                          <p className="text-sm italic">{item.catalog}</p>
+                        </div>
+                      )}
                     </div>
                   </div>
-                </div>
-              ))}
+                ))}
+              </div>
             </motion.section>
 
             {/* Achievements */}
@@ -232,7 +267,8 @@ export const About = () => {
                 <h2 className="text-2xl font-bold">{t('about.achievements.title')}</h2>
               </div>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                {(t('about.achievements.list', { returnObjects: true }) as string[]).map((achievement, index) => (
+                {Array.isArray(t('about.achievements.list', { returnObjects: true })) && 
+                 (t('about.achievements.list', { returnObjects: true }) as string[]).map((achievement, index) => (
                   <Card key={index} className="bg-card/30 border-primary/10 hover:border-primary/30 transition-colors">
                     <CardContent className="pt-6">
                       <div className="flex gap-4">

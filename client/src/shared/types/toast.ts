@@ -3,7 +3,7 @@ import type {
   ToastProps,
 } from "@/shared/ui/toast";
 import { ReactNode } from "react";
-import { actionTypes } from "../lib/constants";
+import { actionTypes } from "../constants/lib/state";
 
 export type ToasterToast = ToastProps & {
   id: string

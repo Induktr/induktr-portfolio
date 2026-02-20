@@ -59,7 +59,10 @@ export interface ProjectUsageStep {
 }
 
 export interface Project {
-  id: number;
+  id: string | number;
+  isFromDb?: boolean;
+  rawDbData?: any; // Full multi-language object from DB
+  slug?: string;
   title: string;
   shortDescription: string;
   description: string;
@@ -94,6 +97,7 @@ export interface PurchaseDialogProps {
     title: string;
     price: number;
   } | null;
+  isOpen: boolean;
   onClose: () => void;
   onSuccess: (orderId: number, accessCode: string) => void;
 }

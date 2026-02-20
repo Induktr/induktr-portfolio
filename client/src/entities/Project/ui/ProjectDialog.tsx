@@ -1,14 +1,18 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
+import { useProjectData } from "@/shared/hooks/useProjectData";
 import { useTranslation } from "react-i18next";
+import { useProjectDocs } from "@/shared/hooks/useProjectDocs";
+import { useProjectStatus, useStringColor } from "@/shared/hooks/useProjectStatus";
+import { useProjectFeatures } from "@/shared/hooks/useProjectFeatures";
+
 import {
-  Dialog,
   DialogContent,
   DialogHeader,
   DialogTitle,
   DialogDescription,
   DialogFooter,
 } from "@/shared/ui/dialog";
-import { ProjectSlider } from "./ProjectSlider";
+import { Gallery } from "./Gallery";
 import { ProjectUsage } from "./ProjectUsage";
 import { Loader, DeferredContent } from "@/shared/ui/Loader";
 import { Badge } from "@/shared/ui/badge";
@@ -30,130 +34,36 @@ import {
 } from "lucide-react";
 import { Card, CardContent } from "@/shared/ui/card";
 import { ScrollArea } from "@/shared/ui/scroll-area";
-
-import ReactMarkdown from 'react-markdown';
-import remarkGfm from 'remark-gfm';
 import { cn } from "@/shared/lib/utils";
-import { CLOUD_DOCS_BASE_URL } from "@/shared/lib/constants";
-
-import type { ProjectGalleryItem } from "@/shared/types/project";
-import type { ProjectDialogProps } from "@/shared/types/project";
+import { Modal } from "@/shared/ui/modal";
 import { Link } from "wouter";
 
-const markdownComponents = {
-  h1: ({node, ...props}: any) => <h1 className="text-3xl font-bold text-primary mb-6 pb-2 border-b border-white/10" {...props} />,
-  h2: ({node, ...props}: any) => <h2 className="text-2xl font-bold text-foreground mt-8 mb-4 flex items-center gap-2" {...props} />,
-  table: ({node, ...props}: any) => <div className="overflow-x-auto my-6 rounded-lg border border-white/10"><table className="w-full text-left bg-black/20" {...props} /></div>,
-  th: ({node, ...props}: any) => <th className="bg-primary/10 p-3 font-bold text-primary border-b border-white/10" {...props} />,
-  td: ({node, ...props}: any) => <td className="p-3 border-b border-white/5" {...props} />,
-  blockquote: ({node, ...props}: any) => <blockquote className="border-l-4 border-primary pl-4 py-1 italic bg-primary/5 rounded-r my-4" {...props} />,
-  code: ({node, className, children, ...props}: any) => {
-    const match = /language-(\w+)/.exec(className || '')
-    return !String(children).includes('\n') ? (
-      <code className="bg-primary/20 text-primary px-1.5 py-0.5 rounded text-sm font-mono" {...props}>
-        {children}
-      </code>
-    ) : (
-      <div className="relative group">
-        <div className="absolute top-2 right-2 text-xs text-muted-foreground bg-black/50 px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity">
-          {match?.[1] || 'text'}
-        </div>
-        <code className="block bg-black/40 p-4 rounded-lg my-4 overflow-x-auto text-sm font-mono border border-white/5" {...props}>
-          {children}
-        </code>
-      </div>
-    )
-  }
-};
+import type { ProjectDialogProps } from "@/shared/types/project";
+
+import { ProjectMarkdown } from "@/shared/ui/ProjectMarkdown";
 
 export const ProjectDialog = ({ project, isOpen, onClose }: ProjectDialogProps) => {
   const [activeTab, setActiveTab] = useState("overview");
-  const [docContent, setDocContent] = useState<string | null>(null);
-  const [currentChapter, setCurrentChapter] = useState<number | null>(null);
   const { t } = useTranslation();
 
-  useEffect(() => {
-    if (project.docFile && isOpen) {
-      fetch(project.docFile)
-        .then(res => {
-          if (!res.ok) throw new Error('Local doc not found');
-          return res.text();
-        })
-        .then(text => setDocContent(text))
-        .catch(() => {
-          // Fallback to cloud
-          const cloudUrl = `${CLOUD_DOCS_BASE_URL}${project.docFile}`;
-          fetch(cloudUrl)
-            .then(res => res.text())
-            .then(text => setDocContent(text))
-            .catch(err => console.error("Cloud fallback failed", err));
-        });
-    } else {
-      setDocContent(null);
-    }
-  }, [project.docFile, isOpen]);
+  const {
+    currentChapter,
+    setCurrentChapter,
+    docContent,
+  } = useProjectDocs(project, isOpen, activeTab);
 
-  useEffect(() => {
-    if (currentChapter !== null && project.docs?.[currentChapter]?.file && isOpen) {
-      setDocContent(null); // Reset content while loading
-      const localPath = project.docs[currentChapter].file!;
-      fetch(localPath)
-        .then(res => {
-          if (!res.ok) throw new Error('Local chapter not found');
-          return res.text();
-        })
-        .then(text => setDocContent(text))
-        .catch(() => {
-          // Fallback to cloud
-          const cloudUrl = `${CLOUD_DOCS_BASE_URL}${localPath}`;
-          fetch(cloudUrl)
-            .then(res => res.text())
-            .then(text => setDocContent(text))
-            .catch(err => console.error("Cloud chapter fallback failed", err));
-        });
-    }
-  }, [currentChapter, project.docs, isOpen]);
+  const { getStatusColor, getStatusLabel } = useProjectStatus();
+  const { getColorFromString } = useStringColor();
 
-  // Reset documentation state when tab changes or dialog closes
-  useEffect(() => {
-    if (activeTab !== "docs" || !isOpen) {
-      setCurrentChapter(null);
-      if (!project.docFile) setDocContent(null);
-    }
-  }, [activeTab, isOpen, project.docFile]);
+  const { arrays: cats } = useProjectData({}, project.categories);
+  const { entries } = useProjectData(project.links, []);
 
-  if (!isOpen) return null;
+  const { hasUsage } = useProjectFeatures(project);
 
-  const getStatusColor = (status: string) => {
-    switch (status) {
-      case "completed":
-        return "bg-green-500";
-      case "active":
-        return "bg-blue-500";
-      case "upcoming":
-        return "bg-amber-500";
-      case "in-development":
-        return "bg-cyan-500";
-      default:
-        return "bg-gray-500";
-    }
-  };
-
-  const getStatusLabel = (status: string) => {
-      if (status === "in-development") return t('projects.dialog.status.inDevelopment');
-      return t(`projects.dialog.status.${status}`) || status;
-  };
-
-  // Construct gallery from legacy fields if gallery array is missing
-  const galleryItems: ProjectGalleryItem[] = project.gallery || [
-    ...(project.video ? [{ type: 'video' as const, url: project.video, title: project.title }] : []),
-    { type: 'image' as const, url: project.image, title: project.title }
-  ];
-
-  const hasUsage = project.usage && project.usage.length > 0;
+  if (!project) return null;
 
   return (
-    <Dialog open={isOpen} onOpenChange={(open) => !open && onClose()}>
+    <Modal isOpen={isOpen} onClose={onClose}>
       <DialogContent className="max-w-5xl w-[95vw] h-[90vh] overflow-hidden flex flex-col bg-background/95 backdrop-blur-xl border-white/10 p-0 gap-0">
         <div className="p-6 pb-2 shrink-0">
           <DialogHeader className="space-y-4">
@@ -163,7 +73,7 @@ export const ProjectDialog = ({ project, isOpen, onClose }: ProjectDialogProps) 
                   {project.title}
                 </DialogTitle>
                 <div className="flex flex-wrap gap-2 pt-1">
-                  {project.categories?.map(cat => (
+                  {cats.map(cat => (
                     <Badge key={cat} variant="secondary" className="bg-primary/10 text-primary border-primary/20 capitalize">
                       {cat}
                     </Badge>
@@ -177,7 +87,9 @@ export const ProjectDialog = ({ project, isOpen, onClose }: ProjectDialogProps) 
               </Badge>
             </div>
             <DialogDescription className="text-lg text-muted-foreground/80 leading-relaxed italic">
-              {t(`projectsData.${project.id}.description`, project.description)}
+              {project.isFromDb 
+                ? project.description 
+                : t(`projectsData.${project.id.toString().replace('static-', '')}.description`, project.description)}
             </DialogDescription>
           </DialogHeader>
         </div>
@@ -194,29 +106,29 @@ export const ProjectDialog = ({ project, isOpen, onClose }: ProjectDialogProps) 
           )}>
             <TabsTrigger value="overview" className="gap-2">
               <Layout className="w-4 h-4" />
-              <span className="hidden sm:inline">{t('projects.dialog.tabs.overview')}</span>
-              <span className="sm:hidden text-[10px]">Info</span>
+              <span className="hidden sm:inline">{t('projects.dialog.tabs.overview', { returnObjects: false })}</span>
+              <span className="sm:hidden text-[10px]">{t('projects.dialog.titles.overview', { returnObjects: false })}</span>
             </TabsTrigger>
             <TabsTrigger value="roadmap" className="gap-2">
               <Milestone className="w-4 h-4" />
               <span className="hidden sm:inline">{t('projects.dialog.tabs.roadmap', 'Roadmap')}</span>
-              <span className="sm:hidden text-[10px]">Map</span>
+              <span className="sm:hidden text-[10px]">{t('projects.dialog.titles.roadmap', 'Roadmap')}</span>
             </TabsTrigger>
             <TabsTrigger value="tech" className="gap-2">
               <Cpu className="w-4 h-4" />
-              <span className="hidden sm:inline">{t('projects.dialog.tabs.tech')}</span>
-              <span className="sm:hidden text-[10px]">Tech</span>
+              <span className="hidden sm:inline">{t('projects.dialog.tabs.tech', 'Tech')}</span>
+              <span className="sm:hidden text-[10px]">{t('projects.dialog.titles.tech', 'Tech')}</span>
             </TabsTrigger>
             <TabsTrigger value="docs" className="gap-2">
               <FileText className="w-4 h-4" />
               <span className="hidden sm:inline">{t('projects.dialog.tabs.docs', 'Docs')}</span>
-              <span className="sm:hidden text-[10px]">Docs</span>
+              <span className="sm:hidden text-[10px]">{t('projects.dialog.titles.docs', 'Docs')}</span>
             </TabsTrigger>
             {hasUsage && (
               <TabsTrigger value="usage" className="gap-2">
                 <BookOpen className="w-4 h-4" />
                 <span className="hidden sm:inline">{t('projects.dialog.tabs.usage', 'Guide')}</span>
-                <span className="sm:hidden text-[10px]">How-to</span>
+                <span className="sm:hidden text-[10px]">{t('projects.dialog.titles.usage', 'Guide')}</span>
               </TabsTrigger>
             )}
           </TabsList>
@@ -228,7 +140,7 @@ export const ProjectDialog = ({ project, isOpen, onClose }: ProjectDialogProps) 
                   fallback={<div className="h-[60vh] w-full flex items-center justify-center"><Loader size="lg" text="preparing overview..." /></div>}
                   delay={150}
                 >
-                  <ProjectSlider items={galleryItems} className="aspect-video shadow-2xl" />
+                  <Gallery project={project} className="aspect-video shadow-2xl" />
 
                   <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
                     <div className="lg:col-span-2 space-y-6">
@@ -238,7 +150,7 @@ export const ProjectDialog = ({ project, isOpen, onClose }: ProjectDialogProps) 
                           {t('projects.dialog.keyFeatures')}
                         </h3>
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                          {project.features?.map((feature, index) => (
+                          {project.features?.map((feature: string, index: number) => (
                             <Card key={index} className="bg-card/50 border-white/5 hover:border-primary/20 transition-all group">
                               <CardContent className="p-4 flex gap-3">
                                 <div className="w-1.5 h-1.5 rounded-full bg-primary mt-2 shrink-0 group-hover:scale-150 transition-transform" />
@@ -255,13 +167,17 @@ export const ProjectDialog = ({ project, isOpen, onClose }: ProjectDialogProps) 
                         <h4 className="text-sm font-bold text-muted-foreground uppercase tracking-widest mb-3">
                           {t('projects.dialog.tags')}
                         </h4>
-                        <div className="flex flex-wrap gap-2">
-                          {project.tags?.map(tag => (
-                            <Badge key={tag} variant="outline" className="text-[10px] px-2 py-0">
-                              {tag}
-                            </Badge>
-                          ))}
-                        </div>
+                         <div className="flex flex-wrap gap-2">
+                           {project.tags?.map((tag: string) => (
+                             <Badge 
+                               key={tag} 
+                               variant="outline" 
+                               className={cn("text-[10px] px-2 py-0 border-none", getColorFromString(tag))}
+                             >
+                               {tag}
+                             </Badge>
+                           ))}
+                         </div>
                       </div>
 
                       <div>
@@ -297,18 +213,18 @@ export const ProjectDialog = ({ project, isOpen, onClose }: ProjectDialogProps) 
                           {stage.goal}
                         </p>
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-4">
-                          {stage.tasks.map((task, taskIdx) => (
+                          {stage.tasks.map((task, taskIdx: number) => (
                             <div key={taskIdx} className="space-y-3">
                               <h4 className="font-bold flex items-center gap-2 text-foreground/90">
                                 <List className="w-4 h-4 text-primary" />
                                 {task.title}
                               </h4>
                               <ul className="space-y-2">
-                                {task.checklists.map((checklist, checkIdx) => (
+                                {task.checklists.map((checklist, checkIdx: number) => (
                                   <li key={checkIdx} className="space-y-1">
                                     <div className="text-sm font-semibold opacity-70 mb-1">{checklist.title}</div>
                                     <div className="space-y-1 ml-2">
-                                      {checklist.items.map((item, itemIdx) => (
+                                      {checklist.items.map((item: string, itemIdx: number) => (
                                         <div key={itemIdx} className="flex items-start gap-2 text-xs text-muted-foreground leading-relaxed">
                                           <CheckSquare className="w-3 h-3 mt-0.5 text-primary shrink-0" />
                                           {item}
@@ -333,10 +249,10 @@ export const ProjectDialog = ({ project, isOpen, onClose }: ProjectDialogProps) 
                   <div className="md:col-span-3">
                     <h3 className="text-lg font-bold mb-4 flex items-center gap-2">
                       <Cpu className="w-5 h-5 text-primary" />
-                      {t('projects.dialog.mainStack')}
+                      {t('projects.dialog.mainStack', 'Main Stack')}
                     </h3>
                     <div className="flex flex-wrap gap-2">
-                      {project.techStack?.map(tech => (
+                      {project.techStack?.map((tech: string) => (
                         <Badge key={tech} className="bg-primary/20 text-primary border-primary/30 px-4 py-1">
                           {tech}
                         </Badge>
@@ -353,7 +269,7 @@ export const ProjectDialog = ({ project, isOpen, onClose }: ProjectDialogProps) 
                             {group.title}
                           </h4>
                           <div className="flex flex-wrap gap-2">
-                            {group.items.map(item => (
+                            {group.items.map((item: string) => (
                               <Badge key={item} variant="secondary" className="text-[10px] bg-background/50">
                                 {item}
                               </Badge>
@@ -371,12 +287,10 @@ export const ProjectDialog = ({ project, isOpen, onClose }: ProjectDialogProps) 
                    <ScrollArea className="h-[60vh] pr-4">
                     <div className="prose prose-invert max-w-none p-6 bg-card/30 rounded-xl border border-white/5">
                       {docContent ? (
-                        <ReactMarkdown 
-                          remarkPlugins={[remarkGfm]}
-                          components={markdownComponents}
-                        >
-                          {docContent}
-                        </ReactMarkdown>
+                        <ProjectMarkdown 
+                          content={docContent}
+                          className="p-6 bg-card/30 rounded-xl border border-white/5"
+                        />
                       ) : (
                         <div className="flex items-center justify-center py-20">
                           <Loader size="lg" text="fetching documentation..." />
@@ -395,7 +309,7 @@ export const ProjectDialog = ({ project, isOpen, onClose }: ProjectDialogProps) 
                           </h3>
                         </div>
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                          {project.docs.map((chapter, idx) => (
+                          {project.docs.map((chapter, idx: number) => (
                             <Card 
                               key={idx} 
                               className="bg-card/30 border-white/5 overflow-hidden group hover:border-primary/30 transition-all cursor-pointer"
@@ -414,19 +328,17 @@ export const ProjectDialog = ({ project, isOpen, onClose }: ProjectDialogProps) 
                                     </span>
                                     {chapter.title}
                                   </h3>
-                                  {(chapter.file || chapter.content) && (
-                                    <ArrowLeft className="w-4 h-4 rotate-180 text-muted-foreground group-hover:text-primary transition-colors" />
-                                  )}
+                                  <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center text-primary opacity-0 group-hover:opacity-100 transition-all">
+                                    <ArrowLeft className="w-4 h-4 rotate-180" />
+                                  </div>
                                 </div>
-                                {chapter.goal && (
-                                  <p className="text-xs text-muted-foreground line-clamp-2 italic">
-                                    {chapter.goal}
-                                  </p>
-                                )}
+                                <p className="text-sm text-muted-foreground line-clamp-2">
+                                  {chapter.goal}
+                                </p>
                                 {chapter.items && (
-                                  <ul className="space-y-1.5 pt-2">
-                                    {chapter.items.slice(0, 2).map((item, i) => (
-                                      <li key={i} className="flex items-start gap-2 text-[11px] text-muted-foreground/70 line-clamp-1">
+                                  <ul className="flex flex-wrap gap-2 mt-2">
+                                    {chapter.items.slice(0, 2).map((item: string, i: number) => (
+                                      <li key={i} className="text-[10px] bg-primary/10 text-primary-foreground/70 px-2 py-0.5 rounded-full flex items-center gap-1">
                                         <Circle className="w-1 h-1 mt-1.5 bg-primary/40 rounded-full shrink-0" />
                                         {item}
                                       </li>
@@ -461,21 +373,23 @@ export const ProjectDialog = ({ project, isOpen, onClose }: ProjectDialogProps) 
                          </div>
                          <ScrollArea className="h-[55vh] pr-4">
                             <div className="prose prose-invert max-w-none p-8 bg-card/30 rounded-2xl border border-white/5 shadow-2xl">
-                              {project.docs[currentChapter].file ? (
-                                docContent ? (
-                                  <ReactMarkdown remarkPlugins={[remarkGfm]} components={markdownComponents}>
-                                    {docContent}
-                                  </ReactMarkdown>
+                                {project.docs[currentChapter].file ? (
+                                  docContent ? (
+                                    <ProjectMarkdown 
+                                      content={docContent} 
+                                      className="p-8 bg-card/30 rounded-2xl border border-white/5 shadow-2xl" 
+                                    />
+                                  ) : (
+                                    <div className="flex flex-col items-center justify-center py-20">
+                                      <Loader size="lg" text="fetching chapter..." variant="accent" />
+                                    </div>
+                                  )
                                 ) : (
-                                  <div className="flex flex-col items-center justify-center py-20">
-                                    <Loader size="lg" text="fetching chapter..." variant="accent" />
-                                  </div>
-                                )
-                              ) : (
-                                <ReactMarkdown remarkPlugins={[remarkGfm]} components={markdownComponents}>
-                                  {project.docs[currentChapter].content || ""}
-                                </ReactMarkdown>
-                              )}
+                                  <ProjectMarkdown 
+                                    content={project.docs[currentChapter].content || ""} 
+                                    className="p-8 bg-card/30 rounded-2xl border border-white/5 shadow-2xl" 
+                                  />
+                                )}
                             </div>
                          </ScrollArea>
                       </div>
@@ -509,22 +423,26 @@ export const ProjectDialog = ({ project, isOpen, onClose }: ProjectDialogProps) 
 
         <DialogFooter className="mt-0 p-6 pt-2 border-t border-white/5 shrink-0">
           <div className="flex flex-wrap gap-3 w-full justify-center md:justify-end">
+            {entries.map(([source, link]) => (
             <Button variant="outline" className="rounded-full px-6 hover:bg-primary/10 hover:border-primary/50 transition-all font-semibold" asChild>
-              {project.links.github ? (
-                <Link href={project.links.github} target="_blank" rel="noopener noreferrer">
-                  <Github className="mr-2 h-4 w-4" />
-                  GitHub
-                </Link>
-              ) : project.links.live ?  (
-                <Link href={project.links.live} target="_blank" rel="noopener noreferrer">
-                  <ExternalLink className="mr-2 h-4 w-4" />
-                  Live Demo
-                </Link>
-              ) : null}
+              <Link href={link as string} target="_blank" rel="noopener noreferrer">
+                {source === "github" ? (
+                  <>
+                    <Github className="mr-2 h-4 w-4" />
+                    {t('projects.card.additionalLinks.github', 'GitHub')}
+                  </>
+                ) : (
+                  <>
+                    <ExternalLink className="mr-2 h-4 w-4" />
+                    {t('projects.card.liveDemo', 'Live Demo')}
+                  </>
+                )}
+              </Link>
             </Button>
+            ))}
           </div>
         </DialogFooter>
       </DialogContent>
-    </Dialog>
+    </Modal>
   );
 }

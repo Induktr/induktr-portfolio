@@ -1,6 +1,6 @@
-import React from 'react';
+import { FC } from 'react';
 
-const TermsPage: React.FC = () => {
+export const TermsPage: FC = () => {
   return (
     <div className="min-h-screen bg-[#0a0a0a] text-white pt-32 pb-20 px-6">
       <div className="max-w-4xl mx-auto">
@@ -46,5 +46,3 @@ const TermsPage: React.FC = () => {
     </div>
   );
 };
-
-export default TermsPage;

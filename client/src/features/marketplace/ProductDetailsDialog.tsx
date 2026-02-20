@@ -9,9 +9,14 @@ import { useTranslation } from "react-i18next";
 import { Link } from "wouter";
 import type { DocPage, ProjectMarketplaceData } from "@/shared/types/marketplace";
 import { ProductDetailsDialogProps, StateView } from "@/shared/types/product";
-import { getYouTubeId, getThumbnail } from "@/shared/api/youtube";
+import { getYouTubeId, getThumbnail } from "@/shared/utils/services/youtube";
 
-export function ProductDetailsDialog({ template, isOpen, onClose, onBuy }: ProductDetailsDialogProps) {
+export const ProductDetailsDialog = ({
+  template,
+  isOpen,
+  onClose,
+  onBuy
+}: ProductDetailsDialogProps) => {
   const { t } = useTranslation();
   const [view, setView] = useState<StateView>("overview");
   const [currentDoc, setCurrentDoc] = useState<DocPage | null>(null);

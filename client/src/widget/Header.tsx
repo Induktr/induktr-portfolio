@@ -1,11 +1,14 @@
-import { Link } from "wouter";
-import { ThemeToggle } from "@/features/toggle-theme/ThemeToggle";
-import { SiGithub, SiTelegram } from "react-icons/si";
-import { motion } from "framer-motion";
-import { MobileNav } from "./MobileNav";
-import { LanguageSwitcher } from "@/features/language-switch/LanguageSwitcher";
 import { useTranslation } from "react-i18next";
-import { navItemVariants, logoVariants } from "@/shared/lib/constants";
+import { motion } from "framer-motion";
+
+import { Link } from "wouter";
+import { SiGithub, SiTelegram } from "react-icons/si";
+import { MobileNav } from "./MobileNav";
+import { ThemeToggle } from "@/features/toggle-theme/ThemeToggle";
+import { LanguageSwitcher } from "@/features/language-switch/LanguageSwitcher";
+
+import { PATHS } from "@/shared/config/paths";
+import { LINKS } from "@/shared/config/links";
 
 export const Header = () => {
   const { t } = useTranslation();
@@ -21,92 +24,48 @@ export const Header = () => {
         <div className="flex items-center gap-4">
           <MobileNav />
           <Link href="/">
-            <motion.span 
+            <motion.span
               className="text-2xl font-bold cursor-pointer"
-              variants={logoVariants}
               whileHover="hover"
               whileTap="tap"
             >
-              Induktr
+              {t("", "Induktr")}
             </motion.span>
           </Link>
         </div>
 
         <nav className="hidden md:flex items-center space-x-8">
-          <Link href="/about">
-            <motion.span 
-              className="cursor-pointer"
-              variants={navItemVariants}
-              whileHover="hover"
-              whileTap="tap"
-            >
-              {t('common.about')}
-            </motion.span>
-          </Link>
-          <Link href="/projects">
-            <motion.span 
-              className="cursor-pointer"
-              variants={navItemVariants}
-              whileHover="hover"
-              whileTap="tap"
-            >
-              {t('common.projects')}
-            </motion.span>
-          </Link>
-          <Link href="/tools">
-            <motion.span 
-              className="cursor-pointer"
-              variants={navItemVariants}
-              whileHover="hover"
-              whileTap="tap"
-            >
-              {t('common.tools')}
-            </motion.span>
-          </Link>
-          <Link href="/marketplace">
-            <motion.span 
-              className="cursor-pointer"
-              variants={navItemVariants}
-              whileHover="hover"
-              whileTap="tap"
-            >
-              {t('common.marketplace')}
-            </motion.span>
-          </Link>
-          <Link href="/faq">
-            <motion.span 
-              className="cursor-pointer"
-              variants={navItemVariants}
-              whileHover="hover"
-              whileTap="tap"
-            >
-              {t('common.faq', 'FAQ')}
-            </motion.span>
-          </Link>
+          {PATHS.filter(p => p !== "/").map((path, index) => (
+            <Link href={path} key={index}>
+              <motion.span
+                className="cursor-pointer"
+                whileHover="hover"
+                whileTap="tap"
+              >
+                {t(`common.${path.slice(1)}`)}
+              </motion.span>
+            </Link>
+          ))}
 
           <div className="flex items-center space-x-4">
-            <motion.a
-              href="https://t.me/induktr"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center justify-center h-9 w-9 rounded-md hover:bg-accent"
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.9 }}
-            >
-              <SiTelegram className="h-5 w-5" />
-              <span className="sr-only">Telegram</span>
-            </motion.a>
-            <motion.a
-              href="https://github.com/induktr"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center justify-center h-9 w-9 rounded-md hover:bg-accent"
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.9 }}
-            >
-              <SiGithub className="h-5 w-5" />
-              <span className="sr-only">GitHub</span>
-            </motion.a>
+            {Object.entries(LINKS).map(([source, link], index) => (
+              <motion.a
+                href={link}
+                key={index}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center h-9 w-9 rounded-md hover:bg-accent"
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.9 }}
+              >
+                {source === "telegram" ? (
+                  <SiTelegram className="h-5 w-5" />
+                ) : (
+                  <SiGithub className="h-5 w-5" />
+                )}
+                <span className="sr-only">{t("", "Telegram")}</span>
+              </motion.a>
+            ))}
             <LanguageSwitcher />
             <ThemeToggle />
           </div>

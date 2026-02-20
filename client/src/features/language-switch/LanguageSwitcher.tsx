@@ -1,4 +1,5 @@
 import { useTranslation } from "react-i18next";
+
 import { Button } from "@/shared/ui/button";
 import {
   DropdownMenu,
@@ -9,12 +10,10 @@ import {
 } from "@/shared/ui/dropdown-menu";
 import { Globe } from "lucide-react";
 
-export function LanguageSwitcher() {
-  const { i18n } = useTranslation();
+import { handleLanguageChange } from "@/shared/utils/lang/language";
 
-  const handleLanguageChange = (value: string) => {
-    i18n.changeLanguage(value);
-  };
+export const LanguageSwitcher = () => {
+  const { i18n } = useTranslation();
 
   return (
     <DropdownMenu>

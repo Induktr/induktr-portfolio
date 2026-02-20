@@ -6,26 +6,11 @@ import { VideoPlayer } from '@/shared/ui/VideoPlayer';
 import { cn } from '@/shared/lib/utils';
 import { ProjectSliderProps } from '@/shared/types/project';
 
+import { slideVariants } from '@/shared/constants/animations/slide';
+
 export function ProjectSlider({ items, className }: ProjectSliderProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [direction, setDirection] = useState(0);
-
-  const slideVariants = {
-    enter: (direction: number) => ({
-      x: direction > 0 ? 1000 : -1000,
-      opacity: 0
-    }),
-    center: {
-      zIndex: 1,
-      x: 0,
-      opacity: 1
-    },
-    exit: (direction: number) => ({
-      zIndex: 0,
-      x: direction < 0 ? 1000 : -1000,
-      opacity: 0
-    })
-  };
 
   const swipeConfidenceThreshold = 10000;
   const swipePower = (offset: number, velocity: number) => {

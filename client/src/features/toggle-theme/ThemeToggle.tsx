@@ -1,7 +1,7 @@
 import { Button } from "@/shared/ui/button";
 import { Moon, Sun } from "lucide-react";
 import { motion } from "framer-motion";
-import { useTheme } from "@/shared/lib/theme-provider";
+import { useTheme } from "@/shared/providers/theme-provider";
 
 export function ThemeToggle() {
   const { theme, setTheme } = useTheme();

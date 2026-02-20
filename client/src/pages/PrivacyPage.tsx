@@ -1,6 +1,6 @@
-import React from 'react';
+import { FC } from 'react';
 
-const PrivacyPage: React.FC = () => {
+export const PrivacyPage: FC = () => {
   return (
     <div className="min-h-screen bg-[#0a0a0a] text-white pt-32 pb-20 px-6">
       <div className="max-w-4xl mx-auto">
@@ -45,4 +45,3 @@ const PrivacyPage: React.FC = () => {
   );
 };
 
-export default PrivacyPage;

@@ -1,29 +1,19 @@
+import "./load-env";
 import path from "path";
-import dotenv from "dotenv";
-import fs from "fs";
+import { registerRoutes } from "./routes";
 
-// Explicitly load .env from current working directory
-const envPath = path.resolve(process.cwd(), '.env');
-const result = dotenv.config({ path: envPath });
-
-if (result.error) {
-  console.log("⚠️ Failed to load .env file:", result.error.message);
-} else {
-  console.log("✅ .env loaded successfully");
-}
-
-// Force development mode if running from TS source (locally)
-if (import.meta.url.endsWith('.ts')) {
+// Set default NODE_ENV if not provided
+if (!process.env.NODE_ENV) {
   process.env.NODE_ENV = 'development';
-  console.log("🔧 Detected TypeScript source, forcing NODE_ENV=development");
 }
+
+console.log(`🔧 Running in ${process.env.NODE_ENV} mode`);
 
 import express, { 
   Request, 
   Response, 
   NextFunction 
 } from "express";
-import { registerRoutes } from "./routes";
 import { setupVite, serveStatic, log } from "./vite";
 import session from "express-session";
 import cors from "cors";
@@ -112,12 +102,27 @@ import { botManager } from "./bot";
 (async () => {
   const server = registerRoutes(app);
 
-  // Initialize Telegram Bot
-  if (process.env.TELEGRAM_BOT_TOKEN) {
+  // Telegram Webhook Endpoint
+  app.post("/api/webhook/telegram", async (req, res) => {
     try {
-      botManager.initialize(process.env.TELEGRAM_BOT_TOKEN);
+      botManager.processUpdate(req.body);
+      res.sendStatus(200);
     } catch (error) {
-       console.error("Failed to initialize Telegram Bot:", error);
+      console.error("Webhook Error:", error);
+      res.sendStatus(500);
+    }
+  });
+
+  // Initialize Telegram Bot (only once or when needed)
+  if (process.env.TELEGRAM_BOT_TOKEN) {
+    const isWebhook = !!process.env.TELEGRAM_WEBHOOK_URL;
+    botManager.initialize(process.env.TELEGRAM_BOT_TOKEN, { polling: !isWebhook });
+    
+    // In Vercel/Production, we only set the webhook if it's not local development
+    if (isWebhook && process.env.NODE_ENV === "production") {
+      botManager.setWebHook(`${process.env.TELEGRAM_WEBHOOK_URL}/api/webhook/telegram`).catch(err => {
+        console.error("Failed to set Telegram Webhook:", err);
+      });
     }
   }
 

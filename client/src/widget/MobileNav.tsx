@@ -1,31 +1,38 @@
+import { useTranslation } from "react-i18next";
+import { motion } from "framer-motion";
+
 import { Sheet, SheetContent, SheetTrigger } from "@/shared/ui/sheet";
 import { Menu } from "lucide-react";
 import { Button } from "@/shared/ui/button";
 import { Link } from "wouter";
-import { motion } from "framer-motion";
 import { SiGithub, SiTelegram } from "react-icons/si";
 import { ThemeToggle } from "@/features/toggle-theme/ThemeToggle";
 import { LanguageSwitcher } from "@/features/language-switch/LanguageSwitcher";
-import { useTranslation } from "react-i18next";
 
-const navItemVariants = {
-  initial: { opacity: 0, x: -20 },
-  animate: { opacity: 1, x: 0 },
-  exit: { opacity: 0, x: 20 }
-};
+import { PATHS } from "@/shared/config/paths";
+import { LINKS } from "@/shared/config/links";
+import { navItemVariants } from "@/shared/constants/animations/mobile";
+import { useAppDispatch, useAppSelector } from "@/shared/lib/store/store";
+import { setSidebar } from "@/shared/lib/store/slices/uiSlice";
 
 export function MobileNav() {
   const { t } = useTranslation();
+  const dispatch = useAppDispatch();
+  const { sidebar } = useAppSelector((state) => state.ui);
+
+  const handleOpenChange = (open: boolean) => {
+    dispatch(setSidebar(open));
+  };
 
   return (
-    <Sheet>
+    <Sheet open={sidebar} onOpenChange={handleOpenChange}>
       <SheetTrigger asChild>
         <Button variant="ghost" size="icon" className="md:hidden">
           <Menu className="h-6 w-6" />
-          <span className="sr-only">Toggle menu</span>
+          <span className="sr-only">{t("", "Toggle menu")}</span>
         </Button>
       </SheetTrigger>
-      <SheetContent side="left" className="w-[80vw] sm:w-[380px] bg-background border-r">
+      <SheetContent side="left" className="w-[80vw] sm:w-[380px] bg-background/95 backdrop-blur-xl border-r border-white/10">
         <nav className="flex flex-col h-full justify-between py-6">
           <motion.div
             initial="initial"
@@ -40,69 +47,39 @@ export function MobileNav() {
             }}
             className="flex flex-col space-y-1"
           >
-            <motion.div variants={navItemVariants}>
-              <Link href="/about">
-                <div className="block px-4 py-3 text-lg hover:text-primary hover:bg-muted rounded-md cursor-pointer transition-colors">
-                  {t('common.about')}
+            {PATHS.filter(p => p !== "/").map((path, index) => (
+            <motion.div variants={navItemVariants} key={index}>
+              <Link href={path} onClick={() => dispatch(setSidebar(false))}>
+                <div className="block px-4 py-3 text-lg font-medium hover:text-primary hover:bg-white/5 rounded-md cursor-pointer transition-all">
+                  {t(`common.${path.slice(1)}`)}
                 </div>
               </Link>
             </motion.div>
-            <motion.div variants={navItemVariants}>
-              <Link href="/projects">
-                <div className="block px-4 py-3 text-lg hover:text-primary hover:bg-muted rounded-md cursor-pointer transition-colors">
-                  {t('common.projects')}
-                </div>
-              </Link>
-            </motion.div>
-            <motion.div variants={navItemVariants}>
-              <Link href="/tools">
-                <div className="block px-4 py-3 text-lg hover:text-primary hover:bg-muted rounded-md cursor-pointer transition-colors">
-                  {t('common.tools')}
-                </div>
-              </Link>
-            </motion.div>
-            <motion.div variants={navItemVariants}>
-              <Link href="/marketplace">
-                <div className="block px-4 py-3 text-lg hover:text-primary hover:bg-muted rounded-md cursor-pointer transition-colors">
-                  {t('common.marketplace')}
-                </div>
-              </Link>
-            </motion.div>
-            <motion.div variants={navItemVariants}>
-              <Link href="/faq">
-                <div className="block px-4 py-3 text-lg hover:text-primary hover:bg-muted rounded-md cursor-pointer transition-colors">
-                  {t('common.faq', 'FAQ')}
-                </div>
-              </Link>
-            </motion.div>
+            ))}
           </motion.div>
 
           <motion.div
             variants={navItemVariants}
-            className="flex items-center gap-4 px-4 pt-4 border-t"
+            className="flex items-center gap-4 px-4 pt-4 border-t border-white/10"
           >
+            {Object.entries(LINKS).map(([source, link], index) => (
             <motion.a
-              href="https://t.me/induktr"
+              href={link}
+              key={index}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-center h-10 w-10 rounded-md hover:bg-muted"
+              className="inline-flex items-center justify-center h-10 w-10 rounded-md hover:bg-white/5"
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
             >
-              <SiTelegram className="h-5 w-5" />
-              <span className="sr-only">Telegram</span>
-            </motion.a>
-            <motion.a
-              href="https://github.com/induktr"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center justify-center h-10 w-10 rounded-md hover:bg-muted"
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.9 }}
-            >
-              <SiGithub className="h-5 w-5" />
-              <span className="sr-only">GitHub</span>
-            </motion.a>
+              {source === "telegram" ? (
+                <SiTelegram className="h-5 w-5" />
+              ) : (
+                <SiGithub className="h-5 w-5" />
+              )}
+              <span className="sr-only">{t("", "Social")}</span>
+             </motion.a>
+            ))}
             <LanguageSwitcher />
             <ThemeToggle />
           </motion.div>

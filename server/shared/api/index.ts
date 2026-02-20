@@ -70,12 +70,7 @@ const wrapAsync = (router: Router) => {
 
 wrapAsync(router);
 
-router.use((req, res) => {
-  res.status(404).json({
-    success: false,
-    message: `API endpoint not found: ${req.method} ${req.originalUrl}`
-  });
-});
+// Removed local 404 handler to allow fallthrough to global routes
 
 router.use((err: any, req: Request, res: Response, next: NextFunction) => {
   logWithTimestamp('error', `API Error: ${err.message}`, err);

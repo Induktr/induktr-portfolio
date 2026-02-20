@@ -25,7 +25,12 @@ import { apiRequest } from "@/shared/lib/queryClient";
 import { PurchaseDialogProps } from "@/shared/types/project";
 import { useClipboard } from "@/shared/hooks/useClipboard";
 
-export function PurchaseDialog({ template, onClose, onSuccess }: PurchaseDialogProps) {
+export const PurchaseDialog = ({
+  template,
+  isOpen,
+  onClose,
+  onSuccess
+}: PurchaseDialogProps) => {
   const { t } = useTranslation();
   const { toast } = useToast();
   const { copied, copyToClipboard } = useClipboard();
@@ -55,10 +60,10 @@ export function PurchaseDialog({ template, onClose, onSuccess }: PurchaseDialogP
       
       onSuccess(responseData.orderId, responseData.accessCode);
       form.reset();
-    } catch (error) {
+    } catch (e) {
       toast({
-        title: t('contactForm.errorTitle'),
-        description: t('contactForm.errorDesc'),
+        title: "Error",
+        description: "Failed to process your order. Please try again.",
         variant: "destructive",
       });
     }
@@ -67,7 +72,7 @@ export function PurchaseDialog({ template, onClose, onSuccess }: PurchaseDialogP
   if (!template) return null;
 
   return (
-    <Dialog open={!!template} onOpenChange={(open) => !open && onClose()}>
+    <Dialog open={isOpen} onOpenChange={(open) => !open && onClose()}>
       <DialogContent className="sm:max-w-[500px] max-h-[90vh] overflow-y-auto bg-card border-primary/20">
         <DialogHeader>
           <DialogTitle className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-primary to-purple-500">

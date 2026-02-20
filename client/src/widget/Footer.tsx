@@ -1,8 +1,12 @@
-import { Link } from "wouter";
 import { useTranslation } from "react-i18next";
-import { Phone, Send } from "lucide-react";
 
-export function Footer() {
+import { Fragment } from "react";
+import { Phone, Send } from "lucide-react";
+import { Link } from "wouter";
+
+import { LINKS } from "@/shared/config/links";
+
+export const Footer = () => {
   const { t } = useTranslation();
 
   return (
@@ -10,7 +14,7 @@ export function Footer() {
       <div className="container mx-auto px-4">
         <div className="flex flex-col md:flex-row justify-between items-start gap-12">
           <div className="max-w-sm">
-            <h3 className="text-lg font-medium mb-4">inDuktr</h3>
+            <h3 className="text-lg font-medium mb-4">{t("", "Induktr")}</h3>
             <p className="text-muted-foreground">
               {t('footer.description')}
             </p>
@@ -20,21 +24,13 @@ export function Footer() {
             <div>
               <h3 className="text-lg font-medium mb-4">{t('footer.navigation.title')}</h3>
               <ul className="space-y-2">
-                <li>
-                  <Link href="/about" className="text-muted-foreground hover:text-primary transition">
-                    {t('common.about')}
+                {Object.entries(LINKS).map(([source, link], index) => (
+                <li key={index}>
+                  <Link href={link} className="text-muted-foreground hover:text-primary transition">
+                    {t(`common.${source}`)}
                   </Link>
                 </li>
-                <li>
-                  <Link href="/" className="text-muted-foreground hover:text-primary transition">
-                    {t('footer.navigation.home')}
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/projects" className="text-muted-foreground hover:text-primary transition">
-                    {t('footer.navigation.projects')}
-                  </Link>
-                </li>
+                ))}
               </ul>
             </div>
 
@@ -50,7 +46,7 @@ export function Footer() {
                 <li>
                   <a 
                     href="https://t.me/induktrs" 
-                    target="_blank" 
+                    target="_blank"
                     rel="noopener noreferrer"
                     className="text-muted-foreground hover:text-primary transition flex items-center gap-2"
                   >
@@ -69,38 +65,26 @@ export function Footer() {
           </p>
           
           <div className="flex space-x-4">
-            <a 
-              href="https://github.com/Induktr" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="text-muted-foreground hover:text-primary transition"
-            >
-              {t('footer.social.github')}
-            </a>
-            <a 
-              href="https://x.com/induktr" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="text-muted-foreground hover:text-primary transition"
-            >
-              {t('footer.social.twitter')}
-            </a>
-            <a 
-              href="https://www.linkedin.com/in/nikita-voitenko-416686399/" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="text-muted-foreground hover:text-primary transition"
-            >
-              {t('footer.social.linkedin')}
-            </a>
+            {Object.entries(LINKS).map(([source, link], index) => (
+              <Fragment key={index}>
+                <a 
+                  href={link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-muted-foreground hover:text-primary transition"
+                >
+                  {t(`footer.social.${source}`)}
+                </a>
+              </Fragment>
+            ))}
           </div>
           
           <div className="flex space-x-6 mt-4 md:mt-0">
             <Link href="/privacy" className="text-xs text-muted-foreground hover:text-primary transition">
-              Privacy Policy
+              {t("footer.privacy", "Privacy Policy")}
             </Link>
             <Link href="/terms" className="text-xs text-muted-foreground hover:text-primary transition">
-              Terms of Service
+              {t("footer.terms", "Terms of Service")}
             </Link>
           </div>
         </div>

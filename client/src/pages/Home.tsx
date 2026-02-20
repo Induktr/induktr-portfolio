@@ -6,7 +6,7 @@ import { MissionWheel } from "@/features/writer-mission/MissionWheel";
 import { ContactForm } from "@/features/send-app/ContactForm";
 import { useTranslation } from "react-i18next";
 
-export default function Home() {
+export const Home = () => {
   const { t } = useTranslation();
 
   return (

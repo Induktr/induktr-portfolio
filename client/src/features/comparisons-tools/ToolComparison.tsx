@@ -1,3 +1,5 @@
+import { useTheme } from "@/shared/providers/theme-provider";
+
 import {
   BarChart,
   XAxis,
@@ -7,10 +9,10 @@ import {
   Legend,
   ResponsiveContainer
 } from "recharts";
-import { useTheme } from "@/shared/lib/theme-provider";
-import { toolComparisonData } from "@/shared/lib/constants";
 
-export function ToolComparison() {
+import { toolComparisonData } from "@/shared/constants/data/tools";
+
+export const ToolComparison = () => {
   const { theme } = useTheme();
 
   return (

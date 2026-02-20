@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
+
 import { ChevronDown, ChevronUp, ZoomIn, ZoomOut, Image, Video } from "lucide-react";
 import { Button } from "@/shared/ui/button";
 import { motion, AnimatePresence } from "framer-motion";
@@ -9,6 +11,7 @@ export function ProjectGallery({ project }: ProjectGalleryProps) {
   const [isDetailsOpen, setIsDetailsOpen] = useState(false);
   const [scale, setScale] = useState(1);
   const [showVideo, setShowVideo] = useState(false);
+  const { t } = useTranslation();
 
   const handleZoomIn = () => {
     setScale(prev => Math.min(prev + 0.5, 3));
@@ -113,12 +116,12 @@ export function ProjectGallery({ project }: ProjectGalleryProps) {
             >
               <div className="mt-4 space-y-4">
                 <div>
-                  <h4 className="text-sm font-medium mb-2">Описание</h4>
+                  <h4 className="text-sm font-medium mb-2">{t("projects.usage.desc")}</h4>
                   <p className="text-sm text-muted-foreground">{project.description}</p>
                 </div>
 
                 <div>
-                  <h4 className="text-sm font-medium mb-2">Ключевые функции</h4>
+                  <h4 className="text-sm font-medium mb-2">{t("projects.dialog.keyFeatures")}</h4>
                   <ul className="text-sm text-muted-foreground grid grid-cols-1 md:grid-cols-2 gap-x-4 gap-y-1">
                     {project.features.map((feature, index) => (
                       <li key={index} className="flex items-start">
@@ -131,7 +134,7 @@ export function ProjectGallery({ project }: ProjectGalleryProps) {
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div>
-                    <h4 className="text-sm font-medium mb-2">Технологии</h4>
+                    <h4 className="text-sm font-medium mb-2">{t("projects.dialog.tabs.tech")}</h4>
                     <ul className="text-sm text-muted-foreground space-y-1">
                       {project.techStack.map((tech, index) => (
                         <li key={index} className="flex items-start">
@@ -144,7 +147,7 @@ export function ProjectGallery({ project }: ProjectGalleryProps) {
 
                   {project.additionalTech && (
                     <div>
-                      <h4 className="text-sm font-medium mb-2">Дополнительные технологии</h4>
+                      <h4 className="text-sm font-medium mb-2">{t("projects.dialog.tabs.additionalTech")}</h4>
                       <div className="space-y-3">
                         {project.additionalTech.mediaTools && (
                           <div>

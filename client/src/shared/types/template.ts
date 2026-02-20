@@ -1,5 +1,6 @@
 export interface Template {
   id: string;
+  slug: string;
   title: string;
   description: string;
   price: number;
