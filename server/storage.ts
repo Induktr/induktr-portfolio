@@ -11,6 +11,7 @@ export interface IStorage {
   getAllLeads(): Promise<Lead[]>;
   getUserLanguage(chatId: string): Promise<string>;
   setUserLanguage(chatId: string, lang: string): Promise<void>;
+  getAllChatIds(): Promise<string[]>;
   
   // User auth methods
   getUser(id: number): Promise<User | undefined>;
@@ -111,6 +112,11 @@ export class DatabaseStorage implements IStorage {
         target: userLanguages.chatId,
         set: { language, updatedAt: new Date() }
       });
+  }
+
+  async getAllChatIds(): Promise<string[]> {
+    const entries = await db.select({ chatId: userLanguages.chatId }).from(userLanguages);
+    return entries.map(e => e.chatId);
   }
 
   async getUser(id: number): Promise<User | undefined> {

@@ -10,7 +10,6 @@ import { BOT_TRANSLATIONS } from "./shared/constants/bot_i18n";
 import { Template, ProjectMarketplaceData } from "./shared/types/template"; 
 import { Project } from "@/shared/types/project"; 
 import { DocPage, RoadmapStage, VideoResource } from "./shared/types/content";
-import { ArchyIntelligence } from "./shared/archy-intelligence";
 
 class TelegramBotManager {
   private bot: TelegramBot | null = null;
@@ -605,15 +604,8 @@ class TelegramBotManager {
           try {
             await this.bot?.sendMessage(adminId, adminNotification, { parse_mode: "HTML" });
             
-            // ARCHY INTELLIGENCE LAYER 🧠
-            const archyReply = await ArchyIntelligence.generateResponse(chatId, fullText);
-            if (archyReply) {
-              await this.bot?.sendMessage(chatId, archyReply, { parse_mode: "HTML" });
-              await this.bot?.sendMessage(adminId, `🧠 <b>Archy replied:</b>\n<i>${archyReply}</i>`, { parse_mode: "HTML" });
-            } else {
-              // Fallback to "Message sent" if Archy is offline/no key
-              this.bot?.sendMessage(chatId, await this.t(chatId, "msg_sent"), { parse_mode: "HTML" });
-            }
+            // Forward message notification
+            this.bot?.sendMessage(chatId, await this.t(chatId, "msg_sent"), { parse_mode: "HTML" });
           } catch (error) {
             if(error instanceof Error) console.error("Failed to forward/reply client message", error);
           }

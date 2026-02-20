@@ -6,6 +6,7 @@ import {
 } from 'express';
 import { handleEnvCheck } from './env-check';
 import { handleSendLead } from './send-lead';
+import agentRouter from './agent-bridge';
 import { log } from '../../vite';
 
 const logWithTimestamp = (level: string, message: string, error?: any) => {
@@ -37,6 +38,8 @@ router.get('/health', (req, res) => {
 router.get('/env-check', handleEnvCheck);
 
 router.post('/send-lead', handleSendLead);
+
+router.use('/agent', agentRouter);
 
 router.get('/env-info', (req, res) => {
   res.json({
