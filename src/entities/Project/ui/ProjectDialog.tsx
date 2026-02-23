@@ -36,7 +36,7 @@ import { Card, CardContent } from "@/shared/ui/card";
 import { ScrollArea } from "@/shared/ui/scroll-area";
 import { cn } from "@/shared/lib/utils";
 import { Modal } from "@/shared/ui/modal";
-import { Link } from "wouter";
+import Link from "next/link";
 
 import type { ProjectDialogProps } from "@/shared/types/project";
 
