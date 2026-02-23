@@ -1,0 +1,1291 @@
+{
+  "common": {
+    "projects": "Projects",
+    "tools": "Tools",
+    "marketplace": "Marketplace",
+    "blog": "Blog",
+    "startProject": "Start a Project",
+    "downloadResume": "Download Resume",
+    "viewProjects": "View Projects",
+    "contact": "Contact",
+    "about": "About",
+    "language": "Language",
+    "selectLang": {
+      "en": "English (EN)",
+      "ua": "Ukraine (UA)",
+      "ru": "Russian (RU)"
+    },
+    "close": "Close",
+    "faq": "FAQ"
+  },
+  "home": {
+    "greeting": "Hi, I'm Induktr",
+    "description": "A passionate web developer crafting beautiful and functional digital experiences",
+    "startProject": "Start a Project"
+  },
+  "mission-statement": {
+    "title": "Mission",
+    "author": "Induktr",
+    "tags": ["Empires", "Performance", "Elegance", "Innovation", "Excellence"],
+    "phrases": [
+      "I build digital empires, one line of code at a time.",
+      "Engineering high-performance solutions for the modern web.",
+      "Transforming complex ideas into elegant reality.",
+      "Innovating at the intersection of AI and user experience.",
+      "Committed to excellence in every digital interaction."
+    ]
+  },
+  "roleWheel": {
+    "title": "Who is Induktr?",
+    "subtitle": "An ecosystem of roles contributing to digital excellence",
+    "roles": {
+      "techSpecialist": {
+        "title": "Tech Specialist",
+        "description": "Expert in modern web stacks, ensuring performance and scalability."
+      },
+      "mvpCreator": {
+        "title": "MVP Creator",
+        "description": "Master of rapid prototyping and bringing ideas to life quickly."
+      },
+      "cryptoInvestor": {
+        "title": "Crypto Investor",
+        "description": "Deep understanding of web3, algorithmic trading, and tokenomics."
+      },
+      "contentCreator": {
+        "title": "Content Creator",
+        "description": "Crafting engaging digital content and educational resources."
+      }
+    }
+  },
+  "contactForm": {
+    "title": "Start a Project",
+    "name": "Name",
+    "contact": "Contact (Email or Telegram)",
+    "projectType": "Project Type",
+    "budget": "Budget",
+    "deadline": "Deadline (Optional)",
+    "paymentMethod": "Preferred Payment Method",
+    "description": "Description",
+    "send": "Send Request 🚀",
+    "sending": "Sending...",
+    "successTitle": "Lead Sent Successfully! 🚀",
+    "successDesc": "I'll get back to you shortly.",
+    "errorTitle": "Error Sending Lead",
+    "errorDesc": "Something went wrong. Please try again or contact me directly on Telegram.",
+    "placeholders": {
+      "name": "John Doe",
+      "contact": "@username or email@example.com",
+      "type": "Select type",
+      "budget": "$1000 - $5000",
+      "deadline": "Example: November 2025",
+      "description": "Tell me about your project idea..."
+    },
+    "types": {
+      "landing": "Landing Page",
+      "ecommerce": "E-commerce",
+      "saas": "Saas",
+      "bot": "Bot Development",
+      "other": "Other"
+    },
+    "paymentMethods": {
+      "crypto": "Cryptocurrency (USDT/BTC/ETH)",
+      "card": "Bank Card / Transfer",
+      "other": "Discuss Later"
+    },
+    "paymentInfo": {
+      "title": "Payment & Requisites",
+      "desc": "To start separate development, a prepayment is usually discussed. You can use these details:",
+      "cryptoLabel": "USDT (TON) Wallet:",
+      "cryptoValue": "UQAz5injkmvCFXp9QtqyicEOh-cBpzAHlbH_BcXj-Tqtc7Sz",
+      "cardLabel": "Bank Card (USD/EUR) (Visa/Mastercard):",
+      "cardValue": "4149 4990 9968 5867",
+      "note": "Please specify the payment method in the form below."
+    }
+  },
+  "footer": {
+    "description": "A platform for reviewing and comparing development and design tools",
+    "navigation": {
+      "title": "Navigation",
+      "home": "Home",
+      "projects": "Projects",
+      "tools": "Tools",
+      "blog": "Blog",
+      "contact": "Contact"
+    },
+    "social": {
+      "title": "Social",
+      "github": "GitHub",
+      "twitter": "Twitter",
+      "linkedin": "LinkedIn"
+    },
+    "contacts": {
+      "title": "Contacts",
+      "phone": "+380 689621643",
+      "telegram": "Telegram"
+    },
+    "copyright": "Induktr © 2025-2026 All rights reserved"
+  },
+  "marketplace": {
+    "title": "Marketplace",
+    "subtitle": "Premium templates and ready-to-use solutions",
+    "buy": "Buy",
+    "questions_title": "Any Questions?",
+    "faq_hint_before": "Check our",
+    "faq_link": "FAQ page",
+    "faq_hint_after": "for all technical details and template usage.",
+    "buy_component": "Buy Component"
+  },
+  "faq": {
+    "title": "Frequently Asked Questions",
+    "subtitle": "Everything you need to know about Induktr templates and services",
+    "categories": {
+      "general": "General Questions",
+      "tech": "Technical Details",
+      "payments": "Payments & Delivery"
+    },
+    "items": {
+      "what_is_induktr": {
+        "q": "What is Induktr Portfolio?",
+        "a": "Induktr Portfolio is a boutique digital ecosystem created by @Induktr. It serves as both a showcase of high-end engineering and a marketplace for premium, production-ready templates and AI-powered tools."
+      },
+      "how_it_works": {
+        "q": "How does the ordering process work?",
+        "a": "Once you select a template in the Marketplace and click \"Buy\", you will receive payment instructions. After payment, you get an access code. Enter this code in our official Telegram Bot to instantly download the source files and documentation."
+      },
+      "custom_projects": {
+        "q": "Can I hire you for a custom project?",
+        "a": "Yes! I specialize in building MVPs, high-performance landings, and AI automations. Fill out the form on the \"Start Project\" page, and I will get back to you with a proposal."
+      },
+      "stack": {
+        "q": "What technologies do you use?",
+        "a": "I primarily use Next.js, React, and TypeScript for the frontend, combined with Python (Flask/FastAPI) or Node.js for heavy logic and AI integrations. For styling, Tailwind CSS and Framer Motion are my standards."
+      },
+      "ai_safety": {
+        "q": "Are the AI trading tools safe?",
+        "a": "The A.S.T.R.A. and Hunter Bot tools are designed with \"Safety First\" principles. They include risk management modules and use official APIs. However, they are provided as frameworks for your own strategies; always test in testnets/sandbox."
+      },
+      "payment_methods": {
+        "q": "Which payment methods are accepted?",
+        "a": "I currently accept USDT (TRC20/ERC20/TON) and direct Bank Card transfers (USD/EUR). Details are provided during the checkout process."
+      },
+      "refunds": {
+        "q": "Do you offer refunds?",
+        "a": "Due to the digital nature of the products (source code access), I generally do not offer refunds once the files are downloaded. However, I provide full support to ensure the template works as advertised."
+      }
+    },
+    "cta": {
+      "title": "Still have questions?",
+      "desc": "If you couldn't find the answer you were looking for, feel free to reach out to me directly on Telegram.",
+      "telegram": "Chat on Telegram",
+      "form": "Contact Form"
+    },
+    "faqData": [
+      {
+        "category": "General Questions",
+        "items": [
+          {
+            "q": "What is Induktr Portfolio?",
+            "a": "Induktr Portfolio is a boutique digital ecosystem created by @Induktr. It serves as both a showcase of high-end engineering and a marketplace for premium, production-ready templates and AI-powered tools."
+          },
+          {
+            "q": "How does the ordering process work?",
+            "a": "Once you select a template in the Marketplace and click \"Buy\", you will receive payment instructions. After payment, you get an access code. Enter this code in our official Telegram Bot to instantly download the source files and documentation."
+          },
+          {
+            "q": "Can I hire you for a custom project?",
+            "a": "Yes! I specialize in building MVPs, high-performance landings, and AI automations. Fill out the form on the \"Start Project\" page, and I will get back to you with a proposal."
+          }
+        ]
+      },
+      {
+        "category": "Technical Details",
+        "items": [
+          {
+            "q": "What technologies do you use?",
+            "a": "I primarily use Next.js, React, and TypeScript for the frontend, combined with Python (Flask/FastAPI) or Node.js for heavy logic and AI integrations. For styling, Tailwind CSS and Framer Motion are my standards."
+          },
+          {
+            "q": "Are the AI trading tools safe?",
+            "a": "The A.S.T.R.A. and Hunter Bot tools are designed with \"Safety First\" principles. They include risk management modules and use official APIs. However, they are provided as frameworks for your own strategies; always test in testnets/sandbox."
+          }
+        ]
+      },
+      {
+        "category": "Payments & Delivery",
+        "items": [
+          {
+            "q": "Which payment methods are accepted?",
+            "a": "I currently accept USDT (TRC20/ERC20/TON) and direct Bank Card transfers (USD/EUR). Details are provided during the checkout process."
+          },
+          {
+            "q": "Do you offer refunds?",
+            "a": "Due to the digital nature of the products (source code access), I generally do not offer refunds once the files are downloaded. However, I provide full support to ensure the template works as advertised."
+          }
+        ]
+      }
+    ]
+  },
+  "projects": {
+    "categories": {
+      "title": "Project Categories",
+      "names": {
+        "web": "Web Applications",
+        "mobile": "Cross-platform Apps",
+        "fintech": "FinTech Solutions",
+        "communication": "Communication Tools",
+        "ai": "AI & Automation",
+        "trading": "Trading Systems"
+      },
+      "descriptions": {
+        "web": "Full-cycle web development from layout to complex logic.",
+        "mobile": "Mobile applications for iOS and Android.",
+        "fintech": "Financial systems and payment gateway integrations.",
+        "communication": "Messengers, notification systems and social tools.",
+        "ai": "Artificial Intelligence and Machine Learning solutions.",
+        "trading": "Algorithmic trading bots and market analysis tools."
+      }
+    },
+    "card": {
+      "inDevelopment": "In Development",
+      "moreDetails": "More Details",
+      "liveDemo": "Live Demo",
+      "additionalLinks": {
+        "github": "GitHub"
+      }
+    },
+    "dialog": {
+      "titles": {
+        "info": "Info",
+        "map": "Map",
+        "tech": "Tech",
+        "docs": "Docs",
+        "howTo": "How-to"
+      },
+      "keyFeatures": "Key Features",
+      "tags": "Tags",
+      "projectStart": "Project Start",
+      "projectPhases": "Project Phases",
+      "mainStack": "Main Stack",
+      "additionalTech": "Additional Technologies",
+      "status": {
+        "completed": "Completed",
+        "active": "In Progress",
+        "upcoming": "Upcoming",
+        "inDevelopment": "In Development"
+      },
+      "roadmap": {
+        "tab": "Roadmap",
+        "stage": "Stage",
+        "goal": "Goal",
+        "duration": "Duration",
+        "task": "Task",
+        "checklist": "Checklist"
+      },
+      "tabs": {
+        "overview": "Overview",
+        "roadmap": "Roadmap",
+        "tech": "Tech Stack",
+        "docs": "Documentation",
+        "usage": "Usage Guide"
+      }
+    }
+  },
+  "tools": {
+    "allCategories": "All Categories",
+    "comparison": {
+      "performance": "Performance",
+      "reliability": "Reliability",
+      "usability": "Usability"
+    }
+  },
+  "pages": {
+    "projects": {
+      "title": "Projects",
+      "description": "Portfolio of our innovative web developments and technological solutions"
+    },
+    "marketplace": {
+      "fueatersInside": "More features inside...",
+      "buy": "Buy now",
+      "pay": {
+        "success": "🎉 Payment Confirmed!",
+        "desc": "Your order has been registered. I will verify the payment and send your files."
+      },
+      "order": {
+        "id": "Order ID",
+        "accessCode": "Access Code:",
+        "getFiles": {
+          "step": "Get Files in Telegram",
+          "desc": "Get your files instantly in Telegram once payment is verified:"
+        }
+      }
+    },
+    "tools": {
+      "title": "Tools and Technologies",
+      "categories": {
+        "dev": "Development and Programming",
+        "code": "Code Analysis and Improvement",
+        "web": "Web Development",
+        "ai": "AI and Language",
+        "translation": "Translation",
+        "product": "Productivity",
+        "marketing": "Marketing and Automation",
+        "utility": "Utilities",
+        "ai-research": "AI Research"
+      },
+      "description": "My personal toolkit and technologies that I have mastered, used to create innovative software solutions",
+      "ourTechStack": "My Technological Arsenal"
+    },
+    "blog": {
+      "title": "Blog"
+    }
+  },
+  "about": {
+      "title": "About Me",
+      "subtitle": "Junior Frontend Developer (React)",
+      "summary": "Junior Frontend Developer focused on Result-Driven development. Specialized in creating modern, fast, and responsive web interfaces (SPA) using the React and Vue ecosystem. My strength is an engineering approach. I don't just write code; I care about component architecture, reusability (DRY), and user experience (UX).",
+      "experience": {
+        "title": "Work Experience",
+        "items": [
+          {
+            "role": "Junior Frontend Developer",
+            "period": "2 years of experience",
+            "description": "Practical experience (Pet-projects & Freelance): Developed and deployed the corporate website for the construction company Westbud. Implemented a custom design system, interactive sliders, and modal windows without heavy libraries. Mobile-First responsiveness.",
+            "catalog": "Interactive Product Catalog (JS + DOM API): Created an SPA product catalog application. Implemented complex filtering and search on the client side. Used the Constraint Validation API for forms."
+          }
+        ]
+      },
+      "achievements": {
+        "title": "Achievements",
+        "list": [
+          "Commercial Success: Independently developed and deployed the corporate website for a construction company (Westbud) using the React + Tailwind stack ahead of the deadline.",
+          "Engineering Mindset: Implemented complex product filtering logic and custom form validation without using heavy libraries for maximum performance.",
+          "Discipline: Built a personal productivity system that allows consistently investing 50-60 hours per week in coding and learning."
+        ]
+      },
+      "expectations": {
+        "title": "Work Expectations",
+        "text": "Looking for a team with a strong engineering culture where Code Review and mentoring are present. I'm not looking for an \"easy job\"; I'm looking for the opportunity to solve complex problems and grow quickly. My goal: to reach Strong Junior / Middle level within 1 year of active work. Open to Remote, Part-time, or project-based work."
+      },
+      "skills": {
+        "title": "Skill Experience",
+        "years": "years",
+        "year": "year"
+      },
+      "languages": {
+        "title": "Language Proficiency",
+        "english": "English: B1 — Intermediate",
+        "ukrainian": "Ukrainian: B2 — Upper-Intermediate",
+        "russian": "Russian: C2 — Native",
+        "communication": "Communication Language: Ukrainian, English"
+      },
+      "stats": {
+        "experience": "2 years of experience",
+        "location": "Ukraine, Zhytomyr",
+        "salary": "$500 / month",
+        "rate": "$7 / hour",
+        "verified": "Verified Candidate Badge"
+      }
+    },
+  "projectsData": {
+    "1": {
+      "id": 1,
+      "title": "BrainMessenger",
+      "shortDescription": "Modern messenger with unique UX/UI design and advanced technologies",
+      "description": "Innovative messaging platform combining cutting-edge technology and intuitive user experience. Engineered for speed, security, and emotional connection.",
+      "image": "https://res.cloudinary.com/dsjalneil/image/upload/v1740704902/5891520_r1cl35.png",
+      "gallery": [
+        { "type": "video", "url": "https://youtu.be/EbGHlnfUqpQ", "title": "Web: Video Showcase" },
+        { "type": "image", "url": "https://res.cloudinary.com/dsjalneil/image/upload/v1768211127/%D0%97%D0%BD%D1%96%D0%BC%D0%BE%D0%BA_%D0%B5%D0%BA%D1%80%D0%B0%D0%BD%D0%B0_2026-01-11_154634_w2zyjd.png", "title": "Web: Main Dashboard" },
+        { "type": "video", "url": "https://youtu.be/64WPsvfU6qY", "title": "Landing Page: Video Showcase" },
+        { "type": "image", "url": "https://res.cloudinary.com/dsjalneil/image/upload/v1768211126/%D0%97%D0%BD%D1%96%D0%BC%D0%BE%D0%BA_%D0%B5%D0%BA%D1%80%D0%B0%D0%BD%D0%B0_2026-01-12_114059_n1xkpz.png", "title": "Landing Page: Home Page" },
+        { "type": "image", "url": "https://res.cloudinary.com/dsjalneil/image/upload/v1768211126/%D0%97%D0%BD%D1%96%D0%BC%D0%BE%D0%BA_%D0%B5%D0%BA%D1%80%D0%B0%D0%BD%D0%B0_2026-01-12_114129_jpuidu.png", "title": "Landing Page: Section Key Features" },
+        { "type": "image", "url": "https://res.cloudinary.com/dsjalneil/image/upload/v1768211126/%D0%97%D0%BD%D1%96%D0%BC%D0%BE%D0%BA_%D0%B5%D0%BA%D1%80%D0%B0%D0%BD%D0%B0_2026-01-12_114118_hmx3rp.png", "title": "Landing Page: Section News" },
+        { "type": "image", "url": "https://res.cloudinary.com/dsjalneil/image/upload/v1768211127/%D0%97%D0%BD%D1%96%D0%BC%D0%BE%D0%BA_%D0%B5%D0%BA%D1%80%D0%B0%D0%BD%D0%B0_2026-01-12_114206_ekbvqz.png", "title": "Landing Page: Section Roadmap" },
+        { "type": "image", "url": "https://res.cloudinary.com/dsjalneil/image/upload/v1768211126/%D0%97%D0%BD%D1%96%D0%BC%D0%BE%D0%BA_%D0%B5%D0%BA%D1%80%D0%B0%D0%BD%D0%B0_2026-01-12_114139_hxb139.png", "title": "Landing Page: Section Roadmap 1" },
+        { "type": "image", "url": "https://res.cloudinary.com/dsjalneil/image/upload/v1768211127/%D0%97%D0%BD%D1%96%D0%BC%D0%BE%D0%BA_%D0%B5%D0%BA%D1%80%D0%B0%D0%BD%D0%B0_2026-01-12_114311_tsizxx.png", "title": "Landing Page: Doc Page" },
+        { "type": "image", "url": "https://res.cloudinary.com/dsjalneil/image/upload/v1768211127/%D0%97%D0%BD%D1%96%D0%BC%D0%BE%D0%BA_%D0%B5%D0%BA%D1%80%D0%B0%D0%BD%D0%B0_2026-01-12_114240_z55vrv.png", "title": "Landing Page: FAQ Page" }
+      ],
+      "categories": ["communication", "mobile", "web"],
+      "techStack": ["TypeScript & React Native", "Next.js & Tailwind CSS", "Node.js & NestJS", "PostgreSQL & Redis", "GraphQL & Firebase"],
+      "tags": ["Messenger", "Cross-platform", "Modern UI"],
+      "links": {
+        "github": "https://github.com/Induktr/brainmessenger",
+        "live": "https://brain-messenger.com/"
+      },
+      "docs": [
+        {
+          "title": "Introduction",
+          "goal": "Project vision, mission, and core principles.",
+          "file": "/docs/BrainMessenger/README.md"
+        },
+        {
+          "title": "Cohesive Manifesto",
+          "goal": "Deep philosophical and architectural alignment.",
+          "file": "/docs/BrainMessenger/TheCohesiveManifesto.md"
+        },
+        {
+          "title": "Technical Overview",
+          "goal": "High-level system architecture and tech stack.",
+          "file": "/docs/BrainMessenger/doc-tech.md"
+        },
+        {
+          "title": "API Specification",
+          "goal": "Detailed GraphQL API and component interaction.",
+          "file": "/docs/BrainMessenger/doc-spec.md"
+        },
+        {
+          "title": "Design System",
+          "goal": "UI components, branding, and visual language.",
+          "file": "/docs/BrainMessenger/doc-design.md"
+        },
+        {
+          "title": "Developer Guide",
+          "goal": "Coding standards, project structure, and workflow.",
+          "file": "/docs/BrainMessenger/doc-devIn.md"
+        },
+        {
+          "title": "Integrations",
+          "goal": "Connecting with Neon, Cloudflare, and external APIs.",
+          "file": "/docs/BrainMessenger/doc-int.md"
+        },
+        {
+          "title": "Localization",
+          "goal": "Multi-language support and translation strategy.",
+          "file": "/docs/BrainMessenger/doc-locIn.md"
+        },
+        {
+          "title": "User Guide",
+          "goal": "Instructional guide for end-user interaction.",
+          "file": "/docs/BrainMessenger/doc-user.md"
+        },
+        {
+          "title": "Quality Assurance",
+          "goal": "Testing, validation, and maintenance protocols.",
+          "file": "/docs/BrainMessenger/doc-validation.md"
+        }
+      ],
+      "features": [
+        "Unique UI Component System",
+        "Animations and Micro-interactions",
+        "Multilanguage Support",
+        "Optimized Performance",
+        "End-to-End Encryption",
+        "Security Systems"
+      ],
+      "status": "in-development",
+      "timeline": {
+        "start": "2024-01-01",
+        "phases": [
+          { "name": "Ideation", "duration": "1 month", "status": "completed" },
+          { "name": "Design", "duration": "2 months", "status": "completed" },
+          { "name": "Development", "duration": "ongoing", "status": "active" }
+        ]
+      },
+      "roadmap": [
+        {
+          "stage": 1,
+          "title": "Phase 1: Strategic Reload",
+          "duration": "Q3 2025",
+          "status": "upcoming",
+          "goal": "Re-planning and architecture optimization for the long-term project vision.",
+          "tasks": [
+            {
+              "title": "Strategic Planning",
+              "checklists": [
+                {
+                  "title": "Roadmap & Structure",
+                  "items": [
+                    "Reorganization of Project Epics",
+                    "Setting realistic deadlines for MVP",
+                    "Creation of 'Blind Zone' Map"
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Quality Systems",
+              "checklists": [
+                {
+                  "title": "Testing Matrix",
+                  "items": [
+                    "Design of the Quality Control system",
+                    "Integration of the Testing Matrix in ClickUp"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "stage": 2,
+          "title": "Phase 2: Foundation & Web-MVP",
+          "duration": "Q4 2025",
+          "status": "upcoming",
+          "goal": "Launch of the core web platform and project 'Showcase'.",
+          "tasks": [
+            {
+              "title": "MVP Launch",
+              "checklists": [
+                {
+                  "title": "Web Core",
+                  "items": [
+                    "Web-MVP infrastructure setup",
+                    "Creation of the project 'Showcase' (Vitrine)",
+                    "Core messaging logic deployment"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "stage": 3,
+          "title": "Phase 3: Android-MVP Development",
+          "duration": "Q4 2025",
+          "status": "upcoming",
+          "goal": "Extending communication capabilities to Android mobile devices.",
+          "tasks": [
+            {
+              "title": "Mobile Core",
+              "checklists": [
+                {
+                  "title": "Android Platform",
+                  "items": [
+                    "Mobile-specific UI/UX implementation",
+                    "Optimization for Android ecosystem"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "stage": 4,
+          "title": "Phase 4: Community & Value",
+          "duration": "Q1 2026",
+          "status": "upcoming",
+          "goal": "Building the user ecosystem and achieving initial value cycle.",
+          "tasks": [
+            {
+              "title": "Ecosystem Building",
+              "checklists": [
+                {
+                  "title": "Value Cycle",
+                  "items": [
+                    "Community content strategy",
+                    "First user acquisition and feedback",
+                    "Monetization model validation"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "stage": 5,
+          "title": "Phase 5: Scaling & Improvement",
+          "duration": "Q3 2026",
+          "status": "upcoming",
+          "goal": "Global scaling and transition to advanced features.",
+          "tasks": [
+            {
+              "title": "Global Scaling",
+              "checklists": [
+                {
+                  "title": "Future Growth",
+                  "items": [
+                    "Scaling backend for mass users",
+                    "Introduction of advanced AI features",
+                    "System-wide performance Kaizen"
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "2": {
+      "id": 2,
+      "title": "Westbud",
+      "shortDescription": "Premium corporate platform for a large construction company",
+      "description": "High-end corporate portal for a major construction player. Focus on maximum load speed, premium design, and user-friendly interface for building showcase.",
+      "image": "https://res.cloudinary.com/dsjalneil/image/upload/v1767898995/WestBud_tcwel4.png",
+      "gallery": [
+        { "type": "image", "url": "https://res.cloudinary.com/dsjalneil/image/upload/v1767898995/WestBud_tcwel4.png", "title": "Main Showcase" },
+        { "type": "image", "url": "https://res.cloudinary.com/dsjalneil/image/upload/v1767905178/%D0%97%D0%BD%D1%96%D0%BC%D0%BE%D0%BA_%D0%B5%D0%BA%D1%80%D0%B0%D0%BD%D0%B0_2026-01-08_224545_ufrehi.png", "title": "Modal Showcase" },
+        { "type": "image", "url": "https://res.cloudinary.com/dsjalneil/image/upload/v1767905253/%D0%97%D0%BD%D1%96%D0%BC%D0%BE%D0%BA_%D0%B5%D0%BA%D1%80%D0%B0%D0%BD%D0%B0_2026-01-08_224717_mhf0zw.png", "title": "Gallery Showcase" },
+        { "type": "image", "url": "https://res.cloudinary.com/dsjalneil/image/upload/v1767905285/%D0%97%D0%BD%D1%96%D0%BC%D0%BE%D0%BA_%D0%B5%D0%BA%D1%80%D0%B0%D0%BD%D0%B0_2026-01-08_224751_cqae35.png", "title": "Functions Gallery Showcase" },
+        { "type": "video", "url": "https://youtu.be/CxzbkhB0MNQ", "title": "Video Showcase" },
+        { "type": "video", "url": "https://youtu.be/6Ai82zHEYxQ", "title": "Video Showcase step 1" },
+        { "type": "video", "url": "https://youtu.be/XSExr7DzMNE", "title": "Video Showcase step 2" },
+        { "type": "video", "url": "https://youtu.be/4J0E5RtLWG0", "title": "Video Showcase step 3" },
+        { "type": "video", "url": "https://youtu.be/lXonkyAU-W0", "title": "Video Showcase step 4" },
+        { "type": "video", "url": "https://youtu.be/EXKtsghISx4", "title": "Video Showcase step 5" },
+        { "type": "video", "url": "https://youtu.be/Cub3dNYY870", "title": "Video Showcase step 6" }
+      ],
+      "categories": ["web"],
+      "techStack": [
+        "Vite",
+        "TypeScript",
+        "Tailwind CSS",
+        "Framer Motion",
+        "i18next",
+        "Zod",
+        "Tailwindcss",
+        "Shadcn UI",
+        "Lucide React",
+        "React Hook Form",
+        "Date Fns",
+        "Sonner",
+        "Clsx",
+        "Eslint"
+      ],
+      "tags": ["Construction", "Web Platform", "Premium UI"],
+      "links": {
+        "github": "https://github.com/Induktr/westbud.git",
+        "live": "https://www.westbud.net/"
+      },
+      "usage": [
+        {
+          "title": "Service Sectors",
+          "description": "Explore specialized construction areas like Masonry, Concrete, and Turnkey solutions via the 'Key Sectors' grid.",
+          "actionType": "interaction"
+        },
+        {
+          "title": "Project Gallery",
+          "description": "Filter and browse the 'Our Projects' showcase to view detailed construction site photos and progress.",
+          "actionType": "search"
+        },
+        {
+          "title": "Career Opportunities",
+          "description": "Navigate to the 'Join the Westbud Team' section to apply for open construction positions.",
+          "actionType": "navigation"
+        },
+        {
+          "title": "Contact Inquiry",
+          "description": "Fill out the 'Get in touch' form with project details to request a callback or quote.",
+          "actionType": "form"
+        }
+      ],
+      "docs": [
+        {
+          "title": "README",
+          "goal": "Project description and setup instructions.",
+          "file": "/docs/westbud/README.md"
+        },
+        {
+          "title": "Tech Stack",
+          "goal": "List of technologies used in the project.",
+          "file": "/docs/westbud/doc-tech.md"
+        },
+        {
+          "title": "Design Colors",
+          "goal": "Branding, palette, and usage rules.",
+          "file": "/docs/westbud/doc-design.md"
+        },
+        {
+          "title": "Requirements Spec",
+          "goal": "Functional and non-functional requirements.",
+          "file": "/docs/westbud/doc-req.md"
+        },
+        {
+          "title": "Developer Guide",
+          "goal": "Project structure, coding standards, and validation.",
+          "file": "/docs/westbud/doc-dev.md"
+        },
+        {
+          "title": "Performance Guide",
+          "goal": "KPIs and optimization strategies for speed.",
+          "file": "/docs/westbud/doc-per.md"
+        },
+        {
+          "title": "Security Policy",
+          "goal": "Spam protection, HTTPS, and data safety.",
+          "file": "/docs/westbud/doc-security.md"
+        }
+      ],
+      "features": [
+        "Maximum performance (PageSpeed 95+)",
+        "3D visualization of objects",
+        "Interactive project map",
+        "Multi-language support (EN/NL)",
+        "Responsive for all devices"
+      ],
+      "status": "completed",
+      "timeline": {
+        "start": "2025-12-15",
+        "phases": [
+          { "name": "Requirements", "duration": "2 weeks", "status": "completed" },
+          { "name": "Development", "duration": "3 months", "status": "completed" },
+          { "name": "Launch", "duration": "1 week", "status": "completed" }
+        ]
+      },
+      "roadmap": [
+        {
+          "stage": 1,
+          "title": "Foundation & Design",
+          "duration": "2 weeks",
+          "status": "completed",
+          "goal": "Establish core architecture and visual identity.",
+          "tasks": [
+            {
+              "title": "Core Setup",
+              "checklists": [
+                {
+                  "title": "Initialization",
+                  "items": [
+                    "Vite + React + TypeScript environment",
+                    "BESIX brand colors & Sora font integration"
+                  ]
+                },
+                {
+                  "title": "Static Layout",
+                  "items": [
+                    "Sticky Header & Mobile Navigation",
+                    "Hero Slider & Service Sectors Grid",
+                    "About Us section & Corporate Footer"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "stage": 2,
+          "title": "Engineering Logic",
+          "duration": "3 weeks",
+          "status": "completed",
+          "goal": "Implement dynamic features and interactive components.",
+          "tasks": [
+            {
+              "title": "Functional Core",
+              "checklists": [
+                {
+                  "title": "Logic & Navigation",
+                  "items": [
+                    "React Router (/, /projects, /about)",
+                    "Dynamic Project Catalog with filtration logic"
+                  ]
+                },
+                {
+                  "title": "Wow-Factor",
+                  "items": [
+                    "3D Tilt Effect on project cards",
+                    "Scrollytelling: Text reveal animations",
+                    "Lightbox Gallery modal system"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "stage": 3,
+          "title": "Global Architecture",
+          "duration": "2 weeks",
+          "status": "completed",
+          "goal": "Scalability and international reach.",
+          "tasks": [
+            {
+              "title": "Infrastructure",
+              "checklists": [
+                {
+                  "title": "i18n & Backend",
+                  "items": [
+                    "react-i18next setup (EN/RU/UA)",
+                    "Full content extraction to JSON",
+                    "Contact form API integration"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "stage": 4,
+          "title": "General Cleanup",
+          "duration": "In Progress",
+          "status": "active",
+          "goal": "Refinement, optimization, and code quality.",
+          "tasks": [
+            {
+              "title": "Final Polish",
+              "checklists": [
+                {
+                  "title": "Optimization",
+                  "items": [
+                    "Code cleanup (unused components, logs)",
+                    "Professional image processing (webp/retouch)",
+                    "Lighthouse Mobile performance run (90+)"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "stage": 5,
+          "title": "Handover & Deploy",
+          "duration": "Planned",
+          "status": "upcoming",
+          "goal": "Final delivery and project launch.",
+          "tasks": [
+            {
+              "title": "Release",
+              "checklists": [
+                {
+                  "title": "Closing",
+                  "items": [
+                    "Production build validation",
+                    "Screencast & README documentation",
+                    "Final project handover"
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "3": {
+      "id": 3,
+      "title": "BuildKo",
+      "shortDescription": "Full-featured web platform for a construction company with innovative technologies",
+      "description": "Modern web application for a construction company with an interactive project portfolio, estimation system, and rich UX.",
+      "image": "https://res.cloudinary.com/dsjalneil/image/upload/v1740704902/5891522-1_yryudd.png",
+      "categories": ["web"],
+      "techStack": ["React", "TypeScript", "Three.js", "Framer Motion", "Tailwind CSS"],
+      "tags": ["Construction", "Web Platform", "3D Visualization"],
+      "links": {
+        "github": "https://github.com/Induktr/buildko",
+        "live": "https://buildko.netlify.app/"
+      },
+      "features": [
+        "Interactive project portfolio",
+        "3D visualization with Three.js",
+        "Estimation system",
+        "Framer Motion animations",
+        "Responsive design"
+      ],
+      "status": "active",
+      "timeline": {
+        "start": "2024-02-15",
+        "phases": [
+          { "name": "Architecture", "duration": "3 weeks", "status": "completed" },
+          { "name": "MVP Development", "duration": "2 months", "status": "active" }
+        ]
+      }
+    },
+    "4": {
+      "id": 4,
+      "title": "BueatyLove",
+      "shortDescription": "Innovative platform for the beauty industry with elegant design and smooth animations",
+      "description": "Elegant web application for the beauty industry combining modern design, smooth animations, and luxurious visual effects.",
+      "image": "https://res.cloudinary.com/dsjalneil/image/upload/v1740704902/5891523_cvgovb.png",
+      "categories": ["web"],
+      "techStack": ["JavaScript", "HTML5", "Vite", "Framer Motion"],
+      "tags": ["Beauty Industry", "Web Platform", "Luxury Design"],
+      "links": {
+        "github": "https://github.com/Induktr/BueatyLove",
+        "live": "https://bueatylove.netlify.app/"
+      },
+      "features": [
+        "Smooth Transition Animations",
+        "Elegant Background Patterns",
+        "Physics-based Inertia Effects",
+        "Luxurious UI Elements",
+        "Optimized Performance"
+      ],
+      "status": "upcoming",
+      "timeline": {
+        "start": "2024-05-01",
+        "phases": [
+          { "name": "Conceptualization", "duration": "1 month", "status": "completed" },
+          { "name": "Prototyping", "duration": "1 month", "status": "upcoming" }
+        ]
+      }
+    },
+    "5": {
+      "id": 5,
+      "title": "A.S.T.R.A",
+      "shortDescription": "Autonomous AI system for algorithmic crypto trading",
+      "description": "Autonomous system for trading on the cryptocurrency market. Uses sentiment analysis via Gemini 2.0 AI and algorithmic strategies for fully independent capital management.",
+      "image": "https://res.cloudinary.com/dsjalneil/image/upload/v1768078819/%D0%97%D0%BD%D1%96%D0%BC%D0%BE%D0%BA_%D0%B5%D0%BA%D1%80%D0%B0%D0%BD%D0%B0_2026-01-10_230002_xh8xg4.png",
+      "gallery": [
+        { "type": "image", "url": "https://res.cloudinary.com/dsjalneil/image/upload/v1768078197/%D0%97%D0%BD%D1%96%D0%BC%D0%BE%D0%BA_%D0%B5%D0%BA%D1%80%D0%B0%D0%BD%D0%B0_2026-01-06_082459_wsmmtr.png", "title": "Dashboard Analytics 1" },
+        { "type": "image", "url": "https://res.cloudinary.com/dsjalneil/image/upload/v1768078190/%D0%97%D0%BD%D1%96%D0%BC%D0%BE%D0%BA_%D0%B5%D0%BA%D1%80%D0%B0%D0%BD%D0%B0_2026-01-06_084539_yaisix.png", "title": "Dashboard Analytics 2" },
+        { "type": "image", "url": "https://res.cloudinary.com/dsjalneil/image/upload/v1768078166/%D0%97%D0%BD%D1%96%D0%BC%D0%BE%D0%BA_%D0%B5%D0%BA%D1%80%D0%B0%D0%BD%D0%B0_2026-01-04_210818_rszwwu.png", "title": "Dashboard Analytics 3" },
+        { "type": "image", "url": "https://res.cloudinary.com/dsjalneil/image/upload/v1768078160/%D0%97%D0%BD%D1%96%D0%BC%D0%BE%D0%BA_%D0%B5%D0%BA%D1%80%D0%B0%D0%BD%D0%B0_2026-01-05_095327_dicltg.png", "title": "Dashboard Analytics 4" },
+        { "type": "image", "url": "https://res.cloudinary.com/dsjalneil/image/upload/v1768078075/%D0%97%D0%BD%D1%96%D0%BC%D0%BE%D0%BA_%D0%B5%D0%BA%D1%80%D0%B0%D0%BD%D0%B0_2026-01-10_224342_ckam7m.png", "title": "Dashboard Analytics 5" },
+        { "type": "image", "url": "https://images.unsplash.com/photo-1642104704074-907c0698bcd9?auto=format&fit=crop&q=80&w=2000", "title": "Market Sentiment Dashboard" }
+      ],
+      "categories": ["ai", "trading", "fintech"],
+      "techStack": [
+        "Python",
+        "React",
+        "CCXT",
+        "Gemini AI",
+        "Async Flask",
+        "Asgiref",
+        "Google GenAI",
+        "Python Dotenv",
+        "Pydantic",
+        "Pydantic Settings",
+        "Schedule",
+        "Requests",
+        "Feedparser",
+        "Websockets",
+        "PyTelegramBotAPI"
+      ],
+      "tags": ["Trading AI", "Crypto", "Automation"],
+      "links": {
+        "github": "https://github.com/Induktr/okx-spot-bot.git"
+      },
+      "docs": [
+        {
+          "title": "A.S.T.R.A README",
+          "goal": "Project philosophy and mission.",
+          "file": "/docs/A.S.T.R.A/README.md"
+        },
+        {
+          "title": "Technical Specs",
+          "goal": "Modular architecture and components.",
+          "file": "/docs/A.S.T.R.A/doc-tech.md"
+        },
+        {
+          "title": "System Requirements",
+          "goal": "Functional and non-functional requirements.",
+          "file": "/docs/A.S.T.R.A/doc-req.md"
+        },
+        {
+          "title": "Reporting Standard",
+          "goal": "Structure of daily autonomous reports.",
+          "file": "/docs/A.S.T.R.A/doc-report.md"
+        }
+      ],
+      "features": [
+        "Gemini 3.0 Sentiment Analysis",
+        "Autonomous order execution",
+        "Advanced Risk Guard",
+        "Real-time dashboard",
+        "Telegram notifications"
+      ],
+      "status": "completed",
+      "timeline": {
+        "start": "2025-12-25",
+        "phases": [
+          { "name": "Algorithm Design", "duration": "1 month", "status": "completed" },
+          { "name": "Backtesting", "duration": "2 months", "status": "completed" },
+          { "name": "Production", "duration": "ongoing", "status": "active" }
+        ]
+      },
+      "roadmap": [
+        {
+          "stage": 0,
+          "title": "Stage 0: Foundation",
+          "duration": "Day 1, Morning",
+          "status": "completed",
+          "goal": "Initial project setup and core environment configuration.",
+          "tasks": [
+            {
+              "title": "Core Setup",
+              "checklists": [
+                {
+                  "title": "Infrastructure",
+                  "items": [
+                    "Python & Virtual Environment setup",
+                    "Gemini API & CCXT configuration"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "stage": 1,
+          "title": "Stage 1: Functional Core",
+          "duration": "Day 1, Day",
+          "status": "completed",
+          "goal": "Development of the primary analysis and trading modules.",
+          "tasks": [
+            {
+              "title": "Neural Logic",
+              "checklists": [
+                {
+                  "title": "Logic Engine",
+                  "items": [
+                    "Sentiment Analysis module with Gemini 3.0",
+                    "RSS & Websocket data aggregation"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "stage": 2,
+          "title": "Stage 2: 'Armor'",
+          "duration": "Day 2, Morning",
+          "status": "completed",
+          "goal": "Implementation of risk management and security guards.",
+          "tasks": [
+            {
+              "title": "Risk Protection",
+              "checklists": [
+                {
+                  "title": "Security Guard",
+                  "items": [
+                    "TokenGuard for API quota management",
+                    "Position sizing & Risk management logic"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "stage": 3,
+          "title": "Stage 3: Interface & Delivery",
+          "duration": "Day 2, Evening",
+          "status": "completed",
+          "goal": "Final notifications setup and production deployment.",
+          "tasks": [
+            {
+              "title": "Final Launch",
+              "checklists": [
+                {
+                  "title": "Reporting & Alerts",
+                  "items": [
+                    "Telegram Bot for real-time notifications",
+                    "Autonomous Markdown reporting system"
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "toolsData": [
+    {
+      "id": "dev",
+      "category": "Development & Programming",
+      "items": [
+        { "name": "VS Code", "icon": "SiVisualstudiocode", "description": "Primary IDE with extensions" },
+        { "name": "Cursor", "icon": "SiCursor", "description": "AI-powered code editor" },
+        { "name": "Antigravity", "icon": "SiGoogle", "description": "Specialized VS Code fork by Google DeepMind for advanced agentic coding" }
+      ]
+    },
+    {
+      "id": "version-control",
+      "category": "Version Control",
+      "items": [
+        { "name": "Git", "icon": "SiGit", "description": "Distributed version control system" },
+        { "name": "GitHub", "icon": "SiGithub", "description": "Hosting platform for collaboration" }
+      ]
+    },
+    {
+      "id": "web-stack",
+      "category": "Web Technologies & Frontend",
+      "items": [
+        { "name": "HTML5", "icon": "SiHtml5", "description": "Web structure and semantics" },
+        { "name": "CSS3", "icon": "SiCss3", "description": "Styling and responsive design" },
+        { "name": "JavaScript", "icon": "SiJavascript", "description": "Interactivity and dynamics" },
+        { "name": "TypeScript", "icon": "SiTypescript", "description": "Strict typing for reliability" },
+        { "name": "React", "icon": "SiReact", "description": "Library for building UIs" },
+        { "name": "Next.js", "icon": "SiNextdotjs", "description": "Full-stack framework for React" },
+        { "name": "Vite", "icon": "SiVite", "description": "Next generation frontend tooling" },
+        { "name": "TailwindCSS", "icon": "SiTailwindcss", "description": "Utility-first CSS framework" },
+        { "name": "clsx", "icon": "SiJavascript", "description": "Utility for conditional CSS classes" }
+      ]
+    },
+    {
+      "id": "python-creative",
+      "category": "Python & Creative Coding",
+      "items": [
+        { "name": "Python", "icon": "SiPython", "description": "Powerful language for logic and AI" },
+        { "name": "Pygame", "icon": "SiPython", "description": "Game development and multimedia" },
+        { "name": "Turtle", "icon": "SiPython", "description": "Vector graphics and algorithmic art" }
+      ]
+    },
+    {
+      "id": "react-ecosystem",
+      "category": "React Ecosystem & State Management",
+      "items": [
+        { "name": "React Hook Form", "icon": "SiReact", "description": "Performant form management" },
+        { "name": "Zod", "icon": "SiTypescript", "description": "TypeScript-first schema validation" },
+        { "name": "Zustand", "icon": "SiReact", "description": "Lightweight state management" },
+        { "name": "i18next", "icon": "SiI18Next", "description": "Internationalization framework for multilingual apps" },
+        { "name": "Lucide React", "icon": "SiReact", "description": "Beautiful icon library for React apps" },
+        { "name": "shadcn/ui", "icon": "SiRadixui", "description": "Component collection built on Radix UI" }
+      ]
+    },
+    {
+      "id": "cloud-services",
+      "category": "Cloud Services & Deployment",
+      "items": [
+        { "name": "Vercel", "icon": "SiVercel", "description": "Frontend deployment platform" },
+        { "name": "Cloud Firestore", "icon": "SiFirebase", "description": "Real-time NoSQL database" },
+        { "name": "Netlify", "icon": "SiNetlify", "description": "Platform for deploying static sites" }
+      ]
+    },
+    {
+      "id": "backend-runtime",
+      "category": "Backend & Runtime",
+      "items": [
+        { "name": "Node.js", "icon": "SiNodedotjs", "description": "JavaScript runtime for server-side development" },
+        { "name": "Express", "icon": "SiExpress", "description": "Minimalist web framework for Node.js" },
+        { "name": "GraphQL", "icon": "SiGraphql", "description": "Query language for APIs" },
+        { "name": "Prisma", "icon": "SiPrisma", "description": "Modern ORM for TypeScript and Node.js" },
+        { "name": "NestJS", "icon": "SiNestjs", "description": "Progressive framework for scalable applications" }
+      ]
+    },
+    {
+      "id": "databases",
+      "category": "Databases & Data Storage",
+      "items": [
+        { "name": "SQL", "icon": "SiMysql", "description": "Structured query language" },
+        { "name": "SQLite", "icon": "SiSqlite", "description": "Embedded relational database" },
+        { "name": "Drizzle ORM", "icon": "SiDrizzle", "description": "Lightweight TypeScript ORM" },
+        { "name": "PostgreSQL", "icon": "SiPostgresql", "description": "Powerful relational database" },
+        { "name": "NeonDB", "icon": "SiPostgresql", "description": "Serverless PostgreSQL platform" }
+      ]
+    }
+  ],
+  "marketplaceTemplates": [
+    {
+      "id": "westbud-legacy",
+      "title": "Elite Corporate Landing Engine",
+      "description": "The Westbud Legacy: Ultimate template for serious business. Maximum speed and premium design.",
+      "price": 199,
+      "stack": ["Next.js", "Tailwind CSS", "TypeScript"],
+      "features": [
+        "Full i18n Support (EN/NL/UA)",
+        "Performance King (95+ PageSpeed)",
+        "Motion UI & 3D Tilt Effects",
+        "Clean JSON-based Content"
+      ],
+      "gradient": "from-blue-600 to-indigo-900"
+    },
+    {
+      "id": "astra-lite",
+      "title": "Autonomous AI Trading Dashboard",
+      "description": "A.S.T.R.A. Lite: Ready-made platform for monitoring and automating trading with AI integration.",
+      "price": 399,
+      "stack": ["React", "Python", "CCXT"],
+      "features": [
+        "Gemini 2.0 AI Sentiment Analysis",
+        "Real-time PnL & Logic Sync",
+        "Built-in Risk Guard & API Safety",
+        "Docker & systemd Ready"
+      ],
+      "gradient": "from-emerald-500 to-teal-800"
+    },
+    {
+      "id": "hunter-bot",
+      "title": "Smart AI Outreach & Job Scouter",
+      "description": "Hunter Bot: Automatic search for orders and jobs. Trash filtering and smart responses.",
+      "price": 149,
+      "stack": ["Python", "Telethon", "Gemini AI"],
+      "features": [
+        "90% Spam & Scam Filtering",
+        "Voss-style AI Response Writer",
+        "Instant Telegram Alerts",
+        "Tactical Empathy Mode"
+      ],
+      "gradient": "from-orange-600 to-amber-900"
+    },
+    {
+      "id": "ui-kit",
+      "title": "Induktr Signature UI System",
+      "description": "Complete design system: component library, color palettes, and animations in the branded Induktr style.",
+      "price": 99,
+      "stack": ["React", "Tailwind", "Framer Motion"],
+      "features": [
+        "50+ Premium Components",
+        "Global Color & Theme System",
+        "Built-in Micro-animations",
+        "Ready-to-use Layouts"
+      ],
+      "gradient": "from-violet-600 to-purple-900"
+    }
+  ],
+  "marketplaceData": {
+    "westbud-legacy": {
+      "videos": [
+        { "id": "walkthrough", "title": "Portal Walkthrough", "description": "Complete overview of the corporate portal features.", "url": "https://youtu.be/CxzbkhB0MNQ", "duration": "3:45", "type": "walkthrough" },
+        { "id": "gallery", "title": "Interactive Gallery", "description": "Deep dive into the 3D gallery and lightbox system.", "url": "https://youtu.be/6Ai82zHEYxQ", "duration": "1:20", "type": "showcase" }
+      ],
+      "roadmap": [
+        {
+          "id": "foundation",
+          "title": "Foundation & Design",
+          "status": "completed",
+          "tasks": [
+            { "label": "<b>Core Setup</b>", "completed": true },
+            { "label": "Vite + React + TypeScript environment", "completed": true },
+            { "label": "BESIX brand colors & Sora font integration", "completed": true },
+            { "label": "<b>Static Layout</b>", "completed": true },
+            { "label": "Sticky Header & Mobile Navigation", "completed": true },
+            { "label": "Hero Slider & Service Sectors Grid", "completed": true },
+            { "label": "About Us section & Corporate Footer", "completed": true }
+          ]
+        },
+        {
+          "id": "logic",
+          "title": "Engineering Logic",
+          "status": "completed",
+          "tasks": [
+            { "label": "<b>Functional Core</b>", "completed": true },
+            { "label": "React Router (/, /projects, /about)", "completed": true },
+            { "label": "Dynamic Project Catalog with filtration logic", "completed": true },
+            { "label": "<b>Wow-Factor</b>", "completed": true },
+            { "label": "3D Tilt Effect on project cards", "completed": true },
+            { "label": "Scrollytelling: Text reveal animations", "completed": true },
+            { "label": "Lightbox Gallery modal system", "completed": true }
+          ]
+        }
+      ],
+      "docs": [
+        {
+          "id": "readme",
+          "title": "README",
+          "content": "<b>Westbud Corporate Portal</b>\n\nHigh-end corporate portal for a major construction player. Focus on maximum load speed, premium design, and user-friendly interface for building showcase.\n\n<b>Key Features:</b>\n• Maximum performance (PageSpeed 95+)\n• 3D visualization of objects\n• Interactive project map\n• Multi-language support (EN/NL)\n• Responsive for all devices"
+        },
+        {
+          "id": "tech",
+          "title": "Tech Stack",
+          "content": "<b>Core Technologies:</b>\n• React + Vite\n• TypeScript\n• Tailwind CSS\n• Framer Motion\n• i18next"
+        },
+        {
+          "id": "design",
+          "title": "Design Colors",
+          "content": "<b>Branding Colors:</b>\n• Primary: BESIX Blue\n• Secondary: Sora White\n• Accent: Construction Orange\n\n<b>Typography:</b>\n• Sora (Main Font)\n• Inter (Fallback)"
+        },
+        {
+          "id": "req",
+          "title": "Requirements Spec",
+          "content": "<b>Functional Requirements:</b>\n• Fast loading across all regions\n• Intuitive project navigation\n• Secure contact form integration"
+        }
+      ]
+    }
+  },
+  "postsData": [
+    {
+      "id": 1,
+      "title": "Building a Modern Portfolio",
+      "date": "2024-03-20",
+      "excerpt": "How I built this portfolio using React and modern web technologies",
+      "content": "# Building a Modern Portfolio\n\nIn this post, I'll share my experience building a modern portfolio website using React, Tailwind CSS, and other cutting-edge technologies.\n\n## The Tech Stack\n\n- React for the UI\n- Tailwind CSS for styling\n- Framer Motion for animations\n\n## Key Features\n\n1. Dark/Light theme\n2. Responsive design\n3. Markdown support"
+    },
+    {
+      "id": 2,
+      "title": "Web Development Best Practices",
+      "date": "2024-03-15",
+      "excerpt": "Essential practices for modern web development",
+      "content": "# Web Development Best Practices\n\nLet's explore some essential practices for modern web development that I've learned over the years.\n\n## 1. Performance First\n\nAlways optimize for performance from the start.\n\n## 2. Responsive Design\n\nMake your sites work on all devices.\n\n## 3. Accessibility\n\nEnsure your sites are accessible to everyone."
+    }
+  ]
+}

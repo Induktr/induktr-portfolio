@@ -1,36 +1,45 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Induktr Portfolio
 
-## Getting Started
+A premium portfolio and marketplace platform built with **Next.js 15+ (App Router)**, **Tailwind CSS v4**, and **Feature-Sliced Design (FSD)** architecture.
 
-First, run the development server:
+## 🚀 Features
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- **Modern Tech Stack**: Next.js, React 19, Redux Toolkit, React Query.
+- **Micro-Animations**: Dynamic interaction with Framer Motion.
+- **Integrated Marketplace**: Purchase and view templates with advanced filtering.
+- **Admin Dashboard**: Secure management of projects, tools, and FAQ.
+- **Telegram Bot Integration**: Real-time notifications for leads and automated delivery.
+- **i18n Support**: Full internationalization for English, Ukrainian, and Russian.
+- **Database**: Drizzle ORM with Neon (PostgreSQL).
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🏗️ Architecture
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Following the **Feature-Sliced Design (FSD)** methodology:
+- `app/`: Routing and global layouts.
+- `pages/`: Page-level components.
+- `widgets/`: Complex UI compositions (e.g., Header, Footer).
+- `features/`: Specific user actions/functionality (e.g., auth, contact-form).
+- `entities/`: Business logic and data structures (e.g., project, marketplace-item).
+- `shared/`: Low-level components, hooks, assets, and APIs.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 🛠️ Development
 
-## Learn More
+### Prerequisites
+- Node.js 18+
+- PostgreSQL database (Neon recommended)
+- Telegram Bot Token (for notifications)
 
-To learn more about Next.js, take a look at the following resources:
+### Setup
+1. Clone the repository.
+2. `npm install`
+3. Copy `.env.example` to `.env` and fill in the variables.
+4. `npm run dev`
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Commands
+- `npm run dev`: Start development server.
+- `npm run build`: Build for production.
+- `npm run start`: Start production server.
+- `npm run lint`: Run ESLint.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 📄 License
+Custom license for Induktr Portfolio. See [Terms](/terms) for details.
