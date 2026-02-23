@@ -21,7 +21,7 @@ export const leads = pgTable("leads", {
 
 export const insertLeadSchema = createInsertSchema(leads);
 export const selectLeadSchema = createSelectSchema(leads);
-export type Lead = typeof leads.$inferSelect;
+export type LeadRow = typeof leads.$inferSelect;
 export type NewLead = typeof leads.$inferInsert;
 
 export const userLanguages = pgTable("user_languages", {

@@ -1,13 +1,13 @@
-import { leads, userLanguages, users, projects, marketplace, tools, faq, experience, chatHistory, type Lead, type NewLead, type User, type NewUser, type ProjectRow, type NewProjectRow, type MarketplaceRow, type NewMarketplaceRow, type ToolRow, type NewToolRow, type FAQRow, type NewFAQRow, type ExperienceRow, type NewExperienceRow, type ChatMessage } from "./schemas/schema";
+import { leads, userLanguages, users, projects, marketplace, tools, faq, experience, chatHistory, type LeadRow, type NewLead, type User, type NewUser, type ProjectRow, type NewProjectRow, type MarketplaceRow, type NewMarketplaceRow, type ToolRow, type NewToolRow, type FAQRow, type NewFAQRow, type ExperienceRow, type NewExperienceRow, type ChatMessage } from "./schemas/schema";
 import { db } from "./client";
 import { eq } from "drizzle-orm";
 
 export interface IStorage {
-  createLead(lead: any): Promise<Lead>;
-  getLead(id: number): Promise<Lead | undefined>;
-  getLeadByAccessCode(code: string): Promise<Lead | undefined>;
-  updateLeadStatus(id: number, status: string, materialsUrl?: string): Promise<Lead>;
-  setLeadTelegramChatId(id: number, chatId: string): Promise<Lead>;
+  createLead(lead: any): Promise<LeadRow>;
+  getLead(id: number): Promise<LeadRow | undefined>;
+  getLeadByAccessCode(code: string): Promise<LeadRow | undefined>;
+  updateLeadStatus(id: number, status: string, materialsUrl?: string): Promise<LeadRow>;
+  setLeadTelegramChatId(id: number, chatId: string): Promise<LeadRow>;
   getUserByUsername(username: string): Promise<User | undefined>;
   getUser(id: number): Promise<User | undefined>;
   getProjects(): Promise<ProjectRow[]>;
@@ -34,7 +34,7 @@ export interface IStorage {
   setUserLanguage(chatId: string, lang: string): Promise<void>;
   addChatMessage(chatId: string, role: string, content: string): Promise<void>;
   getChatHistory(chatId: string): Promise<ChatMessage[]>;
-  getAllLeads(): Promise<Lead[]>;
+  getAllLeads(): Promise<LeadRow[]>;
 }
 
 export class DatabaseStorage implements IStorage {
@@ -48,23 +48,23 @@ export class DatabaseStorage implements IStorage {
     return user;
   }
 
-  async createLead(insertLead: any): Promise<Lead> {
+  async createLead(insertLead: any): Promise<LeadRow> {
     const accessCode = Math.random().toString(36).substring(2, 10).toUpperCase();
     const [lead] = await db.insert(leads).values({ ...insertLead, accessCode }).returning();
     return lead;
   }
 
-  async getLead(id: number): Promise<Lead | undefined> {
+  async getLead(id: number): Promise<LeadRow | undefined> {
     const [lead] = await db.select().from(leads).where(eq(leads.id, id));
     return lead;
   }
 
-  async getLeadByAccessCode(code: string): Promise<Lead | undefined> {
+  async getLeadByAccessCode(code: string): Promise<LeadRow | undefined> {
     const [lead] = await db.select().from(leads).where(eq(leads.accessCode, code));
     return lead;
   }
 
-  async updateLeadStatus(id: number, status: string, materialsUrl?: string): Promise<Lead> {
+  async updateLeadStatus(id: number, status: string, materialsUrl?: string): Promise<LeadRow> {
     const [lead] = await db
       .update(leads)
       .set({ status, materialsUrl })
@@ -73,7 +73,7 @@ export class DatabaseStorage implements IStorage {
     return lead;
   }
 
-  async setLeadTelegramChatId(id: number, chatId: string): Promise<Lead> {
+  async setLeadTelegramChatId(id: number, chatId: string): Promise<LeadRow> {
     const [lead] = await db
       .update(leads)
       .set({ telegramChatId: chatId })
@@ -194,7 +194,7 @@ export class DatabaseStorage implements IStorage {
     return await db.select().from(chatHistory).where(eq(chatHistory.chatId, chatId));
   }
 
-  async getAllLeads(): Promise<Lead[]> {
+  async getAllLeads(): Promise<LeadRow[]> {
     return await db.select().from(leads);
   }
 

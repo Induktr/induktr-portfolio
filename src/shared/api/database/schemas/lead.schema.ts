@@ -10,11 +10,11 @@ export const LeadSchema = z.object({
     "Bot Development", 
     "Other"
   ], {
-    required_error: "Please select a project type",
+    error: "Please select a project type",
   }),
   budget: z.string().min(1, "Budget is required"),
   deadline: z.string().optional(),
-  description: z.string().min(10, "Description must be at least 10 characters long").or(z.string().optional()),
+  description: z.string().min(10, "Description must be at least 10 characters long").or(z.string().length(0)).optional(),
   paymentMethod: z.string().optional(),
   orderType: z.enum(["custom", "template"]).default("custom"),
   templateId: z.string().optional(),
