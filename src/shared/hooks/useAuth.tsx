@@ -1,7 +1,7 @@
 import { createContext, useContext, ReactNode } from "react";
 import { useQuery, useMutation } from "@tanstack/react-query";
 import { queryClient } from "@/shared/lib/queryClient";
-import { useToast } from "@/shared/hooks/use-toast";
+import { useToast } from "@/shared/ui";
 import { User, NewUser } from "@shared/api/database/schemas/schema";
 
 interface AuthContextType {

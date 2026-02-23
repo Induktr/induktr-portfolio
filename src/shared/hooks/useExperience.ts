@@ -1,6 +1,6 @@
 import { useQuery, useMutation } from "@tanstack/react-query";
 import { queryClient } from "@/shared/lib/queryClient";
-import { useToast } from "@/shared/hooks/use-toast";
+import { useToast } from "@/shared/ui";
 import { ExperienceRow, NewExperienceRow } from "@shared/api/database/schemas/schema";
 import { useTranslation } from "react-i18next";
 import { useMemo } from "react";
