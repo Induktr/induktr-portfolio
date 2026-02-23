@@ -56,11 +56,17 @@ export function ContactForm() {
     defaultValues: {
       name: "",
       contact: "",
-      projectType: undefined,
+      projectType: "Other",
       budget: "",
       deadline: "",
-      paymentMethod: undefined,
+      paymentMethod: "",
       description: "",
+      orderType: "custom",
+      templateId: "",
+      status: "pending",
+      telegramChatId: "",
+      accessCode: "",
+      materialsUrl: "",
     },
   });
 

@@ -45,6 +45,12 @@ export const PurchaseDialog = ({
       orderType: "template",
       templateId: template?.id || "",
       description: `Purchase of template: ${template?.title}`,
+      paymentMethod: "",
+      deadline: "",
+      status: "pending",
+      telegramChatId: "",
+      accessCode: "",
+      materialsUrl: "",
     },
   });
 
