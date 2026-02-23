@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import { Play, Pause, Volume2, VolumeX, Maximize, RotateCcw } from 'lucide-react';
 import { Slider } from '@/shared/ui/slider';
 import { Button } from '@/shared/ui/button';
@@ -19,7 +19,7 @@ export function VideoPlayer({ src, poster, className, autoPlay = false }: VideoP
   const [volume, setVolume] = useState(1);
   const [isMuted, setIsMuted] = useState(false);
   const [showControls, setShowControls] = useState(true);
-  const controlsTimeoutRef = useRef<NodeJS.Timeout>();
+  const controlsTimeoutRef = useRef<NodeJS.Timeout>(null);
 
   // Check if URL is YouTube
   const getYoutubeId = (url: string) => {
