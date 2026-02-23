@@ -4,7 +4,7 @@ import { getSession } from "@/shared/lib/auth";
 
 export async function PATCH(
   req: Request,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   const session = await getSession();
   if (!session?.user) {
@@ -12,8 +12,9 @@ export async function PATCH(
   }
 
   try {
+    const { id: idStr } = await params;
     const body = await req.json();
-    const id = parseInt(params.id);
+    const id = parseInt(idStr);
     const item = await storage.updateMarketplaceItem(id, body);
     return NextResponse.json(item);
   } catch (error) {
@@ -23,7 +24,7 @@ export async function PATCH(
 
 export async function DELETE(
   _req: Request,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   const session = await getSession();
   if (!session?.user) {
@@ -31,7 +32,8 @@ export async function DELETE(
   }
 
   try {
-    const id = parseInt(params.id);
+    const { id: idStr } = await params;
+    const id = parseInt(idStr);
     await storage.deleteMarketplaceItem(id);
     return new Response(null, { status: 204 });
   } catch (error) {
