@@ -6,7 +6,7 @@ import { ScrollArea } from "@/shared/ui/scroll-area";
 import { Check, ShoppingCart, Rocket, Code2, Layers, FileText, ArrowLeft, MonitorPlay, Play, HelpCircle } from "lucide-react";
 import { MarkdownViewer } from "@/shared/ui/MarkdownViewer";
 import { useTranslation } from "react-i18next";
-import { Link } from "wouter";
+import Link from "next/link";
 import type { DocPage, ProjectMarketplaceData } from "@/shared/types/marketplace";
 import { ProductDetailsDialogProps, StateView } from "@/shared/types/product";
 import { getYouTubeId, getThumbnail } from "@/shared/utils/services/youtube";
