@@ -10,6 +10,15 @@ import { DocPage, RoadmapStage, VideoResource } from "@shared/types/server/conte
 
 let bot: TelegramBot | null = null;
 let isInitialized = false;
+let pendingTasks: Promise<any>[] = [];
+
+const trackTask = <T>(promise: Promise<T>): Promise<T> => {
+  pendingTasks.push(promise);
+  promise.finally(() => {
+    pendingTasks = pendingTasks.filter(p => p !== promise);
+  });
+  return promise;
+};
 
 const MARKETPLACE_RESOURCES: Record<string, Record<string, ProjectMarketplaceData>> = {
   en: (enData as any).marketplaceData,
@@ -718,14 +727,32 @@ export const botManager = {
     console.log(`[bot] Initializing Telegram Bot (${options.polling ? 'Polling' : 'Webhook'} mode)...`);
     bot = new TelegramBot(token, { polling: options.polling });
 
+    // Override methods to track background tasks in serverless
+    const originalSendMessage = bot.sendMessage.bind(bot);
+    bot.sendMessage = (...args: any[]) => trackTask((originalSendMessage as any)(...args));
+    
+    const originalAnswerCallback = bot.answerCallbackQuery.bind(bot);
+    bot.answerCallbackQuery = (...args: any[]) => trackTask((originalAnswerCallback as any)(...args));
+
     setupListeners();
     isInitialized = true;
     console.log("[bot] Telegram Bot initialized successfully");
   },
 
-  processUpdate(update: any) {
+  async processUpdate(update: any) {
     if (bot) {
+      console.log("[bot] Processing update...");
       bot.processUpdate(update);
+      
+      // Wait for handlers to start and for pending tasks to complete
+      // We wait at least 500ms to allow event emission to happen
+      await new Promise(resolve => setTimeout(resolve, 800));
+      
+      if (pendingTasks.length > 0) {
+        console.log(`[bot] Waiting for ${pendingTasks.length} pending tasks...`);
+        await Promise.allSettled(pendingTasks);
+      }
+      console.log("[bot] Update processing finished");
     }
   },
 
@@ -739,7 +766,7 @@ export const botManager = {
   async sendNotification(telegramChatId: string, message: string) {
     if (!bot) return;
     try {
-      await bot.sendMessage(telegramChatId, message, { parse_mode: "HTML" });
+      await trackTask(bot.sendMessage(telegramChatId, message, { parse_mode: "HTML" }));
     } catch (error) {
       if (error instanceof Error) console.error(`[bot] Failed to send notification to ${telegramChatId}`, error);
     }

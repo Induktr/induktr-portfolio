@@ -48,9 +48,9 @@ export async function POST(req: Request) {
     }
 
     const body = await req.json();
-    console.log(`[bot-webhook] Update body:`, JSON.stringify(body).substring(0, 200));
+    console.log(`[bot-webhook] Update body path: ${body.message?.text || body.callback_query?.data || 'unknown'}`);
 
-    botManager.processUpdate(body);
+    await botManager.processUpdate(body);
     
     // In serverless, we might need a small delay or use await if the library supported it
     // But since it doesn't, we just return OK and hope for the best, or use telegraf
