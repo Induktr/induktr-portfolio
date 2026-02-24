@@ -71,8 +71,7 @@ const getProductVideos = (lang: string): Record<string, VideoResource[]> => {
   return videos;
 };
 
-const t = async (chatId: string, key: string, params: Record<string, any> = {}): Promise<string> => {
-  const lang = (await storage.getUserLanguage(chatId)) || "en";
+const t = (key: string, params: Record<string, any> = {}, lang: string = "en"): string => {
   let str = BOT_TRANSLATIONS[lang as keyof typeof BOT_TRANSLATIONS]?.[key] || BOT_TRANSLATIONS["en"]?.[key] || key;
 
   Object.keys(params).forEach(p => {
@@ -156,7 +155,7 @@ const getMergedProjects = async (lang: string): Promise<Project[]> => {
 const sendMarketplace = async (chatId: string) => {
   if (!bot) return;
   const lang = (await storage.getUserLanguage(chatId)) || "en";
-  const message = await t(chatId, "marketplace_title");
+  const message = t("marketplace_title", {}, lang);
   const templates = await getMergedMarketplace(lang);
 
   const keyboard = templates.map((t: any) => [
@@ -172,7 +171,7 @@ const sendMarketplace = async (chatId: string) => {
 const sendPortfolio = async (chatId: string) => {
   if (!bot) return;
   const lang = (await storage.getUserLanguage(chatId)) || "en";
-  const message = await t(chatId, "portfolio_title");
+  const message = t("portfolio_title", {}, lang);
   const projectList = await getMergedProjects(lang);
 
   const keyboard = projectList.map((p: any) => [
@@ -197,7 +196,8 @@ const setupListeners = () => {
   bot.onText(/\/lang/, async (msg) => {
     console.log(`[bot] Command /lang triggered by ${msg.chat.id}`);
     const chatId = msg.chat.id.toString();
-    await bot?.sendMessage(chatId, await t(chatId, "lang_title"), {
+    const lang = (await storage.getUserLanguage(chatId)) || "en";
+    await bot?.sendMessage(chatId, t("lang_title", {}, lang), {
       parse_mode: "HTML",
       reply_markup: {
         inline_keyboard: [[
@@ -212,17 +212,18 @@ const setupListeners = () => {
   bot.onText(/\/start ?(.+)?/, async (msg, match) => {
     console.log(`[bot] Command /start triggered by ${msg.chat.id}`);
     const chatId = msg.chat.id.toString();
+    const lang = (await storage.getUserLanguage(chatId)) || "en";
     const accessCode = match ? match[1] : undefined;
     const userName = msg.from?.username || msg.from?.first_name || "User";
 
     if (!accessCode) {
-      await bot?.sendMessage(chatId, formatMessage(await t(chatId, "welcome")), { parse_mode: "HTML" });
+      await bot?.sendMessage(chatId, formatMessage(t("welcome", {}, lang)), { parse_mode: "HTML" });
       return;
     }
 
     const lead = await storage.getLeadByAccessCode(accessCode);
     if (!lead) {
-      bot?.sendMessage(chatId, await t(chatId, "invalid_code"));
+      bot?.sendMessage(chatId, t("invalid_code", {}, lang));
       return;
     }
 
@@ -230,24 +231,25 @@ const setupListeners = () => {
 
     bot?.sendMessage(
       chatId,
-      await t(chatId, "order_linked", {
+      t("order_linked", {
         id: lead.id,
         type: lead.projectType,
         deadline: lead.deadline || "???"
-      }),
+      }, lang),
       { parse_mode: "HTML" }
     );
 
     const adminChatId = process.env.TELEGRAM_CHAT_ID;
     if (adminChatId) {
+      const adminLang = (await storage.getUserLanguage(adminChatId)) || "en";
       bot?.sendMessage(
         adminChatId,
-        await t(adminChatId, "lead_connected", {
+        t("lead_connected", {
           id: lead.id,
           name: lead.name,
           user: userName,
           chatId
-        }),
+        }, adminLang),
         { parse_mode: "HTML" }
       );
     }
@@ -265,11 +267,12 @@ const setupListeners = () => {
 
   bot.onText(/\/about/, async (msg) => {
     const chatId = msg.chat.id.toString();
-    bot?.sendMessage(chatId, await t(chatId, "about_title"), {
+    const lang = (await storage.getUserLanguage(chatId)) || "en";
+    bot?.sendMessage(chatId, t("about_title", {}, lang), {
       parse_mode: "HTML",
       reply_markup: {
         inline_keyboard: [[
-          { text: await t(chatId, "philosophy_btn"), callback_data: "philosophy_detail" }
+          { text: t("philosophy_btn", {}, lang), callback_data: "philosophy_detail" }
         ]]
       }
     });
@@ -277,14 +280,15 @@ const setupListeners = () => {
 
   bot.onText(/\/faq/, async (msg) => {
     const chatId = msg.chat.id.toString();
-    const text = await t(chatId, "faq_title");
+    const lang = (await storage.getUserLanguage(chatId)) || "en";
+    const text = t("faq_title", {}, lang);
     await bot?.sendMessage(chatId, text, {
       parse_mode: "HTML",
       reply_markup: {
         inline_keyboard: [
-          [{ text: await t(chatId, "btn_faq_general"), callback_data: "faq_general" }],
-          [{ text: await t(chatId, "btn_faq_tech"), callback_data: "faq_tech" }],
-          [{ text: await t(chatId, "btn_faq_payments"), callback_data: "faq_payments" }]
+          [{ text: t("btn_faq_general", {}, lang), callback_data: "faq_general" }],
+          [{ text: t("btn_faq_tech", {}, lang), callback_data: "faq_tech" }],
+          [{ text: t("btn_faq_payments", {}, lang), callback_data: "faq_payments" }]
         ]
       }
     });
@@ -292,7 +296,8 @@ const setupListeners = () => {
 
   bot.onText(/\/payment/, async (msg) => {
     const chatId = msg.chat.id.toString();
-    bot?.sendMessage(chatId, await t(chatId, "payment_title"), { parse_mode: "HTML" });
+    const lang = (await storage.getUserLanguage(chatId)) || "en";
+    bot?.sendMessage(chatId, t("payment_title", {}, lang), { parse_mode: "HTML" });
   });
 
   bot.on("callback_query", async (query) => {
@@ -305,8 +310,8 @@ const setupListeners = () => {
     if (data.startsWith("set_lang:")) {
       const langCode = data.split(":")[1];
       await storage.setUserLanguage(chatId, langCode);
-      await bot?.answerCallbackQuery(query.id, { text: await t(chatId, "lang_updated") });
-      await bot?.sendMessage(chatId, formatMessage(await t(chatId, "welcome")), { parse_mode: "HTML" });
+      await bot?.answerCallbackQuery(query.id, { text: t("lang_updated", {}, langCode) });
+      await bot?.sendMessage(chatId, formatMessage(t("welcome", {}, langCode)), { parse_mode: "HTML" });
       return;
     }
 
@@ -317,22 +322,22 @@ const setupListeners = () => {
       if (!temp) return;
 
       const message = `🛍️ <b>${temp.title}</b>\n\n` +
-        `💰 <b>${await t(chatId, "label_price")}:</b> $${temp.price}\n\n` +
-        `📝 <b>${await t(chatId, "label_description")}:</b> ${formatMessage(temp.description)}\n\n` +
-        `🛠️ <b>${await t(chatId, "label_stack")}:</b> ${temp.stack.join(", ")}\n\n` +
-        `✨ <b>${await t(chatId, "label_features")}:</b>\n${temp.features.map((f: string) => `• ${formatMessage(f)}`).join("\n")}`;
+        `💰 <b>${t("label_price", {}, lang)}:</b> $${temp.price}\n\n` +
+        `📝 <b>${t("label_description", {}, lang)}:</b> ${formatMessage(temp.description)}\n\n` +
+        `🛠️ <b>${t("label_stack", {}, lang)}:</b> ${temp.stack.join(", ")}\n\n` +
+        `✨ <b>${t("label_features", {}, lang)}:</b>\n${temp.features.map((f: string) => `• ${formatMessage(f)}`).join("\n")}`;
 
       const inline_keyboard = [
         [
-          { text: "🗺️ " + await t(chatId, "roadmap"), callback_data: `show_roadmap:${temp.id}` },
-          { text: "📚 " + await t(chatId, "docs"), callback_data: `show_docs:${temp.id}` }
+          { text: "🗺️ " + t("roadmap", {}, lang), callback_data: `show_roadmap:${temp.id}` },
+          { text: "📚 " + t("docs", {}, lang), callback_data: `show_docs:${temp.id}` }
         ],
         [
-          { text: "🎬 " + await t(chatId, "video"), callback_data: `show_videos:${temp.id}` },
-          { text: "💳 " + await t(chatId, "buy"), callback_data: `buy_template:${temp.id}` }
+          { text: "🎬 " + t("video", {}, lang), callback_data: `show_videos:${temp.id}` },
+          { text: "💳 " + t("buy", {}, lang), callback_data: `buy_template:${temp.id}` }
         ],
         [
-          { text: "⬅️ " + await t(chatId, "back_to_shop"), callback_data: "goto_marketplace" }
+          { text: "⬅️ " + t("back_to_shop", {}, lang), callback_data: "goto_marketplace" }
         ]
       ];
 
@@ -350,11 +355,11 @@ const setupListeners = () => {
       const roadmap = roadmaps[id];
 
       if (!roadmap) {
-        await bot?.answerCallbackQuery(query.id, { text: await t(chatId, "roadmap_coming_soon") });
+        await bot?.answerCallbackQuery(query.id, { text: t("roadmap_coming_soon", {}, lang) });
         return;
       }
 
-      let message = (await t(chatId, "roadmap_title", { id: id.toUpperCase() })) + "\n\n";
+      let message = t("roadmap_title", { id: id.toUpperCase() }, lang) + "\n\n";
       roadmap.forEach((stage: any) => {
         const statusIcon = stage.status === "completed" ? "✅" : (stage.status === "in-progress" ? "⏳" : "💤");
         message += `${statusIcon} <b>${stage.title}</b>\n`;
@@ -367,7 +372,7 @@ const setupListeners = () => {
       await bot?.sendMessage(chatId, message, {
         parse_mode: "HTML",
         reply_markup: {
-          inline_keyboard: [[{ text: "⬅️ " + await t(chatId, "back_to_template"), callback_data: `view_template:${id}` }]]
+          inline_keyboard: [[{ text: "⬅️ " + t("back_to_template", {}, lang), callback_data: `view_template:${id}` }]]
         }
       });
       await bot?.answerCallbackQuery(query.id);
@@ -380,15 +385,15 @@ const setupListeners = () => {
       const docs = docsByLang[id];
 
       if (!docs) {
-        await bot?.answerCallbackQuery(query.id, { text: await t(chatId, "docs_coming_soon") });
+        await bot?.answerCallbackQuery(query.id, { text: t("docs_coming_soon", {}, lang) });
         return;
       }
 
-      let message = await t(chatId, "knowledge_base", { id: id.toUpperCase() }) + "\n\n";
+      let message = t("knowledge_base", { id: id.toUpperCase() }, lang) + "\n\n";
       const keyboard = docs.map((page: any) => [
         { text: "📄 " + page.title, callback_data: `show_doc_page:${id}:${page.id}` }
       ]);
-      keyboard.push([{ text: "⬅️ " + await t(chatId, "back_to_template"), callback_data: `view_template:${id}` }]);
+      keyboard.push([{ text: "⬅️ " + t("back_to_template", {}, lang), callback_data: `view_template:${id}` }]);
 
       await bot?.sendMessage(chatId, message, {
         parse_mode: "HTML",
@@ -410,7 +415,7 @@ const setupListeners = () => {
       await bot?.sendMessage(chatId, `📄 <b>${page.title}</b>\n\n${formattedContent}`, {
         parse_mode: "HTML",
         reply_markup: {
-          inline_keyboard: [[{ text: "⬅️ " + await t(chatId, "back_to_docs"), callback_data: `show_docs:${templateId}` }]]
+          inline_keyboard: [[{ text: "⬅️ " + t("back_to_docs", {}, lang), callback_data: `show_docs:${templateId}` }]]
         }
       });
       await bot?.answerCallbackQuery(query.id);
@@ -423,13 +428,13 @@ const setupListeners = () => {
       const videos = videosByLang[id];
 
       if (!videos) {
-        await bot?.answerCallbackQuery(query.id, { text: await t(chatId, "video_coming_soon") });
+        await bot?.answerCallbackQuery(query.id, { text: t("video_coming_soon", {}, lang) });
         return;
       }
 
-      let message = `🎬 ` + await t(chatId, "video_materials", { id: id.toUpperCase() }) + `\n\n`;
-      const watchText = await t(chatId, "watch_in_browser");
-      const durLabel = await t(chatId, "label_duration");
+      let message = `🎬 ` + t("video_materials", { id: id.toUpperCase() }, lang) + `\n\n`;
+      const watchText = t("watch_in_browser", {}, lang);
+      const durLabel = t("label_duration", {}, lang);
       for (const v of videos) {
         message += `📽️ <b>${v.title}</b>\n`;
         message += `⏱ ${durLabel}: ${v.duration}\n`;
@@ -439,7 +444,7 @@ const setupListeners = () => {
       await bot?.sendMessage(chatId, message, {
         parse_mode: "HTML",
         reply_markup: {
-          inline_keyboard: [[{ text: "⬅️ " + await t(chatId, "back_to_template"), callback_data: `view_template:${id}` }]]
+          inline_keyboard: [[{ text: "⬅️ " + t("back_to_template", {}, lang), callback_data: `view_template:${id}` }]]
         },
         disable_web_page_preview: false
       });
@@ -454,16 +459,16 @@ const setupListeners = () => {
       if (!proj) return;
 
       const message = `🚀 <b>${proj.title}</b>\n\n` +
-        `📍 <b>${await t(chatId, "label_status")}:</b> ${proj.status}\n` +
-        `🏷️ <b>${await t(chatId, "label_categories")}:</b> ${proj.categories.join(", ")}\n\n` +
-        `📝 <b>${await t(chatId, "label_about")}:</b> ${formatMessage(proj.description)}\n\n` +
-        `🛠️ <b>${await t(chatId, "label_stack")}:</b> ${proj.techStack.join(", ")}`;
+        `📍 <b>${t("label_status", {}, lang)}:</b> ${proj.status}\n` +
+        `🏷️ <b>${t("label_categories", {}, lang)}:</b> ${proj.categories.join(", ")}\n\n` +
+        `📝 <b>${t("label_about", {}, lang)}:</b> ${formatMessage(proj.description)}\n\n` +
+        `🛠️ <b>${t("label_stack", {}, lang)}:</b> ${proj.techStack.join(", ")}`;
 
       await bot?.sendMessage(chatId, message, {
         parse_mode: "HTML",
         reply_markup: {
           inline_keyboard: [[
-            { text: "⬅️ " + await t(chatId, "back_to_portfolio"), callback_data: "goto_portfolio" }
+            { text: "⬅️ " + t("back_to_portfolio", {}, lang), callback_data: "goto_portfolio" }
           ]]
         }
       });
@@ -477,16 +482,16 @@ const setupListeners = () => {
       const item = templates.find((x: any) => x.slug === slug);
       if (!item) return;
 
-      const message = await t(chatId, "buy_purchase_title", {
+      const message = t("buy_purchase_title", {
         title: item.title,
         price: item.price
-      });
+      }, lang);
 
       await bot?.sendMessage(chatId, message, {
         parse_mode: "HTML",
         reply_markup: {
           inline_keyboard: [[
-            { text: "⬅️ " + await t(chatId, "back_to_marketplace"), callback_data: "goto_marketplace" }
+            { text: "⬅️ " + t("back_to_marketplace", {}, lang), callback_data: "goto_marketplace" }
           ]]
         }
       });
@@ -507,25 +512,25 @@ const setupListeners = () => {
     }
 
     if (data === "faq_general") {
-      await bot?.sendMessage(chatId, await t(chatId, "faq_general_title"), { parse_mode: "HTML" });
+      await bot?.sendMessage(chatId, t("faq_general_title", {}, lang), { parse_mode: "HTML" });
       await bot?.answerCallbackQuery(query.id);
       return;
     }
 
     if (data === "faq_tech") {
-      await bot?.sendMessage(chatId, await t(chatId, "faq_tech_title"), { parse_mode: "HTML" });
+      await bot?.sendMessage(chatId, t("faq_tech_title", {}, lang), { parse_mode: "HTML" });
       await bot?.answerCallbackQuery(query.id);
       return;
     }
 
     if (data === "faq_payments") {
-      await bot?.sendMessage(chatId, await t(chatId, "faq_payments_title"), { parse_mode: "HTML" });
+      await bot?.sendMessage(chatId, t("faq_payments_title", {}, lang), { parse_mode: "HTML" });
       await bot?.answerCallbackQuery(query.id);
       return;
     }
 
     if (data === "philosophy_detail") {
-      const philosophyMessage = await t(chatId, "philosophy_text");
+      const philosophyMessage = t("philosophy_text", {}, lang);
       await bot?.sendMessage(chatId, philosophyMessage, { parse_mode: "HTML" });
       await bot?.answerCallbackQuery(query.id);
       return;
@@ -543,7 +548,7 @@ const setupListeners = () => {
     const lead = await storage.getLead(orderId);
 
     if (!lead) {
-      if (bot) await bot.answerCallbackQuery(query.id, { text: await t(chatId, "error_order_not_found") });
+      if (bot) await bot.answerCallbackQuery(query.id, { text: t("error_order_not_found", {}, lang) });
       return;
     }
 
@@ -551,20 +556,21 @@ const setupListeners = () => {
     await storage.updateLeadStatus(orderId, newStatus);
 
     if (lead.telegramChatId) {
+      const clientLang = (await storage.getUserLanguage(lead.telegramChatId)) || "en";
       const clientMsg = isApprove
-        ? await t(lead.telegramChatId, "payment_approved", { url: lead.materialsUrl || "https://induktr.com/download/example.zip" })
-        : await t(lead.telegramChatId, "request_in_progress");
+        ? t("payment_approved", { url: lead.materialsUrl || "https://induktr.com/download/example.zip" }, clientLang)
+        : t("request_in_progress", {}, clientLang);
       await botManager.sendNotification(lead.telegramChatId, clientMsg);
     }
 
     const statusKey = isApprove ? "status_completed" : "status_in_progress";
-    const statusVal = await t(chatId, statusKey);
+    const statusVal = t(statusKey, {}, lang);
 
     await bot?.answerCallbackQuery(query.id, {
-      text: await t(chatId, "msg_order_status_updated", { id: orderId, status: statusVal })
+      text: t("msg_order_status_updated", { id: orderId, status: statusVal }, lang)
     });
 
-    const statusLabel = await t(chatId, "label_status");
+    const statusLabel = t("label_status", {}, lang);
 
     await bot?.editMessageText(
       (query.message?.text || "") + `\n\n✅ <b>${statusLabel}: ${statusVal}</b> (${new Date().toLocaleTimeString()})`,
@@ -581,23 +587,24 @@ const setupListeners = () => {
     const adminId = process.env.TELEGRAM_CHAT_ID;
     if (chatId !== adminId) return;
 
+    const adminLang = (await storage.getUserLanguage(chatId)) || "en";
     const leadList = await storage.getAllLeads();
     if (leadList.length === 0) {
-      bot?.sendMessage(chatId, await t(chatId, "label_order_list_empty"));
+      bot?.sendMessage(chatId, t("label_order_list_empty", {}, adminLang));
       return;
     }
 
-    let response = (await t(chatId, "label_list_orders")) + "\n\n";
-    const connLabel = await t(chatId, "label_connected");
-    const statusLabel = await t(chatId, "label_status");
-    const codeLabel = await t(chatId, "label_code");
+    let response = t("label_list_orders", {}, adminLang) + "\n\n";
+    const connLabel = t("label_connected", {}, adminLang);
+    const statusLabel = t("label_status", {}, adminLang);
+    const codeLabel = t("label_code", {}, adminLang);
 
     for (const l of leadList) {
       const typeEmoji = l.orderType === 'template' ? '🛍️' : '🚀';
       const statusEmoji = l.status === 'completed' ? '✅' : (l.status === 'in_progress' ? '⏳' : '💤');
 
       const statusKey = l.status === 'completed' ? 'status_completed' : (l.status === 'in_progress' ? 'status_in_progress' : 'status_new');
-      const statusVal = await t(chatId, statusKey);
+      const statusVal = t(statusKey, {}, adminLang);
 
       response += `${typeEmoji} #<b>${l.id}</b> | ${l.name}\n`;
       response += `   <b>${statusLabel}:</b> ${statusEmoji} ${statusVal}\n`;
@@ -613,25 +620,27 @@ const setupListeners = () => {
     const adminId = process.env.TELEGRAM_CHAT_ID;
     if (chatId !== adminId) return;
 
+    const adminLang = (await storage.getUserLanguage(chatId)) || "en";
     const orderId = parseInt(match![1]);
     const url = match![2];
     const customMessage = match![3];
 
     const lead = await storage.getLead(orderId);
     if (!lead) {
-      bot?.sendMessage(chatId, await t(chatId, "admin_order_not_found", { id: orderId }));
+      bot?.sendMessage(chatId, t("admin_order_not_found", { id: orderId }, adminLang));
       return;
     }
 
     await storage.updateLeadStatus(orderId, "completed", url);
-    bot?.sendMessage(chatId, await t(chatId, "admin_order_ready_success", { id: orderId }));
+    bot?.sendMessage(chatId, t("admin_order_ready_success", { id: orderId }, adminLang));
 
     if (lead.telegramChatId) {
-      const commentLabel = await t(lead.telegramChatId, "comment_label");
-      const clientMsg = await t(lead.telegramChatId, "order_ready_client", {
+      const clientLang = (await storage.getUserLanguage(lead.telegramChatId)) || "en";
+      const commentLabel = t("comment_label", {}, clientLang);
+      const clientMsg = t("order_ready_client", {
         url,
         custom: customMessage ? `\n\n💬 <b>${commentLabel}:</b>\n<i>${customMessage}</i>` : ""
-      });
+      }, clientLang);
       await botManager.sendNotification(lead.telegramChatId, clientMsg);
     }
   });
@@ -640,6 +649,7 @@ const setupListeners = () => {
     const chatId = msg.chat.id.toString();
     const adminId = process.env.TELEGRAM_CHAT_ID;
     const fullText = match![1].trim();
+    const lang = (await storage.getUserLanguage(chatId)) || "en";
 
     const adminMatch = fullText.match(/^(\d+) (.+)/);
     if (chatId === adminId && adminMatch) {
@@ -651,15 +661,16 @@ const setupListeners = () => {
         return;
       }
 
-      const clientNotification = await t(lead.telegramChatId, "dev_msg_client", {
+      const clientLang = (await storage.getUserLanguage(lead.telegramChatId)) || "en";
+      const clientNotification = t("dev_msg_client", {
         id: orderId,
         text: messageToClient
-      });
+      }, clientLang);
       try {
         await botManager.sendNotification(lead.telegramChatId, clientNotification);
-        bot?.sendMessage(chatId, await t(chatId, "admin_sent_success", { id: orderId }));
+        bot?.sendMessage(chatId, t("admin_sent_success", { id: orderId }, lang));
       } catch {
-        bot?.sendMessage(chatId, await t(chatId, "admin_send_error"));
+        bot?.sendMessage(chatId, t("admin_send_error", {}, lang));
       }
       return;
     }
@@ -670,18 +681,19 @@ const setupListeners = () => {
       const linkedLead = leads.find(l => l.telegramChatId === chatId);
 
       if (adminId) {
-        const orderLabel = await t(adminId, "label_order");
-        let adminNotification = await t(adminId, "new_msg_admin", {
+        const adminLang = (await storage.getUserLanguage(adminId)) || "en";
+        const orderLabel = t("label_order", {}, adminLang);
+        let adminNotification = t("new_msg_admin", {
           user: userName,
           chatId,
           orderInfo: linkedLead ? `📦 <b>${orderLabel}:</b> #${linkedLead.id} [${linkedLead.projectType}]` : "",
           text: fullText,
           orderId: linkedLead?.id || "[ID]"
-        });
+        }, adminLang);
 
         try {
           await bot?.sendMessage(adminId, adminNotification, { parse_mode: "HTML" });
-          bot?.sendMessage(chatId, await t(chatId, "msg_sent"), { parse_mode: "HTML" });
+          bot?.sendMessage(chatId, t("msg_sent", {}, lang), { parse_mode: "HTML" });
         } catch (error) {
           if (error instanceof Error) console.error("Failed to forward/reply client message", error);
         }
@@ -690,7 +702,7 @@ const setupListeners = () => {
     }
 
     if (chatId === adminId && !adminMatch) {
-      bot?.sendMessage(chatId, await t(chatId, "admin_format"), { parse_mode: "HTML" });
+      bot?.sendMessage(chatId, t("admin_format", {}, lang), { parse_mode: "HTML" });
     }
   });
 
@@ -705,12 +717,6 @@ export const botManager = {
 
     console.log(`[bot] Initializing Telegram Bot (${options.polling ? 'Polling' : 'Webhook'} mode)...`);
     bot = new TelegramBot(token, { polling: options.polling });
-
-    bot.getMe().then(me => {
-      console.log(`[bot] Bot identity verified: @${me.username}`);
-    }).catch(err => {
-      console.error("[bot] Bot verification failed! Check TELEGRAM_BOT_TOKEN.", err.message);
-    });
 
     setupListeners();
     isInitialized = true;
