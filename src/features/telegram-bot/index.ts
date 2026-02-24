@@ -190,7 +190,12 @@ const sendPortfolio = async (chatId: string) => {
 const setupListeners = () => {
   if (!bot) return;
 
+  bot.on('message', (msg) => {
+    console.log(`[bot] Message received: "${msg.text}" from ${msg.chat.id}`);
+  });
+
   bot.onText(/\/lang/, async (msg) => {
+    console.log(`[bot] Command /lang triggered by ${msg.chat.id}`);
     const chatId = msg.chat.id.toString();
     await bot?.sendMessage(chatId, await t(chatId, "lang_title"), {
       parse_mode: "HTML",
@@ -205,6 +210,7 @@ const setupListeners = () => {
   });
 
   bot.onText(/\/start ?(.+)?/, async (msg, match) => {
+    console.log(`[bot] Command /start triggered by ${msg.chat.id}`);
     const chatId = msg.chat.id.toString();
     const accessCode = match ? match[1] : undefined;
     const userName = msg.from?.username || msg.from?.first_name || "User";
@@ -248,10 +254,12 @@ const setupListeners = () => {
   });
 
   bot.onText(/\/marketplace/, async (msg) => {
+    console.log(`[bot] Command /marketplace triggered by ${msg.chat.id}`);
     await sendMarketplace(msg.chat.id.toString());
   });
 
   bot.onText(/\/portfolio/, async (msg) => {
+    console.log(`[bot] Command /portfolio triggered by ${msg.chat.id}`);
     await sendPortfolio(msg.chat.id.toString());
   });
 
@@ -693,10 +701,16 @@ const setupListeners = () => {
 
 export const botManager = {
   initialize(token: string, options: { polling?: boolean } = { polling: true }) {
-    if (isInitialized) return;
+    if (isInitialized && bot) return;
 
     console.log(`[bot] Initializing Telegram Bot (${options.polling ? 'Polling' : 'Webhook'} mode)...`);
     bot = new TelegramBot(token, { polling: options.polling });
+
+    bot.getMe().then(me => {
+      console.log(`[bot] Bot identity verified: @${me.username}`);
+    }).catch(err => {
+      console.error("[bot] Bot verification failed! Check TELEGRAM_BOT_TOKEN.", err.message);
+    });
 
     setupListeners();
     isInitialized = true;
