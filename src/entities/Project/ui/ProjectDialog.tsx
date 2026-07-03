@@ -245,7 +245,6 @@ export const ProjectDialog = ({ project, isOpen, onClose }: ProjectDialogProps) 
 
               <TabsContent value="tech" className="mt-0 space-y-8">
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                  {/* Основной стек */}
                   <div className="md:col-span-3">
                     <h3 className="text-lg font-bold mb-4 flex items-center gap-2">
                       <Cpu className="w-5 h-5 text-primary" />
@@ -259,8 +258,7 @@ export const ProjectDialog = ({ project, isOpen, onClose }: ProjectDialogProps) 
                       ))}
                     </div>
                   </div>
-
-                  {/* Дополнительные технологии */}
+                  
                   {project.additionalTech && Object.entries(project.additionalTech).map(([key, group]) => (
                     group && (
                       <Card key={key} className="bg-accent/20 border-white/5 border-dashed">

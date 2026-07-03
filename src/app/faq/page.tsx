@@ -19,7 +19,7 @@ import { useAppDispatch } from "@/shared/lib/store/store";
 import { openModal } from "@/shared/lib/store/slices/uiSlice";
 import { Loader } from "@/shared/ui/Loader";
 
-export default function FAQPage() {
+const FAQPage = () => {
   const { t } = useTranslation();
   const { user } = useAuth();
   const { MERGED_FAQ: faqCategories, isLoading, deleteFAQMutation } = useFAQ();
@@ -39,25 +39,23 @@ export default function FAQPage() {
           animate={{ opacity: 1, y: 0 }}
           className="text-center mb-16"
         >
-        {isLoading && <Loader className="min-h-screen flex items-center justify-center" text="Loading FAQ..." variant="primary" />}
+          {isLoading && <Loader className="min-h-screen flex items-center justify-center" text="Loading FAQ..." variant="primary" />}
         
-        <div className="inline-flex items-center justify-center p-3 bg-primary/10 rounded-full mb-4">
-          <HelpCircle className="w-8 h-8 text-primary shadow-glow" />
-        </div>
-        <h1 className="text-4xl md:text-5xl font-bold bg-clip-text text-transparent bg-linear-to-r from-primary to-purple-400 mb-4">
-          {t('faq.title', 'Frequently Asked Questions')}
-        </h1>
-        <p className="text-xl text-muted-foreground">
-          {t('faq.subtitle', 'Everything you need to know about Induktr templates and services')}
-        </p>
-
-          
+          <div className="inline-flex items-center justify-center p-3 bg-primary/10 rounded-full mb-4">
+            <HelpCircle className="w-8 h-8 text-primary shadow-glow" />
+          </div>
+          <h1 className="text-4xl md:text-5xl font-bold bg-clip-text text-transparent bg-linear-to-r from-primary to-purple-400 mb-4">
+            {t('faq.title', 'Frequently Asked Questions')}
+          </h1>
+          <p className="text-xl text-muted-foreground">
+            {t('faq.subtitle', 'Everything you need to know about Induktr templates and services')}
+          </p>
           {user && (
-            <Button 
+            <Button
               className="mt-6 gap-2" 
               onClick={() => dispatch(openModal({ modalName: "faqForm" }))}
             >
-              <Plus className="w-4 h-4" /> Add FAQ Item
+              <Plus className="w-4 h-4" /> {t("faq.addFAQItem", "Add FAQ Item")}
             </Button>
           )}
         </motion.div>
@@ -162,3 +160,5 @@ export default function FAQPage() {
     </div>
   );
 }
+
+export default FAQPage;

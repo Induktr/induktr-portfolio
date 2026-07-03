@@ -1,3 +1,8 @@
+import { ProjectMarketplaceData } from "@/shared/types/server/template";
+import enData from "../../../shared/locales/en.json";
+import ruData from "../../../shared/locales/ru.json";
+import uaData from "../../../shared/locales/ua.json";
+
 export const BOT_TRANSLATIONS: Record<string, any> = {
   en: {
     welcome: "👋 <b>Hi! I'm Induktr Portfolio Bot.</b>\n\nI'm your personal assistant in the world of Induktr digital assets.\n\n🚀 <b>What I can do:</b>\n• Show my best <b>projects and portfolio</b>\n• Browse and <b>buy premium templates</b> directly\n• Track the <b>status of your orders</b> in real-time\n\n💡 <b>Navigation:</b>\n🛍️ /marketplace — Templates store\n📂 /portfolio — My cases and dev projects\n🔱 /about — Philosophy and Roadmap\n❓ /faq — Frequently Asked Questions\n💳 /payment — Payment requisites\n🌏 /lang — Change language\n\n<i>If you have a question, use:</i>\n<code>/msg Your text</code>",
@@ -257,4 +262,10 @@ export const BOT_TRANSLATIONS: Record<string, any> = {
     btn_faq_tech: "🛠️ Технічні",
     btn_faq_payments: "💳 Оплата"
   }
+};
+
+export const MARKETPLACE_RESOURCES: Record<string, Record<string, ProjectMarketplaceData>> = {
+  en: (enData as any).marketplaceData,
+  ru: (ruData as any).marketplaceData,
+  ua: (uaData as any).marketplaceData
 };

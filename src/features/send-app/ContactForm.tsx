@@ -81,12 +81,7 @@ export function ContactForm() {
         className: "bg-green-500 text-white border-none",
       });
       
-      if (responseData.orderId && responseData.accessCode) {
-        setSubmittedOrder({
-          orderId: responseData.orderId,
-          accessCode: responseData.accessCode
-        });
-      }
+      if (responseData.orderId && responseData.accessCode) setSubmittedOrder({orderId: responseData.orderId,accessCode: responseData.accessCode});
       
       form.reset();
     } catch (error) {
@@ -113,7 +108,6 @@ export function ContactForm() {
           {t('contactForm.title')}
         </h2>
 
-        {/* Payment Info Block */}
         <div className="mb-8 p-4 bg-primary/5 border border-primary/10 rounded-lg backdrop-blur-sm">
           <div className="flex items-start gap-3">
             <Info className="w-5 h-5 text-primary mt-1 flex-shrink-0" />
@@ -299,9 +293,9 @@ export function ContactForm() {
                         </SelectTrigger>
                       </FormControl>
                       <SelectContent>
-                        <SelectItem value="Crypto">{t('contactForm.paymentMethods.crypto')}</SelectItem>
-                        <SelectItem value="Card">{t('contactForm.paymentMethods.card')}</SelectItem>
-                        <SelectItem value="Other">{t('contactForm.paymentMethods.other')}</SelectItem>
+                        <SelectItem value={t("common.crypto", "Crypto")}>{t('contactForm.paymentMethods.crypto')}</SelectItem>
+                        <SelectItem value={t("common.card", "Card")}>{t('contactForm.paymentMethods.card')}</SelectItem>
+                        <SelectItem value={t("common.other", "Other")}>{t('contactForm.paymentMethods.other')}</SelectItem>
                       </SelectContent>
                     </Select>
                     <FormMessage />
@@ -342,32 +336,32 @@ export function ContactForm() {
       <Dialog open={!!submittedOrder} onOpenChange={(open) => !open && setSubmittedOrder(null)}>
         <DialogContent className="sm:max-w-md bg-card border-primary/20">
           <DialogHeader>
-            <DialogTitle className="text-2xl text-primary">🎉 Request Received!</DialogTitle>
+            <DialogTitle className="text-2xl text-primary">{t("common.requestReceived", "Request Received!")}</DialogTitle>
             <DialogDescription>
-              Your project request has been successfully registered.
+              {t("common.requestReceivedDesc", "Your project request has been successfully registered.")}
             </DialogDescription>
           </DialogHeader>
           
           <div className="flex flex-col gap-4 py-4">
             <div className="bg-background/50 p-4 rounded-lg border border-border">
-              <p className="text-sm text-muted-foreground mb-1">Order ID:</p>
+              <p className="text-sm text-muted-foreground mb-1">{t("common.orderID", "Order ID:")}</p>
               <p className="text-xl font-bold font-mono">#{submittedOrder?.orderId}</p>
               
               <div className="my-2 border-t border-border/50" />
               
-              <p className="text-sm text-muted-foreground mb-1">Access Code:</p>
+              <p className="text-sm text-muted-foreground mb-1">{t("common.accessCode", "Access Code:")}</p>
               <p className="text-lg font-mono text-primary bg-primary/10 inline-block px-2 py-1 rounded">
                 {submittedOrder?.accessCode}
               </p>
             </div>
 
             <div className="text-sm text-muted-foreground">
-              To receive updates and files in Telegram, please start our bot:
+              {t("common.subscribeToUpdates", "To receive updates and files in Telegram, please start our bot:")}
             </div>
             
             <Button className="w-full gap-2" variant="outline" onClick={() => window.open(`https://t.me/induktr_portfolio_bot?start=${submittedOrder?.accessCode}`, '_blank')}>
               <Info className="w-4 h-4" />
-              Subscribe to Updates
+              {t("common.subscribeToUpdates", "Subscribe to Updates")}
             </Button>
           </div>
         </DialogContent>

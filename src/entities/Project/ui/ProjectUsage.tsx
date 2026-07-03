@@ -14,6 +14,8 @@ import { motion, AnimatePresence } from 'framer-motion';
 
 import { ProjectUsageProps } from '@/shared/types/project';
 
+import { useTranslation } from 'react-i18next';
+
 export const ProjectUsage = ({ steps }: ProjectUsageProps) => {
   const [currentStep, setCurrentStep] = useState(0);
 
@@ -23,11 +25,11 @@ export const ProjectUsage = ({ steps }: ProjectUsageProps) => {
 
   const currentAction = steps[currentStep]?.actionType || 'interaction';
 
+  const { t } = useTranslation();
+
   return (
     <div className="space-y-8">
-      {/* Visual Simulation Display */}
       <div className="relative h-[300px] w-full bg-black/40 rounded-3xl border border-white/5 overflow-hidden flex items-center justify-center backdrop-blur-sm shadow-2xl">
-        {/* Background Grid Accent */}
         <div className="absolute inset-0 opacity-[0.03] pointer-events-none" 
              style={{ backgroundImage: 'radial-gradient(circle at 1px 1px, white 1px, transparent 0)', backgroundSize: '24px 24px' }} />
         
@@ -40,7 +42,6 @@ export const ProjectUsage = ({ steps }: ProjectUsageProps) => {
             transition={{ type: "spring", stiffness: 300, damping: 30 }}
             className="relative w-full h-full flex items-center justify-center p-8"
           >
-            {/* Visual Presets based on actionType */}
             {currentAction === 'navigation' && (
               <div className="w-full max-w-md space-y-4">
                 <div className="h-10 w-full rounded-xl bg-white/5 border border-white/10 flex items-center px-4 gap-3">
@@ -106,7 +107,7 @@ export const ProjectUsage = ({ steps }: ProjectUsageProps) => {
                       whileTap={{ scale: 0.98 }}
                       className="h-12 w-full bg-primary rounded-xl flex items-center justify-center font-bold text-sm shadow-lg shadow-primary/20"
                     >
-                      SUBMIT
+                      {t("", "SUBMIT")}
                     </motion.div>
                  </div>
               </div>
@@ -161,7 +162,7 @@ export const ProjectUsage = ({ steps }: ProjectUsageProps) => {
         {/* Floating Controls Overlay */}
         <div className="absolute top-4 left-4 flex gap-2 no-print">
            <div className="px-3 py-1 bg-black/50 backdrop-blur-md border border-white/10 rounded-full text-[10px] uppercase tracking-widest font-bold">
-              Simulation Mode
+              {t("", "Simulation Mode")}
            </div>
         </div>
       </div>
@@ -180,7 +181,7 @@ export const ProjectUsage = ({ steps }: ProjectUsageProps) => {
                   <div>
                      <h3 className="text-2xl font-bold tracking-tight">{steps[currentStep].title}</h3>
                      <p className="text-xs text-primary uppercase font-bold tracking-wider mt-1 opacity-70">
-                        {currentAction} Action
+                        {currentAction} {t("", "Action")}
                      </p>
                   </div>
                </div>

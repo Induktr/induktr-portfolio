@@ -9,8 +9,8 @@ async function throwIfResNotOk(res: Response) {
 
 const getBaseUrl = () => {
   // Use NEXT_PUBLIC_API_URL if defined, otherwise use current origin for relative paths
-  const apiUrl = process.env.NEXT_PUBLIC_API_URL;
-  if (apiUrl) return apiUrl;
+  const API_URL = process.env.NEXT_PUBLIC_API_URL;
+  if (API_URL) return API_URL;
   return "";
 };
 

@@ -23,7 +23,6 @@ export function ProjectGallery({ project }: ProjectGalleryProps) {
 
   return (
     <div className="relative w-full h-full flex flex-col">
-      {/* Gallery Controls */}
       <div className="absolute top-4 right-4 z-10 flex items-center gap-2">
         <Button
           variant="outline"
@@ -51,7 +50,6 @@ export function ProjectGallery({ project }: ProjectGalleryProps) {
         </Button>
       </div>
 
-      {/* Media Display */}
       <div className="relative flex-1 overflow-hidden">
         <AnimatePresence mode="wait">
           {showVideo && project.video ? (

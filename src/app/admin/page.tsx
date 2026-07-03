@@ -7,12 +7,14 @@ import { Button } from "@/shared/ui/button";
 import { Input } from "@/shared/ui/input";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/shared/ui/card";
 import { motion } from "framer-motion";
+import { useTranslation } from "react-i18next";
 
-export default function AdminPage() {
+const AdminPage = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const { loginMutation, user } = useAuth();
   const router = useRouter();
+  const { t } = useTranslation();
 
   useEffect(() => {
     if (user) router.push("/projects");
@@ -35,15 +37,15 @@ export default function AdminPage() {
       >
         <Card className="border-primary/20 bg-card/50 backdrop-blur-xl">
           <CardHeader className="text-center">
-            <CardTitle className="text-2xl font-bold">Admin Portal</CardTitle>
-            <CardDescription>Enter your credentials to access management tools</CardDescription>
+            <CardTitle className="text-2xl font-bold">{t("admin.title", "Admin Portal")}</CardTitle>
+            <CardDescription>{t("admin.description", "Enter your credentials to access management tools")}</CardDescription>
           </CardHeader>
           <CardContent>
             <form onSubmit={handleSubmit} className="space-y-4">
               <div className="space-y-2">
                 <Input
                   type="text"
-                  placeholder="Username"
+                  placeholder={t("admin.username", "Username")}
                   value={username}
                   onChange={(e) => setUsername(e.target.value)}
                   className="bg-background/50"
@@ -53,7 +55,7 @@ export default function AdminPage() {
               <div className="space-y-2">
                 <Input
                   type="password"
-                  placeholder="Password"
+                  placeholder={t("admin.password", "Password")}
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   className="bg-background/50"
@@ -65,7 +67,7 @@ export default function AdminPage() {
                 className="w-full" 
                 disabled={loginMutation.isPending}
               >
-                {loginMutation.isPending ? "Authenticating..." : "Login to Admin"}
+                {loginMutation.isPending ? t("admin.authenticating", "Authenticating...") : t("admin.login", "Login to Admin")}
               </Button>
             </form>
           </CardContent>
@@ -74,3 +76,5 @@ export default function AdminPage() {
     </div>
   );
 }
+
+export default AdminPage;

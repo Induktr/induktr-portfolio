@@ -1,4 +1,4 @@
-import React from "react";
+import React, { ReactNode } from "react";
 import { motion } from "framer-motion";
 import { cn } from "@/shared/lib/utils";
 
@@ -9,12 +9,12 @@ interface LoaderProps {
   text?: string;
 }
 
-export function Loader({ 
+export const Loader = ({ 
   className, 
   size = "md", 
   variant = "primary",
   text 
-}: LoaderProps) {
+}: LoaderProps) => {
   const sizeMap = {
     sm: "w-6 h-6",
     md: "w-10 h-10",
@@ -98,15 +98,15 @@ export function Loader({
  * Purpose: Optimize browser rendering by delaying the mounting of heavy components
  * until the next animation frame, preventing main thread blocking during crucial paints.
  */
-export function DeferredContent({ 
+export const DeferredContent = ({ 
   children, 
   fallback,
   delay = 0 
 }: { 
-  children: React.ReactNode; 
-  fallback?: React.ReactNode;
+  children: ReactNode; 
+  fallback?: ReactNode;
   delay?: number;
-}) {
+}) => {
   const [shouldRender, setShouldRender] = React.useState(false);
 
   React.useEffect(() => {

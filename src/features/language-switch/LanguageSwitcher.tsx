@@ -13,21 +13,21 @@ import { Globe } from "lucide-react";
 import { handleLanguageChange } from "@/shared/utils/lang/language";
 
 export const LanguageSwitcher = () => {
-  const { i18n } = useTranslation();
+  const { i18n, t } = useTranslation();
 
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button variant="ghost" size="icon">
           <Globe className="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all" />
-          <span className="sr-only">Toggle language</span>
+          <span className="sr-only">{t("common.toggleLanguage", "Toggle language")}</span>
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
         <DropdownMenuRadioGroup value={i18n.language} onValueChange={handleLanguageChange}>
-          <DropdownMenuRadioItem value="en">English (EN)</DropdownMenuRadioItem>
-          <DropdownMenuRadioItem value="ru">Русский (RU)</DropdownMenuRadioItem>
-          <DropdownMenuRadioItem value="ua">Українська (UA)</DropdownMenuRadioItem>
+          <DropdownMenuRadioItem value="en">{t("common.english", "English (EN)")}</DropdownMenuRadioItem>
+          <DropdownMenuRadioItem value="ru">{t("common.russian", "Русский (RU)")}</DropdownMenuRadioItem>
+          <DropdownMenuRadioItem value="ua">{t("common.ukrainian", "Українська (UA)")}</DropdownMenuRadioItem>
         </DropdownMenuRadioGroup>
       </DropdownMenuContent>
     </DropdownMenu>

@@ -4,13 +4,13 @@ import { useTranslation } from "react-i18next";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { SiGithub, SiTelegram } from "react-icons/si";
-import { MobileNav } from "./MobileNav";
+import MobileNav from "./MobileNav";
 import { ThemeToggle } from "@/features/toggle-theme/ThemeToggle";
 import { LanguageSwitcher } from "@/features/language-switch/LanguageSwitcher";
 import { PATHS } from "@/shared/config/paths";
 import { LINKS } from "@/shared/config/links";
 
-export const Header = () => {
+const Header = () => {
   const { t } = useTranslation();
 
   return (
@@ -74,3 +74,5 @@ export const Header = () => {
     </motion.header>
   );
 }
+
+export default Header;

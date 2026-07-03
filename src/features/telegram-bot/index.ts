@@ -1,12 +1,17 @@
 import TelegramBot from "node-telegram-bot-api";
+import { storage } from "@shared/api/database/storage";
+
+import { BOT_TRANSLATIONS, MARKETPLACE_RESOURCES } from "@shared/constants/server/bot_i18n";
+
+import { Template } from "@shared/types/server/template";
+import { Project } from "@shared/types/server/project";
+import { DocPage, RoadmapStage, VideoResource } from "@shared/types/server/content";
+
 import enData from "../../shared/locales/en.json";
 import ruData from "../../shared/locales/ru.json";
 import uaData from "../../shared/locales/ua.json";
-import { storage } from "@shared/api/database/storage";
-import { BOT_TRANSLATIONS } from "@shared/constants/server/bot_i18n";
-import { Template, ProjectMarketplaceData } from "@shared/types/server/template";
-import { Project } from "@shared/types/server/project";
-import { DocPage, RoadmapStage, VideoResource } from "@shared/types/server/content";
+
+import { formatMessage } from "@/shared/utils/services/msg-format";
 
 let bot: TelegramBot | null = null;
 let isInitialized = false;
@@ -17,24 +22,8 @@ const trackTask = <T>(promise: Promise<T>): Promise<T> => {
   promise.finally(() => {
     pendingTasks = pendingTasks.filter(p => p !== promise);
   });
+  
   return promise;
-};
-
-const MARKETPLACE_RESOURCES: Record<string, Record<string, ProjectMarketplaceData>> = {
-  en: (enData as any).marketplaceData,
-  ru: (ruData as any).marketplaceData,
-  ua: (uaData as any).marketplaceData
-};
-
-const formatMessage = (text: string): string => {
-  if (!text) return "";
-  return text
-    .replace(/#+ /g, "") // Remove headers
-    .replace(/\*\*\*(.*?)\*\*\*/g, "<b><i>$1</i></b>") // Bold Italic
-    .replace(/\*\*(.*?)\*\*/g, "<b>$1</b>") // Bold
-    .replace(/\*(.*?)\*/g, "<i>$1</i>") // Italic
-    .replace(/`(.*?)`/g, "<code>$1</code>") // Inline code
-    .replace(/\[(.*?)\]\((.*?)\)/g, '<a href="$2">$1</a>'); // Links
 };
 
 const getTemplates = (lang: string): Template[] => {
@@ -50,33 +39,39 @@ const getProjects = (lang: string): Project[] => {
 const getProductDocs = (lang: string): Record<string, DocPage[]> => {
   const data = MARKETPLACE_RESOURCES[lang] || MARKETPLACE_RESOURCES["en"];
   const docs: Record<string, DocPage[]> = {};
+
   if (data) {
     Object.entries(data).forEach(([key, value]) => {
       docs[key] = value.docs;
     });
   }
+
   return docs;
 };
 
 const getProductRoadmaps = (lang: string): Record<string, RoadmapStage[]> => {
   const data = MARKETPLACE_RESOURCES[lang] || MARKETPLACE_RESOURCES["en"];
   const roadmaps: Record<string, RoadmapStage[]> = {};
+
   if (data) {
     Object.entries(data).forEach(([key, value]) => {
       roadmaps[key] = value.roadmap;
     });
   }
+
   return roadmaps;
 };
 
 const getProductVideos = (lang: string): Record<string, VideoResource[]> => {
   const data = MARKETPLACE_RESOURCES[lang] || MARKETPLACE_RESOURCES["en"];
   const videos: Record<string, VideoResource[]> = {};
+  
   if (data) {
     Object.entries(data).forEach(([key, value]) => {
       videos[key] = value.videos;
     });
   }
+
   return videos;
 };
 
@@ -105,6 +100,7 @@ const getMergedMarketplace = async (lang: string): Promise<Template[]> => {
       try {
         const parsed = JSON.parse(row.data);
         const langData = parsed[lang] || parsed['en'] || Object.values(parsed)[0];
+
         if (langData) {
           itemMap.set(row.slug, {
             ...langData,
@@ -140,6 +136,7 @@ const getMergedProjects = async (lang: string): Promise<Project[]> => {
       try {
         const parsed = JSON.parse(row.data);
         const langData = parsed[lang] || parsed['en'] || Object.values(parsed)[0];
+
         if (langData) {
           const slug = row.slug;
           projectMap.set(slug, {
@@ -163,6 +160,7 @@ const getMergedProjects = async (lang: string): Promise<Project[]> => {
 
 const sendMarketplace = async (chatId: string) => {
   if (!bot) return;
+
   const lang = (await storage.getUserLanguage(chatId)) || "en";
   const message = t("marketplace_title", {}, lang);
   const templates = await getMergedMarketplace(lang);
@@ -179,6 +177,7 @@ const sendMarketplace = async (chatId: string) => {
 
 const sendPortfolio = async (chatId: string) => {
   if (!bot) return;
+
   const lang = (await storage.getUserLanguage(chatId)) || "en";
   const message = t("portfolio_title", {}, lang);
   const projectList = await getMergedProjects(lang);
@@ -192,8 +191,6 @@ const sendPortfolio = async (chatId: string) => {
     reply_markup: { inline_keyboard: keyboard }
   });
 };
-
-// --- Listeners Setup ---
 
 const setupListeners = () => {
   if (!bot) return;
@@ -231,6 +228,7 @@ const setupListeners = () => {
     }
 
     const lead = await storage.getLeadByAccessCode(accessCode);
+
     if (!lead) {
       bot?.sendMessage(chatId, t("invalid_code", {}, lang));
       return;
@@ -249,6 +247,7 @@ const setupListeners = () => {
     );
 
     const adminChatId = process.env.TELEGRAM_CHAT_ID;
+
     if (adminChatId) {
       const adminLang = (await storage.getUserLanguage(adminChatId)) || "en";
       bot?.sendMessage(
@@ -311,9 +310,13 @@ const setupListeners = () => {
 
   bot.on("callback_query", async (query) => {
     const data = query.data;
+
     if (!data) return;
+
     const chatId = query.message?.chat.id.toString();
+
     if (!chatId) return;
+
     const lang = (await storage.getUserLanguage(chatId)) || "en";
 
     if (data.startsWith("set_lang:")) {
@@ -328,6 +331,7 @@ const setupListeners = () => {
       const id = data.split(":")[1];
       const templates = getTemplates(lang);
       const temp = templates.find((x: any) => x.id === id);
+
       if (!temp) return;
 
       const message = `🛍️ <b>${temp.title}</b>\n\n` +
@@ -338,15 +342,15 @@ const setupListeners = () => {
 
       const inline_keyboard = [
         [
-          { text: "🗺️ " + t("roadmap", {}, lang), callback_data: `show_roadmap:${temp.id}` },
-          { text: "📚 " + t("docs", {}, lang), callback_data: `show_docs:${temp.id}` }
+          { text: `🗺️ ${t("roadmap", {}, lang)}`, callback_data: `show_roadmap:${temp.id}` },
+          { text: `📚 ${t("docs", {}, lang)}`, callback_data: `show_docs:${temp.id}` }
         ],
         [
-          { text: "🎬 " + t("video", {}, lang), callback_data: `show_videos:${temp.id}` },
-          { text: "💳 " + t("buy", {}, lang), callback_data: `buy_template:${temp.id}` }
+          { text: `🎬 ${t("video", {}, lang)}`, callback_data: `show_videos:${temp.id}` },
+          { text: `💳 ${t("buy", {}, lang)}`, callback_data: `buy_template:${temp.id}` }
         ],
         [
-          { text: "⬅️ " + t("back_to_shop", {}, lang), callback_data: "goto_marketplace" }
+          { text: `⬅️ ${t("back_to_shop", {}, lang)}`, callback_data: "goto_marketplace" }
         ]
       ];
 
@@ -381,7 +385,7 @@ const setupListeners = () => {
       await bot?.sendMessage(chatId, message, {
         parse_mode: "HTML",
         reply_markup: {
-          inline_keyboard: [[{ text: "⬅️ " + t("back_to_template", {}, lang), callback_data: `view_template:${id}` }]]
+          inline_keyboard: [[{ text: `⬅️ ${t("back_to_template", {}, lang)}`, callback_data: `view_template:${id}` }]]
         }
       });
       await bot?.answerCallbackQuery(query.id);
@@ -400,9 +404,9 @@ const setupListeners = () => {
 
       let message = t("knowledge_base", { id: id.toUpperCase() }, lang) + "\n\n";
       const keyboard = docs.map((page: any) => [
-        { text: "📄 " + page.title, callback_data: `show_doc_page:${id}:${page.id}` }
+        { text: `📄${page.title}`, callback_data: `show_doc_page:${id}:${page.id}` }
       ]);
-      keyboard.push([{ text: "⬅️ " + t("back_to_template", {}, lang), callback_data: `view_template:${id}` }]);
+      keyboard.push([{ text: `⬅️ ${t("back_to_template", {}, lang)}`, callback_data: `view_template:${id}` }]);
 
       await bot?.sendMessage(chatId, message, {
         parse_mode: "HTML",
@@ -424,7 +428,7 @@ const setupListeners = () => {
       await bot?.sendMessage(chatId, `📄 <b>${page.title}</b>\n\n${formattedContent}`, {
         parse_mode: "HTML",
         reply_markup: {
-          inline_keyboard: [[{ text: "⬅️ " + t("back_to_docs", {}, lang), callback_data: `show_docs:${templateId}` }]]
+          inline_keyboard: [[{ text: `⬅️ ${t("back_to_docs", {}, lang)}`, callback_data: `show_docs:${templateId}` }]]
         }
       });
       await bot?.answerCallbackQuery(query.id);
@@ -441,9 +445,10 @@ const setupListeners = () => {
         return;
       }
 
-      let message = `🎬 ` + t("video_materials", { id: id.toUpperCase() }, lang) + `\n\n`;
+      let message = `🎬 ${t("video_materials", { id: id.toUpperCase() }, lang)}\n\n`;
       const watchText = t("watch_in_browser", {}, lang);
       const durLabel = t("label_duration", {}, lang);
+
       for (const v of videos) {
         message += `📽️ <b>${v.title}</b>\n`;
         message += `⏱ ${durLabel}: ${v.duration}\n`;
@@ -453,7 +458,7 @@ const setupListeners = () => {
       await bot?.sendMessage(chatId, message, {
         parse_mode: "HTML",
         reply_markup: {
-          inline_keyboard: [[{ text: "⬅️ " + t("back_to_template", {}, lang), callback_data: `view_template:${id}` }]]
+          inline_keyboard: [[{ text: `⬅️ ${t("back_to_template", {}, lang)}`, callback_data: `view_template:${id}` }]]
         },
         disable_web_page_preview: false
       });
@@ -477,7 +482,7 @@ const setupListeners = () => {
         parse_mode: "HTML",
         reply_markup: {
           inline_keyboard: [[
-            { text: "⬅️ " + t("back_to_portfolio", {}, lang), callback_data: "goto_portfolio" }
+            { text: `⬅️ ${t("back_to_portfolio", {}, lang)}`, callback_data: "goto_portfolio" }
           ]]
         }
       });
@@ -500,7 +505,7 @@ const setupListeners = () => {
         parse_mode: "HTML",
         reply_markup: {
           inline_keyboard: [[
-            { text: "⬅️ " + t("back_to_marketplace", {}, lang), callback_data: "goto_marketplace" }
+            { text: `⬅️ ${t("back_to_marketplace", {}, lang)}`, callback_data: "goto_marketplace" }
           ]]
         }
       });
@@ -598,6 +603,7 @@ const setupListeners = () => {
 
     const adminLang = (await storage.getUserLanguage(chatId)) || "en";
     const leadList = await storage.getAllLeads();
+
     if (leadList.length === 0) {
       bot?.sendMessage(chatId, t("label_order_list_empty", {}, adminLang));
       return;
@@ -692,7 +698,7 @@ const setupListeners = () => {
       if (adminId) {
         const adminLang = (await storage.getUserLanguage(adminId)) || "en";
         const orderLabel = t("label_order", {}, adminLang);
-        let adminNotification = t("new_msg_admin", {
+        const adminNotification = t("new_msg_admin", {
           user: userName,
           chatId,
           orderInfo: linkedLead ? `📦 <b>${orderLabel}:</b> #${linkedLead.id} [${linkedLead.projectType}]` : "",
@@ -718,8 +724,6 @@ const setupListeners = () => {
   bot.on("polling_error", (error) => {});
 };
 
-// --- API ---
-
 export const botManager = {
   initialize(token: string, options: { polling?: boolean } = { polling: true }) {
     if (isInitialized && bot) return;
@@ -727,7 +731,6 @@ export const botManager = {
     console.log(`[bot] Initializing Telegram Bot (${options.polling ? 'Polling' : 'Webhook'} mode)...`);
     bot = new TelegramBot(token, { polling: options.polling });
 
-    // Override methods to track background tasks in serverless
     const originalSendMessage = bot.sendMessage.bind(bot);
     bot.sendMessage = (...args: any[]) => trackTask((originalSendMessage as any)(...args));
     
@@ -743,9 +746,7 @@ export const botManager = {
     if (bot) {
       console.log("[bot] Processing update...");
       bot.processUpdate(update);
-      
-      // Wait for handlers to start and for pending tasks to complete
-      // We wait at least 500ms to allow event emission to happen
+
       await new Promise(resolve => setTimeout(resolve, 800));
       
       if (pendingTasks.length > 0) {

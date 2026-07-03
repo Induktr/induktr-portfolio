@@ -16,11 +16,11 @@ import { ProjectForm } from "@/entities/Project/ui/ProjectForm";
 import { useAppDispatch } from "@/shared/lib/store/store";
 import { openModal } from "@/shared/lib/store/slices/uiSlice";
 
-// Nuqs for advanced/encrypted URL params
 import { useQueryState } from 'nuqs';
 import { parseAsBase64Json } from '@/shared/lib/parsers';
+import { LIST_CATEGORIES } from "@/shared/config/categories";
 
-export default function ProjectsPage() {
+const ProjectsPage = () => {
   const { PROJECTS, isLoading } = useProjects();
   const [activeCategory, setActiveCategory] = useState("all");
   const { t } = useTranslation();
@@ -42,8 +42,9 @@ export default function ProjectsPage() {
     return PROJECTS.find(p => p.slug === activeProjectToken.slug);
   }, [activeProjectToken, PROJECTS]);
 
-  if (isLoading) {
-    return (
+  return (
+    <>
+    {isLoading && (
       <div className="container mx-auto px-4 py-20">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {[1, 2, 3].map((i) => (
@@ -51,10 +52,7 @@ export default function ProjectsPage() {
           ))}
         </div>
       </div>
-    );
-  }
-
-  return (
+    )}
     <PageTransition>
       <div className="container mx-auto px-4 py-20">
         <div className="flex flex-col md:flex-row items-center justify-between mb-8 gap-4">
@@ -68,7 +66,7 @@ export default function ProjectsPage() {
 
           {user && (
             <Button className="gap-2" onClick={() => dispatch(openModal({ modalName: "projectForm" }))}>
-              <Plus className="w-5 h-5" /> Add Project
+              <Plus className="w-5 h-5" /> {t('projects.addProject', "Add Project")}
             </Button>
           )}
         </div>
@@ -76,12 +74,7 @@ export default function ProjectsPage() {
         <ProjectForm />
 
         <ProjectCategories
-          categories={[
-            { id: "browser", name: "Web Sites", icon: "browser", description: "" },
-            { id: "trading", name: "Trading Bots", icon: "trading", description: "" },
-            { id: "ai", name: "AI Agents", icon: "ai", description: "" },
-            { id: "mobile", name: "Mobile Apps", icon: "mobile", description: "" }
-          ]}
+          categories={LIST_CATEGORIES}
           selectedCategories={activeCategory === "all" ? [] : [activeCategory]}
           onSelectCategory={(id) => setActiveCategory(activeCategory === id ? "all" : id)}
         />
@@ -123,5 +116,8 @@ export default function ProjectsPage() {
         )}
       </div>
     </PageTransition>
+    </>
   );
 }
+
+export default ProjectsPage;

@@ -17,22 +17,23 @@ import { Briefcase, Settings } from "lucide-react";
 import { useAppDispatch, useAppSelector } from "@/shared/lib/store/store";
 import { closeModal } from "@/shared/lib/store/slices/uiSlice";
 import { useLocalizedForm } from "@/shared/hooks/useLocalizedForm";
+import { useTranslation } from "react-i18next";
 
-export const ExperienceForm = () => {
+const ExperienceForm = () => {
+  const { t } = useTranslation();
   const dispatch = useAppDispatch();
   const { modals } = useAppSelector((state) => state.ui);
   const { isOpen, editingItem: item } = modals.experienceForm;
 
   const { createExperienceMutation, updateExperienceMutation } = useExperience();
   
-  const { 
+  const {
       slug, setSlug, 
       localizedData, updateLangField, getPayload 
   } = useLocalizedForm(isOpen, item, { role: "", period: "", description: "", catalog: "" });
 
   const [order, setOrder] = useState(0);
 
-  // Sync order manually from item
   useState(() => { if (item) setOrder(item.order || 0); });
 
   const handleClose = () => dispatch(closeModal("experienceForm"));
@@ -58,7 +59,7 @@ export const ExperienceForm = () => {
         <DialogHeader className="p-6 border-b border-white/10">
           <DialogTitle className="text-2xl font-bold flex items-center gap-2">
             <Briefcase className="w-6 h-6 text-primary" />
-            {item ? "Edit Experience Entry" : "Add Career Milestone"}
+            {item ? t("experience.editExperienceEntry", "Edit Experience Entry") : t("experience.addCareerMilestone", "Add Career Milestone")}
           </DialogTitle>
         </DialogHeader>
 
@@ -66,17 +67,17 @@ export const ExperienceForm = () => {
           <div className="w-full md:w-72 border-r border-white/10 p-6 space-y-6 overflow-y-auto bg-white/5">
             <h3 className="text-xs font-bold uppercase tracking-widest text-muted-foreground flex items-center gap-2">
               <Settings className="w-4 h-4" />
-              Timeline Control
+              {t("experience.timelineControl", "Timeline Control")}
             </h3>
             
             <div className="space-y-4">
               <div className="space-y-2">
-                <Label className="text-xs">Timeline Slug</Label>
+                <Label className="text-xs">{t("experience.timelineSlug", "Timeline Slug")}</Label>
                 <Input value={slug} onChange={(e) => setSlug(e.target.value)} placeholder="e.g. senior-dev" className="h-9" />
               </div>
 
               <div className="space-y-2">
-                <Label className="text-xs">Display Order (Higher = First)</Label>
+                <Label className="text-xs">{t("experience.displayOrder", "Display Order (Higher = First)")}</Label>
                 <Input type="number" value={order} onChange={(e) => setOrder(parseInt(e.target.value))} className="h-9" />
               </div>
             </div>
@@ -86,9 +87,9 @@ export const ExperienceForm = () => {
             <ScrollArea className="flex-1 p-6">
               <Tabs defaultValue="en" className="space-y-6">
                 <TabsList className="grid w-full grid-cols-3 sticky top-0 z-10 bg-background/50 backdrop-blur pb-1">
-                  <TabsTrigger value="en">English</TabsTrigger>
-                  <TabsTrigger value="ru">Русский</TabsTrigger>
-                  <TabsTrigger value="ua">Українська</TabsTrigger>
+                  <TabsTrigger value="en">{t("common.english", "English")}</TabsTrigger>
+                  <TabsTrigger value="ru">{t("common.russian", "Русский")}</TabsTrigger>
+                  <TabsTrigger value="ua">{t("common.ukrainian", "Українська")}</TabsTrigger>
                 </TabsList>
 
                 {["en", "ru", "ua"].map((lang) => (
@@ -96,7 +97,7 @@ export const ExperienceForm = () => {
                     <div className="space-y-4">
                       <div className="grid grid-cols-2 gap-4">
                         <div className="space-y-2">
-                          <Label className="text-sm">Role Title</Label>
+                          <Label className="text-sm">{t("experience.roleTitle", "Role Title")}</Label>
                           <Input 
                             value={localizedData[lang]?.role || ""} 
                             onChange={(e) => updateLangField(lang, "role", e.target.value)}
@@ -104,7 +105,7 @@ export const ExperienceForm = () => {
                           />
                         </div>
                         <div className="space-y-2">
-                          <Label className="text-sm">Period</Label>
+                          <Label className="text-sm">{t("experience.period", "Period")}</Label>
                           <Input 
                             value={localizedData[lang]?.period || ""} 
                             onChange={(e) => updateLangField(lang, "period", e.target.value)}
@@ -114,7 +115,7 @@ export const ExperienceForm = () => {
                       </div>
 
                       <div className="space-y-2">
-                        <Label className="text-sm">Main Description</Label>
+                        <Label className="text-sm">{t("experience.mainDescription", "Main Description")}</Label>
                         <Textarea 
                           value={localizedData[lang]?.description || ""} 
                           onChange={(e) => updateLangField(lang, "description", e.target.value)}
@@ -123,12 +124,12 @@ export const ExperienceForm = () => {
                       </div>
 
                       <div className="space-y-2">
-                        <Label className="text-sm">Catalog Highlights (Optional)</Label>
+                        <Label className="text-sm">{t("experience.catalogHighlights", "Catalog Highlights (Optional)")}</Label>
                         <Textarea 
                           value={localizedData[lang]?.catalog || ""} 
                           onChange={(e) => updateLangField(lang, "catalog", e.target.value)}
                           rows={3}
-                          placeholder="Key achievements or catalog text..."
+                          placeholder={t("experience.catalogHighlightsPlaceholder", "Key achievements or catalog text...")}
                         />
                       </div>
                     </div>
@@ -138,12 +139,12 @@ export const ExperienceForm = () => {
             </ScrollArea>
             
             <DialogFooter className="p-6 border-t border-white/10 bg-white/5">
-              <Button variant="outline" onClick={handleClose}>Cancel</Button>
+              <Button variant="outline" onClick={handleClose}>{t("common.cancel", "Cancel")}</Button>
               <Button 
                 onClick={handleSubmit} 
                 disabled={createExperienceMutation.isPending || updateExperienceMutation.isPending}
               >
-                {item ? "Update Milestone" : "Publish Career Move"}
+                {item ? t("experience.updateMilestone", "Update Milestone") : t("experience.publishCareerMove", "Publish Career Move")}
               </Button>
             </DialogFooter>
           </div>
@@ -152,3 +153,5 @@ export const ExperienceForm = () => {
     </Dialog>
   );
 };
+
+export default ExperienceForm;

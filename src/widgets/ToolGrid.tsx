@@ -16,7 +16,7 @@ import { Pencil, Trash2, Plus } from "lucide-react";
 import { useAppDispatch, useAppSelector } from "@/shared/lib/store/store";
 import { openModal } from "@/shared/lib/store/slices/uiSlice";
 
-export const ToolGrid = () => {
+const ToolGrid = () => {
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const { t } = useTranslation();
   const { user } = useAuth();
@@ -139,3 +139,5 @@ export const ToolGrid = () => {
     </div>
   );
 }
+
+export default ToolGrid;

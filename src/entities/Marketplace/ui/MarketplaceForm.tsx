@@ -18,8 +18,10 @@ import { Badge } from "@/shared/ui/badge";
 import { useAppDispatch, useAppSelector } from "@/shared/lib/store/store";
 import { closeModal } from "@/shared/lib/store/slices/uiSlice";
 import { useLocalizedForm } from "@/shared/hooks/useLocalizedForm";
+import { useTranslation } from "react-i18next";
 
 export const MarketplaceForm = () => {
+  const { t } = useTranslation();
   const dispatch = useAppDispatch();
   const { modals } = useAppSelector((state) => state.ui);
   const { isOpen, editingItem: item } = modals.marketplaceForm;
@@ -27,9 +29,11 @@ export const MarketplaceForm = () => {
   const { createItemMutation, updateItemMutation } = useMarketplace();
   
   const { 
-    slug, setSlug, 
-    localizedData, setLocalizedData, 
-    updateLangField, getPayload 
+    slug,
+    setSlug, 
+    localizedData, 
+    updateLangField, 
+    getPayload 
   } = useLocalizedForm(isOpen, item, { title: "", description: "", features: [] as string[] });
 
   const [price, setPrice] = useState("0");
@@ -66,9 +70,9 @@ export const MarketplaceForm = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    
-    // Inject shared fields into the localized structure as per backend expectation
+
     const finalLocalized = { ...localizedData } as any;
+
     Object.keys(finalLocalized).forEach(lang => {
         finalLocalized[lang] = {
             ...finalLocalized[lang],
@@ -78,8 +82,8 @@ export const MarketplaceForm = () => {
         };
     });
 
-    const payload = getPayload(); // Base payload from hook
-    payload.data = JSON.stringify(finalLocalized); // Re-injecting with merged fields
+    const payload = getPayload();
+    payload.data = JSON.stringify(finalLocalized);
 
     if (item?.isFromDb) {
       updateItemMutation.mutate({ id: parseInt(item.id.toString().replace("db-", "")), item: payload }, {
@@ -106,28 +110,28 @@ export const MarketplaceForm = () => {
           <div className="w-full md:w-80 border-r border-white/10 p-6 space-y-6 overflow-y-auto bg-white/5">
             <h3 className="text-xs font-bold uppercase tracking-widest text-muted-foreground flex items-center gap-2">
               <Settings className="w-4 h-4" />
-              General Configuration
+              {t("marketplace.generalConfiguration", "General Configuration")}
             </h3>
             
             <div className="space-y-4">
               <div className="space-y-2">
-                <Label className="text-xs">Unique Slug</Label>
+                <Label className="text-xs">{t("marketplace.uniqueSlug", "Unique Slug")}</Label>
                 <Input value={slug} onChange={(e) => setSlug(e.target.value)} placeholder="e.g. nextjs-saas-starter" className="h-9 font-mono text-xs" />
               </div>
 
               <div className="space-y-2">
-                <Label className="text-xs">Price ($)</Label>
+                <Label className="text-xs">{t("marketplace.price", "Price ($)")}</Label>
                 <Input type="number" value={price} onChange={(e) => setPrice(e.target.value)} className="h-9 text-lg font-bold text-primary" />
               </div>
 
               <div className="space-y-2">
-                <Label className="text-xs">Gradient (Tailwind classes)</Label>
+                <Label className="text-xs">{t("marketplace.gradient", "Gradient (Tailwind classes)")}</Label>
                 <Input value={gradient} onChange={(e) => setGradient(e.target.value)} placeholder="from-blue-600 to-cyan-500" className="h-9 text-xs" />
                 <div className={`h-8 rounded w-full bg-gradient-to-br ${gradient}`} />
               </div>
 
               <div className="space-y-2">
-                <Label className="text-xs">Tech Stack</Label>
+                <Label className="text-xs">{t("common.techStack", "Tech Stack")}</Label>
                 <div className="flex flex-wrap gap-1 mb-2">
                   {stack.map((s, i) => (
                     <Badge key={i} variant="secondary" className="gap-1 pr-1 text-[10px]">
@@ -147,16 +151,16 @@ export const MarketplaceForm = () => {
             <ScrollArea className="flex-1 p-6">
               <Tabs defaultValue="en" className="space-y-6">
                 <TabsList className="grid w-full grid-cols-3 sticky top-0 z-10 bg-background/50 backdrop-blur pb-1">
-                  <TabsTrigger value="en">English</TabsTrigger>
-                  <TabsTrigger value="ru">Русский</TabsTrigger>
-                  <TabsTrigger value="ua">Українська</TabsTrigger>
+                  <TabsTrigger value="en">{t("common.en", "English")}</TabsTrigger>
+                  <TabsTrigger value="ru">{t("common.ru", "Русский")}</TabsTrigger>
+                  <TabsTrigger value="ua">{t("common.ua", "Українська")}</TabsTrigger>
                 </TabsList>
 
                 {["en", "ru", "ua"].map((lang) => (
                   <TabsContent key={lang} value={lang} className="space-y-6">
                     <div className="space-y-4">
                       <div className="space-y-2">
-                        <Label className="text-sm">Product Title</Label>
+                        <Label className="text-sm">{t("common.productTitle", "Product Title")}</Label>
                         <Input 
                           value={localizedData[lang]?.title || ""} 
                           onChange={(e) => updateLangField(lang, "title", e.target.value)}
@@ -165,7 +169,7 @@ export const MarketplaceForm = () => {
                       </div>
 
                       <div className="space-y-2">
-                        <Label className="text-sm">Full Description</Label>
+                        <Label className="text-sm">{t("common.fullDescription", "Full Description")}</Label>
                         <Textarea 
                           value={localizedData[lang]?.description || ""} 
                           onChange={(e) => updateLangField(lang, "description", e.target.value)}
@@ -175,9 +179,9 @@ export const MarketplaceForm = () => {
 
                       <div className="space-y-4">
                         <div className="flex items-center justify-between">
-                            <Label className="text-sm">Key Features</Label>
+                            <Label className="text-sm">{t("common.keyFeatures", "Key Features")}</Label>
                             <Button size="sm" variant="outline" className="h-7 text-xs gap-1" onClick={() => addFeature(lang)}>
-                                <Plus className="w-3 h-3" /> Add Feature
+                                <Plus className="w-3 h-3" /> {t("common.addFeature", "Add Feature")}
                             </Button>
                         </div>
                         <div className="grid gap-2">
@@ -187,7 +191,7 @@ export const MarketplaceForm = () => {
                                         value={feat} 
                                         onChange={(e) => updateFeature(lang, i, e.target.value)}
                                         className="h-9 text-sm"
-                                        placeholder={`Feature ${i+1}`}
+                                        placeholder={t("common.feature", `Feature ${i+1}`)}
                                     />
                                     <Button size="icon" variant="ghost" className="h-9 w-9 text-destructive" onClick={() => removeFeature(lang, i)}>
                                         <X className="w-4 h-4" />
@@ -203,13 +207,13 @@ export const MarketplaceForm = () => {
             </ScrollArea>
             
             <DialogFooter className="p-6 border-t border-white/10 bg-white/5">
-              <Button variant="outline" onClick={handleClose}>Cancel</Button>
+              <Button variant="outline" onClick={handleClose}>{t("common.cancel", "Cancel")}</Button>
               <Button 
                 onClick={handleSubmit} 
                 disabled={createItemMutation.isPending || updateItemMutation.isPending}
                 className="gap-2"
               >
-                {item ? "Update Template" : "Publish to Marketplace"}
+                {item ? t("common.updateTemplate", "Update Template") : t("common.publishToMarketplace", "Publish to Marketplace")}
               </Button>
             </DialogFooter>
           </div>

@@ -57,7 +57,7 @@ export const ProductDetailsDialog = ({
               <div>
                 <h4 className="flex items-center gap-2 text-sm font-semibold text-primary mb-2">
                   <Rocket className="w-4 h-4" />
-                  About Product
+                  {t("common.aboutProduct", "About Product")}
                 </h4>
                 <p className="text-muted-foreground leading-relaxed">
                   {template.description}
@@ -68,7 +68,7 @@ export const ProductDetailsDialog = ({
                 <div>
                   <h4 className="flex items-center gap-2 text-sm font-semibold text-primary mb-3">
                     <Code2 className="w-4 h-4" />
-                    Tech Stack
+                    {t("common.techStack", "Tech Stack")}
                   </h4>
                   <div className="flex flex-wrap gap-2">
                     {template.stack.map((tech) => (
@@ -82,7 +82,7 @@ export const ProductDetailsDialog = ({
                 <div>
                    <h4 className="flex items-center gap-2 text-sm font-semibold text-primary mb-3">
                     <Check className="w-4 h-4" />
-                    Key Features
+                    {t("common.keyFeatures", "Key Features")}
                   </h4>
                   <div className="rounded-md border p-3 bg-secondary/10">
                     <ul className="space-y-2">
@@ -104,10 +104,10 @@ export const ProductDetailsDialog = ({
                 <Button variant="secondary" className="justify-between group h-auto py-3 px-4" onClick={() => setView("docs_list")}>
                    <div className="flex flex-col items-start gap-1">
                       <span className="flex items-center gap-2 font-semibold">
-                          <FileText className="w-4 h-4 text-primary" />
-                          Docs
+                        <FileText className="w-4 h-4 text-primary" />
+                        {t("common.docs", "Docs")}
                       </span>
-                      <span className="text-xs text-muted-foreground">{docs.length} chapters</span>
+                      <span className="text-xs text-muted-foreground">{docs.length} {t("common.chapters", "chapters")}</span>
                    </div>
                    <ArrowLeft className="w-4 h-4 rotate-180 text-muted-foreground group-hover:text-primary transition-colors" />
                 </Button>
@@ -115,10 +115,10 @@ export const ProductDetailsDialog = ({
                 <Button variant="secondary" className="justify-between group h-auto py-3 px-4" onClick={() => setView("roadmap")}>
                    <div className="flex flex-col items-start gap-1">
                       <span className="flex items-center gap-2 font-semibold">
-                          <Layers className="w-4 h-4 text-orange-500" />
-                          Roadmap
+                        <Layers className="w-4 h-4 text-orange-500" />
+                        {t("common.roadmap", "Roadmap")}
                       </span>
-                      <span className="text-xs text-muted-foreground">{roadmap.length > 0 ? "Track progress" : "N/A"}</span>
+                      <span className="text-xs text-muted-foreground">{roadmap.length > 0 ? t("common.trackProgress", "Track progress") : t("common.notAvailable", "N/A")}</span>
                    </div>
                    <ArrowLeft className="w-4 h-4 rotate-180 text-muted-foreground group-hover:text-orange-500 transition-colors" />
                 </Button>
@@ -126,10 +126,10 @@ export const ProductDetailsDialog = ({
                 <Button variant="secondary" className="justify-between group h-auto py-3 px-4" onClick={() => setView("videos")}>
                    <div className="flex flex-col items-start gap-1">
                       <span className="flex items-center gap-2 font-semibold">
-                          <MonitorPlay className="w-4 h-4 text-blue-500" />
-                          Showcase
+                        <MonitorPlay className="w-4 h-4 text-blue-500" />
+                        {t("common.showcase", "Showcase")}
                       </span>
-                      <span className="text-xs text-muted-foreground">{videos.length} videos</span>
+                      <span className="text-xs text-muted-foreground">{videos.length} {t("common.videos", "videos")}</span>
                    </div>
                    <ArrowLeft className="w-4 h-4 rotate-180 text-muted-foreground group-hover:text-blue-500 transition-colors" />
                 </Button>
@@ -145,7 +145,7 @@ export const ProductDetailsDialog = ({
             <div className="p-6 space-y-6">
                 <h3 className="text-xl font-bold mb-4 flex items-center gap-2">
                   <MonitorPlay className="w-5 h-5 text-blue-500" />
-                  Video Showcase
+                  {t("common.videoShowcase", "Video Showcase")}
                 </h3>
 
                 {videos.length > 0 ? (
@@ -181,7 +181,7 @@ export const ProductDetailsDialog = ({
                                      <div className="mt-4 flex items-center justify-between">
                                         <Badge variant="secondary" className="uppercase text-[10px] tracking-wider opacity-70">{vid.type}</Badge>
                                         <Button variant="link" className="p-0 h-auto text-blue-500 text-xs gap-1" onClick={() => window.open(vid.url, '_blank')}>
-                                            YouTube <ArrowLeft className="w-3 h-3 rotate-[135deg]" />
+                                          {t("common.youtube", "YouTube")} <ArrowLeft className="w-3 h-3 rotate-[135deg]" />
                                         </Button>
                                      </div>
                                  </div>
@@ -191,7 +191,7 @@ export const ProductDetailsDialog = ({
                     </div>
                 ) : (
                     <div className="text-center py-10 text-muted-foreground">
-                        No videos available for this product yet.
+                      {t("common.noVideosAvailable", "No videos available for this product yet.")}
                     </div>
                 )}
             </div>

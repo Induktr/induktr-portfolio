@@ -9,14 +9,14 @@ export const parseAsBase64Json = <T>(defaultValue?: T) => {
     parse: (query) => {
       try {
         return JSON.parse(atob(query));
-      } catch (e) {
+      } catch {
         return null;
       }
     },
     serialize: (value) => {
       try {
         return btoa(JSON.stringify(value));
-      } catch (e) {
+      } catch {
         return "";
       }
     },

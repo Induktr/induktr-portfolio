@@ -15,7 +15,7 @@ import { navItemVariants } from "@/shared/constants/animations/mobile";
 import { useAppDispatch, useAppSelector } from "@/shared/lib/store/store";
 import { setSidebar } from "@/shared/lib/store/slices/uiSlice";
 
-export function MobileNav() {
+const MobileNav = () => {
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
   const { sidebar } = useAppSelector((state) => state.ui);
@@ -88,3 +88,5 @@ export function MobileNav() {
     </Sheet>
   );
 }
+
+export default MobileNav;

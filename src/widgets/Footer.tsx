@@ -6,7 +6,7 @@ import { Phone, Send } from "lucide-react";
 import Link from "next/link";
 import { LINKS } from "@/shared/config/links";
 
-export const Footer = () => {
+const Footer = () => {
   const { t } = useTranslation();
 
   return (
@@ -92,3 +92,5 @@ export const Footer = () => {
     </footer>
   );
 }
+
+export default Footer;

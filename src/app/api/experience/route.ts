@@ -6,7 +6,7 @@ export async function GET() {
   try {
     const experience = await storage.getExperience();
     return NextResponse.json(experience);
-  } catch (error) {
+  } catch {
     return NextResponse.json({ message: "Failed to fetch experience" }, { status: 500 });
   }
 }

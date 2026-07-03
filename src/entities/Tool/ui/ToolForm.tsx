@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { FormEvent, useState } from "react";
 import { useTools } from "@/shared/hooks/useTools";
 import {
   Dialog,
@@ -13,15 +13,17 @@ import { Textarea } from "@/shared/ui/textarea";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/shared/ui/tabs";
 import { Label } from "@/shared/ui/label";
 import { ScrollArea } from "@/shared/ui/scroll-area";
-import { Wrench, Plus, Settings } from "lucide-react";
+import { Wrench, Settings } from "lucide-react";
 import { useAppDispatch, useAppSelector } from "@/shared/lib/store/store";
 import { closeModal } from "@/shared/lib/store/slices/uiSlice";
 import { useLocalizedForm } from "@/shared/hooks/useLocalizedForm";
+import { useTranslation } from "react-i18next";
 
 export const ToolForm = () => {
   const dispatch = useAppDispatch();
   const { modals } = useAppSelector((state) => state.ui);
   const { isOpen, editingItem: tool } = modals.toolForm;
+  const { t } = useTranslation();
 
   const { createToolMutation, updateToolMutation } = useTools();
   
@@ -32,6 +34,7 @@ export const ToolForm = () => {
 
   const [icon, setIcon] = useState("");
   const [category, setCategory] = useState("");
+
   
   // Sync non-localized fields
   useState(() => {
@@ -43,7 +46,7 @@ export const ToolForm = () => {
 
   const handleClose = () => dispatch(closeModal("toolForm"));
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
     
     // Inject shared fields into localized data as per backend pattern
@@ -77,7 +80,7 @@ export const ToolForm = () => {
         <DialogHeader className="p-6 border-b border-white/10">
           <DialogTitle className="text-2xl font-bold flex items-center gap-2">
             <Wrench className="w-6 h-6 text-primary" />
-            {tool ? "Edit Tool" : "Add New Technology"}
+            {tool ? t("common.editTool", "Edit Tool") : t("common.addNewTechnology", "Add New Technology")}
           </DialogTitle>
         </DialogHeader>
 
@@ -85,37 +88,37 @@ export const ToolForm = () => {
           <div className="w-full md:w-72 border-r border-white/10 p-6 space-y-6 overflow-y-auto bg-white/5">
             <h3 className="text-xs font-bold uppercase tracking-widest text-muted-foreground flex items-center gap-2">
               <Settings className="w-4 h-4" />
-              Metadata
+              {t("common.metadata", "Metadata")}
             </h3>
             
             <div className="space-y-4">
               <div className="space-y-2">
-                <Label className="text-xs">Unique Slug</Label>
+                <Label className="text-xs">{t("common.uniqueSlug", "Unique Slug")}</Label>
                 <input 
                   value={slug} 
                   onChange={(e) => setSlug(e.target.value)} 
-                  placeholder="e.g. react-native" 
+                  placeholder={t("common.egReactNative", "e.g. react-native")} 
                   className="w-full h-9 bg-background border border-border rounded-md px-3 text-sm" 
                 />
               </div>
 
               <div className="space-y-2">
-                <Label className="text-xs">React Icon (SimpleIcons name)</Label>
+                <Label className="text-xs">{t("common.reactIcon", "React Icon (SimpleIcons name)")}</Label>
                 <input 
                   value={icon} 
                   onChange={(e) => setIcon(e.target.value)} 
-                  placeholder="e.g. SiReact" 
+                  placeholder={t("common.egReact", "e.g. SiReact")}
                   className="w-full h-9 bg-background border border-border rounded-md px-3 text-sm" 
                 />
-                <p className="text-[10px] text-muted-foreground">Lookup icon names at react-icons.github.io</p>
+                <p className="text-[10px] text-muted-foreground">{t("common.lookupIconNames", "Lookup icon names at react-icons.github.io")}</p>
               </div>
 
               <div className="space-y-2">
-                <Label className="text-xs">Category</Label>
+                <Label className="text-xs">{t("common.category", "Category")}</Label>
                 <input 
                   value={category} 
                   onChange={(e) => setCategory(e.target.value)} 
-                  placeholder="e.g. Development & Programming" 
+                  placeholder={t("common.egDevelopment", "e.g. Development & Programming")} 
                   className="w-full h-9 bg-background border border-border rounded-md px-3 text-sm" 
                 />
               </div>
@@ -126,30 +129,30 @@ export const ToolForm = () => {
             <ScrollArea className="flex-1 p-6">
               <Tabs defaultValue="en" className="space-y-6">
                 <TabsList className="grid w-full grid-cols-3 sticky top-0 z-10 bg-background/50 backdrop-blur pb-1">
-                  <TabsTrigger value="en">English</TabsTrigger>
-                  <TabsTrigger value="ru">Русский</TabsTrigger>
-                  <TabsTrigger value="ua">Українська</TabsTrigger>
+                  <TabsTrigger value="en">{t("common.en", "English")}</TabsTrigger>
+                  <TabsTrigger value="ru">{t("common.ru", "Русский")}</TabsTrigger>
+                  <TabsTrigger value="ua">{t("common.ua", "Українська")}</TabsTrigger>
                 </TabsList>
 
                 {["en", "ru", "ua"].map((lang) => (
                   <TabsContent key={lang} value={lang} className="space-y-6">
                     <div className="space-y-4">
                       <div className="space-y-2">
-                        <Label className="text-sm">Tool Name ({lang.toUpperCase()})</Label>
+                        <Label className="text-sm">{t("common.toolName", "Tool Name")} ({lang.toUpperCase()})</Label>
                         <Input 
                           value={localizedData[lang]?.name || ""} 
                           onChange={(e) => updateLangField(lang, "name", e.target.value)}
-                          placeholder="e.g. Next.js"
+                          placeholder={t("common.egNextJs", "e.g. Next.js")}
                           className="text-base font-semibold"
                         />
                       </div>
 
                       <div className="space-y-2">
-                        <Label className="text-sm">Description</Label>
+                        <Label className="text-sm">{t("common.description", "Description")}</Label>
                         <Textarea 
                           value={localizedData[lang]?.description || ""} 
                           onChange={(e) => updateLangField(lang, "description", e.target.value)}
-                          placeholder="Short description of the tool..."
+                          placeholder={t("common.shortDescription", "Short description of the tool...")}
                           rows={4}
                         />
                       </div>
@@ -160,12 +163,12 @@ export const ToolForm = () => {
             </ScrollArea>
             
             <DialogFooter className="p-6 border-t border-white/10 bg-white/5">
-              <Button variant="outline" onClick={handleClose}>Cancel</Button>
+              <Button variant="outline" onClick={handleClose}>{t("common.cancel", "Cancel")}</Button>
               <Button 
                 onClick={handleSubmit} 
                 disabled={createToolMutation.isPending || updateToolMutation.isPending}
               >
-                {tool ? "Update Tool" : "Publish Tool"}
+                {tool ? t("common.updateTool", "Update Tool") : t("common.publishTool", "Publish Tool")}
               </Button>
             </DialogFooter>
           </div>

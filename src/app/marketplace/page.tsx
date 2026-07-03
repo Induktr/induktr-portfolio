@@ -37,11 +37,10 @@ import { MarketplaceForm } from "@/entities/Marketplace/ui/MarketplaceForm";
 import { useAppDispatch, useAppSelector } from "@/shared/lib/store/store";
 import { openModal, closeModal } from "@/shared/lib/store/slices/uiSlice";
 
-// Nuqs for advanced/encrypted URL params
 import { useQueryState } from 'nuqs';
 import { parseAsBase64Json } from '@/shared/lib/parsers';
 
-export default function MarketplacePage() {
+const MarketplacePage = () => {
   const { t } = useTranslation();
   const { user } = useAuth();
   const { ALL_TEMPLATES, deleteItemMutation } = useMarketplace();
@@ -257,4 +256,6 @@ export default function MarketplacePage() {
       </Dialog>
     </div>
   );
-}
+} 
+
+export default MarketplacePage;

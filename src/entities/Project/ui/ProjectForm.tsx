@@ -18,11 +18,13 @@ import { X, Plus, Video, Copy, Globe } from "lucide-react";
 import { useAppDispatch, useAppSelector } from "@/shared/lib/store/store";
 import { closeModal } from "@/shared/lib/store/slices/uiSlice";
 import { useLocalizedForm } from "@/shared/hooks/useLocalizedForm";
+import { useTranslation } from "react-i18next";
 
 export const ProjectForm = () => {
   const dispatch = useAppDispatch();
   const { modals } = useAppSelector((state) => state.ui);
   const { isOpen, editingItem: project } = modals.projectForm;
+  const { t } = useTranslation();
 
   const { createProjectMutation, updateProjectMutation } = useProjects();
   
@@ -92,9 +94,9 @@ export const ProjectForm = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    
-    // Inject shared fields into localized data as per backend pattern
+
     const finalLocalized = { ...localizedData } as any;
+
     ["en", "ru", "ua"].forEach(lang => {
       finalLocalized[lang] = {
         ...finalLocalized[lang],
@@ -114,11 +116,7 @@ export const ProjectForm = () => {
       updateProjectMutation.mutate({ id: parseInt(project.id.toString().replace("db-", "")), project: payload }, {
         onSuccess: () => handleClose()
       });
-    } else {
-      createProjectMutation.mutate(payload, {
-        onSuccess: () => handleClose()
-      });
-    }
+    } else createProjectMutation.mutate(payload, { onSuccess: () => handleClose() });
   };
 
   return (
@@ -135,19 +133,19 @@ export const ProjectForm = () => {
           <div className="w-full md:w-80 border-r border-white/10 p-6 space-y-6 overflow-y-auto bg-white/5">
             <h3 className="text-sm font-bold uppercase tracking-widest text-muted-foreground flex items-center gap-2">
               <Plus className="w-4 h-4" />
-              Base Configuration
+              {t("", "Base Configuration")}
             </h3>
             
             <div className="space-y-4">
               <div className="space-y-2">
-                <Label>System Slug</Label>
+                <Label>{t("", "System Slug")}</Label>
                 <Input value={slug} onChange={(e) => setSlug(e.target.value)} placeholder="e.g. westbud-legacy" />
               </div>
 
               <div className="space-y-2">
-                <Label>Status</Label>
+                <Label>{t("", "Status")}</Label>
                 <select 
-                  value={status} 
+                  value={status}
                   onChange={(e: any) => setStatus(e.target.value)}
                   className="w-full bg-background border border-white/10 rounded-md h-10 px-3 text-sm"
                 >
@@ -266,16 +264,16 @@ export const ProjectForm = () => {
                       </div>
 
                       <div className="space-y-2">
-                        <Label>Short Hook / Card Description</Label>
+                        <Label>{t("", "Short Hook / Card Description")}</Label>
                         <Input 
                           value={localizedData[lang]?.shortDescription || ""} 
                           onChange={(e) => updateLangField(lang, "shortDescription", e.target.value)}
-                          placeholder="Visible on the main grid"
+                          placeholder={t("", "Visible on the main grid")}
                         />
                       </div>
 
                       <div className="space-y-2">
-                        <Label>Detailed Description</Label>
+                        <Label>{t("", "Detailed Description")}</Label>
                         <Textarea 
                           value={localizedData[lang]?.description || ""} 
                           onChange={(e) => updateLangField(lang, "description", e.target.value)}
@@ -285,50 +283,50 @@ export const ProjectForm = () => {
 
                       <div className="grid grid-cols-2 gap-4">
                         <div className="space-y-2">
-                          <Label>Tech Stack (Comma separated)</Label>
+                          <Label>{t("", "Tech Stack (Comma separated)")}</Label>
                           <Input 
                             value={localizedData[lang]?.techStack?.join(", ") || ""} 
                             onChange={(e) => {
                               const tech = e.target.value.split(",").map(t => t.trim()).filter(t => t !== "");
                               updateLangField(lang, "techStack", tech);
                             }}
-                            placeholder="React, Next.js, Node.js"
+                            placeholder={t("", "React, Next.js, Node.js")}
                           />
                         </div>
                         <div className="space-y-2">
-                          <Label>Tags (Comma separated)</Label>
+                          <Label>{t("", "Tags (Comma separated)")}</Label>
                           <Input 
                             value={localizedData[lang]?.tags?.join(", ") || ""} 
                             onChange={(e) => {
                               const tags = e.target.value.split(",").map(t => t.trim()).filter(t => t !== "");
                               updateLangField(lang, "tags", tags);
                             }}
-                            placeholder="E-commerce, SaaS"
+                            placeholder={t("", "E-commerce, SaaS")}
                           />
                         </div>
                       </div>
                       
                       <div className="space-y-2">
-                        <Label>Key Features (One per line)</Label>
+                        <Label>{t("", "Key Features (One per line)")}</Label>
                         <Textarea 
                           value={localizedData[lang]?.features?.join("\n") || ""} 
                           onChange={(e) => {
                             const features = e.target.value.split("\n").map(f => f.trim()).filter(f => f !== "");
                             updateLangField(lang, "features", features);
                           }}
-                          placeholder="Real-time chat&#10;Stripe integration"
+                          placeholder={t("", "Real-time chat&#10;Stripe integration")}
                           rows={3}
                         />
                       </div>
 
                       <div className="pt-6 border-t border-white/10 space-y-6">
                         <h4 className="text-sm font-bold flex items-center gap-2 text-primary">
-                          <Plus className="w-4 h-4" /> Technical Structures (JSON Format)
+                          <Plus className="w-4 h-4" /> {t("", "Technical Structures (JSON Format)")}
                         </h4>
                         
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                           <div className="space-y-2">
-                            <Label className="text-xs">Roadmap Stages</Label>
+                            <Label className="text-xs">{t("", "Roadmap Stages")}</Label>
                             <Textarea 
                               className="font-mono text-[10px] h-32"
                               value={JSON.stringify(localizedData[lang]?.roadmap || [], null, 2)}
@@ -343,7 +341,7 @@ export const ProjectForm = () => {
                           </div>
 
                           <div className="space-y-2">
-                            <Label className="text-xs">Documentation Chapters</Label>
+                            <Label className="text-xs">{t("", "Documentation Chapters")}</Label>
                             <Textarea 
                               className="font-mono text-[10px] h-32"
                               value={JSON.stringify(localizedData[lang]?.docs || [], null, 2)}
@@ -358,7 +356,7 @@ export const ProjectForm = () => {
                           </div>
 
                           <div className="space-y-2">
-                            <Label className="text-xs">User Guide Steps</Label>
+                            <Label className="text-xs">{t("", "User Guide Steps")}</Label>
                             <Textarea 
                               className="font-mono text-[10px] h-32"
                               value={JSON.stringify(localizedData[lang]?.usage || [], null, 2)}
@@ -385,7 +383,7 @@ export const ProjectForm = () => {
                 onClick={handleSubmit} 
                 disabled={createProjectMutation.isPending || updateProjectMutation.isPending}
               >
-                {project ? "Update Project" : "Publish Project"}
+                {project ? t("", "Update Project") : t("", "Publish Project")}
               </Button>
             </DialogFooter>
           </div>

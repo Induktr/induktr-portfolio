@@ -66,7 +66,7 @@ export const PurchaseDialog = ({
       
       onSuccess(responseData.orderId, responseData.accessCode);
       form.reset();
-    } catch (e) {
+    } catch {
       toast({
         title: "Error",
         description: "Failed to process your order. Please try again.",
@@ -82,10 +82,10 @@ export const PurchaseDialog = ({
       <DialogContent className="sm:max-w-[500px] max-h-[90vh] overflow-y-auto bg-card border-primary/20">
         <DialogHeader>
           <DialogTitle className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-primary to-purple-500">
-            Purchase {template.title}
+            {t("common.purchase", "Purchase")} {template.title}
           </DialogTitle>
           <DialogDescription>
-            Follow the instructions below to complete your purchase.
+            {t("common.followInstructions", "Follow the instructions below to complete your purchase.")}
           </DialogDescription>
         </DialogHeader>
 
@@ -94,13 +94,13 @@ export const PurchaseDialog = ({
           <div className="p-4 bg-primary/5 border border-primary/10 rounded-lg space-y-4">
             <div className="flex items-center gap-2 text-primary font-semibold">
               <Info className="w-5 h-5" />
-              <span>Payment Details</span>
+              <span>{t("common.paymentDetails", "Payment Details")}</span>
               <span className="ml-auto text-xl font-bold">${template.price}</span>
             </div>
 
             <div className="space-y-3 font-mono text-xs">
               <div className="p-3 bg-background/50 rounded border border-border/50 group">
-                <span className="text-muted-foreground block mb-1 uppercase tracking-tighter text-[10px]">USDT (TRC20)</span>
+                <span className="text-muted-foreground block mb-1 uppercase tracking-tighter text-[10px]">{t("common.usdt", "USDT (TRC20)")}</span>
                 <div className="flex items-center justify-between gap-2">
                   <span className="truncate select-all">{t('contactForm.paymentInfo.cryptoValue')}</span>
                   <Button 
@@ -113,7 +113,7 @@ export const PurchaseDialog = ({
               </div>
 
               <div className="p-3 bg-background/50 rounded border border-border/50 group">
-                <span className="text-muted-foreground block mb-1 uppercase tracking-tighter text-[10px]">Bank Card</span>
+                <span className="text-muted-foreground block mb-1 uppercase tracking-tighter text-[10px]">{t("common.bankCard", "Bank Card")}</span>
                 <div className="flex items-center justify-between gap-2">
                   <span className="truncate select-all">{t('contactForm.paymentInfo.cardValue')}</span>
                   <Button 
@@ -126,7 +126,7 @@ export const PurchaseDialog = ({
               </div>
             </div>
             <p className="text-[10px] text-muted-foreground italic">
-              Send the exact amount and fill the form below to notify me.
+              {t("common.sendExactAmount", "Send the exact amount and fill the form below to notify me.")}
             </p>
           </div>
 
@@ -137,7 +137,7 @@ export const PurchaseDialog = ({
                 name="name"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Your Name</FormLabel>
+                    <FormLabel>{t("common.yourName", "Your Name")}</FormLabel>
                     <FormControl>
                       <Input placeholder="John Doe" {...field} />
                     </FormControl>
@@ -151,7 +151,7 @@ export const PurchaseDialog = ({
                 name="contact"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Telegram / Email</FormLabel>
+                    <FormLabel>{t("common.telegramOrEmail", "Telegram / Email")}</FormLabel>
                     <FormControl>
                       <Input placeholder="@username or email@example.com" {...field} />
                     </FormControl>
@@ -165,7 +165,7 @@ export const PurchaseDialog = ({
                 className="w-full h-12 text-lg font-medium mt-4"
                 disabled={form.formState.isSubmitting}
               >
-                {form.formState.isSubmitting ? "Confirming..." : "I have paid"}
+                {form.formState.isSubmitting ? t("common.confirming", "Confirming...") : t("common.iHavePaid", "I have paid")}
               </Button>
             </form>
           </Form>

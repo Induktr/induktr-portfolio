@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronLeft, ChevronRight, PlayCircle, Image as ImageIcon } from 'lucide-react';
 import { Button } from '@/shared/ui/button';
@@ -8,7 +8,7 @@ import { ProjectSliderProps } from '@/shared/types/project';
 
 import { slideVariants } from '@/shared/constants/animations/slide';
 
-export function ProjectSlider({ items, className }: ProjectSliderProps) {
+export const ProjectSlider = ({ items, className }: ProjectSliderProps) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [direction, setDirection] = useState(0);
 
@@ -53,9 +53,7 @@ export function ProjectSlider({ items, className }: ProjectSliderProps) {
 
             if (swipe < -swipeConfidenceThreshold) {
               paginate(1);
-            } else if (swipe > swipeConfidenceThreshold) {
-              paginate(-1);
-            }
+            } else if (swipe > swipeConfidenceThreshold) paginate(-1);
           }}
           className="absolute inset-0 w-full h-full"
         >
@@ -63,7 +61,7 @@ export function ProjectSlider({ items, className }: ProjectSliderProps) {
             <VideoPlayer 
               src={currentItem.url} 
               className="w-full h-full"
-              autoPlay={items.length === 1} // Only autoplay if it's the only item
+              autoPlay={items.length === 1}
             />
           ) : (
             <div 
@@ -72,7 +70,6 @@ export function ProjectSlider({ items, className }: ProjectSliderProps) {
             />
           )}
 
-          {/* Title Overlay */}
           {currentItem.title && (
             <div className="absolute bottom-16 left-4 right-4 z-20 pointer-events-none">
               <span className="px-3 py-1 bg-black/50 backdrop-blur-md rounded-full text-white text-xs border border-white/10">
@@ -83,7 +80,6 @@ export function ProjectSlider({ items, className }: ProjectSliderProps) {
         </motion.div>
       </AnimatePresence>
 
-      {/* Navigation Controls */}
       {items.length > 1 && (
         <>
           <Button
@@ -103,7 +99,6 @@ export function ProjectSlider({ items, className }: ProjectSliderProps) {
             <ChevronRight className="h-6 w-6" />
           </Button>
 
-          {/* Dots Indicator */}
           <div className="absolute bottom-4 left-0 right-0 z-30 flex justify-center gap-2">
             {items.map((_, index) => (
               <button
@@ -123,8 +118,7 @@ export function ProjectSlider({ items, className }: ProjectSliderProps) {
           </div>
         </>
       )}
-
-      {/* Type Indicator */}
+      
       <div className="absolute top-4 left-4 z-30 no-print">
         <div className="flex items-center gap-2 px-2 py-1 bg-black/40 backdrop-blur-md rounded-lg border border-white/10 text-[10px] text-white/80">
           {currentItem.type === 'video' ? <PlayCircle className="w-3 h-3" /> : <ImageIcon className="w-3 h-3" />}

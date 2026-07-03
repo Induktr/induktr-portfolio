@@ -11,7 +11,7 @@ import { NuqsAdapter } from "nuqs/adapters/react";
 import { Toaster } from "@/shared/ui/toaster";
 import "@/shared/utils/lang/i18n";
 
-export function Providers({ children }: { children: ReactNode }) {
+const Providers = ({ children }: { children: ReactNode }) => {
   return (
     <QueryClientProvider client={queryClient}>
       <Provider store={store}>
@@ -27,3 +27,5 @@ export function Providers({ children }: { children: ReactNode }) {
     </QueryClientProvider>
   );
 }
+
+export default Providers;

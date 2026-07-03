@@ -81,7 +81,6 @@ export const ProjectCard = ({ project, onEdit }: ExtendedProjectCardProps) => {
           variant="outline"
           size="sm"
           className="flex-1 font-semibold group-hover:bg-primary group-hover:text-primary-foreground transition-all duration-300"
-          // Interaction is now managed by the parent via URL state/Redux orchestration
         >
           {t('projects.card.moreDetails')}
         </Button>

@@ -31,10 +31,10 @@ export function logWithTimestamp(level: LogLevel, message: string, data?: any) {
  * @param message - Сообщение об ошибке
  * @param error - Объект ошибки
  */
-export function logError(message: string, error: any) {
+export function logError(message: string, error: Error) {
   const timestamp = new Date().toISOString();
   console.error(`[${timestamp}] ${message}`, error);
-  if (error?.stack) {
+  if (error.stack) {
     console.error(`[${timestamp}] Stack trace:`, error.stack);
   }
 }

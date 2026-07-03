@@ -1,10 +1,10 @@
 "use client";
 
-import { ToolGrid } from "@/widgets/ToolGrid";
+import ToolGrid from "@/widgets/ToolGrid";
 import { motion } from "framer-motion";
 import { useTranslation } from "react-i18next";
 
-export default function ToolsPage() {
+const ToolsPage = () => {
   const { t } = useTranslation();
 
   return (
@@ -27,3 +27,5 @@ export default function ToolsPage() {
     </div>
   );
 }
+
+export default ToolsPage;

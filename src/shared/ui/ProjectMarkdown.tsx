@@ -49,7 +49,7 @@ const markdownComponents = {
   }
 };
 
-export function ProjectMarkdown({ content, className }: ProjectMarkdownProps) {
+export const ProjectMarkdown = ({ content, className }: ProjectMarkdownProps) => {
   return (
     <div className={cn("prose prose-invert max-w-none", className)}>
       <ReactMarkdown remarkPlugins={[remarkGfm]} components={markdownComponents}>

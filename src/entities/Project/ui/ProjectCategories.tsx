@@ -13,6 +13,7 @@ import { Button } from "@/shared/ui/button";
 import { motion } from "framer-motion";
 
 import type { ProjectCategoriesProps } from "@/shared/types/project";
+import { IconContext, IconType } from "react-icons/lib";
 
 export const ProjectCategories = ({
   categories,

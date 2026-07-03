@@ -13,20 +13,20 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-import { Providers } from "./providers";
-import { Header } from "@/widgets/Header";
-import { Footer } from "@/widgets/Footer";
+import Providers from "./providers";
+import Header from "@/widgets/Header";
+import Footer from "@/widgets/Footer";
 
 export const metadata: Metadata = {
   title: "Induktr Portfolio",
   description: "Senior Fullstack Developer Portfolio",
 };
 
-export default function RootLayout({
+const RootLayout = ({
   children,
 }: Readonly<{
   children: ReactNode;
-}>) {
+}>) => {
   return (
     <html lang="en" suppressHydrationWarning>
       <body
@@ -44,3 +44,4 @@ export default function RootLayout({
   );
 }
 
+export default RootLayout;

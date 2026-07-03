@@ -39,22 +39,19 @@ import avatarInduktr from "@/shared/assets/images/avatar-induktr.jpg";
 import { fadeIn, staggerContainer } from "@/shared/constants/animations/about";
 import { useAuth } from "@/shared/hooks/useAuth";
 import { useExperience } from "@/shared/hooks/useExperience";
-import { ExperienceForm } from "@/entities/Experience/ui/ExperienceForm";
+import ExperienceForm from "@/entities/Experience/ui/ExperienceForm";
 import { useAppDispatch } from "@/shared/lib/store/store";
 import { openModal } from "@/shared/lib/store/slices/uiSlice";
 import { Loader } from "@/shared/ui/Loader";
+import { handleDownloadPDF } from "@/shared/utils/services/pdf-print";
 
-export default function AboutPage() {
+const AboutPage = () => {
   const { t } = useTranslation();
   const { user } = useAuth();
   const { MERGED_EXPERIENCE, isLoading, deleteExperienceMutation } = useExperience();
   const dispatch = useAppDispatch();
 
-  const handleDownloadPDF = () => {
-    window.print();
-  };
-
-  const skills = [
+  const SKILLS = [
     { name: "React.js", icon: <SiReact className="w-5 h-5 text-blue-400" />, years: "1", level: 90 },
     { name: "JavaScript (ES6+)", icon: <SiJavascript className="w-5 h-5 text-yellow-400" />, years: "1.5", level: 95 },
     { name: "TypeScript", icon: <SiTypescript className="w-5 h-5 text-blue-600" />, years: "1", level: 85 },
@@ -62,7 +59,7 @@ export default function AboutPage() {
     { name: "Next.js", icon: <SiNextdotjs className="w-5 h-5 text-white" />, years: "0.5", level: 75 }
   ];
 
-  const additionalSkills = [
+  const ADDITIONAL_SKILLS = [
     { name: "HTML5/CSS3", icon: <SiHtml5 /> },
     { name: "Vite", icon: <SiVite /> },
     { name: "Node.js", icon: <SiNodedotjs /> },
@@ -118,12 +115,12 @@ export default function AboutPage() {
           {user && (
             <Button variant="outline" className="gap-2" onClick={() => dispatch(openModal({ modalName: "experienceForm" }))}>
               <Plus className="w-4 h-4" />
-              Add Experience
+              {t("common.addExperience", "Add Experience")}
             </Button>
           )}
           <Button onClick={handleDownloadPDF} className="gap-2 shadow-lg shadow-primary/20">
             <Download className="w-4 h-4" />
-            {t('common.downloadResume')}
+            {t('common.downloadResume', 'Download Resume')}
           </Button>
         </div>
 
@@ -137,7 +134,6 @@ export default function AboutPage() {
           initial="initial"
           animate="animate"
         >
-          {/* Sidebar Area: User Info & Stats */}
           <div className="lg:col-span-1 space-y-6">
             <motion.div variants={fadeIn}>
               <Card className="overflow-hidden border-primary/20 bg-card/50 backdrop-blur-sm">
@@ -204,9 +200,7 @@ export default function AboutPage() {
             </motion.div>
           </div>
 
-          {/* Main Content Area */}
           <div className="lg:col-span-2 space-y-8">
-            {/* Professional Summary */}
             <motion.section variants={fadeIn} className="space-y-4">
               <div className="flex items-center gap-2 mb-2">
                 <Rocket className="w-6 h-6 text-primary" />
@@ -217,7 +211,6 @@ export default function AboutPage() {
               </p>
             </motion.section>
 
-            {/* Experience */}
             <motion.section variants={fadeIn} className="space-y-6">
               <div className="flex items-center gap-2 mb-2">
                 <Briefcase className="w-6 h-6 text-primary" />
@@ -262,7 +255,6 @@ export default function AboutPage() {
               </div>
             </motion.section>
 
-            {/* Achievements */}
             <motion.section variants={fadeIn} className="space-y-4">
               <div className="flex items-center gap-2 mb-2">
                 <Award className="w-6 h-6 text-primary" />
@@ -283,7 +275,6 @@ export default function AboutPage() {
               </div>
             </motion.section>
 
-            {/* Expectations */}
             <motion.section variants={fadeIn} className="space-y-4">
               <div className="flex items-center gap-2 mb-2">
                 <Target className="w-6 h-6 text-primary" />
@@ -298,14 +289,13 @@ export default function AboutPage() {
               </Card>
             </motion.section>
 
-            {/* Skills & Progress */}
             <motion.section variants={fadeIn} className="space-y-4">
               <div className="flex items-center gap-2 mb-4">
                 <Award className="w-6 h-6 text-primary" />
                 <h2 className="text-2xl font-bold">{t('about.skills.title')}</h2>
               </div>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-6">
-                {skills.map((skill, index) => (
+                {SKILLS.map((skill, index) => (
                   <div key={index} className="space-y-2">
                     <div className="flex justify-between items-center text-sm">
                       <div className="flex items-center gap-2 font-medium">
@@ -323,7 +313,7 @@ export default function AboutPage() {
               
               <div className="pt-6">
                 <div className="flex flex-wrap gap-3">
-                  {additionalSkills.map((skill, index) => (
+                  {ADDITIONAL_SKILLS.map((skill, index) => (
                     <Badge 
                       key={index} 
                       variant="secondary" 
@@ -345,3 +335,5 @@ export default function AboutPage() {
     </div>
   );
 }
+
+export default AboutPage;
