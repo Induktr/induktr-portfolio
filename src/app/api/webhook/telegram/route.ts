@@ -4,66 +4,115 @@ import { NextResponse } from "next/server";
 export async function GET(req: Request) {
   try {
     const { searchParams } = new URL(req.url);
-    const isSetup = searchParams.get('setup') === 'true';
+    const isSetup = searchParams.get("setup") === "true";
+    const isDelete = searchParams.get("delete") === "true";
 
-    if (isSetup && process.env.TELEGRAM_BOT_TOKEN) {
-      botManager.initialize(process.env.TELEGRAM_BOT_TOKEN, { polling: false });
-      
-      const host = req.headers.get('host');
-      const protocol = req.headers.get('x-forwarded-proto') || 'https';
-      const webhookUrl = `${protocol}://${host}/api/webhook/telegram`;
-      
-      await botManager.setWebHook(webhookUrl);
-      return NextResponse.json({ success: true, message: `Webhook set to ${webhookUrl}` });
+    const token = process.env.TELEGRAM_BOT_TOKEN;
+    if (!token) {
+      return NextResponse.json({
+        success: false,
+        error: "TELEGRAM_BOT_TOKEN is not configured in environment variables."
+      }, { status: 500 });
     }
-    
-    return NextResponse.json({ success: false, message: "Use ?setup=true to configure webhook" });
+
+    botManager.initialize(token, { polling: false });
+
+    // Handle webhook deletion
+    if (isDelete) {
+      const deleteResult = await botManager.deleteWebhook();
+      return NextResponse.json({
+        success: true,
+        message: "Telegram webhook removed successfully.",
+        result: deleteResult
+      });
+    }
+
+    // Handle webhook setup
+    if (isSetup) {
+      const host = req.headers.get("x-forwarded-host") || req.headers.get("host");
+      const protocol = req.headers.get("x-forwarded-proto") || "https";
+      const webhookUrl = `${protocol}://${host}/api/webhook/telegram`;
+
+      console.log(`[Telegram Webhook Setup] Setting webhook to: ${webhookUrl}`);
+      const setupResult = await botManager.setWebHook(webhookUrl);
+
+      return NextResponse.json({
+        success: true,
+        message: `Webhook configured to: ${webhookUrl}`,
+        result: setupResult
+      });
+    }
+
+    // Diagnostics / Status query
+    const webhookInfo = await botManager.getWebhookInfo();
+    const client = botManager.getClient();
+    let botInfo = null;
+
+    if (client) {
+      try {
+        botInfo = await client.getMe();
+      } catch (err) {
+        botInfo = { error: String(err) };
+      }
+    }
+
+    return NextResponse.json({
+      success: true,
+      status: "ready",
+      bot: botInfo,
+      webhook: webhookInfo,
+      environment: {
+        hasToken: !!process.env.TELEGRAM_BOT_TOKEN,
+        hasAdminChatId: !!process.env.TELEGRAM_CHAT_ID,
+        hasDatabaseUrl: !!process.env.DATABASE_URL,
+        nodeEnv: process.env.NODE_ENV
+      },
+      instructions: {
+        setupWebhook: "Add ?setup=true to this URL to register the webhook with Telegram.",
+        removeWebhook: "Add ?delete=true to remove the webhook (e.g. for polling mode)."
+      }
+    });
   } catch (error) {
-    console.error("Telegram Setup GET Error:", error);
-    return NextResponse.json({ success: false, error: String(error) }, { status: 500 });
+    console.error("[Telegram Webhook GET Error]:", error);
+    return NextResponse.json({
+      success: false,
+      error: error instanceof Error ? error.message : String(error)
+    }, { status: 500 });
   }
 }
 
 export async function POST(req: Request) {
   try {
-    const { searchParams } = new URL(req.url);
-    const isSetup = searchParams.get('setup') === 'true';
-
-    console.log(`[bot-webhook] Received POST request. isSetup: ${isSetup}`);
-
-    if (process.env.TELEGRAM_BOT_TOKEN) {
-      botManager.initialize(process.env.TELEGRAM_BOT_TOKEN, { polling: false });
-    } else {
-      console.error("[bot-webhook] Missing TELEGRAM_BOT_TOKEN");
+    const token = process.env.TELEGRAM_BOT_TOKEN;
+    if (!token) {
+      console.error("[Telegram Webhook POST] Missing TELEGRAM_BOT_TOKEN");
+      return new Response("Missing BOT TOKEN", { status: 500 });
     }
 
-    if (isSetup) {
-      const host = req.headers.get('host');
-      const protocol = req.headers.get('x-forwarded-proto') || 'https';
-      const webhookUrl = `${protocol}://${host}/api/webhook/telegram`;
-      
-      console.log(`[bot-webhook] Setting up webhook to: ${webhookUrl}`);
-      await botManager.setWebHook(webhookUrl);
-      return NextResponse.json({ success: true, message: `Webhook set to ${webhookUrl}` });
+    botManager.initialize(token, { polling: false });
+
+    // Optional secret token verification
+    const expectedSecret = process.env.TELEGRAM_WEBHOOK_SECRET;
+    if (expectedSecret) {
+      const secretHeader = req.headers.get("x-telegram-bot-api-secret-token");
+      if (secretHeader !== expectedSecret) {
+        console.warn("[Telegram Webhook POST] Invalid secret token received.");
+        return new Response("Unauthorized", { status: 401 });
+      }
     }
 
     const body = await req.json();
-    console.log(`[bot-webhook] Update body path: ${body.message?.text || body.callback_query?.data || 'unknown'}`);
+    console.log(`[Telegram Webhook POST] Update ID: ${body.update_id || "none"}`);
 
+    // Pure async dispatch - Vercel will only terminate after this promise resolves
     await botManager.processUpdate(body);
-    
-    // In serverless, we might need a small delay or use await if the library supported it
-    // But since it doesn't, we just return OK and hope for the best, or use telegraf
+
     return new Response("OK", { status: 200 });
   } catch (error) {
-    if (error instanceof Error) {
-      console.error("Telegram Webhook Error:", error.message, error.stack);
-    } else {
-      console.error("Telegram Webhook Error:", error);
-    }
-    return new Response(JSON.stringify({ error: String(error) }), { 
-      status: 500,
-      headers: { "Content-Type": "application/json" }
-    });
+    console.error("[Telegram Webhook POST Error]:", error);
+    return new Response(
+      JSON.stringify({ error: error instanceof Error ? error.message : String(error) }),
+      { status: 500, headers: { "Content-Type": "application/json" } }
+    );
   }
 }

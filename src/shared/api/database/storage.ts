@@ -39,51 +39,91 @@ export interface IStorage {
 
 export class DatabaseStorage implements IStorage {
   async getUser(id: number): Promise<User | undefined> {
-    const [user] = await db.select().from(users).where(eq(users.id, id));
-    return user;
+    try {
+      const [user] = await db.select().from(users).where(eq(users.id, id));
+      return user;
+    } catch (error) {
+      console.error(`[storage.getUser] Error fetching user ${id}:`, error);
+      return undefined;
+    }
   }
 
   async getUserByUsername(username: string): Promise<User | undefined> {
-    const [user] = await db.select().from(users).where(eq(users.username, username));
-    return user;
+    try {
+      const [user] = await db.select().from(users).where(eq(users.username, username));
+      return user;
+    } catch (error) {
+      console.error(`[storage.getUserByUsername] Error fetching username ${username}:`, error);
+      return undefined;
+    }
   }
 
   async createLead(insertLead: any): Promise<LeadRow> {
     const accessCode = Math.random().toString(36).substring(2, 10).toUpperCase();
-    const [lead] = await db.insert(leads).values({ ...insertLead, accessCode }).returning();
-    return lead;
+    try {
+      const [lead] = await db.insert(leads).values({ ...insertLead, accessCode }).returning();
+      return lead;
+    } catch (error) {
+      console.error('[storage.createLead] Error creating lead:', error);
+      throw error;
+    }
   }
 
   async getLead(id: number): Promise<LeadRow | undefined> {
-    const [lead] = await db.select().from(leads).where(eq(leads.id, id));
-    return lead;
+    try {
+      const [lead] = await db.select().from(leads).where(eq(leads.id, id));
+      return lead;
+    } catch (error) {
+      console.error(`[storage.getLead] Error fetching lead ${id}:`, error);
+      return undefined;
+    }
   }
 
   async getLeadByAccessCode(code: string): Promise<LeadRow | undefined> {
-    const [lead] = await db.select().from(leads).where(eq(leads.accessCode, code));
-    return lead;
+    try {
+      const [lead] = await db.select().from(leads).where(eq(leads.accessCode, code));
+      return lead;
+    } catch (error) {
+      console.error(`[storage.getLeadByAccessCode] Error fetching lead with code ${code}:`, error);
+      return undefined;
+    }
   }
 
   async updateLeadStatus(id: number, status: string, materialsUrl?: string): Promise<LeadRow> {
-    const [lead] = await db
-      .update(leads)
-      .set({ status, materialsUrl })
-      .where(eq(leads.id, id))
-      .returning();
-    return lead;
+    try {
+      const [lead] = await db
+        .update(leads)
+        .set({ status, materialsUrl })
+        .where(eq(leads.id, id))
+        .returning();
+      return lead;
+    } catch (error) {
+      console.error(`[storage.updateLeadStatus] Error updating lead ${id}:`, error);
+      throw error;
+    }
   }
 
   async setLeadTelegramChatId(id: number, chatId: string): Promise<LeadRow> {
-    const [lead] = await db
-      .update(leads)
-      .set({ telegramChatId: chatId })
-      .where(eq(leads.id, id))
-      .returning();
-    return lead;
+    try {
+      const [lead] = await db
+        .update(leads)
+        .set({ telegramChatId: chatId })
+        .where(eq(leads.id, id))
+        .returning();
+      return lead;
+    } catch (error) {
+      console.error(`[storage.setLeadTelegramChatId] Error updating lead ${id}:`, error);
+      throw error;
+    }
   }
 
   async getProjects(): Promise<ProjectRow[]> {
-    return await db.select().from(projects);
+    try {
+      return await db.select().from(projects);
+    } catch (error) {
+      console.error('[storage.getProjects] Error fetching projects:', error);
+      return [];
+    }
   }
 
   async createProject(project: NewProjectRow): Promise<ProjectRow> {
@@ -101,7 +141,12 @@ export class DatabaseStorage implements IStorage {
   }
 
   async getMarketplace(): Promise<MarketplaceRow[]> {
-    return await db.select().from(marketplace);
+    try {
+      return await db.select().from(marketplace);
+    } catch (error) {
+      console.error('[storage.getMarketplace] Error fetching marketplace items:', error);
+      return [];
+    }
   }
 
   async createMarketplaceItem(item: NewMarketplaceRow): Promise<MarketplaceRow> {
@@ -119,7 +164,12 @@ export class DatabaseStorage implements IStorage {
   }
 
   async getTools(): Promise<ToolRow[]> {
-    return await db.select().from(tools);
+    try {
+      return await db.select().from(tools);
+    } catch (error) {
+      console.error('[storage.getTools] Error fetching tools:', error);
+      return [];
+    }
   }
 
   async createTool(tool: NewToolRow): Promise<ToolRow> {
@@ -137,7 +187,12 @@ export class DatabaseStorage implements IStorage {
   }
 
   async getFAQ(): Promise<FAQRow[]> {
-    return await db.select().from(faq);
+    try {
+      return await db.select().from(faq);
+    } catch (error) {
+      console.error('[storage.getFAQ] Error fetching FAQ:', error);
+      return [];
+    }
   }
 
   async createFAQ(item: NewFAQRow): Promise<FAQRow> {
@@ -155,7 +210,12 @@ export class DatabaseStorage implements IStorage {
   }
 
   async getExperience(): Promise<ExperienceRow[]> {
-    return await db.select().from(experience);
+    try {
+      return await db.select().from(experience);
+    } catch (error) {
+      console.error('[storage.getExperience] Error fetching experience:', error);
+      return [];
+    }
   }
 
   async createExperience(item: NewExperienceRow): Promise<ExperienceRow> {
@@ -173,39 +233,72 @@ export class DatabaseStorage implements IStorage {
   }
 
   async getUserLanguage(chatId: string): Promise<string | undefined> {
-    const [record] = await db.select().from(userLanguages).where(eq(userLanguages.chatId, chatId));
-    return record?.language;
+    try {
+      const [record] = await db.select().from(userLanguages).where(eq(userLanguages.chatId, chatId));
+      return record?.language;
+    } catch (error) {
+      console.error(`[storage.getUserLanguage] Error fetching language for ${chatId}:`, error);
+      return undefined;
+    }
   }
 
   async setUserLanguage(chatId: string, language: string): Promise<void> {
-    await db.insert(userLanguages)
-      .values({ chatId, language })
-      .onConflictDoUpdate({
-        target: userLanguages.chatId,
-        set: { language }
-      });
+    try {
+      await db.insert(userLanguages)
+        .values({ chatId, language })
+        .onConflictDoUpdate({
+          target: userLanguages.chatId,
+          set: { language }
+        });
+    } catch (error) {
+      console.error(`[storage.setUserLanguage] Error setting language for ${chatId}:`, error);
+    }
   }
 
   async addChatMessage(chatId: string, role: string, content: string): Promise<void> {
-    await db.insert(chatHistory).values({ chatId, role, content });
+    try {
+      await db.insert(chatHistory).values({ chatId, role, content });
+    } catch (error) {
+      console.error(`[storage.addChatMessage] Error saving chat message for ${chatId}:`, error);
+    }
   }
 
   async getChatHistory(chatId: string): Promise<ChatMessage[]> {
-    return await db.select().from(chatHistory).where(eq(chatHistory.chatId, chatId));
+    try {
+      return await db.select().from(chatHistory).where(eq(chatHistory.chatId, chatId));
+    } catch (error) {
+      console.error(`[storage.getChatHistory] Error fetching chat history for ${chatId}:`, error);
+      return [];
+    }
   }
 
   async getAllLeads(): Promise<LeadRow[]> {
-    return await db.select().from(leads);
+    try {
+      return await db.select().from(leads);
+    } catch (error) {
+      console.error('[storage.getAllLeads] Error fetching leads:', error);
+      return [];
+    }
   }
 
   async getAllChatIds(): Promise<string[]> {
-    const results = await db.select({ chatId: userLanguages.chatId }).from(userLanguages);
-    return results.map(r => r.chatId);
+    try {
+      const results = await db.select({ chatId: userLanguages.chatId }).from(userLanguages);
+      return results.map(r => r.chatId);
+    } catch (error) {
+      console.error('[storage.getAllChatIds] Error fetching chat IDs:', error);
+      return [];
+    }
   }
 
   async getUsersCount(): Promise<number> {
-    const results = await db.select().from(users);
-    return results.length;
+    try {
+      const results = await db.select().from(users);
+      return results.length;
+    } catch (error) {
+      console.error('[storage.getUsersCount] Error counting users:', error);
+      return 0;
+    }
   }
 }
 

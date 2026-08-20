@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { storage } from "@/shared/api/database/storage";
 import { botManager } from "@/features/telegram-bot/index";
-import { BOT_TRANSLATIONS } from "@/shared/constants/server/bot_i18n";
+import { escapeHtml } from "@/shared/utils/services/msg-format";
 
 export async function POST(req: Request) {
   try {
@@ -10,23 +10,25 @@ export async function POST(req: Request) {
 
     // Notify Admin via Telegram
     const adminChatId = process.env.TELEGRAM_CHAT_ID;
-    if (adminChatId && process.env.TELEGRAM_BOT_TOKEN) {
-      botManager.initialize(process.env.TELEGRAM_BOT_TOKEN, { polling: false });
-      
-      const adminLang = "en"; // Admin usually gets en
-      // Use fallback translation if needed
-      const t = BOT_TRANSLATIONS[adminLang]?.["new_lead_admin"] || "New Lead Received!";
-      
-      const message = `🔔 <b>New Lead Received!</b>\n\n` +
-        `👤 <b>Name:</b> ${lead.name}\n` +
-        `📞 <b>Contact:</b> ${lead.contact}\n` +
-        `📂 <b>Type:</b> ${lead.projectType}\n` +
-        `💰 <b>Budget:</b> ${lead.budget}\n` +
-        `🕒 <b>Deadline:</b> ${lead.deadline || "Not specified"}\n\n` +
-        `💬 <b>Description:</b>\n${lead.description}\n\n` +
-        `🔑 <b>Access Code:</b> <code>${lead.accessCode}</code>`;
+    const token = process.env.TELEGRAM_BOT_TOKEN;
 
-      await botManager.sendNotification(adminChatId, message);
+    if (adminChatId && token) {
+      try {
+        botManager.initialize(token, { polling: false });
+
+        const message = `🔔 <b>New Lead Received!</b>\n\n` +
+          `👤 <b>Name:</b> ${escapeHtml(lead.name)}\n` +
+          `📞 <b>Contact:</b> ${escapeHtml(lead.contact)}\n` +
+          `📂 <b>Type:</b> ${escapeHtml(lead.projectType)}\n` +
+          `💰 <b>Budget:</b> ${escapeHtml(lead.budget)}\n` +
+          `🕒 <b>Deadline:</b> ${escapeHtml(lead.deadline || "Not specified")}\n\n` +
+          `💬 <b>Description:</b>\n${escapeHtml(lead.description || "")}\n\n` +
+          `🔑 <b>Access Code:</b> <code>${lead.accessCode}</code>`;
+
+        await botManager.sendNotification(adminChatId, message);
+      } catch (notifyErr) {
+        console.error("[send-lead] Failed to send Telegram notification to admin:", notifyErr);
+      }
     }
 
     return NextResponse.json({ 
@@ -35,7 +37,7 @@ export async function POST(req: Request) {
       accessCode: lead.accessCode 
     });
   } catch (error) {
-    console.error("Failed to send lead:", error);
+    console.error("[send-lead] Failed to process lead request:", error);
     return NextResponse.json({ message: "Failed to process request" }, { status: 500 });
   }
 }

@@ -12,6 +12,14 @@ const verifyAgent = (req: NextRequest) => {
   return true;
 };
 
+const ensureBotInitialized = () => {
+  const token = process.env.TELEGRAM_BOT_TOKEN;
+  if (!token) {
+    throw new Error("TELEGRAM_BOT_TOKEN is not configured.");
+  }
+  botManager.initialize(token, { polling: false });
+};
+
 export async function POST(req: NextRequest) {
   if (!verifyAgent(req)) {
     return NextResponse.json({ success: false, message: 'Unauthorized agent access' }, { status: 401 });
@@ -21,40 +29,41 @@ export async function POST(req: NextRequest) {
     const { command, params } = await req.json();
 
     switch (command) {
-      case 'notify':
-        if (!params.chatId || !params.message) {
+      case 'notify': {
+        if (!params?.chatId || !params?.message) {
           return NextResponse.json({ success: false, message: 'Missing chatId or message' }, { status: 400 });
         }
-        if (process.env.TELEGRAM_BOT_TOKEN) {
-           botManager.initialize(process.env.TELEGRAM_BOT_TOKEN, { polling: false });
-        }
-        await botManager.sendNotification(params.chatId, params.message);
-        return NextResponse.json({ success: true, message: `Notification sent to ${params.chatId}` });
+        ensureBotInitialized();
+        const sent = await botManager.sendNotification(params.chatId, params.message);
+        return NextResponse.json({
+          success: sent,
+          message: sent ? `Notification sent to ${params.chatId}` : `Failed to send notification to ${params.chatId}`
+        });
+      }
 
-      case 'broadcast':
-        if (!params.message) {
+      case 'broadcast': {
+        if (!params?.message) {
           return NextResponse.json({ success: false, message: 'Missing message' }, { status: 400 });
         }
-        if (process.env.TELEGRAM_BOT_TOKEN) {
-           botManager.initialize(process.env.TELEGRAM_BOT_TOKEN, { polling: false });
-        }
+        ensureBotInitialized();
         const allChatIds = await storage.getAllChatIds();
-        
+
         const results = await Promise.allSettled(
           allChatIds.map((id: string) => botManager.sendNotification(id, params.message))
         );
-        
-        const successCount = results.filter((r): r is PromiseFulfilledResult<any> => r.status === 'fulfilled').length;
-        return NextResponse.json({ 
-          success: true, 
-          message: `Broadcast sent. Successful: ${successCount}/${allChatIds.length}` 
-        });
 
-      case 'status':
+        const successCount = results.filter((r) => r.status === 'fulfilled' && r.value === true).length;
+        return NextResponse.json({
+          success: true,
+          message: `Broadcast sent. Successful: ${successCount}/${allChatIds.length}`
+        });
+      }
+
+      case 'status': {
         const leadsCount = (await storage.getAllLeads()).length;
         const usersCount = await storage.getUsersCount();
         const activeChats = (await storage.getAllChatIds()).length;
-        
+
         return NextResponse.json({
           success: true,
           data: {
@@ -66,15 +75,16 @@ export async function POST(req: NextRequest) {
             memory: process.memoryUsage()
           }
         });
+      }
 
       default:
         return NextResponse.json({ success: false, message: `Unknown command: ${command}` }, { status: 400 });
     }
   } catch (error) {
-    return NextResponse.json({ 
-      success: false, 
-      message: 'Failed to execute command', 
-      error: error instanceof Error ? error.message : String(error) 
+    return NextResponse.json({
+      success: false,
+      message: 'Failed to execute command',
+      error: error instanceof Error ? error.message : String(error)
     }, { status: 500 });
   }
 }
