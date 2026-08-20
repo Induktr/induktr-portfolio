@@ -73,10 +73,17 @@ export async function GET(req: Request) {
       }
     });
   } catch (error) {
+    const errorMsg = error instanceof Error ? error.message : String(error);
     console.error("[Telegram Webhook GET Error]:", error);
+
+    const isUnauthorized = errorMsg.includes("401") || errorMsg.toLowerCase().includes("unauthorized");
+
     return NextResponse.json({
       success: false,
-      error: error instanceof Error ? error.message : String(error)
+      error: errorMsg,
+      hint: isUnauthorized
+        ? "Telegram Bot API отклонил токен (401 Unauthorized). Проверьте токен в @BotFather в Telegram (команда /token или /revoke) и обновите переменную TELEGRAM_BOT_TOKEN в настройках проекта Vercel (Project Settings -> Environment Variables), после чего сделайте Redeploy."
+        : "Проверьте сетевое подключение и переменные окружения."
     }, { status: 500 });
   }
 }
