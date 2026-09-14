@@ -66,7 +66,7 @@ const AboutPage = () => {
     { name: "Vite / Turbopack", icon: <SiVite /> },
     { name: "Node.js & FSD", icon: <SiNodedotjs /> },
     { name: "Git / CI/CD", icon: <SiGit /> },
-    { name: "React Three Fiber & WebGL", icon: <SiReact /> }
+    { name: "Figma", icon: <SiFigma /> }
   ];
 
   const handleDelete = (id: string | number) => {
