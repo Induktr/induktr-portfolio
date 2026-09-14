@@ -359,16 +359,22 @@
             "catalog": "Mercor Certification: Highest Evaluation Tier in Technical Domain Expertise."
           },
           {
+            "role": "Frontend Software Engineer — Westbud & Commercial Client Platforms",
+            "period": "2025 — 2026",
+            "description": "Led client technical discovery and delivered the corporate web platform for Westbud construction company using React, TypeScript, and Tailwind CSS. Designed custom atomic design systems, interactive component suites, and mobile-first responsive layouts without heavy bloated dependencies.",
+            "catalog": "Performance Engineering: Optimized client-side rendering pipeline, asset delivery, and form validations (Constraint Validation API), achieving 95+ Google Lighthouse scores across devices."
+          },
+          {
             "role": "Lead Architect & Founder — Induktr Studio",
             "period": "2024 — Present",
             "description": "Founded autonomous engineering studio specializing in high-performance web systems and cross-platform architectures. Architected BrainMessenger ecosystem (cross-platform Next.js/React Native, end-to-end type safety, micro-interactions, custom design tokens). Managed full lifecycle from system design to production deployment.",
             "catalog": "Architecture & Methodology: Implemented strict Feature-Sliced Design (FSD v2.1), automated CI/CD pipelines, and high-standard engineering protocols."
           },
           {
-            "role": "Frontend Software Engineer — Westbud & Commercial Contracts",
+            "role": "Frontend Software Engineer — Contract & Independent Projects",
             "period": "2023 — 2024",
-            "description": "Developed and deployed the corporate web platform for Westbud construction company using React, TypeScript, and Tailwind CSS. Designed custom atomic design systems, interactive component suites, and mobile-first responsive layouts without heavy bloated dependencies.",
-            "catalog": "Performance Engineering: Optimized client-side rendering pipeline, asset delivery, and form validations (Constraint Validation API), achieving 95+ Google Lighthouse scores across devices."
+            "description": "Engineered responsive Single Page Applications (SPA), custom component libraries, and interactive catalog interfaces. Implemented client-side filtering, data transformation, and robust form validation using native Web APIs and modern JavaScript/React.",
+            "catalog": "Foundational Engineering: Built high-performance interactive interfaces with pure DOM/JS optimization and modular component hierarchy."
           }
         ]
       },
