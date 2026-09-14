@@ -18,6 +18,8 @@ import {
   SiNextdotjs,
   SiNodedotjs,
   SiHtml5,
+  SiSolana,
+  SiJest,
 } from "react-icons/si";
 import { 
   MapPin, 
@@ -52,19 +54,19 @@ const AboutPage = () => {
   const dispatch = useAppDispatch();
 
   const SKILLS = [
-    { name: "React.js", icon: <SiReact className="w-5 h-5 text-blue-400" />, years: "1", level: 90 },
-    { name: "JavaScript (ES6+)", icon: <SiJavascript className="w-5 h-5 text-yellow-400" />, years: "1.5", level: 95 },
-    { name: "TypeScript", icon: <SiTypescript className="w-5 h-5 text-blue-600" />, years: "1", level: 85 },
-    { name: "React UI", icon: <SiTailwindcss className="w-5 h-5 text-cyan-400" />, years: "1.5", level: 90 },
-    { name: "Next.js", icon: <SiNextdotjs className="w-5 h-5 text-white" />, years: "0.5", level: 75 }
+    { name: "React 19 & Next.js", icon: <SiNextdotjs className="w-5 h-5 text-white" />, years: "3+", level: 98 },
+    { name: "TypeScript & Systems", icon: <SiTypescript className="w-5 h-5 text-blue-500" />, years: "3+", level: 95 },
+    { name: "Web3 / SVM & Solana", icon: <SiSolana className="w-5 h-5 text-purple-400" />, years: "2+", level: 90 },
+    { name: "Tailwind v4 & High-Perf UI", icon: <SiTailwindcss className="w-5 h-5 text-cyan-400" />, years: "3+", level: 95 },
+    { name: "Testing (Jest / Playwright / k6)", icon: <SiJest className="w-5 h-5 text-red-400" />, years: "2+", level: 92 }
   ];
 
   const ADDITIONAL_SKILLS = [
-    { name: "HTML5/CSS3", icon: <SiHtml5 /> },
-    { name: "Vite", icon: <SiVite /> },
-    { name: "Node.js", icon: <SiNodedotjs /> },
-    { name: "Git", icon: <SiGit /> },
-    { name: "Figma", icon: <SiFigma /> }
+    { name: "V8 & Memory Profiling", icon: <SiJavascript /> },
+    { name: "Vite / Turbopack", icon: <SiVite /> },
+    { name: "Node.js & FSD", icon: <SiNodedotjs /> },
+    { name: "Git / CI/CD", icon: <SiGit /> },
+    { name: "React Three Fiber & WebGL", icon: <SiReact /> }
   ];
 
   const handleDelete = (id: string | number) => {

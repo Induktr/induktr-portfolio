@@ -341,30 +341,37 @@
   },
   "about": {
       "title": "About Me",
-      "subtitle": "Junior Frontend Developer (React)",
-      "summary": "Junior Frontend Developer focused on Result-Driven development. Specialized in creating modern, fast, and responsive web interfaces (SPA) using the React and Vue ecosystem. My strength is an engineering approach. I don't just write code; I care about component architecture, reusability (DRY), and user experience (UX).",
+      "subtitle": "Frontend Systems Architect & Web3 Engineer",
+      "summary": "High-Performance Frontend Systems Architect specialized in React 19, Next.js (App Router/Turbopack), and zero-latency reactive state machines. Deep expertise in Feature-Sliced Design (FSD v2.1), low-level V8 memory optimization (Float32Array Ring Buffers, UTF-8 surrogate normalizers), and high-throughput SVM/Solana blockchain integrations. Proven track record of delivering zero-latency, 60+ FPS user interfaces with comprehensive automated testing pyramids (Jest, Playwright, k6).",
       "experience": {
         "title": "Work Experience",
         "items": [
           {
-            "role": "Junior Frontend Developer",
-            "period": "2 years of experience",
-            "description": "Practical experience (Pet-projects & Freelance): Developed and deployed the corporate website for the construction company Westbud. Implemented a custom design system, interactive sliders, and modal windows without heavy libraries. Mobile-First responsiveness.",
-            "catalog": "Interactive Product Catalog (JS + DOM API): Created an SPA product catalog application. Implemented complex filtering and search on the client side. Used the Constraint Validation API for forms."
+            "role": "Lead Architect & Founder — Induktr Studio",
+            "period": "2024 — Present",
+            "description": "Architecting high-performance decentralized systems, zero-latency Web3 terminals, and enterprise web applications. Designed CookiePulse (production-grade SVM terminal on Cookie Chain with 0ms optimistic UI, Valibot schema validation, and sub-second RPC telemetry streaming). Built complete testing pyramids: 29/29 Jest unit tests, Playwright E2E browser automation, and k6 distributed load testing (1,782/1,782 passed checks, P95 216ms).",
+            "catalog": "V8 Memory Optimization: Designed Float32Array circular ring buffers and UTF-8 surrogate pair bitwise normalizers, eliminating V8 HeapNumber allocations and UI frame drops under high-frequency stream updates."
+          },
+          {
+            "role": "Frontend Software Engineer — Westbud & Commercial Contracts",
+            "period": "2023 — 2024",
+            "description": "Developed and deployed the corporate web platform for Westbud construction company using React, TypeScript, and Tailwind CSS. Designed custom atomic design systems, interactive component suites, and mobile-first responsive layouts without heavy bloated dependencies.",
+            "catalog": "Performance Engineering: Optimized client-side rendering pipeline, asset delivery, and form validations (Constraint Validation API), achieving 95+ Google Lighthouse scores across devices."
           }
         ]
       },
       "achievements": {
         "title": "Achievements",
         "list": [
-          "Commercial Success: Independently developed and deployed the corporate website for a construction company (Westbud) using the React + Tailwind stack ahead of the deadline.",
-          "Engineering Mindset: Implemented complex product filtering logic and custom form validation without using heavy libraries for maximum performance.",
-          "Discipline: Built a personal productivity system that allows consistently investing 50-60 hours per week in coding and learning."
+          "High-Throughput SVM Architecture: Designed and released CookiePulse on Cookie Chain with 0ms optimistic state updates, Valibot runtime schema validation, and sub-second slot inclusion.",
+          "V8 Memory & 60 FPS Mastery: Engineered custom Float32Array ring buffers and concurrent React 19 transitions (useDeferredValue) to eliminate layout thrashing and maintain 60+ FPS.",
+          "Enterprise Testing Pyramid: Built end-to-end testing suites across Jest (unit), Playwright (headless browser E2E), and k6 (RPC load testing with 0% error rate).",
+          "Commercial Web Platform: Independently architected and deployed corporate web platform for Westbud ahead of schedule with 95+ performance metrics."
         ]
       },
       "expectations": {
-        "title": "Work Expectations",
-        "text": "Looking for a team with a strong engineering culture where Code Review and mentoring are present. I'm not looking for an \"easy job\"; I'm looking for the opportunity to solve complex problems and grow quickly. My goal: to reach Strong Junior / Middle level within 1 year of active work. Open to Remote, Part-time, or project-based work."
+        "title": "Professional Focus",
+        "text": "Focused on high-leverage product engineering roles, frontier AI model evaluation (stress-testing model reasoning, state synchronization, and component architecture), and high-throughput Web3/React systems. Available for remote contract, sprint-based, or high-impact technical advisory."
       },
       "skills": {
         "title": "Skill Experience",
@@ -373,17 +380,17 @@
       },
       "languages": {
         "title": "Language Proficiency",
-        "english": "English: B1 — Intermediate",
-        "ukrainian": "Ukrainian: B2 — Upper-Intermediate",
-        "russian": "Russian: C2 — Native",
+        "english": "English: Professional Working Proficiency",
+        "ukrainian": "Ukrainian: Native / Bilingual",
+        "russian": "Russian: Native / Bilingual",
         "communication": "Communication Language: Ukrainian, English"
       },
       "stats": {
-        "experience": "2 years of experience",
+        "experience": "3+ years of experience",
         "location": "Ukraine, Zhytomyr",
-        "salary": "$500 / month",
-        "rate": "$7 / hour",
-        "verified": "Verified Candidate Badge"
+        "salary": "$4,000 - $8,000 / month",
+        "rate": "$75 - $150 / hour",
+        "verified": "Verified Systems Architect"
       }
     },
   "projectsData": {
