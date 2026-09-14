@@ -151,10 +151,14 @@ const AboutPage = () => {
                   <CardDescription className="text-primary font-medium">
                     {t('about.subtitle')}
                   </CardDescription>
-                  <div className="mt-4 flex flex-center gap-2">
+                  <div className="mt-4 flex flex-wrap justify-center gap-2">
                     <Badge variant="secondary" className="bg-primary/10 text-primary border-primary/20">
                       <CheckCircle2 className="w-3 h-3 mr-1" />
                       {t('about.stats.verified')}
+                    </Badge>
+                    <Badge variant="outline" className="bg-emerald-500/10 text-emerald-400 border-emerald-500/30">
+                      <Award className="w-3 h-3 mr-1" />
+                      {t('about.stats.mercorVerified')}
                     </Badge>
                   </div>
                 </CardHeader>

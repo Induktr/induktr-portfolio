@@ -342,15 +342,27 @@
   "about": {
       "title": "About Me",
       "subtitle": "Frontend Systems Architect & Web3 Engineer",
-      "summary": "High-Performance Frontend Systems Architect specialized in React 19, Next.js (App Router/Turbopack), and zero-latency reactive state machines. Deep expertise in Feature-Sliced Design (FSD v2.1), low-level V8 memory optimization (Float32Array Ring Buffers, UTF-8 surrogate normalizers), and high-throughput SVM/Solana blockchain integrations. Proven track record of delivering zero-latency, 60+ FPS user interfaces with comprehensive automated testing pyramids (Jest, Playwright, k6).",
+      "summary": "Vetted Mercor Domain Expert (Highest Score Bracket) & High-Performance Frontend Systems Architect specialized in React 19, Next.js (App Router/Turbopack), and zero-latency reactive state machines. Deep expertise in Feature-Sliced Design (FSD v2.1), low-level V8 memory optimization (Float32Array Ring Buffers, UTF-8 surrogate normalizers), and high-throughput SVM/Solana blockchain integrations. Proven track record of delivering zero-latency, 60+ FPS user interfaces with comprehensive automated testing pyramids (Jest, Playwright, k6).",
       "experience": {
         "title": "Work Experience",
         "items": [
           {
+            "role": "Lead Systems Architect — CookiePulse (Web3 / SVM)",
+            "period": "2026",
+            "description": "Architected and shipped a production-grade SVM terminal on Cookie Chain. Designed zero-latency optimistic UI, Valibot runtime schema validation, and sub-second RPC telemetry streaming. Built full testing pyramid: 29/29 Jest unit tests, Playwright E2E browser automation, and k6 load testing (1,782/1,782 passed checks, P95 216ms).",
+            "catalog": "V8 Memory Optimization: Designed Float32Array circular ring buffers and UTF-8 surrogate pair bitwise normalizers, eliminating V8 HeapNumber allocations and UI frame drops under high-frequency stream updates."
+          },
+          {
+            "role": "Vetted Domain Expert (Frontend & Systems Architecture) — Mercor",
+            "period": "2026 — Present",
+            "description": "Admitted into Mercor's elite engineering network with the highest evaluation score tier ($90+/hr rate bracket). Rigorously assessed via comprehensive AI technical interviews covering high-concurrency systems design, reactive state machines, edge cases, and resilient frontend infrastructure.",
+            "catalog": "Mercor Certification: Highest Evaluation Tier in Technical Domain Expertise."
+          },
+          {
             "role": "Lead Architect & Founder — Induktr Studio",
             "period": "2024 — Present",
-            "description": "Architecting high-performance decentralized systems, zero-latency Web3 terminals, and enterprise web applications. Designed CookiePulse (production-grade SVM terminal on Cookie Chain with 0ms optimistic UI, Valibot schema validation, and sub-second RPC telemetry streaming). Built complete testing pyramids: 29/29 Jest unit tests, Playwright E2E browser automation, and k6 distributed load testing (1,782/1,782 passed checks, P95 216ms).",
-            "catalog": "V8 Memory Optimization: Designed Float32Array circular ring buffers and UTF-8 surrogate pair bitwise normalizers, eliminating V8 HeapNumber allocations and UI frame drops under high-frequency stream updates."
+            "description": "Founded autonomous engineering studio specializing in high-performance web systems and cross-platform architectures. Architected BrainMessenger ecosystem (cross-platform Next.js/React Native, end-to-end type safety, micro-interactions, custom design tokens). Managed full lifecycle from system design to production deployment.",
+            "catalog": "Architecture & Methodology: Implemented strict Feature-Sliced Design (FSD v2.1), automated CI/CD pipelines, and high-standard engineering protocols."
           },
           {
             "role": "Frontend Software Engineer — Westbud & Commercial Contracts",
@@ -363,6 +375,7 @@
       "achievements": {
         "title": "Achievements",
         "list": [
+          "Mercor Vetted Domain Expert: Achieved the highest score tier on Mercor's global AI technical assessment ($90+/hr rate bracket), officially certified as an elite Domain Expert for high-complexity frontend systems.",
           "High-Throughput SVM Architecture: Designed and released CookiePulse on Cookie Chain with 0ms optimistic state updates, Valibot runtime schema validation, and sub-second slot inclusion.",
           "V8 Memory & 60 FPS Mastery: Engineered custom Float32Array ring buffers and concurrent React 19 transitions (useDeferredValue) to eliminate layout thrashing and maintain 60+ FPS.",
           "Enterprise Testing Pyramid: Built end-to-end testing suites across Jest (unit), Playwright (headless browser E2E), and k6 (RPC load testing with 0% error rate).",
@@ -390,7 +403,8 @@
         "location": "Ukraine, Zhytomyr",
         "salary": "$4,000 - $8,000 / month",
         "rate": "$75 - $150 / hour",
-        "verified": "Verified Systems Architect"
+        "verified": "Verified Systems Architect",
+        "mercorVerified": "Mercor: Vetted Domain Expert"
       }
     },
   "projectsData": {
