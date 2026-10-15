@@ -9,7 +9,7 @@ import { SiGithub, SiTelegram } from "react-icons/si";
 import { ThemeToggle } from "@/features/toggle-theme/ThemeToggle";
 import { LanguageSwitcher } from "@/features/language-switch/LanguageSwitcher";
 
-import { PATHS } from "@/shared/config/paths";
+import { NAV_PATHS } from "@/shared/config/paths";
 import { LINKS } from "@/shared/config/links";
 import { navItemVariants } from "@/shared/constants/animations/mobile";
 import { useAppDispatch, useAppSelector } from "@/shared/lib/store/store";
@@ -47,7 +47,7 @@ const MobileNav = () => {
             }}
             className="flex flex-col space-y-1"
           >
-            {PATHS.filter(p => p !== "/").map((path, index) => (
+            {NAV_PATHS.map((path, index) => (
             <motion.div variants={navItemVariants} key={index}>
               <Link href={path} onClick={() => dispatch(setSidebar(false))}>
                 <div className="block px-4 py-3 text-lg font-medium hover:text-primary hover:bg-white/5 rounded-md cursor-pointer transition-all">

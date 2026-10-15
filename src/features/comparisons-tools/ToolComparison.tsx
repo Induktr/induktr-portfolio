@@ -1,5 +1,4 @@
 import { useTheme } from "@/shared/providers/theme-provider";
-
 import {
   BarChart,
   XAxis,
@@ -9,11 +8,12 @@ import {
   Legend,
   ResponsiveContainer
 } from "recharts";
-
 import { toolComparisonData } from "@/shared/constants/data/tools";
+import { getChartThemeConfig } from "@/shared/constants/charts/chartTheme";
 
 export const ToolComparison = () => {
   const { theme } = useTheme();
+  const chartTheme = getChartThemeConfig(theme);
 
   return (
     <div className="space-y-6">
@@ -22,23 +22,18 @@ export const ToolComparison = () => {
           <BarChart data={toolComparisonData}>
             <CartesianGrid
               strokeDasharray="3 3"
-              stroke={theme === "dark" ? "#333" : "#eee"}
+              stroke={chartTheme.gridStroke}
             />
             <XAxis
               dataKey="name"
-              stroke={theme === "dark" ? "#888" : "#333"}
+              stroke={chartTheme.axisStroke}
             />
             <YAxis
-              stroke={theme === "dark" ? "#888" : "#333"}
+              stroke={chartTheme.axisStroke}
               domain={[0, 100]}
             />
             <Tooltip
-              contentStyle={{
-                backgroundColor: theme === "dark" ? "#1a1a1a" : "#fff",
-                border: "none",
-                borderRadius: "8px",
-                boxShadow: "0 2px 8px rgba(0,0,0,0.2)"
-              }}
+              contentStyle={chartTheme.tooltipStyle}
             />
             <Legend />
           </BarChart>
@@ -46,4 +41,4 @@ export const ToolComparison = () => {
       </div>
     </div>
   );
-}
+};

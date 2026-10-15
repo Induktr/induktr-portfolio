@@ -8,20 +8,6 @@ import { Progress } from "@/shared/ui/progress";
 import { Separator } from "@/shared/ui/separator";
 import { Button } from "@/shared/ui/button";
 import { 
-  SiReact, 
-  SiTypescript, 
-  SiJavascript, 
-  SiTailwindcss, 
-  SiVite, 
-  SiFigma, 
-  SiGit,
-  SiNextdotjs,
-  SiNodedotjs,
-  SiHtml5,
-  SiSolana,
-  SiJest,
-} from "react-icons/si";
-import { 
   MapPin, 
   Briefcase, 
   DollarSign, 
@@ -39,6 +25,8 @@ import {
 import avatarInduktr from "@/shared/assets/images/avatar-induktr.jpg";
 
 import { fadeIn, staggerContainer } from "@/shared/constants/animations/about";
+import { MAIN_SKILLS, ADDITIONAL_SKILLS } from "@/shared/constants/data/aboutSkills";
+import { ABOUT_PRINT_STYLES } from "@/shared/constants/styles/printStyles";
 import { useAuth } from "@/shared/hooks/useAuth";
 import { useExperience } from "@/shared/hooks/useExperience";
 import ExperienceForm from "@/entities/Experience/ui/ExperienceForm";
@@ -50,68 +38,12 @@ import { handleDownloadPDF } from "@/shared/utils/services/pdf-print";
 const AboutPage = () => {
   const { t } = useTranslation();
   const { user } = useAuth();
-  const { MERGED_EXPERIENCE, isLoading, deleteExperienceMutation } = useExperience();
+  const { MERGED_EXPERIENCE, isLoading, deleteWithConfirmation } = useExperience();
   const dispatch = useAppDispatch();
-
-  const SKILLS = [
-    { name: "React 19 & Next.js", icon: <SiNextdotjs className="w-5 h-5 text-white" />, years: "2+", level: 98 },
-    { name: "TypeScript & Systems", icon: <SiTypescript className="w-5 h-5 text-blue-500" />, years: "2+", level: 95 },
-    { name: "Web3 / SVM & Solana", icon: <SiSolana className="w-5 h-5 text-purple-400" />, years: "1+", level: 90 },
-    { name: "Tailwind v4 & High-Perf UI", icon: <SiTailwindcss className="w-5 h-5 text-cyan-400" />, years: "2+", level: 95 },
-    { name: "Testing (Jest / Playwright / k6)", icon: <SiJest className="w-5 h-5 text-red-400" />, years: "2+", level: 92 }
-  ];
-
-  const ADDITIONAL_SKILLS = [
-    { name: "V8 & Memory Profiling", icon: <SiJavascript /> },
-    { name: "Vite / Turbopack", icon: <SiVite /> },
-    { name: "Node.js & FSD", icon: <SiNodedotjs /> },
-    { name: "Git / CI/CD", icon: <SiGit /> },
-    { name: "Figma", icon: <SiFigma /> }
-  ];
-
-  const handleDelete = (id: string | number) => {
-    if (confirm("Delete this experience entry?")) {
-      deleteExperienceMutation.mutate(id);
-    }
-  };
 
   return (
     <div className="min-h-screen pt-24 pb-16 px-4 print:p-0 print:pt-0">
-      <style>{`
-        @media print {
-          header, footer, .no-print {
-            display: none !important;
-          }
-          body {
-            background: white !important;
-            color: black !important;
-          }
-          .container {
-            max-width: 100% !important;
-            width: 100% !important;
-            margin: 0 !important;
-            padding: 0 !important;
-          }
-          .Card {
-            border: 1px solid #e2e8f0 !important;
-            box-shadow: none !important;
-            background: white !important;
-          }
-          .Badge {
-            border: 1px solid #ccc !important;
-          }
-          * {
-            -webkit-print-color-adjust: exact !important;
-            print-color-adjust: exact !important;
-          }
-          .grid {
-            display: grid !important;
-          }
-          .lg\\:grid-cols-3 {
-            grid-template-columns: 1fr 2fr !important;
-          }
-        }
-      `}</style>
+      <style>{ABOUT_PRINT_STYLES}</style>
       <div className="container mx-auto max-w-5xl">
         <div className="flex justify-end mb-8 no-print gap-4">
           {user && (
@@ -241,7 +173,7 @@ const AboutPage = () => {
                            <Button size="icon" variant="ghost" className="h-8 w-8" onClick={() => dispatch(openModal({ modalName: "experienceForm", editingItem: item }))}>
                              <Pencil className="w-4 h-4" />
                            </Button>
-                           <Button size="icon" variant="ghost" className="h-8 w-8 text-destructive" onClick={() => handleDelete(item.id)}>
+                           <Button size="icon" variant="ghost" className="h-8 w-8 text-destructive" onClick={() => deleteWithConfirmation(item.id)}>
                              <Trash2 className="w-4 h-4" />
                            </Button>
                         </div>
@@ -301,7 +233,7 @@ const AboutPage = () => {
                 <h2 className="text-2xl font-bold">{t('about.skills.title')}</h2>
               </div>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-6">
-                {SKILLS.map((skill, index) => (
+                {MAIN_SKILLS.map((skill, index) => (
                   <div key={index} className="space-y-2">
                     <div className="flex justify-between items-center text-sm">
                       <div className="flex items-center gap-2 font-medium">

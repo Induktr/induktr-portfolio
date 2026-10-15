@@ -107,11 +107,18 @@ export function useMarketplace() {
     }
   });
 
+  const deleteWithConfirmation = (id: string | number, confirmMessage = "Are you sure you want to delete this template from database?") => {
+    if (typeof window !== "undefined" && window.confirm(confirmMessage)) {
+      deleteItemMutation.mutate(id);
+    }
+  };
+
   return {
     ALL_TEMPLATES,
     isLoading,
     createItemMutation,
     updateItemMutation,
     deleteItemMutation,
+    deleteWithConfirmation,
   };
 }

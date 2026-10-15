@@ -109,11 +109,18 @@ export function useFAQ() {
     },
   });
 
+  const deleteWithConfirmation = (id: string | number, confirmMessage = "Delete this FAQ item?") => {
+    if (typeof window !== "undefined" && window.confirm(confirmMessage)) {
+      deleteFAQMutation.mutate(id);
+    }
+  };
+
   return {
     MERGED_FAQ,
     isLoading,
     createFAQMutation,
     updateFAQMutation,
     deleteFAQMutation,
+    deleteWithConfirmation,
   };
 }

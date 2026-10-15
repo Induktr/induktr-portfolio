@@ -22,14 +22,8 @@ import { Loader } from "@/shared/ui/Loader";
 const FAQPage = () => {
   const { t } = useTranslation();
   const { user } = useAuth();
-  const { MERGED_FAQ: faqCategories, isLoading, deleteFAQMutation } = useFAQ();
+  const { MERGED_FAQ: faqCategories, isLoading, deleteWithConfirmation } = useFAQ();
   const dispatch = useAppDispatch();
-
-  const handleDelete = (id: string | number) => {
-    if (confirm("Delete this FAQ item?")) {
-      deleteFAQMutation.mutate(id);
-    }
-  };
 
   return (
     <div className="min-h-screen pt-24 pb-20 px-4">
@@ -110,7 +104,7 @@ const FAQPage = () => {
                                 className="h-8 w-8 bg-destructive/80 backdrop-blur-sm"
                                 onClick={(e) => {
                                   e.stopPropagation();
-                                  handleDelete(item.id);
+                                  deleteWithConfirmation(item.id);
                                 }}
                                >
                                  <Trash2 className="w-4 h-4" />

@@ -18,6 +18,7 @@ import { useAppDispatch, useAppSelector } from "@/shared/lib/store/store";
 import { closeModal } from "@/shared/lib/store/slices/uiSlice";
 import { useLocalizedForm } from "@/shared/hooks/useLocalizedForm";
 import { useTranslation } from "react-i18next";
+import { INITIAL_EXPERIENCE_FORM_DATA } from "@/shared/constants/forms/experienceForm";
 
 const ExperienceForm = () => {
   const { t } = useTranslation();
@@ -30,7 +31,7 @@ const ExperienceForm = () => {
   const {
       slug, setSlug, 
       localizedData, updateLangField, getPayload 
-  } = useLocalizedForm(isOpen, item, { role: "", period: "", description: "", catalog: "" });
+  } = useLocalizedForm(isOpen, item, INITIAL_EXPERIENCE_FORM_DATA);
 
   const [order, setOrder] = useState(0);
 

@@ -15,7 +15,7 @@ export const formatMessage = (text: string): string => {
 
   // If text already contains Telegram HTML tags, perform soft cleanup
   // First, extract links [text](url)
-  let formatted = text
+  const formatted = text
     .replace(/#+\s+(.+)$/gm, "<b>$1</b>")
     .replace(/\*\*\*(.*?)\*\*\*/g, "<b><i>$1</i></b>")
     .replace(/\*\*(.*?)\*\*/g, "<b>$1</b>")

@@ -19,6 +19,7 @@ import { useAppDispatch, useAppSelector } from "@/shared/lib/store/store";
 import { closeModal } from "@/shared/lib/store/slices/uiSlice";
 import { useLocalizedForm } from "@/shared/hooks/useLocalizedForm";
 import { useTranslation } from "react-i18next";
+import { INITIAL_PROJECT_FORM_DATA } from "@/shared/constants/forms/projectForm";
 
 export const ProjectForm = () => {
   const dispatch = useAppDispatch();
@@ -31,17 +32,7 @@ export const ProjectForm = () => {
   const { 
     slug, setSlug, 
     localizedData, updateLangField, getPayload 
-  } = useLocalizedForm(isOpen, project, { 
-    title: "", 
-    shortDescription: "", 
-    description: "", 
-    features: [] as string[], 
-    tags: [] as string[], 
-    techStack: [] as string[], 
-    roadmap: [] as any[], 
-    docs: [] as any[], 
-    usage: [] as any[] 
-  });
+  } = useLocalizedForm(isOpen, project, INITIAL_PROJECT_FORM_DATA);
 
   const [status, setStatus] = useState<"completed" | "active" | "upcoming" | "in-development">("active");
   const [mainImage, setMainImage] = useState("");

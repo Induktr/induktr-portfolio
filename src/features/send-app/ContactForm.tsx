@@ -1,8 +1,4 @@
-import { useState } from "react";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
 import { motion } from "framer-motion";
-import { useToast } from "@/shared/ui/use-toast";
 import {
   Form,
   FormControl,
@@ -21,8 +17,6 @@ import {
   SelectValue,
 } from "@/shared/ui/select";
 import { Button } from "@/shared/ui/button";
-import { LeadSchema, type Lead } from "@shared/api/database/schemas/lead.schema";
-import { apiRequest } from "@/shared/lib/queryClient";
 import { useTranslation } from "react-i18next";
 import { format } from "date-fns";
 import { Calendar as CalendarIcon, Info, Copy, CheckCheck } from "lucide-react";
@@ -42,59 +36,17 @@ import {
 } from "@/shared/ui/dialog";
 import { use3DTilt } from "@/shared/hooks/use3DTilt";
 import { useClipboard } from "@/shared/hooks/useClipboard";
-import { Order } from "@/shared/types/template";
+import { useContactLeadForm } from "@/shared/hooks/useContactLeadForm";
+import { 
+  PROJECT_TYPE_OPTIONS, 
+  PAYMENT_METHOD_OPTIONS 
+} from "@/shared/constants/forms/contactForm";
 
 export function ContactForm() {
-  const { toast } = useToast();
   const { t } = useTranslation();
   const { handleMouseMove, handleMouseLeave, style } = use3DTilt();
   const { copied, copyToClipboard } = useClipboard();
-  const [submittedOrder, setSubmittedOrder] = useState<Order | null>(null);
-  
-  const form = useForm<Lead>({
-    resolver: zodResolver(LeadSchema),
-    defaultValues: {
-      name: "",
-      contact: "",
-      projectType: "Other",
-      budget: "",
-      deadline: "",
-      paymentMethod: "",
-      description: "",
-      orderType: "custom",
-      templateId: "",
-      status: "pending",
-      telegramChatId: "",
-      accessCode: "",
-      materialsUrl: "",
-    },
-  });
-
-  const onSubmit = async (data: Lead) => {
-    try {
-      const res = await apiRequest("POST", "/api/send-lead", data);
-      const responseData = await res.json();
-      
-      toast({
-        title: t('contactForm.successTitle'),
-        description: t('contactForm.successDesc'),
-        className: "bg-green-500 text-white border-none",
-      });
-      
-      if (responseData.orderId && responseData.accessCode) setSubmittedOrder({orderId: responseData.orderId,accessCode: responseData.accessCode});
-      
-      form.reset();
-    } catch (error) {
-      if(error instanceof Error) {
-        console.error(error);
-        toast({
-          title: t('contactForm.errorTitle'),
-          description: t('contactForm.errorDesc'),
-          variant: "destructive",
-        });
-      }
-    }
-  };
+  const { form, onSubmit, submittedOrder, setSubmittedOrder } = useContactLeadForm();
 
   return (
     <motion.div
@@ -208,11 +160,11 @@ export function ContactForm() {
                         </SelectTrigger>
                       </FormControl>
                       <SelectContent>
-                        <SelectItem value="Landing Page">{t('contactForm.types.landing')}</SelectItem>
-                        <SelectItem value="E-commerce">{t('contactForm.types.ecommerce')}</SelectItem>
-                        <SelectItem value="SaaS">{t('contactForm.types.saas')}</SelectItem>
-                        <SelectItem value="Bot Development">{t('contactForm.types.bot')}</SelectItem>
-                        <SelectItem value="Other">{t('contactForm.types.other')}</SelectItem>
+                        {PROJECT_TYPE_OPTIONS.map((opt) => (
+                          <SelectItem key={opt.value} value={opt.value}>
+                            {t(opt.translationKey)}
+                          </SelectItem>
+                        ))}
                       </SelectContent>
                     </Select>
                     <FormMessage />
@@ -293,9 +245,11 @@ export function ContactForm() {
                         </SelectTrigger>
                       </FormControl>
                       <SelectContent>
-                        <SelectItem value={t("common.crypto", "Crypto")}>{t('contactForm.paymentMethods.crypto')}</SelectItem>
-                        <SelectItem value={t("common.card", "Card")}>{t('contactForm.paymentMethods.card')}</SelectItem>
-                        <SelectItem value={t("common.other", "Other")}>{t('contactForm.paymentMethods.other')}</SelectItem>
+                        {PAYMENT_METHOD_OPTIONS.map((method) => (
+                          <SelectItem key={method.valueKey} value={t(method.valueKey, method.defaultValue)}>
+                            {t(method.translationKey)}
+                          </SelectItem>
+                        ))}
                       </SelectContent>
                     </Select>
                     <FormMessage />

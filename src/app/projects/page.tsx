@@ -1,7 +1,9 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useMemo } from "react";
 import { useProjects } from "@/shared/hooks/useProjects";
+import { useProjectFilter } from "@/shared/hooks/useProjectFilter";
+import { SKELETON_ITEMS_3 } from "@/shared/constants/ui/skeletons";
 import { ProjectCard } from "@/entities/Project/ui/ProjectCard";
 import { ProjectCategories } from "@/entities/Project/ui/ProjectCategories";
 import { ProjectDialog } from "@/entities/Project/ui/ProjectDialog";
@@ -22,7 +24,7 @@ import { LIST_CATEGORIES } from "@/shared/config/categories";
 
 const ProjectsPage = () => {
   const { PROJECTS, isLoading } = useProjects();
-  const [activeCategory, setActiveCategory] = useState("all");
+  const { activeCategory, filteredProjects, onSelectCategory } = useProjectFilter(PROJECTS);
   const { t } = useTranslation();
   const { user } = useAuth();
   const dispatch = useAppDispatch();
@@ -31,11 +33,6 @@ const ProjectsPage = () => {
     'pax', 
     parseAsBase64Json<{slug: string, id: string, idx: number}>()
   );
-
-  const filteredProjects = useMemo(() => {
-    if (activeCategory === "all") return PROJECTS;
-    return PROJECTS.filter((p) => p.categories.includes(activeCategory));
-  }, [activeCategory, PROJECTS]);
 
   const viewProject = useMemo(() => {
     if (!activeProjectToken?.slug) return null;
@@ -47,7 +44,7 @@ const ProjectsPage = () => {
     {isLoading && (
       <div className="container mx-auto px-4 py-20">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {[1, 2, 3].map((i) => (
+          {SKELETON_ITEMS_3.map((i) => (
             <Skeleton key={i} className="h-[400px] w-full rounded-xl" />
           ))}
         </div>
@@ -76,7 +73,7 @@ const ProjectsPage = () => {
         <ProjectCategories
           categories={LIST_CATEGORIES}
           selectedCategories={activeCategory === "all" ? [] : [activeCategory]}
-          onSelectCategory={(id) => setActiveCategory(activeCategory === id ? "all" : id)}
+          onSelectCategory={onSelectCategory}
         />
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-12">

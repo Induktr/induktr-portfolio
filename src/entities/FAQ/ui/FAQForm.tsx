@@ -18,6 +18,7 @@ import { useAppDispatch, useAppSelector } from "@/shared/lib/store/store";
 import { closeModal } from "@/shared/lib/store/slices/uiSlice";
 import { useLocalizedForm } from "@/shared/hooks/useLocalizedForm";
 import { useTranslation } from "react-i18next";
+import { INITIAL_FAQ_FORM_DATA } from "@/shared/constants/forms/faqForm";
 
 export const FAQForm = () => {
   const { t } = useTranslation();
@@ -33,7 +34,7 @@ export const FAQForm = () => {
       localizedData,
       updateLangField,
       getPayload 
-  } = useLocalizedForm(isOpen, item, { q: "", a: "" });
+  } = useLocalizedForm(isOpen, item, INITIAL_FAQ_FORM_DATA);
 
   const [category, setCategory] = useState("general");
 

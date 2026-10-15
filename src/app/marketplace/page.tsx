@@ -43,7 +43,7 @@ import { parseAsBase64Json } from '@/shared/lib/parsers';
 const MarketplacePage = () => {
   const { t } = useTranslation();
   const { user } = useAuth();
-  const { ALL_TEMPLATES, deleteItemMutation } = useMarketplace();
+  const { ALL_TEMPLATES, deleteWithConfirmation } = useMarketplace();
   
   const dispatch = useAppDispatch();
   const { modals } = useAppSelector((state) => state.ui);
@@ -57,12 +57,6 @@ const MarketplacePage = () => {
     if (!activeItemToken?.slug) return null;
     return ALL_TEMPLATES.find(p => p.slug === activeItemToken.slug);
   }, [activeItemToken, ALL_TEMPLATES]);
-
-  const handleDelete = (id: string) => {
-    if (confirm("Are you sure you want to delete this template from database?")) {
-      deleteItemMutation.mutate(id);
-    }
-  };
 
   return (
     <div className="container mx-auto px-4 py-20">
@@ -130,7 +124,7 @@ const MarketplacePage = () => {
                     className="h-8 w-8 bg-destructive/80 hover:bg-destructive backdrop-blur-sm"
                     onClick={(e) => {
                       e.stopPropagation();
-                      handleDelete(item.id);
+                      deleteWithConfirmation(item.id);
                     }}
                    >
                      <Trash2 className="w-4 h-4" />

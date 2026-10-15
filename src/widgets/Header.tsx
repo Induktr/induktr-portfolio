@@ -7,7 +7,7 @@ import { SiGithub, SiTelegram } from "react-icons/si";
 import MobileNav from "./MobileNav";
 import { ThemeToggle } from "@/features/toggle-theme/ThemeToggle";
 import { LanguageSwitcher } from "@/features/language-switch/LanguageSwitcher";
-import { PATHS } from "@/shared/config/paths";
+import { NAV_PATHS } from "@/shared/config/paths";
 import { LINKS } from "@/shared/config/links";
 
 const Header = () => {
@@ -35,7 +35,7 @@ const Header = () => {
         </div>
 
         <nav className="hidden md:flex items-center space-x-8">
-          {PATHS.filter(p => p !== "/").map((path, index) => (
+          {NAV_PATHS.map((path, index) => (
             <Link href={path} key={index}>
               <motion.span
                 className="cursor-pointer"

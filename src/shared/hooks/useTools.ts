@@ -122,11 +122,18 @@ export function useTools() {
     }
   });
 
+  const deleteWithConfirmation = (id: string | number, confirmMessage = "Delete this tool from database?") => {
+    if (typeof window !== "undefined" && window.confirm(confirmMessage)) {
+      deleteToolMutation.mutate(id);
+    }
+  };
+
   return {
     MERGED_CATEGORIES,
     isLoading,
     createToolMutation,
     updateToolMutation,
     deleteToolMutation,
+    deleteWithConfirmation,
   };
 }

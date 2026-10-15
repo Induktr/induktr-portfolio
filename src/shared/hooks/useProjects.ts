@@ -132,11 +132,18 @@ export function useProjects() {
     }
   });
 
+  const deleteWithConfirmation = (id: string | number, confirmMessage = "Are you sure you want to delete this project?") => {
+    if (typeof window !== "undefined" && window.confirm(confirmMessage)) {
+      deleteProjectMutation.mutate(id);
+    }
+  };
+
   return {
     PROJECTS,
     isLoading,
     createProjectMutation,
     updateProjectMutation,
     deleteProjectMutation,
+    deleteWithConfirmation,
   };
 }

@@ -19,6 +19,11 @@ import { useAppDispatch, useAppSelector } from "@/shared/lib/store/store";
 import { closeModal } from "@/shared/lib/store/slices/uiSlice";
 import { useLocalizedForm } from "@/shared/hooks/useLocalizedForm";
 import { useTranslation } from "react-i18next";
+import { 
+  INITIAL_MARKETPLACE_FORM_DATA, 
+  DEFAULT_MARKETPLACE_GRADIENT, 
+  DEFAULT_MARKETPLACE_STACK 
+} from "@/shared/constants/forms/marketplaceForm";
 
 export const MarketplaceForm = () => {
   const { t } = useTranslation();
@@ -34,17 +39,17 @@ export const MarketplaceForm = () => {
     localizedData, 
     updateLangField, 
     getPayload 
-  } = useLocalizedForm(isOpen, item, { title: "", description: "", features: [] as string[] });
+  } = useLocalizedForm(isOpen, item, INITIAL_MARKETPLACE_FORM_DATA);
 
   const [price, setPrice] = useState("0");
-  const [gradient, setGradient] = useState("from-blue-600 to-cyan-500");
-  const [stack, setStack] = useState<string[]>(["React", "TypeScript"]);
+  const [gradient, setGradient] = useState(DEFAULT_MARKETPLACE_GRADIENT);
+  const [stack, setStack] = useState<string[]>([...DEFAULT_MARKETPLACE_STACK]);
   const [newStackItem, setNewStackItem] = useState("");
 
   useState(() => {
     if (item) {
       setPrice(item.price?.toString() || "0");
-      setGradient(item.gradient || "from-blue-600 to-cyan-500");
+      setGradient(item.gradient || DEFAULT_MARKETPLACE_GRADIENT);
       setStack(item.stack || []);
     }
   });

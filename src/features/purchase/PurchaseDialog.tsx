@@ -1,7 +1,4 @@
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
 import { useTranslation } from "react-i18next";
-import { useToast } from "@/shared/ui/use-toast";
 import {
   Dialog,
   DialogContent,
@@ -20,10 +17,9 @@ import {
 import { Input } from "@/shared/ui/input";
 import { Button } from "@/shared/ui/button";
 import { Info, Copy, CheckCircle2 } from "lucide-react";
-import { LeadSchema, type Lead } from "@shared/api/database/schemas/lead.schema";
-import { apiRequest } from "@/shared/lib/queryClient";
 import { PurchaseDialogProps } from "@/shared/types/project";
 import { useClipboard } from "@/shared/hooks/useClipboard";
+import { usePurchaseLeadForm } from "@/shared/hooks/usePurchaseLeadForm";
 
 export const PurchaseDialog = ({
   template,
@@ -32,48 +28,8 @@ export const PurchaseDialog = ({
   onSuccess
 }: PurchaseDialogProps) => {
   const { t } = useTranslation();
-  const { toast } = useToast();
   const { copied, copyToClipboard } = useClipboard();
-
-  const form = useForm<Lead>({
-    resolver: zodResolver(LeadSchema),
-    defaultValues: {
-      name: "",
-      contact: "",
-      projectType: "Other",
-      budget: template?.price.toString() || "0",
-      orderType: "template",
-      templateId: template?.id || "",
-      description: `Purchase of template: ${template?.title}`,
-      paymentMethod: "",
-      deadline: "",
-      status: "pending",
-      telegramChatId: "",
-      accessCode: "",
-      materialsUrl: "",
-    },
-  });
-
-  const onSubmit = async (data: Lead) => {
-    try {
-      const res = await apiRequest("POST", "/api/send-lead", {
-        ...data,
-        budget: template?.price.toString(),
-        templateId: template?.id,
-        orderType: "template"
-      });
-      const responseData = await res.json();
-      
-      onSuccess(responseData.orderId, responseData.accessCode);
-      form.reset();
-    } catch {
-      toast({
-        title: "Error",
-        description: "Failed to process your order. Please try again.",
-        variant: "destructive",
-      });
-    }
-  };
+  const { form, onSubmit } = usePurchaseLeadForm({ template, onSuccess });
 
   if (!template) return null;
 

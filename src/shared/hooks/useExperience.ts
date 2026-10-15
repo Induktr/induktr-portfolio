@@ -97,11 +97,18 @@ export function useExperience() {
     },
   });
 
+  const deleteWithConfirmation = (id: string | number, confirmMessage = "Delete this experience entry?") => {
+    if (typeof window !== "undefined" && window.confirm(confirmMessage)) {
+      deleteExperienceMutation.mutate(id);
+    }
+  };
+
   return {
     MERGED_EXPERIENCE,
     isLoading,
     createExperienceMutation,
     updateExperienceMutation,
     deleteExperienceMutation,
+    deleteWithConfirmation,
   };
 }

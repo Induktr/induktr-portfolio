@@ -1,19 +1,9 @@
 import { useTranslation } from "react-i18next";
 
-import { 
-  MdWeb,
-  MdPhoneAndroid,
-  MdPayments,
-  MdMessage,
-  MdSmartToy,
-} from "react-icons/md";
-import { ArrowUpCircle } from "lucide-react";
 import { Button } from "@/shared/ui/button";
-
 import { motion } from "framer-motion";
-
 import type { ProjectCategoriesProps } from "@/shared/types/project";
-import { IconContext, IconType } from "react-icons/lib";
+import { getCategoryIcon } from "@/shared/lib/icons/categoryIcons";
 
 export const ProjectCategories = ({
   categories,
@@ -21,25 +11,6 @@ export const ProjectCategories = ({
   onSelectCategory,
 }: ProjectCategoriesProps) => {
   const { t } = useTranslation();
-  
-  const getCategoryIcon = (iconName: string) => {
-    switch (iconName) {
-      case "browser":
-        return <MdWeb className="w-6 h-6" />;
-      case "mobile":
-        return <MdPhoneAndroid className="w-6 h-6" />;
-      case "finance":
-        return <MdPayments className="w-6 h-6" />;
-      case "message":
-        return <MdMessage className="w-6 h-6" />;
-      case "ai":
-        return <MdSmartToy className="w-6 h-6" />;
-      case "trading":
-        return <ArrowUpCircle className="w-6 h-6" />;
-      default:
-        return <MdWeb className="w-6 h-6" />;
-    }
-  };
 
   return (
     <div className="mb-8">

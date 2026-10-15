@@ -29,7 +29,7 @@ export const ProjectCard = ({ project, onEdit }: ExtendedProjectCardProps) => {
   const { getStatusColor, getStatusLabel } = useProjectStatus();
   const { getColorFromString } = useStringColor();
   const { user } = useAuth();
-  const { deleteProjectMutation } = useProjects();
+  const { deleteWithConfirmation } = useProjects();
 
   return (
     <Card className="overflow-hidden h-full flex flex-col group border-primary/10 hover:border-primary/30 transition-all bg-card/40 backdrop-blur-sm shadow-xl hover:shadow-primary/5">
@@ -132,9 +132,7 @@ export const ProjectCard = ({ project, onEdit }: ExtendedProjectCardProps) => {
                 className="h-9 w-9 text-red-500 hover:text-red-400 hover:bg-red-500/10"
                 onClick={(e) => {
                   e.stopPropagation();
-                  if (confirm("Are you sure you want to delete this project?")) {
-                    deleteProjectMutation.mutate(project.id);
-                  }
+                  deleteWithConfirmation(project.id);
                 }}
               >
                 <Trash2 className="h-4 w-4" />
