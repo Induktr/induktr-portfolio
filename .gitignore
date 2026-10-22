@@ -45,9 +45,9 @@ next-env.d.ts
 **/dist/**
 
 # bun
-/bun.lockb
-/bun.lock
-/bun.locki
+bun.lockb
+bun.lock
+bun.locki
 
 # base configs
 .vscode
