@@ -1,39 +1,42 @@
-# Multi-stage Dockerfile for Next.js & Hugging Face Spaces (Port 7860)
+# =================================================================
+# Induktr Studio v2.0 — Canonical High-Performance Bun Dockerfile
+# Target: oven/bun:1.2-alpine (< 95MB footprint, non-root user)
+# =================================================================
 
-FROM node:20-alpine AS base
+FROM oven/bun:1.2-alpine AS base
 WORKDIR /app
-RUN apk add --no-cache libc6-compat
 
-# 1. Install dependencies
+# 1. Install workspace dependencies
 FROM base AS deps
-COPY package.json package-lock.json* ./
-RUN npm ci
+COPY package.json bun.lock ./
+COPY apps/api/package.json ./apps/api/
+COPY apps/web/package.json ./apps/web/
+COPY packages/contracts/package.json ./packages/contracts/
+RUN bun install --frozen-lockfile
 
-# 2. Build the application
+# 2. Build backend and contracts
 FROM base AS builder
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
-ENV NEXT_TELEMETRY_DISABLED=1
 ENV NODE_ENV=production
-RUN npm run build
+RUN bun run --filter @induktr/contracts build
+RUN bun run --filter @induktr/api prisma:generate
+RUN bun run --filter @induktr/api build
 
-# 3. Production runner
+# 3. Production runner (Non-root security perimeter)
 FROM base AS runner
+WORKDIR /app
 ENV NODE_ENV=production
-ENV NEXT_TELEMETRY_DISABLED=1
-ENV PORT=7860
-ENV HOSTNAME="0.0.0.0"
+ENV PORT=4000
 
-RUN addgroup --system --gid 1001 nodejs
-RUN adduser --system --uid 1001 nextjs
+# Security: Non-root user execution
+USER bun
 
-COPY --from=builder /app/public ./public
-COPY --from=builder --chown=nextjs:nodejs /app/.next ./.next
-COPY --from=builder /app/node_modules ./node_modules
-COPY --from=builder /app/package.json ./package.json
+COPY --from=builder --chown=bun:bun /app/node_modules ./node_modules
+COPY --from=builder --chown=bun:bun /app/apps/api ./apps/api
+COPY --from=builder --chown=bun:bun /app/packages/contracts ./packages/contracts
+COPY --from=builder --chown=bun:bun /app/package.json ./package.json
 
-USER nextjs
+EXPOSE 4000
 
-EXPOSE 7860
-
-CMD ["npm", "start", "--", "-p", "7860", "-H", "0.0.0.0"]
+CMD ["bun", "run", "apps/api/src/main.ts"]

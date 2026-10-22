@@ -1,0 +1,40 @@
+{
+  "name": "@induktr/api",
+  "version": "2.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "bun --watch src/main.ts",
+    "build": "tsc -p tsconfig.json",
+    "start": "bun run src/main.ts",
+    "typecheck": "tsc --noEmit",
+    "prisma:generate": "prisma generate",
+    "prisma:migrate": "prisma migrate dev"
+  },
+  "dependencies": {
+    "@apollo/server": "^4.11.3",
+    "@induktr/contracts": "workspace:*",
+    "@nestjs/apollo": "^13.1.0",
+    "@nestjs/common": "^11.0.11",
+    "@nestjs/config": "^4.0.0",
+    "@nestjs/core": "^11.0.11",
+    "@nestjs/graphql": "^13.1.0",
+    "@nestjs/throttler": "^6.4.0",
+    "@prisma/client": "^7.0.0",
+    "@types/bun": "^1.4.3",
+    "class-transformer": "^0.5.1",
+    "class-validator": "^0.14.1",
+    "graphql": "^16.10.0",
+    "helmet": "^8.0.0",
+    "nestjs-zod": "^5.5.0",
+    "reflect-metadata": "^0.2.2",
+    "rxjs": "^7.8.2",
+    "zod": "^4.6.7"
+  },
+  "devDependencies": {
+    "@types/graphql": "^14.2.3",
+    "@types/node": "^22.13.9",
+    "prisma": "^7.0.0",
+    "typescript": "^7.0.2"
+  }
+}

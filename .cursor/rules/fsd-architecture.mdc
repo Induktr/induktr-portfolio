@@ -1,0 +1,23 @@
+---
+description: Feature-Sliced Design (FSD 2.1) and UI Performance rules for Induktr Studio
+globs: src/**/*.{ts,tsx}
+---
+
+# Feature-Sliced Design (FSD 2.1) & UI Performance Rules
+
+When developing in `src/`:
+
+1. **Feature-Sliced Design (FSD 2.1) Layers:**
+   - Hierarchy (strictly top-down): `app` -> `widgets` -> `features` -> `entities` -> `shared`.
+   - Upper layers import from lower layers. Lower layers NEVER import from upper layers.
+   - Slices on the same layer CANNOT import each other directly (use composition in higher layer).
+   - Absolute alias paths `@/*` are required. Relative traversal (`../../..`) is banned.
+
+2. **60/120 FPS Compositor & Performance:**
+   - Frame budget: `< 16.6ms`.
+   - All animations must use GPU-composited properties (`transform`, `opacity`). Never animate `width`, `height`, `top`, `left`, `margin`.
+   - Clean up Three.js (`@react-three/fiber`) geometries and materials with `.dispose()` on unmount.
+
+3. **Database & API Boundaries:**
+   - Current database runs on **Drizzle ORM** (`src/shared/api/database/schemas/schema.ts`).
+   - Never access the database directly from Client Components (`'use client'`). Use Server Components, Server Actions, or API handlers.

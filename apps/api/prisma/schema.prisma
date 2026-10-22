@@ -1,0 +1,121 @@
+datasource db {
+  provider = "postgresql"
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+enum LeadStatus {
+  NEW
+  CONTACTED
+  QUALIFIED
+  IN_PROGRESS
+  COMPLETED
+  REJECTED
+}
+
+enum UserRole {
+  CLIENT
+  STUDIO_LEAD
+  ADMIN
+}
+
+enum ProductType {
+  UI_KIT
+  CHEATSHEET_HIGH_LEVEL
+  CHEATSHEET_LOW_LEVEL
+  CONSULTATION_AUDIT
+}
+
+enum OrderStatus {
+  PENDING
+  PAID
+  DELIVERED
+  CANCELLED
+}
+
+model Lead {
+  id             String     @id @default(uuid())
+  name           String
+  contact        String
+  budget         String
+  description    String
+  serviceType    String     @default("FULL_CYCLE_ENGINEERING")
+  referrer       String?
+  idempotencyKey String?    @unique
+  status         LeadStatus @default(NEW)
+  createdAt      DateTime   @default(now())
+  updatedAt      DateTime   @updatedAt
+
+  @@index([status])
+  @@index([createdAt])
+}
+
+model User {
+  id           String        @id @default(uuid())
+  telegramId   String?       @unique
+  username     String?
+  firstName    String?
+  email        String?       @unique
+  role         UserRole      @default(CLIENT)
+  purchases    Purchase[]
+  customOrders CustomOrder[]
+  sessions     Session[]
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+}
+
+model Product {
+  id          String      @id @default(uuid())
+  slug        String      @unique
+  title       String
+  type        ProductType
+  priceUsd    Float
+  description String
+  purchases   Purchase[]
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+}
+
+model Purchase {
+  id          String      @id @default(uuid())
+  userId      String
+  user        User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  productId   String
+  product     Product     @relation(fields: [productId], references: [id])
+  amountUsd   Float
+  status      OrderStatus @default(PENDING)
+  downloadUrl String?
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+
+  @@index([userId])
+}
+
+model CustomOrder {
+  id         String      @id @default(uuid())
+  userId     String
+  user       User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  title      String
+  budgetUsd  Float
+  status     OrderStatus @default(PENDING)
+  milestones Json        @default("[]")
+  createdAt  DateTime    @default(now())
+  updatedAt  DateTime    @updatedAt
+
+  @@index([userId])
+}
+
+model Session {
+  id        String   @id @default(uuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  tokenHash String   @unique
+  ipAddress String?
+  userAgent String?
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+
+  @@index([userId])
+}

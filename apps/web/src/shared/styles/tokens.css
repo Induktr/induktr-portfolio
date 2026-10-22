@@ -1,0 +1,50 @@
+:root {
+  /* =================================================================
+     INDUKTR OKLCH DESIGN TOKENS (APCA / High Contrast Ergonomics)
+     ================================================================= */
+  --bg-primary: oklch(0.12 0.01 260); /* Deep graphite base */
+  --bg-surface: oklch(0.16 0.015 260); /* Elevated card layer */
+  --bg-glass: oklch(0.18 0.02 260 / 0.7); /* Frosted blur backdrop */
+
+  --text-primary: oklch(0.96 0.01 260); /* Razor-sharp light */
+  --text-secondary: oklch(0.72 0.02 260); /* Low-fatigue muted */
+  --text-tertiary: oklch(0.48 0.015 260); /* Structural guidelines */
+
+  --accent-cyan: oklch(0.78 0.16 210); /* Quantum Electric Cyan */
+  --accent-neon: oklch(0.85 0.18 150); /* High-Performance Neon */
+  --accent-danger: oklch(0.65 0.22 25); /* Critical Alert */
+
+  --border-subtle: oklch(0.24 0.02 260);
+  --border-focus: oklch(0.78 0.16 210 / 0.8);
+
+  /* Fluid Typography via CSS Clamp */
+  --font-hero: clamp(2.5rem, 5vw + 1rem, 4.5rem);
+  --font-h1: clamp(2rem, 3.5vw + 0.8rem, 3.25rem);
+  --font-h2: clamp(1.5rem, 2.5vw + 0.5rem, 2.25rem);
+  --font-body: clamp(0.95rem, 0.8vw + 0.75rem, 1.125rem);
+
+  /* 8px Modular Spacing */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+}
+
+body {
+  margin: 0;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}

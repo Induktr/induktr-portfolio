@@ -1,0 +1,20 @@
+---
+description: Deterministic status reporting, IPO-Protocol, and verification standards
+globs: **/*
+---
+
+# Agent Engineering & Verification Standards: Induktr Studio
+
+1. **IPO-Protocol Execution:**
+   - Every task must strictly progress: INPUT (Audit) -> PROCESS (Transformation) -> OUTCOME (Validation).
+   - Emit deterministic status tags:
+     `[IPO:INPUT]`, `[IPO:PROCESS:k/N]`, `[IPO:OUTCOME]`.
+
+2. **Zero-Defect Gate (DoD):**
+   - Run `bun run typecheck` (`tsc --noEmit`) before completing any task. Zero type errors allowed.
+   - Run linter/formatter (`bun run lint`).
+   - Validate input parameters using Zod schemas and TypeScript strict types.
+
+3. **Performance & Reliability SLAs:**
+   - Client: 60/120 FPS, sub-16.6ms frame budget, LCP < 0.8s.
+   - Database integrity: Preserving Drizzle schema invariants during development.
